@@ -1,0 +1,1006 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "Bref",
+    "slug": "alarboulletmarin__bref",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "Bref",
+    "entryLayout": "src/main.rs",
+    "root": ".",
+    "summary": "Layered GPUI note app: shell window over views over pure logic and disk",
+    "externalModules": [
+      "shell",
+      "editor",
+      "logic"
+    ]
+  },
+  "stats": {
+    "nodes": 46,
+    "edges": 64,
+    "components": 19,
+    "stateFiles": 4,
+    "commands": 10,
+    "ipcCalls": 4,
+    "flows": 8
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Bref",
+      "label": "main.rs",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/main.rs",
+      "loc": 22,
+      "tags": [
+        "entry"
+      ],
+      "summary": "Installs a crash-file panic hook, then calls shell::run()."
+    },
+    {
+      "id": "cmp:Shell",
+      "label": "Shell",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/render.rs",
+      "loc": 872,
+      "tags": [
+        "root"
+      ],
+      "summary": "Root Render: title bar, one or two panes, comments rail, footer band."
+    },
+    {
+      "id": "cmp:Capture",
+      "label": "Capture window",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/capture.rs",
+      "loc": 81,
+      "tags": [
+        "--capture"
+      ],
+      "summary": "Borderless one-line window that appends to today's note."
+    },
+    {
+      "id": "cmp:Editor",
+      "label": "Editor",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/mod.rs",
+      "loc": 766,
+      "summary": "The note: content, cursors, undo, tables, embeds, find, format bar, input."
+    },
+    {
+      "id": "cmp:Nav",
+      "label": "Side panel",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/nav.rs",
+      "loc": 495,
+      "summary": "Tree, recents, tags, backlinks, calendar, graph, list pages — one panel."
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "Palette",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/palette.rs",
+      "loc": 1196,
+      "summary": "One overlay for notes, commands, vault search, outline, settings, choices."
+    },
+    {
+      "id": "cmp:Sheet",
+      "label": "CSV grid",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/sheet/mod.rs",
+      "loc": 476
+    },
+    {
+      "id": "cmp:Canvas",
+      "label": "Diagram canvas",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/canvas/mod.rs",
+      "loc": 594,
+      "summary": "Shapes, arrows and UML boxes drawn into a versioned SVG file."
+    },
+    {
+      "id": "cmp:Graph",
+      "label": "Link graph",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/graph.rs",
+      "loc": 662,
+      "tags": [
+        "force layout"
+      ]
+    },
+    {
+      "id": "cmp:Viewer",
+      "label": "Viewer",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/viewer.rs",
+      "loc": 582
+    },
+    {
+      "id": "cmp:Board",
+      "label": "Kanban board",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/kanban.rs",
+      "loc": 364
+    },
+    {
+      "id": "cmp:Markdown",
+      "label": "Markdown logic",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/mod.rs",
+      "loc": 1705
+    },
+    {
+      "id": "cmp:Table",
+      "label": "Table logic",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/table.rs",
+      "loc": 1295,
+      "summary": "CSV/TSV parse and write, encoding and delimiter detection, grid ops."
+    },
+    {
+      "id": "cmp:Diagram",
+      "label": "Diagram logic",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/mod.rs",
+      "loc": 1692
+    },
+    {
+      "id": "cmp:Formula",
+      "label": "Cell formulas",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/formula.rs",
+      "loc": 838,
+      "tags": [
+        "parser"
+      ]
+    },
+    {
+      "id": "cmp:Commands",
+      "label": "Command catalogue",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/commands.rs",
+      "loc": 232,
+      "summary": "Every palette command: action name, label, icon, group; pure data."
+    },
+    {
+      "id": "cmp:Keymap",
+      "label": "Keymap",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/keymap.rs",
+      "loc": 525,
+      "summary": "Default shortcut table, help rows, user overrides from the keys file."
+    },
+    {
+      "id": "cmp:Theme",
+      "label": "Theme",
+      "kind": "component",
+      "group": "components",
+      "path": "src/ui/theme.rs",
+      "loc": 221,
+      "tags": [
+        "13 themes"
+      ]
+    },
+    {
+      "id": "cmp:Lang",
+      "label": "Language",
+      "kind": "component",
+      "group": "components",
+      "path": "src/lang.rs",
+      "loc": 142,
+      "tags": [
+        "en",
+        "fr"
+      ]
+    },
+    {
+      "id": "state:ShellState",
+      "label": "Shell fields",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shell/mod.rs",
+      "loc": 361,
+      "summary": "Panes, vault, notes, dirs, images, palette, focus, theme, syncing, dirty."
+    },
+    {
+      "id": "state:Prefs",
+      "label": "Prefs",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/prefs.rs",
+      "loc": 79
+    },
+    {
+      "id": "state:History",
+      "label": "History",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/history.rs",
+      "loc": 227
+    },
+    {
+      "id": "state:Note",
+      "label": "Note model",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/note.rs",
+      "loc": 50
+    },
+    {
+      "id": "cmd:OpenPalette",
+      "label": "Open palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-p"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:ToggleCommands",
+      "label": "Command list",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/palette_open.rs",
+      "tags": [
+        "f10"
+      ],
+      "loc": 242
+    },
+    {
+      "id": "cmd:NewNote",
+      "label": "New note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/notes.rs",
+      "tags": [
+        "secondary-n"
+      ],
+      "loc": 530
+    },
+    {
+      "id": "cmd:SyncVault",
+      "label": "Sync vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/sync.rs",
+      "tags": [
+        "secondary-shift-s"
+      ],
+      "loc": 179
+    },
+    {
+      "id": "cmd:SplitPane",
+      "label": "Split pane",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/pane.rs",
+      "tags": [
+        "secondary-\\"
+      ],
+      "loc": 262
+    },
+    {
+      "id": "cmd:Travel",
+      "label": "Back / forward",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/travel.rs",
+      "tags": [
+        "alt-left",
+        "alt-right"
+      ],
+      "loc": 107
+    },
+    {
+      "id": "cmd:SearchVault",
+      "label": "Search vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/search.rs",
+      "tags": [
+        "secondary-shift-f"
+      ],
+      "loc": 93
+    },
+    {
+      "id": "cmd:Today",
+      "label": "Daily note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/notes.rs",
+      "tags": [
+        "secondary-j"
+      ],
+      "loc": 530
+    },
+    {
+      "id": "cmd:OpenVault",
+      "label": "Open vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/library.rs",
+      "tags": [
+        "secondary-o"
+      ],
+      "loc": 378
+    },
+    {
+      "id": "cmd:NewDiagram",
+      "label": "New diagram",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/diagrams.rs",
+      "tags": [
+        "secondary-shift-d"
+      ],
+      "loc": 176
+    },
+    {
+      "id": "ipc:Vault",
+      "label": "vault.rs",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/vault.rs",
+      "loc": 1321,
+      "summary": "Scan, atomic write, rename, trash, backup, icons file, watcher."
+    },
+    {
+      "id": "ipc:Git",
+      "label": "git.rs",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/git.rs",
+      "loc": 578
+    },
+    {
+      "id": "ipc:Update",
+      "label": "update.rs",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/update.rs",
+      "loc": 473
+    },
+    {
+      "id": "ipc:Clock",
+      "label": "clock.rs",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/clock.rs",
+      "loc": 97
+    },
+    {
+      "id": "shared:Widgets",
+      "label": "widgets.rs",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/widgets.rs",
+      "loc": 115
+    },
+    {
+      "id": "shared:Figure",
+      "label": "figure.rs",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/figure.rs",
+      "loc": 154,
+      "summary": "Mermaid and LaTeX to pixels, cached by source hash."
+    },
+    {
+      "id": "shared:Svg",
+      "label": "svg.rs",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/svg.rs",
+      "loc": 596
+    },
+    {
+      "id": "shared:Assets",
+      "label": "assets.rs",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/assets.rs",
+      "loc": 302,
+      "tags": [
+        "IBM Plex"
+      ]
+    },
+    {
+      "id": "ext:GPUI",
+      "label": "gpui 0.2.2",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44,
+      "summary": "Zed's GPU UI framework: entities, divs, app/window loop."
+    },
+    {
+      "id": "ext:Mermaid",
+      "label": "mermaid-rs-renderer",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    },
+    {
+      "id": "ext:LaTeX",
+      "label": "latex-rust",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    },
+    {
+      "id": "ext:Resvg",
+      "label": "resvg / usvg",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    },
+    {
+      "id": "ext:Notify",
+      "label": "notify 7",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Bref",
+      "to": "cmp:Shell",
+      "kind": "calls",
+      "label": "shell::run()"
+    },
+    {
+      "from": "cmp:Bref",
+      "to": "cmp:Capture",
+      "kind": "renders",
+      "label": "--capture"
+    },
+    {
+      "from": "cmp:Bref",
+      "to": "ext:GPUI",
+      "kind": "calls",
+      "label": "Application::new().run"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "state:ShellState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "state:ShellState",
+      "kind": "writes",
+      "label": "update(), notify()"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Nav",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Editor",
+      "kind": "renders",
+      "label": "one per pane"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Palette",
+      "kind": "renders",
+      "label": "overlay"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Capture",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "scan, watch, write"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "ipc:Update",
+      "kind": "ipc",
+      "label": "once a day"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "ext:GPUI",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Capture",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "vault::capture"
+    },
+    {
+      "from": "cmp:Nav",
+      "to": "cmp:Graph",
+      "kind": "renders",
+      "label": "Mode::Graph"
+    },
+    {
+      "from": "cmp:Nav",
+      "to": "state:ShellState",
+      "kind": "reads",
+      "label": "notes, dirs, tags"
+    },
+    {
+      "from": "cmp:Nav",
+      "to": "state:Note",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Nav",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "Open, Rename, Trash"
+    },
+    {
+      "from": "cmp:Nav",
+      "to": "cmp:Graph",
+      "kind": "navigates",
+      "label": "ShowGraph"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:Commands",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "PaletteEvent"
+    },
+    {
+      "from": "cmp:Commands",
+      "to": "cmp:Keymap",
+      "kind": "reads",
+      "label": "keys in effect"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "cmp:Palette",
+      "kind": "commands",
+      "label": "open_palette"
+    },
+    {
+      "from": "cmd:ToggleCommands",
+      "to": "cmp:Palette",
+      "kind": "commands",
+      "label": "open_commands"
+    },
+    {
+      "from": "cmd:NewNote",
+      "to": "cmp:Shell",
+      "kind": "commands",
+      "label": "new_note_here"
+    },
+    {
+      "from": "cmd:NewNote",
+      "to": "cmp:Editor",
+      "kind": "commands",
+      "label": "editor.reset"
+    },
+    {
+      "from": "cmd:SyncVault",
+      "to": "ipc:Git",
+      "kind": "commands",
+      "label": "git_sync"
+    },
+    {
+      "from": "cmd:SplitPane",
+      "to": "state:ShellState",
+      "kind": "commands",
+      "label": "panes.push"
+    },
+    {
+      "from": "cmd:Travel",
+      "to": "state:History",
+      "kind": "commands",
+      "label": "travel()"
+    },
+    {
+      "from": "cmd:SearchVault",
+      "to": "cmp:Palette",
+      "kind": "commands",
+      "label": "open_search, lines"
+    },
+    {
+      "from": "cmd:Today",
+      "to": "ipc:Vault",
+      "kind": "commands",
+      "label": "free_path + write"
+    },
+    {
+      "from": "cmd:OpenVault",
+      "to": "ipc:Vault",
+      "kind": "commands",
+      "label": "choose_vault"
+    },
+    {
+      "from": "cmd:NewDiagram",
+      "to": "cmp:Canvas",
+      "kind": "commands",
+      "label": "new_diagram"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "cmp:Keymap",
+      "kind": "reads",
+      "label": "bound keys"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Markdown",
+      "kind": "calls",
+      "label": "classify, emphasis, links"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Formula",
+      "kind": "calls",
+      "label": "cell results"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Table",
+      "kind": "calls",
+      "label": "markdown tables"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Board",
+      "kind": "renders",
+      "label": "kanban note"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Viewer",
+      "kind": "renders",
+      "label": "enlarged figure"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "EditorEvent"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "state:History",
+      "kind": "writes",
+      "label": "undo / redo"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "shared:Figure",
+      "kind": "calls",
+      "label": "mermaid, latex"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:GPUI",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Sheet",
+      "to": "cmp:Table",
+      "kind": "calls",
+      "label": "parse / write"
+    },
+    {
+      "from": "cmp:Sheet",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "read, save in place"
+    },
+    {
+      "from": "cmp:Sheet",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "SheetEvent"
+    },
+    {
+      "from": "cmp:Canvas",
+      "to": "cmp:Diagram",
+      "kind": "calls",
+      "label": "Diagram::from_svg"
+    },
+    {
+      "from": "cmp:Canvas",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "write SVG + source"
+    },
+    {
+      "from": "cmp:Canvas",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "CanvasEvent"
+    },
+    {
+      "from": "cmp:Graph",
+      "to": "state:Note",
+      "kind": "reads",
+      "label": "titles and links"
+    },
+    {
+      "from": "cmp:Graph",
+      "to": "cmp:Shell",
+      "kind": "dispatches",
+      "label": "GraphEvent"
+    },
+    {
+      "from": "cmp:Viewer",
+      "to": "shared:Svg",
+      "kind": "calls",
+      "label": "svg to pixels"
+    },
+    {
+      "from": "cmp:Viewer",
+      "to": "shared:Figure",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Board",
+      "to": "cmp:Markdown",
+      "kind": "calls",
+      "label": "tasks and headings"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:Table",
+      "kind": "calls",
+      "label": "table lines"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "shared:Svg",
+      "kind": "calls",
+      "label": "read imported SVG"
+    },
+    {
+      "from": "cmp:Table",
+      "to": "cmp:Formula",
+      "kind": "calls",
+      "label": "=cells"
+    },
+    {
+      "from": "cmp:Keymap",
+      "to": "cmp:Commands",
+      "kind": "reads",
+      "label": "action names"
+    },
+    {
+      "from": "cmp:Theme",
+      "to": "state:Prefs",
+      "kind": "reads",
+      "label": "theme, font, size"
+    },
+    {
+      "from": "shared:Figure",
+      "to": "ext:Mermaid",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:Figure",
+      "to": "ext:LaTeX",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:Figure",
+      "to": "ext:Resvg",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:Svg",
+      "to": "ext:Resvg",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:Vault",
+      "to": "ext:Notify",
+      "kind": "calls",
+      "label": "watch()"
+    },
+    {
+      "from": "shared:Widgets",
+      "to": "cmp:Theme",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-note",
+      "name": "Open a note",
+      "trigger": "Click a note in the side panel",
+      "steps": [
+        "cmp:Nav",
+        "cmp:Shell",
+        "ipc:Vault",
+        "cmp:Editor"
+      ],
+      "summary": "Tree row -> open_note -> file read -> editor.set_text, place recorded."
+    },
+    {
+      "id": "autosave",
+      "name": "Type and autosave",
+      "trigger": "A keystroke in the note",
+      "steps": [
+        "cmp:Editor",
+        "cmp:Shell",
+        "ipc:Vault"
+      ],
+      "summary": "EditorEvent::Changed -> flush() writes the note atomically; title renames it."
+    },
+    {
+      "id": "palette",
+      "name": "Command palette",
+      "trigger": "F10",
+      "steps": [
+        "cmd:ToggleCommands",
+        "cmp:Palette",
+        "cmp:Commands"
+      ],
+      "summary": "Palette opens in command mode, filters the catalogue, dispatches an action name."
+    },
+    {
+      "id": "sync",
+      "name": "Git sync",
+      "trigger": "Ctrl+Shift+S",
+      "steps": [
+        "cmd:SyncVault",
+        "ipc:Git",
+        "state:ShellState"
+      ],
+      "summary": "commit, fetch, merge, push in background; conflicts land as two notes."
+    },
+    {
+      "id": "open-csv",
+      "name": "Open a CSV",
+      "trigger": "Click a .csv in the side panel",
+      "steps": [
+        "cmp:Nav",
+        "cmp:Sheet",
+        "cmp:Table",
+        "ipc:Vault"
+      ],
+      "summary": "Detect encoding and delimiter, parse to Table, edit in place."
+    },
+    {
+      "id": "startup",
+      "name": "Startup scan",
+      "trigger": "Launching bref",
+      "steps": [
+        "cmp:Bref",
+        "cmp:Shell",
+        "state:ShellState",
+        "ipc:Vault"
+      ],
+      "summary": "Read config, scan the vault, watch it, open the last panes."
+    },
+    {
+      "id": "capture",
+      "name": "Quick capture",
+      "trigger": "bref --capture",
+      "steps": [
+        "cmp:Bref",
+        "cmp:Capture",
+        "ipc:Vault"
+      ],
+      "summary": "A one-line window appends the text to today's note and quits."
+    },
+    {
+      "id": "new-diagram",
+      "name": "Draw a diagram",
+      "trigger": "Ctrl+Shift+D",
+      "steps": [
+        "cmd:NewDiagram",
+        "cmp:Canvas",
+        "cmp:Diagram",
+        "ipc:Vault"
+      ],
+      "summary": "Canvas writes an SVG with its versioned source beside it."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Shell is one struct, split by subject",
+      "body": "`struct Shell` (src/shell/mod.rs:77) holds panes, vault, notes, dirs, images, palette, theme, history, focus; 23 `impl Shell` files each own one subject. Every feature still reaches the same struct.",
+      "severity": "warn",
+      "path": "src/shell/mod.rs"
+    },
+    {
+      "title": "Layer rule is a test, not a convention",
+      "body": "`layers_only_depend_downwards` in src/shell/tests/mod.rs:25 fails when logic/platform/ui/views import a layer above them, strips comments first, and also bans `impl Shell` in views.",
+      "severity": "info",
+      "path": "src/shell/tests/mod.rs"
+    },
+    {
+      "title": "Almost no unwrap in shipped code",
+      "body": "571 `unwrap()`/`expect(` outside src/shell/tests, but only 32 are outside `#[cfg(test)]` blocks; the rest are module-local tests. No `todo!()`/`unimplemented!()` and no TODO/FIXME in src.",
+      "severity": "info",
+      "path": "src/platform/vault.rs"
+    },
+    {
+      "title": "Incremental layout is the perf contract",
+      "body": "`Editor::plan` (src/views/editor/layout.rs:506) redoes only damaged lines; `layout_reuse_matches_full_layout` compares every reuse against a full layout, so the fast path cannot silently rot.",
+      "severity": "info",
+      "path": "src/views/editor/layout.rs"
+    },
+    {
+      "title": "Views talk to the shell only by events",
+      "body": "7 view event enums (Editor, Sheet, Canvas, Palette, Graph, Viewer, Field) are consumed with `cx.subscribe_in` in src/shell/, which keeps views free of shell imports.",
+      "severity": "info",
+      "path": "src/views/editor/mod.rs"
+    },
+    {
+      "title": "Hand-drawn UI, no component library",
+      "body": "Every widget is built from gpui divs in src/ui/widgets.rs (115 lines) plus src/ui/theme.rs colour tables; there is no gpui-component dependency, so consistency rests on the theme, not on a kit.",
+      "severity": "info",
+      "path": "src/ui/widgets.rs"
+    }
+  ]
+}

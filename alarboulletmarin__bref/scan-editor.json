@@ -1,0 +1,915 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Bref",
+    "slug": "alarboulletmarin__bref",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "editor",
+    "name": "Note editor",
+    "entryLayout": "src/views/editor/mod.rs",
+    "root": "src/views/editor",
+    "summary": "Live-styled Markdown text: cursors, undo, blocks, tables, embeds, find, input",
+    "externalModules": [
+      "shell",
+      "logic",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 44,
+    "edges": 59,
+    "components": 20,
+    "stateFiles": 2,
+    "commands": 8,
+    "ipcCalls": 3,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Editor",
+      "label": "Editor",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/views/editor/mod.rs",
+      "loc": 766,
+      "tags": [
+        "entry"
+      ],
+      "summary": "83 fields: text, cursors, undo, find, bar, figures, embeds; Render in render.rs."
+    },
+    {
+      "id": "cmp:Layout",
+      "label": "layout.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/layout.rs",
+      "loc": 1589,
+      "summary": "Shapes and places lines; `plan` redoes only the damaged ones."
+    },
+    {
+      "id": "cmp:Paint",
+      "label": "paint.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/paint.rs",
+      "loc": 564,
+      "summary": "Paints the plan; renders Mermaid/SVG figures through a background Job."
+    },
+    {
+      "id": "cmp:Render",
+      "label": "render.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/render.rs",
+      "loc": 230,
+      "summary": "The page element, footer band, counter, find bar, formatting bar slot."
+    },
+    {
+      "id": "cmp:Edit",
+      "label": "edit.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/edit.rs",
+      "loc": 371,
+      "summary": "One undoable change at a time, applied to every cursor."
+    },
+    {
+      "id": "cmp:Cursor",
+      "label": "cursor.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/cursor.rs",
+      "loc": 234,
+      "summary": "Motions, selection extension, several cursors."
+    },
+    {
+      "id": "cmp:Blocks",
+      "label": "blocks.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/blocks.rs",
+      "loc": 414,
+      "summary": "Grip, block menu, drag a block to a new place."
+    },
+    {
+      "id": "cmp:Grid",
+      "label": "grid.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/grid.rs",
+      "loc": 899,
+      "summary": "Markdown table drawn as a web-like grid, sharing the page width."
+    },
+    {
+      "id": "cmp:Table",
+      "label": "table.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/table.rs",
+      "loc": 834,
+      "summary": "Cell navigation, row/column ops, alignment, grid picker."
+    },
+    {
+      "id": "cmp:Formulas",
+      "label": "formulas.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/formulas.rs",
+      "loc": 144
+    },
+    {
+      "id": "cmp:Find",
+      "label": "find.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/find.rs",
+      "loc": 273,
+      "summary": "Find bar, regex/word/case flags, replace, vault-wide replace."
+    },
+    {
+      "id": "cmp:Completion",
+      "label": "completion.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/completion.rs",
+      "loc": 222
+    },
+    {
+      "id": "cmp:Links",
+      "label": "links.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/links.rs",
+      "loc": 270,
+      "summary": "Make/follow links; CriticMarkup comments on text and selections."
+    },
+    {
+      "id": "cmp:Embeds",
+      "label": "embed.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/embed.rs",
+      "loc": 330,
+      "summary": "Read-only Editor per embedded section, framed, polled for changes."
+    },
+    {
+      "id": "cmp:FormatBar",
+      "label": "format_bar.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/format_bar.rs",
+      "loc": 380,
+      "summary": "B/I/U/S/highlight/code/link/list/table buttons; lit when active."
+    },
+    {
+      "id": "cmp:Mouse",
+      "label": "mouse.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/mouse.rs",
+      "loc": 616
+    },
+    {
+      "id": "cmp:Clipboard",
+      "label": "clipboard.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/clipboard.rs",
+      "loc": 93
+    },
+    {
+      "id": "cmp:IME",
+      "label": "input.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/input.rs",
+      "loc": 170
+    },
+    {
+      "id": "cmp:Style",
+      "label": "style.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/style.rs",
+      "loc": 233
+    },
+    {
+      "id": "cmp:Notes",
+      "label": "notes.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/editor/notes.rs",
+      "loc": 86
+    },
+    {
+      "id": "state:Text",
+      "label": "content + selection",
+      "kind": "state",
+      "group": "state",
+      "path": "src/views/editor/mod.rs",
+      "summary": "content String, sel, more cursors, undo/redo, dirty flag.",
+      "loc": 766
+    },
+    {
+      "id": "state:Figures",
+      "label": "Figure cache",
+      "kind": "state",
+      "group": "state",
+      "path": "src/views/editor/paint.rs",
+      "loc": 564
+    },
+    {
+      "id": "cmd:Bold",
+      "label": "Bold",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/format_bar.rs",
+      "tags": [
+        "secondary-b"
+      ],
+      "loc": 380
+    },
+    {
+      "id": "cmd:Comment",
+      "label": "Comment",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/links.rs",
+      "tags": [
+        "secondary-shift-m"
+      ],
+      "loc": 270
+    },
+    {
+      "id": "cmd:Find",
+      "label": "Find in note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/find.rs",
+      "tags": [
+        "secondary-f"
+      ],
+      "loc": 273
+    },
+    {
+      "id": "cmd:ReplaceInVault",
+      "label": "Replace in vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/find.rs",
+      "tags": [
+        "secondary-shift-h"
+      ],
+      "loc": 273
+    },
+    {
+      "id": "cmd:BlockUp",
+      "label": "Move block up",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/blocks.rs",
+      "tags": [
+        "alt-up"
+      ],
+      "loc": 414
+    },
+    {
+      "id": "cmd:ListCycle",
+      "label": "Cycle list kind",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/mod.rs",
+      "tags": [
+        "secondary-shift-l"
+      ],
+      "loc": 766
+    },
+    {
+      "id": "cmd:TableRowBelow",
+      "label": "Add table row",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/table.rs",
+      "loc": 834
+    },
+    {
+      "id": "cmd:Undo",
+      "label": "Undo",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/views/editor/edit.rs",
+      "tags": [
+        "secondary-z"
+      ],
+      "loc": 371
+    },
+    {
+      "id": "ipc:EmbedDisk",
+      "label": "section reads",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/views/editor/embed.rs",
+      "loc": 330
+    },
+    {
+      "id": "ipc:FigureJob",
+      "label": "figure jobs",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/views/editor/paint.rs",
+      "loc": 564
+    },
+    {
+      "id": "ipc:Clipboard",
+      "label": "system clipboard",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/views/editor/clipboard.rs",
+      "loc": 93
+    },
+    {
+      "id": "shared:Markdown",
+      "label": "logic::markdown",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/logic/markdown/mod.rs",
+      "loc": 1705
+    },
+    {
+      "id": "shared:Figure",
+      "label": "ui::figure",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/figure.rs",
+      "loc": 154
+    },
+    {
+      "id": "ext:TableLogic",
+      "label": "logic::table",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/table.rs",
+      "loc": 1295
+    },
+    {
+      "id": "ext:FormulaLogic",
+      "label": "logic::formula",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/formula.rs",
+      "loc": 838
+    },
+    {
+      "id": "ext:EmbedLogic",
+      "label": "logic::embed",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/embed.rs",
+      "loc": 305
+    },
+    {
+      "id": "ext:BlockLogic",
+      "label": "logic::block",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/block.rs",
+      "loc": 413
+    },
+    {
+      "id": "ext:DiagramLogic",
+      "label": "logic::diagram",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/diagram/mod.rs",
+      "loc": 1692
+    },
+    {
+      "id": "ext:UndoHistory",
+      "label": "logic::history",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/history.rs",
+      "loc": 227
+    },
+    {
+      "id": "ext:Shell",
+      "label": "shell",
+      "kind": "external",
+      "group": "external",
+      "path": "src/shell/notes.rs",
+      "loc": 530
+    },
+    {
+      "id": "ext:Theme",
+      "label": "ui::theme",
+      "kind": "external",
+      "group": "external",
+      "path": "src/ui/theme.rs",
+      "loc": 221
+    },
+    {
+      "id": "ext:GPUI",
+      "label": "gpui",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Layout",
+      "kind": "calls",
+      "label": "plan(width, room, cursor)"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Paint",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Render",
+      "kind": "calls",
+      "label": "impl Render"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Edit",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Find",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:FormatBar",
+      "kind": "calls",
+      "label": "bar_place, format_bar"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Embeds",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "state:Text",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "state:Text",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:Shell",
+      "kind": "dispatches",
+      "label": "EditorEvent"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:GPUI",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "cmp:Layout",
+      "kind": "reads",
+      "label": "Plan rows"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "cmp:FormatBar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "cmp:Find",
+      "kind": "renders",
+      "label": "find bar"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "state:Figures",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "ipc:FigureJob",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "shared:Figure",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "cmp:Grid",
+      "kind": "calls",
+      "label": "paint table cells"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "cmp:Embeds",
+      "kind": "calls",
+      "label": "paint_embed"
+    },
+    {
+      "from": "cmp:Paint",
+      "to": "cmp:Style",
+      "kind": "reads",
+      "label": "flags per line"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "shared:Markdown",
+      "kind": "calls",
+      "label": "classify, emphasis"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "cmp:Style",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Edit",
+      "to": "state:Text",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Edit",
+      "to": "ext:UndoHistory",
+      "kind": "calls",
+      "label": "undo / redo"
+    },
+    {
+      "from": "cmp:Edit",
+      "to": "cmp:Cursor",
+      "kind": "calls",
+      "label": "each(cx, ..)"
+    },
+    {
+      "from": "cmp:Cursor",
+      "to": "state:Text",
+      "kind": "reads",
+      "label": "sel, more"
+    },
+    {
+      "from": "cmp:Cursor",
+      "to": "shared:Markdown",
+      "kind": "calls",
+      "label": "word boundaries"
+    },
+    {
+      "from": "cmp:Blocks",
+      "to": "ext:BlockLogic",
+      "kind": "calls",
+      "label": "block range"
+    },
+    {
+      "from": "cmp:Blocks",
+      "to": "cmp:Edit",
+      "kind": "calls",
+      "label": "move, duplicate"
+    },
+    {
+      "from": "cmp:Grid",
+      "to": "ext:TableLogic",
+      "kind": "calls",
+      "label": "parse cells"
+    },
+    {
+      "from": "cmp:Grid",
+      "to": "ext:FormulaLogic",
+      "kind": "calls",
+      "label": "evaluate, display"
+    },
+    {
+      "from": "cmp:Grid",
+      "to": "cmp:Table",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Table",
+      "to": "ext:TableLogic",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Table",
+      "to": "cmp:Edit",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Formulas",
+      "to": "ext:FormulaLogic",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Formulas",
+      "to": "cmp:Grid",
+      "kind": "calls",
+      "label": "results shown"
+    },
+    {
+      "from": "cmp:Find",
+      "to": "shared:Markdown",
+      "kind": "calls",
+      "label": "swap across vault"
+    },
+    {
+      "from": "cmp:Find",
+      "to": "cmp:Links",
+      "kind": "calls",
+      "label": "comment edits"
+    },
+    {
+      "from": "cmp:Completion",
+      "to": "ext:EmbedLogic",
+      "kind": "calls",
+      "label": "headings, block ids"
+    },
+    {
+      "from": "cmp:Links",
+      "to": "shared:Markdown",
+      "kind": "calls",
+      "label": "links, comments"
+    },
+    {
+      "from": "cmp:Links",
+      "to": "cmp:Notes",
+      "kind": "calls",
+      "label": "marks per cell"
+    },
+    {
+      "from": "cmp:Embeds",
+      "to": "ext:EmbedLogic",
+      "kind": "calls",
+      "label": "section, position"
+    },
+    {
+      "from": "cmp:Embeds",
+      "to": "ipc:EmbedDisk",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Embeds",
+      "to": "cmp:Editor",
+      "kind": "renders",
+      "label": "read-only Editor per section"
+    },
+    {
+      "from": "cmp:FormatBar",
+      "to": "cmp:Edit",
+      "kind": "calls",
+      "label": "apply a mark"
+    },
+    {
+      "from": "cmp:FormatBar",
+      "to": "cmp:Table",
+      "kind": "calls",
+      "label": "row/column buttons"
+    },
+    {
+      "from": "cmp:Mouse",
+      "to": "cmp:Cursor",
+      "kind": "writes",
+      "label": "place cursor, drag selection"
+    },
+    {
+      "from": "cmp:Mouse",
+      "to": "cmp:Table",
+      "kind": "calls",
+      "label": "pick rows and columns"
+    },
+    {
+      "from": "cmp:Mouse",
+      "to": "cmp:Blocks",
+      "kind": "calls",
+      "label": "grip drag"
+    },
+    {
+      "from": "cmp:Clipboard",
+      "to": "ipc:Clipboard",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:IME",
+      "to": "cmp:Edit",
+      "kind": "calls",
+      "label": "replace marked range"
+    },
+    {
+      "from": "cmd:Bold",
+      "to": "cmp:FormatBar",
+      "kind": "commands",
+      "label": "same mark as the B button"
+    },
+    {
+      "from": "cmd:Comment",
+      "to": "cmp:Links",
+      "kind": "commands",
+      "label": "comment selection"
+    },
+    {
+      "from": "cmd:Find",
+      "to": "cmp:Find",
+      "kind": "commands",
+      "label": "open bar"
+    },
+    {
+      "from": "cmd:ReplaceInVault",
+      "to": "cmp:Find",
+      "kind": "commands",
+      "label": "count, then swap"
+    },
+    {
+      "from": "cmd:BlockUp",
+      "to": "cmp:Blocks",
+      "kind": "commands",
+      "label": "move_block"
+    },
+    {
+      "from": "cmd:ListCycle",
+      "to": "cmp:Style",
+      "kind": "commands",
+      "label": "list kind"
+    },
+    {
+      "from": "cmd:TableRowBelow",
+      "to": "cmp:Table",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Undo",
+      "to": "cmp:Edit",
+      "kind": "commands",
+      "label": "restore(false)"
+    }
+  ],
+  "flows": [
+    {
+      "id": "type",
+      "name": "Type a character",
+      "trigger": "A letter key in the note",
+      "steps": [
+        "cmp:IME",
+        "cmp:Edit",
+        "state:Text",
+        "cmp:Layout",
+        "cmp:Paint"
+      ],
+      "summary": "One undoable edit, cursor moved, damaged line re-laid, painted."
+    },
+    {
+      "id": "bold",
+      "name": "Bold from the bar",
+      "trigger": "Click B in the formatting bar",
+      "steps": [
+        "cmd:Bold",
+        "cmp:FormatBar",
+        "cmp:Edit",
+        "state:Text"
+      ],
+      "summary": "Wraps the selection in **, a second click removes it."
+    },
+    {
+      "id": "comment",
+      "name": "Comment a line",
+      "trigger": "Ctrl+Shift+M",
+      "steps": [
+        "cmd:Comment",
+        "cmp:Links",
+        "state:Text",
+        "cmp:Notes"
+      ],
+      "summary": "Wraps the text in CriticMarkup, marks it, lists it in the panel."
+    },
+    {
+      "id": "embed",
+      "name": "Embed a section",
+      "trigger": "Type ![[Note#Heading]] alone on a line",
+      "steps": [
+        "cmp:Completion",
+        "cmp:Embeds",
+        "ext:EmbedLogic",
+        "ipc:EmbedDisk",
+        "cmp:Layout"
+      ],
+      "summary": "A read-only Editor lays the section out, framed under the line, polled."
+    },
+    {
+      "id": "table-cell",
+      "name": "Move in a table",
+      "trigger": "Tab inside a Markdown table",
+      "steps": [
+        "cmp:Table",
+        "cmp:Grid",
+        "cmp:Edit",
+        "cmp:Paint"
+      ],
+      "summary": "Tab adds a row at the end of the table, otherwise moves to the next cell."
+    },
+    {
+      "id": "find",
+      "name": "Find and replace",
+      "trigger": "Ctrl+F",
+      "steps": [
+        "cmd:Find",
+        "cmp:Find",
+        "state:Text",
+        "cmp:Layout"
+      ],
+      "summary": "Matches recompute on each change; replace goes through the same undo stack."
+    },
+    {
+      "id": "undo",
+      "name": "Undo",
+      "trigger": "Ctrl+Z",
+      "steps": [
+        "cmd:Undo",
+        "cmp:Edit",
+        "ext:UndoHistory",
+        "state:Text"
+      ],
+      "summary": "The History of the whole text, not per-cursor: one step per gesture."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Layout reuse is a checked invariant",
+      "body": "`Damage` (layout.rs:19) records changed lines; `plan` (layout.rs:506) re-shapes only those. `layout_reuse_matches_full_layout` in src/shell/tests/layout.rs compares the reuse with a full layout.",
+      "severity": "info",
+      "path": "src/views/editor/layout.rs"
+    },
+    {
+      "title": "Editor is a 766-line, 83-field struct",
+      "body": "src/views/editor/mod.rs holds the text, cursors, undo/redo, find state, format bar state, figure cache, embed cache and hitboxes; every part file is `impl Editor` on the same struct.",
+      "severity": "warn",
+      "path": "src/views/editor/mod.rs"
+    },
+    {
+      "title": "Embeds recurse into real Editors",
+      "body": "`Embeds::row` (views/editor/embed.rs:129) builds a read-only `Editor` per section, bounded by `DEPTH = 3` (embed.rs:19) and a `trail` that flags circular embeds instead of recursing.",
+      "severity": "info",
+      "path": "src/views/editor/embed.rs"
+    },
+    {
+      "title": "Figures render off the UI thread",
+      "body": "`Job` (paint.rs:8) hands Mermaid and LaTeX sources to `cx.background_executor`, keeps results in `Figures` keyed by source hash, and paints the cached image next frame.",
+      "severity": "info",
+      "path": "src/views/editor/paint.rs"
+    },
+    {
+      "title": "The view owns no disk access except embeds",
+      "body": "Everything else goes through the shell; the one exception is `Embeds::text` (embed.rs:73) reading other notes directly to keep sections live, bypassing the shell's file cache.",
+      "severity": "warn",
+      "path": "src/views/editor/embed.rs"
+    },
+    {
+      "title": "Markdown stays plain on disk",
+      "body": "Styles are computed in `style.rs`/`logic/markdown` as flags per line; the buffer is never rewritten into HTML, so a comment, a table or a highlight is still valid Markdown for other editors.",
+      "severity": "info",
+      "path": "src/views/editor/style.rs"
+    }
+  ]
+}

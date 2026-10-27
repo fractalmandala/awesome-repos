@@ -1,0 +1,1021 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Bref",
+    "slug": "alarboulletmarin__bref",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "shell",
+    "name": "Shell (window)",
+    "entryLayout": "src/shell/mod.rs",
+    "root": "src/shell",
+    "summary": "Window state and routing: panes, vault, note saving, sync, panel, palette",
+    "externalModules": [
+      "editor",
+      "nav",
+      "palette",
+      "sheet",
+      "canvas",
+      "graph",
+      "viewer",
+      "kanban",
+      "logic",
+      "platform",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 51,
+    "edges": 67,
+    "components": 24,
+    "stateFiles": 1,
+    "commands": 10,
+    "ipcCalls": 4,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Shell",
+      "label": "Shell",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/mod.rs",
+      "loc": 361,
+      "tags": [
+        "entry"
+      ],
+      "summary": "Owns the panes and views, routes their events, runs the app's actions."
+    },
+    {
+      "id": "cmp:ShellRender",
+      "label": "render.rs",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "impl Render"
+      ],
+      "summary": "Draws title bar, panes, pane divider, comments rail and footer band.",
+      "loc": 872
+    },
+    {
+      "id": "cmp:Capture",
+      "label": "Capture",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/capture.rs",
+      "tags": [
+        "--capture"
+      ],
+      "loc": 81
+    },
+    {
+      "id": "cmp:Pane",
+      "label": "pane.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/pane.rs",
+      "summary": "Pane, FileView/FileKind, split, close, focus target per kind.",
+      "loc": 262
+    },
+    {
+      "id": "cmp:Notes",
+      "label": "notes.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/notes.rs",
+      "summary": "Load/open/preview/new/save; debounced flush; wikilink and heading follow.",
+      "loc": 530
+    },
+    {
+      "id": "cmp:Library",
+      "label": "library.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/library.rs",
+      "summary": "Vault choose/scan/watch, icons, backup, trash, terminal.",
+      "loc": 378
+    },
+    {
+      "id": "cmp:Sync",
+      "label": "sync.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/sync.rs",
+      "summary": "git_sync, connect, clone; conflict notes; one sync at a time.",
+      "loc": 179
+    },
+    {
+      "id": "cmp:Sidebar",
+      "label": "sidebar.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/sidebar.rs",
+      "loc": 956,
+      "summary": "Draws the panel: rows, icons, calendar, rail, folding."
+    },
+    {
+      "id": "cmp:Files",
+      "label": "files.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/files.rs",
+      "loc": 147
+    },
+    {
+      "id": "cmp:Menu",
+      "label": "menu.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/menu.rs",
+      "loc": 368
+    },
+    {
+      "id": "cmp:Listing",
+      "label": "listing.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/listing.rs",
+      "loc": 256
+    },
+    {
+      "id": "cmp:PaletteOpen",
+      "label": "palette_open.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/palette_open.rs",
+      "summary": "Every way the palette opens: notes, commands, outline, ask, choices.",
+      "loc": 242
+    },
+    {
+      "id": "cmp:Help",
+      "label": "help.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/help.rs",
+      "summary": "Shortcut help panel, search, rebinding, clash report.",
+      "loc": 462
+    },
+    {
+      "id": "cmp:Keymap",
+      "label": "keymap.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/keymap.rs",
+      "summary": "Default binds, help sections, install, keys-file overrides.",
+      "loc": 525
+    },
+    {
+      "id": "cmp:Travel",
+      "label": "travel.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/travel.rs",
+      "loc": 107
+    },
+    {
+      "id": "cmp:Search",
+      "label": "search.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/search.rs",
+      "loc": 93
+    },
+    {
+      "id": "cmp:Templates",
+      "label": "templates.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/templates.rs",
+      "loc": 147
+    },
+    {
+      "id": "cmp:Tables",
+      "label": "tables.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/tables.rs",
+      "loc": 107
+    },
+    {
+      "id": "cmp:Diagrams",
+      "label": "diagrams.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/diagrams.rs",
+      "loc": 176
+    },
+    {
+      "id": "cmp:Board",
+      "label": "board.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/board.rs",
+      "loc": 306
+    },
+    {
+      "id": "cmp:Drops",
+      "label": "drops.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/drops.rs",
+      "loc": 168
+    },
+    {
+      "id": "cmp:Settings",
+      "label": "settings.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/settings.rs",
+      "loc": 95
+    },
+    {
+      "id": "cmp:Updates",
+      "label": "updates.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/updates.rs",
+      "loc": 142
+    },
+    {
+      "id": "cmp:Toasts",
+      "label": "toasts.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/toasts.rs",
+      "summary": "Tone + message status line; failures stay until cleared.",
+      "loc": 149
+    },
+    {
+      "id": "state:Pane",
+      "label": "Pane fields",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shell/pane.rs",
+      "summary": "zone, editor, file, figure, path, dirty, preview, board, listing, peek.",
+      "loc": 262
+    },
+    {
+      "id": "cmd:OpenPalette",
+      "label": "Open palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-p"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:NewNote",
+      "label": "New note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-n"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:SyncVault",
+      "label": "Sync vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-shift-s"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:SplitPane",
+      "label": "Split pane",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-\\"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:Travel",
+      "label": "Back / forward",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "alt-left",
+        "alt-right"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:Today",
+      "label": "Daily note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-j"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:OpenVault",
+      "label": "Open vault",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-o"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:ShowGraph",
+      "label": "Show graph",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "nav::ShowGraph"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:ToggleHelp",
+      "label": "Shortcut help",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "f1"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "cmd:NewDiagram",
+      "label": "New diagram",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.rs",
+      "tags": [
+        "secondary-shift-d"
+      ],
+      "loc": 872
+    },
+    {
+      "id": "ipc:Vault",
+      "label": "platform::vault",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/vault.rs",
+      "loc": 1321,
+      "summary": "Atomic write, scan, watch (notify), trash, backup, import, config files."
+    },
+    {
+      "id": "ipc:Git",
+      "label": "platform::git",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/git.rs",
+      "loc": 578
+    },
+    {
+      "id": "ipc:Update",
+      "label": "platform::update",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/platform/update.rs",
+      "loc": 473
+    },
+    {
+      "id": "ipc:Clipboard",
+      "label": "gpui clipboard",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shell/notes.rs",
+      "loc": 530
+    },
+    {
+      "id": "shared:Widgets",
+      "label": "ui::widgets",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/widgets.rs",
+      "loc": 115
+    },
+    {
+      "id": "shared:Keys",
+      "label": "ui::keys",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/keys.rs",
+      "loc": 480
+    },
+    {
+      "id": "ext:Editor",
+      "label": "views::editor",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/editor/mod.rs",
+      "loc": 766
+    },
+    {
+      "id": "ext:Nav",
+      "label": "views::nav",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/nav.rs",
+      "loc": 495
+    },
+    {
+      "id": "ext:Palette",
+      "label": "views::palette",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/palette.rs",
+      "loc": 1196
+    },
+    {
+      "id": "ext:Sheet",
+      "label": "views::sheet",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/sheet/mod.rs",
+      "loc": 476
+    },
+    {
+      "id": "ext:Canvas",
+      "label": "views::canvas",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/canvas/mod.rs",
+      "loc": 594
+    },
+    {
+      "id": "ext:Graph",
+      "label": "views::graph",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/graph.rs",
+      "loc": 662
+    },
+    {
+      "id": "ext:Viewer",
+      "label": "views::viewer",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/viewer.rs",
+      "loc": 582
+    },
+    {
+      "id": "ext:Kanban",
+      "label": "views::kanban",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/kanban.rs",
+      "loc": 364
+    },
+    {
+      "id": "ext:Logic",
+      "label": "logic::*",
+      "kind": "external",
+      "group": "external",
+      "path": "src/logic/mod.rs",
+      "loc": 21
+    },
+    {
+      "id": "ext:GPUI",
+      "label": "gpui",
+      "kind": "external",
+      "group": "external",
+      "path": "Cargo.toml",
+      "loc": 44
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:ShellRender",
+      "kind": "calls",
+      "label": "impl Render"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "state:Pane",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "state:Pane",
+      "kind": "writes",
+      "label": "pane_mut(), in_pane()"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Editor",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Nav",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Palette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Sheet",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Canvas",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Viewer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "ext:Kanban",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellRender",
+      "to": "shared:Widgets",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Notes",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Pane",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Library",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Sync",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Sidebar",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:PaletteOpen",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Help",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Keymap",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Travel",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Files",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Menu",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Listing",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Search",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Templates",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Tables",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Diagrams",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Board",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Drops",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Settings",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Updates",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:Toasts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "ext:GPUI",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "ext:Logic",
+      "kind": "reads",
+      "label": "markdown, history, prefs"
+    },
+    {
+      "from": "cmp:Notes",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "vault::save, free_path"
+    },
+    {
+      "from": "cmp:Notes",
+      "to": "ext:Editor",
+      "kind": "writes",
+      "label": "set_text / reload"
+    },
+    {
+      "from": "cmp:Notes",
+      "to": "cmp:Toasts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Library",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "scan, watch, backup, trash"
+    },
+    {
+      "from": "cmp:Library",
+      "to": "cmp:Sidebar",
+      "kind": "calls",
+      "label": "push_names, push_dirs"
+    },
+    {
+      "from": "cmp:Sync",
+      "to": "ipc:Git",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Sync",
+      "to": "cmp:Toasts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Sync",
+      "to": "cmp:Library",
+      "kind": "calls",
+      "label": "rescan after merge"
+    },
+    {
+      "from": "cmp:Updates",
+      "to": "ipc:Update",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Drops",
+      "to": "ipc:Vault",
+      "kind": "ipc",
+      "label": "vault::import, save_image"
+    },
+    {
+      "from": "cmp:Notes",
+      "to": "ipc:Clipboard",
+      "kind": "ipc",
+      "label": "copy_all"
+    },
+    {
+      "from": "cmp:Pane",
+      "to": "ext:Editor",
+      "kind": "renders",
+      "label": "cx.new(Editor::new)"
+    },
+    {
+      "from": "cmp:Pane",
+      "to": "ext:Sheet",
+      "kind": "renders",
+      "label": "FileKind::Sheet"
+    },
+    {
+      "from": "cmp:Pane",
+      "to": "ext:Canvas",
+      "kind": "renders",
+      "label": "FileKind::Drawing"
+    },
+    {
+      "from": "cmp:Pane",
+      "to": "ext:Viewer",
+      "kind": "renders",
+      "label": "FileKind::Svg"
+    },
+    {
+      "from": "cmp:PaletteOpen",
+      "to": "ext:Palette",
+      "kind": "renders",
+      "label": "cx.new(Palette)"
+    },
+    {
+      "from": "cmp:PaletteOpen",
+      "to": "ext:Logic",
+      "kind": "reads",
+      "label": "commands::catalog"
+    },
+    {
+      "from": "cmp:Tables",
+      "to": "ext:Sheet",
+      "kind": "reads",
+      "label": "SheetEvent"
+    },
+    {
+      "from": "cmp:Board",
+      "to": "ext:Kanban",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "ext:Nav",
+      "kind": "calls",
+      "label": "nav_rows, Mode"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "ext:Graph",
+      "kind": "renders",
+      "label": "Mode::Graph"
+    },
+    {
+      "from": "cmp:Keymap",
+      "to": "shared:Keys",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Help",
+      "to": "cmp:Keymap",
+      "kind": "reads",
+      "label": "defaults, help_sections"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "cmp:PaletteOpen",
+      "kind": "commands",
+      "label": "open_palette"
+    },
+    {
+      "from": "cmd:NewNote",
+      "to": "cmp:Notes",
+      "kind": "commands",
+      "label": "new_note_here"
+    },
+    {
+      "from": "cmd:SyncVault",
+      "to": "cmp:Sync",
+      "kind": "commands",
+      "label": "git_sync"
+    },
+    {
+      "from": "cmd:SplitPane",
+      "to": "cmp:Pane",
+      "kind": "commands",
+      "label": "split"
+    },
+    {
+      "from": "cmd:Travel",
+      "to": "cmp:Travel",
+      "kind": "commands",
+      "label": "travel"
+    },
+    {
+      "from": "cmd:Today",
+      "to": "cmp:Notes",
+      "kind": "commands",
+      "label": "open_today"
+    },
+    {
+      "from": "cmd:OpenVault",
+      "to": "cmp:Library",
+      "kind": "commands",
+      "label": "choose_vault"
+    },
+    {
+      "from": "cmd:ShowGraph",
+      "to": "cmp:Sidebar",
+      "kind": "commands",
+      "label": "show_nav(Graph)"
+    },
+    {
+      "from": "cmd:ToggleHelp",
+      "to": "cmp:Help",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:NewDiagram",
+      "to": "cmp:Diagrams",
+      "kind": "commands",
+      "label": "new_diagram"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-note",
+      "name": "Open a note",
+      "trigger": "Click a row in the side panel",
+      "steps": [
+        "ext:Nav",
+        "cmp:Sidebar",
+        "cmp:Notes",
+        "ipc:Vault",
+        "ext:Editor"
+      ],
+      "summary": "Row -> open_from_nav -> load_note reads the file and fills the pane's Editor."
+    },
+    {
+      "id": "autosave",
+      "name": "Debounced autosave",
+      "trigger": "A keystroke in the note",
+      "steps": [
+        "ext:Editor",
+        "cmp:Notes",
+        "ipc:Vault",
+        "cmp:Toasts"
+      ],
+      "summary": "Changed bumps save_gen; 400 ms later flush() writes the note atomically."
+    },
+    {
+      "id": "split-pane",
+      "name": "Split the window",
+      "trigger": "Ctrl+\\",
+      "steps": [
+        "cmd:SplitPane",
+        "cmp:Pane",
+        "state:Pane"
+      ],
+      "summary": "panes.push(new_pane) clones nothing: a fresh Editor and an empty Pane."
+    },
+    {
+      "id": "git-sync",
+      "name": "Sync the vault",
+      "trigger": "Ctrl+Shift+S",
+      "steps": [
+        "cmd:SyncVault",
+        "cmp:Sync",
+        "ipc:Git",
+        "cmp:Toasts"
+      ],
+      "summary": "Background save/fetch/merge/push; a real conflict is written as two notes."
+    },
+    {
+      "id": "switch-vault",
+      "name": "Open another vault",
+      "trigger": "Ctrl+O",
+      "steps": [
+        "cmd:OpenVault",
+        "cmp:Library",
+        "ipc:Vault",
+        "cmp:Sidebar"
+      ],
+      "summary": "Path prompt -> set_vault -> scan + watch -> panel names rebuilt."
+    },
+    {
+      "id": "commands",
+      "name": "Run a command",
+      "trigger": "F10",
+      "steps": [
+        "cmd:OpenPalette",
+        "cmp:PaletteOpen",
+        "ext:Palette",
+        "ext:Logic"
+      ],
+      "summary": "Palette opens in command mode over logic::commands::catalog plus bound keys."
+    },
+    {
+      "id": "drop-file",
+      "name": "Drop a file in",
+      "trigger": "Drag a file from the desktop onto a pane",
+      "steps": [
+        "cmp:Drops",
+        "ipc:Vault",
+        "cmp:Toasts"
+      ],
+      "summary": "Aim by pointer half, import into the vault folder, report failures."
+    }
+  ],
+  "notes": [
+    {
+      "title": "One struct, 23 subject files",
+      "body": "`struct Shell` (src/shell/mod.rs:77) carries 20+ fields; 23 `impl Shell` files each own one subject, so no shell file exceeds 956 lines.",
+      "severity": "warn",
+      "path": "src/shell/mod.rs"
+    },
+    {
+      "title": "Autosave is debounced, not synchronous",
+      "body": "EditorEvent::Changed bumps `save_gen` then waits 400 ms before `flush`; a newer keystroke cancels it (notes.rs:423). The write runs on the UI thread, flagged `ponytail:` at notes.rs:318.",
+      "severity": "info",
+      "path": "src/shell/notes.rs"
+    },
+    {
+      "title": "One sync at a time",
+      "body": "`syncing: bool` on Shell guards `git_sync`; the work runs in `cx.background_executor`, so the window keeps drawing during a merge.",
+      "severity": "info",
+      "path": "src/shell/sync.rs"
+    },
+    {
+      "title": "Views never name the shell",
+      "body": "All view coupling goes through events consumed by `cx.subscribe_in` in shell (editor at pane.rs:100, graph at mod.rs:194, palette at 5 call sites). `layers_only_depend_downwards` enforces it.",
+      "severity": "info",
+      "path": "src/shell/pane.rs"
+    },
+    {
+      "title": "The real UI test suite lives here",
+      "body": "src/shell/tests is 7.8k lines: 21 end-to-end chapters drive one session by simulated keystrokes, plus layout, window, drops and keycap probes.",
+      "severity": "info",
+      "path": "src/shell/tests/mod.rs"
+    },
+    {
+      "title": "Capture duplicates a slice of the shell",
+      "body": "src/shell/capture.rs is a second window with its own field and its own append path (`vault::capture`), so a change to note saving must be made in both places.",
+      "severity": "warn",
+      "path": "src/shell/capture.rs"
+    }
+  ]
+}

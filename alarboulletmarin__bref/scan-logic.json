@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Bref",
+    "slug": "alarboulletmarin__bref",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "logic",
+    "name": "Pure logic",
+    "entryLayout": "src/logic/mod.rs",
+    "root": "src/logic",
+    "summary": "Pure functions: Markdown, CSV tables, formulas, embeds, diagrams, preferences",
+    "externalModules": [
+      "editor",
+      "shell",
+      "views/canvas",
+      "views/sheet"
+    ]
+  },
+  "stats": {
+    "nodes": 34,
+    "edges": 49,
+    "components": 25,
+    "stateFiles": 4,
+    "commands": 0,
+    "ipcCalls": 0,
+    "flows": 8
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Logic",
+      "label": "logic/mod.rs",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/logic/mod.rs",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Declares 18 pure modules; the layer may not see gpui, disk or the window.",
+      "loc": 21
+    },
+    {
+      "id": "cmp:Markdown",
+      "label": "markdown/mod.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/mod.rs",
+      "summary": "29 public fns: classify lines, emphasis flags, links, comments, headings, index.",
+      "loc": 1705
+    },
+    {
+      "id": "cmp:MdTables",
+      "label": "markdown/tables.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/tables.rs",
+      "summary": "Markdown table cells: paste, rows/columns, sort, aligned formatting.",
+      "loc": 367
+    },
+    {
+      "id": "cmp:FrontMatter",
+      "label": "markdown/front.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/front.rs",
+      "loc": 135
+    },
+    {
+      "id": "cmp:Lists",
+      "label": "markdown/lists.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/lists.rs",
+      "loc": 217
+    },
+    {
+      "id": "cmp:Dates",
+      "label": "markdown/dates.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/dates.rs",
+      "summary": "Day numbers, calendar months, `@` suggestions.",
+      "loc": 89
+    },
+    {
+      "id": "cmp:MdSearch",
+      "label": "markdown/search.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/markdown/search.rs",
+      "loc": 111
+    },
+    {
+      "id": "cmp:Table",
+      "label": "table.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/table.rs",
+      "summary": "CSV/TSV: encoding and delimiter detection, parse, edit, write.",
+      "loc": 1295
+    },
+    {
+      "id": "cmp:Formula",
+      "label": "formula.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/formula.rs",
+      "summary": "=cell tokenizer, parser, evaluator, references, cycle detection.",
+      "loc": 838
+    },
+    {
+      "id": "cmp:Embed",
+      "label": "embed.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/embed.rs",
+      "summary": "Read ![[Note#Heading]], find the section/block, rewrite on rename.",
+      "loc": 305
+    },
+    {
+      "id": "cmp:Block",
+      "label": "block.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/block.rs",
+      "summary": "A block's line range; transform, move, duplicate, delete.",
+      "loc": 413
+    },
+    {
+      "id": "cmp:Diagram",
+      "label": "diagram/mod.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/mod.rs",
+      "summary": "Shapes, arrows between them, versioned SVG+source file model.",
+      "loc": 1692
+    },
+    {
+      "id": "cmp:DiagramFile",
+      "label": "diagram/file.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/file.rs",
+      "loc": 721
+    },
+    {
+      "id": "cmp:DiagramHold",
+      "label": "diagram/hold.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/hold.rs",
+      "loc": 446
+    },
+    {
+      "id": "cmp:DiagramRoute",
+      "label": "diagram/route.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/route.rs",
+      "loc": 483
+    },
+    {
+      "id": "cmp:DiagramSequence",
+      "label": "diagram/sequence.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/diagram/sequence.rs",
+      "loc": 883
+    },
+    {
+      "id": "cmp:Mermaid",
+      "label": "mermaid.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/mermaid.rs",
+      "loc": 898
+    },
+    {
+      "id": "cmp:Uml",
+      "label": "uml.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/uml.rs",
+      "loc": 428
+    },
+    {
+      "id": "cmp:Relation",
+      "label": "relation.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/relation.rs",
+      "loc": 403
+    },
+    {
+      "id": "cmp:RichText",
+      "label": "richtext.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/richtext.rs",
+      "loc": 120
+    },
+    {
+      "id": "cmp:StateNotation",
+      "label": "state.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/state.rs",
+      "loc": 85
+    },
+    {
+      "id": "cmp:Import",
+      "label": "import.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/import.rs",
+      "loc": 354
+    },
+    {
+      "id": "cmp:Library",
+      "label": "library.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/library.rs",
+      "loc": 410
+    },
+    {
+      "id": "cmp:Commands",
+      "label": "commands.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/commands.rs",
+      "loc": 232
+    },
+    {
+      "id": "cmp:Recall",
+      "label": "recall.rs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/logic/recall.rs",
+      "summary": "What the empty page remembers: week/month/year ago, one forgotten note.",
+      "loc": 150
+    },
+    {
+      "id": "state:Prefs",
+      "label": "Prefs",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/prefs.rs",
+      "loc": 79
+    },
+    {
+      "id": "state:Note",
+      "label": "Note",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/note.rs",
+      "summary": "name, path, tags, links, text as held in memory.",
+      "loc": 50
+    },
+    {
+      "id": "state:History",
+      "label": "History",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/history.rs",
+      "summary": "Back/forward places (file, line, scroll), in memory only.",
+      "loc": 227
+    },
+    {
+      "id": "state:DiagramModel",
+      "label": "Diagram",
+      "kind": "state",
+      "group": "state",
+      "path": "src/logic/diagram/mod.rs",
+      "loc": 1692
+    },
+    {
+      "id": "ext:Editor",
+      "label": "views/editor",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/editor/mod.rs",
+      "loc": 766
+    },
+    {
+      "id": "ext:Shell",
+      "label": "shell",
+      "kind": "external",
+      "group": "external",
+      "path": "src/shell/mod.rs",
+      "loc": 361
+    },
+    {
+      "id": "ext:Canvas",
+      "label": "views/canvas",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/canvas/mod.rs",
+      "loc": 594
+    },
+    {
+      "id": "ext:Sheet",
+      "label": "views/sheet",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/sheet/mod.rs",
+      "loc": 476
+    },
+    {
+      "id": "ext:Palette",
+      "label": "views/palette",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views/palette.rs",
+      "loc": 1196
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Logic",
+      "to": "cmp:Markdown",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Logic",
+      "to": "cmp:Table",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Logic",
+      "to": "cmp:Diagram",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Logic",
+      "to": "cmp:Formula",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Logic",
+      "to": "cmp:Embed",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:MdTables",
+      "kind": "calls",
+      "label": "is_table_line"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:FrontMatter",
+      "kind": "calls",
+      "label": "front matter bounds"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:Lists",
+      "kind": "calls",
+      "label": "list kinds"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:Dates",
+      "kind": "calls",
+      "label": "date names"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:MdSearch",
+      "kind": "calls",
+      "label": "counts, swap"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:RichText",
+      "kind": "calls",
+      "label": "emphasis flags reused"
+    },
+    {
+      "from": "cmp:MdTables",
+      "to": "cmp:Block",
+      "kind": "calls",
+      "label": "table block range"
+    },
+    {
+      "from": "cmp:Embed",
+      "to": "cmp:Markdown",
+      "kind": "calls",
+      "label": "headings, block ids"
+    },
+    {
+      "from": "cmp:Block",
+      "to": "cmp:Markdown",
+      "kind": "calls",
+      "label": "classify each line"
+    },
+    {
+      "from": "cmp:Table",
+      "to": "cmp:Formula",
+      "kind": "calls",
+      "label": "cell results on write"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:DiagramFile",
+      "kind": "calls",
+      "label": "from_svg / to_svg"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:DiagramHold",
+      "kind": "calls",
+      "label": "parent, holder bounds"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:DiagramSequence",
+      "kind": "calls",
+      "label": "lifelines, messages"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:DiagramRoute",
+      "kind": "calls",
+      "label": "route arrows"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:Uml",
+      "kind": "calls",
+      "label": "class compartments"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:Relation",
+      "kind": "calls",
+      "label": "Relation::of"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:RichText",
+      "kind": "calls",
+      "label": "styled labels"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "cmp:StateNotation",
+      "kind": "calls",
+      "label": "transition label"
+    },
+    {
+      "from": "cmp:Diagram",
+      "to": "state:DiagramModel",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:DiagramFile",
+      "to": "state:DiagramModel",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DiagramSequence",
+      "to": "cmp:DiagramHold",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Mermaid",
+      "to": "cmp:Diagram",
+      "kind": "writes",
+      "label": "produces elements"
+    },
+    {
+      "from": "cmp:Import",
+      "to": "cmp:Diagram",
+      "kind": "writes",
+      "label": "Excalidraw / draw.io"
+    },
+    {
+      "from": "cmp:Library",
+      "to": "cmp:Diagram",
+      "kind": "writes",
+      "label": "starter shapes"
+    },
+    {
+      "from": "cmp:Recall",
+      "to": "cmp:Dates",
+      "kind": "calls",
+      "label": "ago, long_date"
+    },
+    {
+      "from": "cmp:Recall",
+      "to": "state:Note",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Commands",
+      "to": "cmp:Logic",
+      "kind": "imports"
+    },
+    {
+      "from": "state:Prefs",
+      "to": "cmp:Logic",
+      "kind": "imports",
+      "label": "lives in the layer"
+    },
+    {
+      "from": "state:Note",
+      "to": "cmp:Markdown",
+      "kind": "reads",
+      "label": "tags, links, title"
+    },
+    {
+      "from": "state:History",
+      "to": "state:Note",
+      "kind": "reads",
+      "label": "Place per note"
+    },
+    {
+      "from": "ext:Editor",
+      "to": "cmp:Markdown",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Editor",
+      "to": "cmp:Formula",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Editor",
+      "to": "cmp:Embed",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Editor",
+      "to": "cmp:Block",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Editor",
+      "to": "state:History",
+      "kind": "imports",
+      "label": "undo, not travel"
+    },
+    {
+      "from": "ext:Sheet",
+      "to": "cmp:Table",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Canvas",
+      "to": "cmp:Diagram",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Canvas",
+      "to": "cmp:Mermaid",
+      "kind": "imports",
+      "label": "diagram from Mermaid text"
+    },
+    {
+      "from": "ext:Canvas",
+      "to": "cmp:Library",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Palette",
+      "to": "cmp:Commands",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Shell",
+      "to": "state:Prefs",
+      "kind": "imports"
+    },
+    {
+      "from": "ext:Shell",
+      "to": "state:History",
+      "kind": "imports",
+      "label": "back / forward"
+    },
+    {
+      "from": "ext:Shell",
+      "to": "cmp:Recall",
+      "kind": "imports",
+      "label": "empty page"
+    },
+    {
+      "from": "ext:Shell",
+      "to": "state:Note",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "list-enter",
+      "name": "Continue a list",
+      "trigger": "Enter at the end of a `- ` line",
+      "steps": [
+        "cmp:Lists",
+        "cmp:Markdown"
+      ],
+      "summary": "Picks the next marker, renumbers ordered lists, keeps indentation."
+    },
+    {
+      "id": "cell-formula",
+      "name": "Evaluate a cell",
+      "trigger": "Type =B*C in a table cell",
+      "steps": [
+        "cmp:Formula",
+        "cmp:Table"
+      ],
+      "summary": "Columns are letters, rows counted under the header; cycles are detected."
+    },
+    {
+      "id": "embed-lookup",
+      "name": "Resolve an embed",
+      "trigger": "Type ![[Note#Heading]] alone",
+      "steps": [
+        "cmp:Embed",
+        "cmp:Markdown"
+      ],
+      "summary": "Finds the heading and what is under it up to the next same-level heading."
+    },
+    {
+      "id": "mermaid-import",
+      "name": "Mermaid to canvas",
+      "trigger": "Paste a Mermaid class diagram",
+      "steps": [
+        "cmp:Mermaid",
+        "cmp:Diagram",
+        "cmp:Uml",
+        "cmp:Relation"
+      ],
+      "summary": "Classes, members, relations become shapes and arrows; the rest is skipped."
+    },
+    {
+      "id": "save-diagram",
+      "name": "Save a moved shape",
+      "trigger": "Drag a shape on the canvas",
+      "steps": [
+        "cmp:Diagram",
+        "cmp:DiagramRoute",
+        "cmp:DiagramFile"
+      ],
+      "summary": "Arrows re-route around obstacles, then SVG and metadata source are rewritten."
+    },
+    {
+      "id": "paste-table",
+      "name": "Paste a spreadsheet",
+      "trigger": "Paste TSV onto a Markdown table",
+      "steps": [
+        "cmp:MdTables",
+        "cmp:Markdown",
+        "cmp:Block"
+      ],
+      "summary": "Rows and columns are widened to fit, alignment row kept, block range updated."
+    },
+    {
+      "id": "rename-heading",
+      "name": "Rename a heading",
+      "trigger": "Rename a heading in a note",
+      "steps": [
+        "cmp:Embed",
+        "cmp:Markdown"
+      ],
+      "summary": "Rewrites `#Heading` anchors in the notes that embed or link to it."
+    },
+    {
+      "id": "empty-page",
+      "name": "Empty page",
+      "trigger": "Open a new empty note",
+      "steps": [
+        "cmp:Recall",
+        "cmp:Dates",
+        "state:Note"
+      ],
+      "summary": "Daily notes of a week/month/year ago plus one note untouched for a month."
+    }
+  ],
+  "notes": [
+    {
+      "title": "The layer is pure and stays pure",
+      "body": "No file under src/logic imports gpui, the disk or a view; `layers_only_depend_downwards` (src/shell/tests/mod.rs:25) fails the build otherwise. 13.2k lines, unit-tested inline.",
+      "severity": "info",
+      "path": "src/logic/mod.rs"
+    },
+    {
+      "title": "markdown/mod.rs is a 1.7k-line toolbox",
+      "body": "29 public functions in one file (classify, emphasis, links, comments, headings, index, relink) plus 23 `unwrap`/`expect` and 400+ lines of tests. Most views import it directly.",
+      "severity": "warn",
+      "path": "src/logic/markdown/mod.rs"
+    },
+    {
+      "title": "Diagram files are versioned SVG + source",
+      "body": "`VERSION = 10` (diagram/mod.rs:52). A file is written with `Diagram::needed`, the lowest version that says what it holds, so older builds still open it; newer files open read-only.",
+      "severity": "info",
+      "path": "src/logic/diagram/file.rs"
+    },
+    {
+      "title": "Table parsing is index-only",
+      "body": "src/logic/table.rs keeps the decoded text once as `Arc<String>` and indexes 12 bytes per record, which is why a million rows parse in under a tenth of a second per the README.",
+      "severity": "info",
+      "path": "src/logic/table.rs"
+    },
+    {
+      "title": "Mermaid import is lossy by design",
+      "body": "src/logic/mermaid.rs turns only what the canvas can draw and counts the rest in `skipped` rather than refusing the file: a bridge, not a renderer.",
+      "severity": "info",
+      "path": "src/logic/mermaid.rs"
+    },
+    {
+      "title": "Formula cycles are detected, not fatal",
+      "body": "`evaluate` short-circuits the untaken branch of a conditional and marks a reference cycle instead of recursing (formula.rs:635, test at 786).",
+      "severity": "info",
+      "path": "src/logic/formula.rs"
+    }
+  ]
+}
