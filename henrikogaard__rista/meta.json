@@ -1,0 +1,12 @@
+{
+  "slug": "henrikogaard__rista",
+  "name": "rista",
+  "github": "https://github.com/henrikogaard/rista",
+  "license": "MIT",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Native Rust Markdown workspace: folders as pages, bases, graph, reviewable agents.",
+  "stack": ["rust", "gpui-kit", "markdown", "acp", "mermaid", "katex", "pty"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html", "scan-bases.json", "scan-bases.html", "scan-agent.json", "scan-agent.html"]
+}

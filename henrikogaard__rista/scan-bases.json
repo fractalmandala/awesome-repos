@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "rista",
+    "slug": "henrikogaard__rista",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "bases",
+    "name": "bases",
+    "entryLayout": "src/bases.rs",
+    "root": "src",
+    "summary": ".base query language + BaseView rendering for frontmatter databases.",
+    "externalModules": [
+      "workspace",
+      "vault"
+    ]
+  },
+  "stats": {
+    "nodes": 11,
+    "edges": 10,
+    "components": 6,
+    "stateFiles": 1,
+    "commands": 0,
+    "ipcCalls": 1,
+    "flows": 2
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Parser",
+      "kind": "layout",
+      "group": "layout",
+      "label": "bases.rs (module)",
+      "path": "src/bases.rs",
+      "loc": 8692,
+      "summary": "Single-file module: parser, evaluator, view models, BaseView renderer."
+    },
+    {
+      "id": "cmp:DbParser",
+      "kind": "component",
+      "group": "components",
+      "label": "Lit + Parser",
+      "path": "src/bases.rs",
+      "summary": "Expression lexer/parser for filters, formulas, rollup DSL."
+    },
+    {
+      "id": "cmp:RightsideEvaluator",
+      "kind": "component",
+      "group": "components",
+      "label": "evaluator",
+      "path": "src/bases.rs",
+      "summary": "Filters/formulas evaluate per note from the frontmatter index."
+    },
+    {
+      "id": "cmp:BaseView",
+      "kind": "component",
+      "group": "components",
+      "label": "BaseView",
+      "path": "src/bases.rs",
+      "loc": 8692,
+      "summary": "Entity over a .base or note-scoped spec; subscribes to Document/Vault."
+    },
+    {
+      "id": "cmp:KanbanDrag",
+      "kind": "component",
+      "group": "components",
+      "label": "KanbanDrag",
+      "path": "src/bases.rs",
+      "summary": "Drag-out rendering for kanban/board cards."
+    },
+    {
+      "id": "cmp:ViewSwitch",
+      "kind": "component",
+      "group": "components",
+      "label": "view switch",
+      "path": "src/bases.rs",
+      "summary": "Switch table|cards|gallery|kanban|board|calendar views with saved sorts.",
+      "tags": [
+        "tab bar"
+      ]
+    },
+    {
+      "id": "state:BasesSettings",
+      "kind": "state",
+      "group": "state",
+      "label": "Settings::base_views",
+      "path": "src/settings.rs",
+      "summary": "Persisted view index + column sorts for each base file."
+    },
+    {
+      "id": "ipc:DocEvents",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "Document/Vault events",
+      "path": "src/bases.rs",
+      "summary": "cx.subscribe_in on Document Changed/Saved updates recompute epoch."
+    },
+    {
+      "id": "ext:Vault",
+      "kind": "external",
+      "group": "external",
+      "label": "vault entity",
+      "path": "src/vault.rs",
+      "summary": "Frontmatter index + file tree feeding every query."
+    },
+    {
+      "id": "ext:Document",
+      "kind": "external",
+      "group": "external",
+      "label": "document entity",
+      "path": "src/document.rs",
+      "summary": "Scoped spec inside a note (```bases``` blocks)."
+    },
+    {
+      "id": "ext:Workspace",
+      "kind": "external",
+      "group": "external",
+      "label": "workspace shell",
+      "path": "src/app.rs",
+      "summary": "WeakEntity<Workspace> used to open notes and notify like tabs."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:DbParser",
+      "to": "cmp:RightsideEvaluator",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:RightsideEvaluator",
+      "to": "ext:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "cmp:DbParser",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "ext:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "ext:Document",
+      "kind": "reads",
+      "label": "SpecSrc::Doc"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "ext:Workspace",
+      "kind": "calls",
+      "label": "open note"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "cmp:KanbanDrag",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "cmp:ViewSwitch",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmp:BaseView",
+      "to": "ipc:DocEvents",
+      "kind": "listens"
+    },
+    {
+      "from": "state:BasesSettings",
+      "to": "cmp:BaseView",
+      "kind": "reads",
+      "label": "restores types/sorts"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-base-view",
+      "name": "Open a .base file",
+      "trigger": "open file in the explorer",
+      "steps": [
+        "ext:Workspace",
+        "cmp:BaseView",
+        "cmp:DbParser",
+        "ext:Vault"
+      ],
+      "summary": "Parser reads YAML, evaluates filters per file, view renders results."
+    },
+    {
+      "id": "kanban-edit",
+      "name": "Edit kanban cards",
+      "trigger": "drag on the kanban/canvas",
+      "steps": [
+        "cmp:KanbanDrag",
+        "cmp:BaseView",
+        "ipc:DocEvents",
+        "ext:Document"
+      ],
+      "summary": "Card move updates the source note's property, view sniffs the epoch bump."
+    }
+  ],
+  "notes": [
+    {
+      "title": "pure-language base layer",
+      "body": "Expression parser (Lit/Parser) and evaluator are pure and shared: the headless CLI can also report on bases.",
+      "severity": "info",
+      "path": "src/bases.rs"
+    },
+    {
+      "title": "saved-sort restoration",
+      "body": "view_ix and (view,column,desc) sorts reconstructed from Settings::base_views during BaseView::new.",
+      "severity": "info",
+      "path": "src/bases.rs"
+    },
+    {
+      "title": "subscribe-in epoch",
+      "body": "doc_epoch bumps on DocumentEvent::Changed/Saved and recompiles results while the borrow is still held.",
+      "severity": "info",
+      "path": "src/bases.rs"
+    }
+  ]
+}

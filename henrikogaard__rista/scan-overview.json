@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "rista",
+    "slug": "henrikogaard__rista",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "rista",
+    "entryLayout": "src/main.rs",
+    "root": ".",
+    "summary": "Native Rust Markdown workspace: folders as pages, bases, agents.",
+    "externalModules": [
+      "workspace",
+      "bases",
+      "agent"
+    ]
+  },
+  "stats": {
+    "nodes": 28,
+    "edges": 32,
+    "components": 10,
+    "stateFiles": 4,
+    "commands": 4,
+    "ipcCalls": 3,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Modules"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Engines"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Main",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.rs",
+      "path": "src/main.rs",
+      "loc": 460,
+      "summary": "CLI/headless/gui startup, IPC + url listeners, style-snippet watcher."
+    },
+    {
+      "id": "cmp:Windows",
+      "kind": "component",
+      "group": "components",
+      "label": "windows.rs",
+      "path": "src/windows.rs",
+      "loc": 1798,
+      "summary": "WindowManager global: open paths, window sessions, quit, dispatch CLI."
+    },
+    {
+      "id": "cmp:AppCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "app.rs (Workspace)",
+      "path": "src/app.rs",
+      "loc": 15651,
+      "summary": "The shell: Workspace entity, tabs/panes, ~80 on_action handlers, palette, menus."
+    },
+    {
+      "id": "cmp:BasesMod",
+      "kind": "component",
+      "group": "components",
+      "label": "bases.rs",
+      "path": "src/bases.rs",
+      "loc": 8692,
+      "summary": ".base files: YAML query language over frontmatter, six view types."
+    },
+    {
+      "id": "cmp:DocumentMod",
+      "kind": "component",
+      "group": "components",
+      "label": "document.rs",
+      "path": "src/document.rs",
+      "loc": 4965,
+      "summary": "One open note: editor state, autosave, disk sync, spellcheck, vim."
+    },
+    {
+      "id": "cmp:PreviewMod",
+      "kind": "component",
+      "group": "components",
+      "label": "preview.rs",
+      "path": "src/preview.rs",
+      "loc": 4635
+    },
+    {
+      "id": "cmp:CanvasMod",
+      "kind": "component",
+      "group": "components",
+      "label": "canvas",
+      "path": "src/canvas.rs",
+      "loc": 1827
+    },
+    {
+      "id": "cmp:GraphMod",
+      "kind": "component",
+      "group": "components",
+      "label": "graph.rs",
+      "path": "src/graph.rs",
+      "summary": "Vault graph + local graph views over note links."
+    },
+    {
+      "id": "cmp:AgentPanels",
+      "kind": "component",
+      "group": "components",
+      "label": "agent_panel.rs",
+      "path": "src/agent_panel.rs",
+      "loc": 2414,
+      "summary": "Agent side panel: picker, permissions, reviewable write diffs."
+    },
+    {
+      "id": "shared:ExplorerMods",
+      "kind": "shared",
+      "group": "shared",
+      "label": "panels",
+      "path": "src/explorer.rs"
+    },
+    {
+      "id": "cmp:SearchMods",
+      "kind": "component",
+      "group": "components",
+      "label": "search",
+      "path": "src/search_service.rs",
+      "summary": "Project search: query parser (2.3k), service, saved searches."
+    },
+    {
+      "id": "shared:PdfMods",
+      "kind": "shared",
+      "group": "shared",
+      "label": "pdf + misc",
+      "path": "src/pdf.rs"
+    },
+    {
+      "id": "state:Vault",
+      "kind": "state",
+      "group": "state",
+      "label": "vault.rs",
+      "path": "src/vault.rs",
+      "loc": 1794,
+      "summary": "Opened folder: file tree, flattened note index, notify watcher."
+    },
+    {
+      "id": "state:DocumentEnt",
+      "kind": "state",
+      "group": "state",
+      "label": "Document entity",
+      "path": "src/document.rs",
+      "summary": "Per-note editor entity that panel code reads and writes through."
+    },
+    {
+      "id": "state:Settings",
+      "kind": "state",
+      "group": "state",
+      "label": "settings.rs",
+      "path": "src/settings.rs"
+    },
+    {
+      "id": "state:WindowManager",
+      "kind": "state",
+      "group": "state",
+      "label": "WindowManager global",
+      "path": "src/windows.rs"
+    },
+    {
+      "id": "cmd:PaletteAction",
+      "kind": "command",
+      "group": "commands",
+      "label": "~60 rista actions",
+      "path": "src/actions.rs",
+      "summary": "actions! block: file/edit/nav/view/app + Option[Swagger] RunPaletteCommand.",
+      "tags": [
+        "menu",
+        "keybindings",
+        "palette"
+      ]
+    },
+    {
+      "id": "cmd:PaletteOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "OpenCommandPalette",
+      "path": "src/actions.rs",
+      "tags": [
+        "cmd+p"
+      ]
+    },
+    {
+      "id": "cmd:TerminalOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "ToggleTerminal",
+      "path": "src/actions.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "cmd:InstallCli",
+      "kind": "command",
+      "group": "commands",
+      "label": "InstallCli",
+      "path": "src/cli_install.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "ipc:CliIpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "cli_ipc.rs",
+      "path": "src/cli_ipc.rs",
+      "summary": "Unix socket instance-lock + frame protocol (4B header, 1MB cap)."
+    },
+    {
+      "id": "ipc:AcpProcess",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent ACP subprocess",
+      "path": "src/agent.rs",
+      "summary": "Spawned agent adapter: JSONL over stdio, stderr tail, model switching."
+    },
+    {
+      "id": "ipc:VaultWatcher",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "notify watcher",
+      "path": "src/vault.rs"
+    },
+    {
+      "id": "fn:GraphLayout",
+      "kind": "function",
+      "group": "components",
+      "label": "graph_layout",
+      "path": "src/graph_layout.rs"
+    },
+    {
+      "id": "fn:BasesDSL",
+      "kind": "function",
+      "group": "components",
+      "label": "bases Lit/Parser",
+      "path": "src/bases.rs",
+      "summary": "Expression parser, formula evaluator, rollups, view models."
+    },
+    {
+      "id": "fn:SearchParser",
+      "kind": "function",
+      "group": "components",
+      "label": "search_query",
+      "path": "src/search_query.rs",
+      "loc": 2260
+    },
+    {
+      "id": "ext:GpuiKit",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui-kit",
+      "path": "Cargo.toml",
+      "summary": "gpui-kit 0.7.1 + patched gpui-base rev in henrikogaard's fork."
+    },
+    {
+      "id": "ext:Mermaid",
+      "kind": "external",
+      "group": "external",
+      "label": "merman + resvg",
+      "path": "Cargo.toml"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Windows",
+      "kind": "calls",
+      "label": "open_paths"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:CliIpc",
+      "kind": "ipc",
+      "label": "ipc_rx listener"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "state:Settings",
+      "kind": "reads",
+      "label": "language"
+    },
+    {
+      "from": "cmp:Windows",
+      "to": "cmp:AppCrate",
+      "kind": "renders",
+      "label": "gpui_kit::open_window"
+    },
+    {
+      "from": "cmp:Windows",
+      "to": "state:WindowManager",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "state:DocumentEnt",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "state:DocumentEnt",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "state:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "cmd:PaletteOpen",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "cmp:PreviewMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "cmp:AgentPanels",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppCrate",
+      "to": "cmd:TerminalOpen",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmp:BasesMod",
+      "to": "state:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:BasesMod",
+      "to": "fn:BasesDSL",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentMod",
+      "to": "state:Vault",
+      "kind": "writes",
+      "label": "autosave"
+    },
+    {
+      "from": "cmp:DocumentMod",
+      "to": "state:Settings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:PreviewMod",
+      "to": "state:DocumentEnt",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:GraphMod",
+      "to": "state:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:GraphMod",
+      "to": "fn:GraphLayout",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SearchMods",
+      "to": "state:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:SearchMods",
+      "to": "fn:SearchParser",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AgentPanels",
+      "to": "ipc:AcpProcess",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentPanels",
+      "to": "state:DocumentEnt",
+      "kind": "writes",
+      "label": "reviewable edits"
+    },
+    {
+      "from": "ipc:AcpProcess",
+      "to": "ext:GpuiKit",
+      "kind": "ipc",
+      "label": "acp stdio"
+    },
+    {
+      "from": "ipc:CliIpc",
+      "to": "cmp:Windows",
+      "kind": "navigates",
+      "label": "dispatch requests"
+    },
+    {
+      "from": "ipc:VaultWatcher",
+      "to": "state:Vault",
+      "kind": "listens"
+    },
+    {
+      "from": "state:Vault",
+      "to": "ipc:VaultWatcher",
+      "kind": "ipc"
+    },
+    {
+      "from": "state:Vault",
+      "to": "fn:SearchParser",
+      "kind": "calls",
+      "label": "index"
+    },
+    {
+      "from": "state:Vault",
+      "to": "fn:BasesDSL",
+      "kind": "calls",
+      "label": "frontmatter"
+    },
+    {
+      "from": "cmd:PaletteAction",
+      "to": "cmp:AppCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:InstallCli",
+      "to": "ipc:CliIpc",
+      "kind": "commands"
+    },
+    {
+      "from": "shared:ExplorerMods",
+      "to": "cmd:PaletteOpen",
+      "kind": "navigates",
+      "label": "quick open"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-vault",
+      "name": "Open a vault",
+      "trigger": "OpenFolder action or CLI open",
+      "steps": [
+        "cmd:PaletteAction",
+        "cmp:Windows",
+        "cmp:AppCrate",
+        "state:Vault",
+        "ipc:VaultWatcher"
+      ],
+      "summary": "Folder becomes a page; watcher keeps index live."
+    },
+    {
+      "id": "write-note",
+      "name": "Write a note",
+      "trigger": "edit in Document editor",
+      "steps": [
+        "cmp:AppCrate",
+        "state:DocumentEnt",
+        "state:Vault",
+        "cmp:PreviewMod"
+      ],
+      "summary": "Autosave lands as plain .md; preview tabs re-render live."
+    },
+    {
+      "id": "bases-view",
+      "name": "Query the vault",
+      "trigger": "open a .base file",
+      "steps": [
+        "cmp:BasesMod",
+        "fn:BasesDSL",
+        "state:Vault"
+      ],
+      "summary": "YAML filters+formulas select, group and render notes."
+    },
+    {
+      "id": "agent-review",
+      "name": "Agent proposes edits",
+      "trigger": "agent write in the panel",
+      "steps": [
+        "ipc:AcpProcess",
+        "cmp:AgentPanels",
+        "state:DocumentEnt"
+      ],
+      "summary": "ACP write arrives as a diff for accept/reject before landing."
+    },
+    {
+      "id": "cli-write",
+      "name": "Drive app from CLI",
+      "trigger": "rista CLI or rista:// url",
+      "steps": [
+        "ipc:CliIpc",
+        "cmp:Windows",
+        "cmd:PaletteAction"
+      ],
+      "summary": "Socket frame \u2192 dispatch \u2192 window navigation; read-only runs headless."
+    }
+  ],
+  "notes": [
+    {
+      "title": "app.rs is a 15.6k monolith",
+      "body": "src/app.rs holds the Workspace entity, keymap/palette wiring and most handlers in one file of 15,651 LOC.",
+      "severity": "alert",
+      "path": "src/app.rs"
+    },
+    {
+      "title": "flat 65-file src",
+      "body": "No mod hierarchy beyond top-level files: noir/other concepts sit as sibling .rs files (bases, agent, cli, canvases, pdf, at the same level).",
+      "severity": "info",
+      "path": "src"
+    },
+    {
+      "title": "clean query layering",
+      "body": "bases Lit/Parser and search_query are separate pure parsing engines \u2014 both reused by GUI panels and the headless CLI.",
+      "severity": "info",
+      "path": "src/bases.rs"
+    },
+    {
+      "title": "1026 unwrap/expect",
+      "body": "1,034 unwrap()|expect( matches across src, mostly context/window accessors in a single-crate GUI app.",
+      "severity": "warn",
+      "path": "src/app.rs"
+    },
+    {
+      "title": "strong docs+design",
+      "body": "DESIGN.md tokens.json/ts/css single source, scripts/export-theme-tokens.py, docs/ARCHITECTURE.md and TEST-CASES.md.",
+      "severity": "info",
+      "path": "DESIGN.md"
+    }
+  ]
+}

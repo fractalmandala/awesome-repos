@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "rista",
+    "slug": "henrikogaard__rista",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "agent",
+    "name": "agent",
+    "entryLayout": "src/agent_panel.rs",
+    "root": "src",
+    "summary": "ACP agent panel: subprocess JSONL, permissions, reviewable write diffs.",
+    "externalModules": [
+      "workspace",
+      "vault",
+      "document"
+    ]
+  },
+  "stats": {
+    "nodes": 12,
+    "edges": 13,
+    "components": 3,
+    "stateFiles": 2,
+    "commands": 1,
+    "ipcCalls": 3,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AgentPanel",
+      "kind": "layout",
+      "group": "layout",
+      "label": "agent_panel.rs",
+      "path": "src/agent_panel.rs",
+      "loc": 2414,
+      "summary": "Panel entity: composer, agent picker, permission options, pending writes."
+    },
+    {
+      "id": "ipc:AgentProcess",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent.rs (AgentProcess)",
+      "path": "src/agent.rs",
+      "loc": 1381,
+      "summary": "Spawned ACP adapter subprocess; stdio frames, stderr tail, model switching."
+    },
+    {
+      "id": "cmp:ToolCall",
+      "kind": "component",
+      "group": "components",
+      "label": "ToolCall / UpdateState",
+      "path": "src/agent.rs",
+      "summary": "Framed ACP session state: tool calls, plan entries, model choices."
+    },
+    {
+      "id": "cmp:PendingWriteView",
+      "kind": "component",
+      "group": "components",
+      "label": "PendingWrite UI",
+      "path": "src/agent_panel.rs",
+      "summary": "Renders before/after diff with accept/reject options."
+    },
+    {
+      "id": "state:ModelState",
+      "kind": "state",
+      "group": "state",
+      "label": "ModelState / ModelChoice",
+      "path": "src/agent.rs",
+      "summary": "Per-session model list, selected model and pending switches."
+    },
+    {
+      "id": "state:AgentDiscovery",
+      "kind": "state",
+      "group": "state",
+      "label": "AgentDiscovery",
+      "path": "src/agent_panel.rs",
+      "summary": "Discovered agent adapters/programs offered in the picker."
+    },
+    {
+      "id": "cmd:PermissionOption",
+      "kind": "command",
+      "group": "commands",
+      "label": "permission / accept / reject",
+      "path": "src/agent_panel.rs",
+      "summary": "Panel buttons answer pending ACP permission or write requests.",
+      "tags": [
+        "buttons"
+      ]
+    },
+    {
+      "id": "ipc:StdioFrames",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "stdio JSONL frames",
+      "path": "src/agent.rs",
+      "summary": "MAX_FRAME_BYTES 1MB, lock, mpsc channels; stderr tail kept for errors."
+    },
+    {
+      "id": "ipc:SubprocessSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "spawn adapter",
+      "path": "src/agent.rs",
+      "summary": "resolve_program over search path;ault special-case fallbacks."
+    },
+    {
+      "id": "ext:Workspace",
+      "kind": "external",
+      "group": "external",
+      "label": "workspace shell",
+      "path": "src/app.rs",
+      "summary": "WeakEntity<Workspace> opens diffs into editors and cleans up panel."
+    },
+    {
+      "id": "ext:Document",
+      "kind": "external",
+      "group": "external",
+      "label": "document entity",
+      "path": "src/document.rs",
+      "summary": "Accepted writes land here (reviewable before being persisted)."
+    },
+    {
+      "id": "ext:Vault",
+      "kind": "external",
+      "group": "external",
+      "label": "vault",
+      "path": "src/vault.rs",
+      "summary": "The agent may also edit files directly; watcher keeps the tree honest."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AgentPanel",
+      "to": "ipc:AgentProcess",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:AgentProcess",
+      "to": "cmp:ToolCall",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:AgentProcess",
+      "to": "state:ModelState",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:AgentProcess",
+      "to": "ipc:StdioFrames",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:AgentProcess",
+      "to": "ipc:SubprocessSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "state:AgentDiscovery",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "cmp:PendingWriteView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "cmp:ToolCall",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:PendingWriteView",
+      "to": "cmd:PermissionOption",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:PermissionOption",
+      "to": "ipc:AgentProcess",
+      "kind": "commands",
+      "label": "reply frame"
+    },
+    {
+      "from": "cmd:PermissionOption",
+      "to": "ext:Document",
+      "kind": "writes",
+      "label": "accept lands"
+    },
+    {
+      "from": "ext:Document",
+      "to": "ext:Vault",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "ext:Workspace",
+      "kind": "calls",
+      "label": "open diff in editor"
+    }
+  ],
+  "flows": [
+    {
+      "id": "agent-session",
+      "name": "Run an agent session",
+      "trigger": "composer submit in the agent panel",
+      "steps": [
+        "cmp:AgentPanel",
+        "ipc:SubprocessSpawn",
+        "ipc:StdioFrames",
+        "cmp:ToolCall"
+      ],
+      "summary": "Adapter subprocess streams JSONL prompts; panel shows plan/tools."
+    },
+    {
+      "id": "write-review",
+      "name": "Review an agent write",
+      "trigger": "accept or reject on the diff",
+      "steps": [
+        "ipc:AgentProcess",
+        "cmp:PendingWriteView",
+        "cmd:PermissionOption",
+        "ext:Document",
+        "ext:Vault"
+      ],
+      "summary": "ACP write stays as a before/after diff until a reviewer answers."
+    },
+    {
+      "id": "switch-model",
+      "name": "Switch models",
+      "trigger": "model picker in the panel",
+      "steps": [
+        "state:ModelState",
+        "ipc:AgentProcess",
+        "ipc:StdioFrames"
+      ],
+      "summary": "Selected model serialized into the next ACP frame."
+    }
+  ],
+  "notes": [
+    {
+      "title": "review-first design",
+      "body": "Writes requested through ACP surface as PendingWrite (before/after text) and apply only on accept; agent tasks may also modify files (vault watcher picks up).",
+      "severity": "info",
+      "path": "src/agent_panel.rs"
+    },
+    {
+      "title": "subprocess isolation",
+      "body": "AgentProcess is separate threads over mpsc with a 1MB frame cap and an 8KB stderr tail for error reporting.",
+      "severity": "info",
+      "path": "src/agent.rs"
+    },
+    {
+      "title": "panel owns no editor state",
+      "body": "only a composer TextareaState + weak workspace ref; notes live in Document entities.",
+      "severity": "info",
+      "path": "src/agent_panel.rs"
+    }
+  ]
+}
