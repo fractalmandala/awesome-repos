@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "hibi",
+    "slug": "schmayterling__hibi",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "renderer",
+    "name": "React renderer",
+    "entryLayout": "src/renderer/src/main.tsx",
+    "root": "src/renderer/src",
+    "summary": "App shell, rich and source editors, document runtime, addon host, settings",
+    "externalModules": [
+      "main",
+      "shared",
+      "addons",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 47,
+    "edges": 64,
+    "components": 24,
+    "stateFiles": 3,
+    "commands": 7,
+    "ipcCalls": 4,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:App",
+      "label": "App",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/renderer/src/main.tsx",
+      "tags": [
+        "entry"
+      ],
+      "summary": "One component: workspace, tabs, documents, sidebars, dialogs, hotkeys, autosave.",
+      "loc": 3315
+    },
+    {
+      "id": "cmp:Editor",
+      "label": "Editor.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/Editor.tsx",
+      "summary": "TipTap rich editor; extensions come from enabled addon flavors.",
+      "loc": 3367
+    },
+    {
+      "id": "cmp:SourceEditor",
+      "label": "SourceEditor.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/SourceEditor.tsx",
+      "summary": "CodeMirror 6 view with vim, mirror cursor and source decorations.",
+      "loc": 1891
+    },
+    {
+      "id": "cmp:MarkdownSource",
+      "label": "MarkdownSourceEditor",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/MarkdownSourceEditor.tsx",
+      "summary": "Wraps SourceEditor with the Markdown parser and plain-text runs.",
+      "loc": 31
+    },
+    {
+      "id": "cmp:PlainSourceSync",
+      "label": "plain-source-sync.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/plain-source-sync.ts",
+      "loc": 419
+    },
+    {
+      "id": "cmp:RichSourceSession",
+      "label": "rich-source-session.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/rich-source-session.ts",
+      "loc": 116
+    },
+    {
+      "id": "cmp:DocumentRuntime",
+      "label": "document-runtime.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/document-runtime.ts",
+      "summary": "Per-document session, dirty tracking, save and external-change checks.",
+      "loc": 638
+    },
+    {
+      "id": "cmp:WorkerClient",
+      "label": "document-worker-client.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/document-worker-client.ts",
+      "summary": "Web Worker transport for metadata, semantics and find; restarts on stall.",
+      "loc": 521
+    },
+    {
+      "id": "cmp:CompletionBroker",
+      "label": "completion-broker.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/completion-broker.ts",
+      "loc": 689
+    },
+    {
+      "id": "cmp:AddonHost",
+      "label": "renderer/addons.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/addons.ts",
+      "summary": "useAddons: loads addons and merges their commands, panels, flavors and syntax.",
+      "loc": 2648
+    },
+    {
+      "id": "cmp:AddonGarden",
+      "label": "AddonGarden.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/AddonGarden.tsx",
+      "loc": 200
+    },
+    {
+      "id": "cmp:AddonSidebar",
+      "label": "AddonSidebar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/AddonSidebar.tsx",
+      "loc": 86
+    },
+    {
+      "id": "cmp:AddonSettings",
+      "label": "AddonSettings.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/AddonSettings.tsx",
+      "loc": 591
+    },
+    {
+      "id": "cmp:Settings",
+      "label": "SettingsScreen.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/SettingsScreen.tsx",
+      "summary": "Lazy settings shell over sections contributed by core and addons.",
+      "loc": 899
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "CommandPalette.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/CommandPalette.tsx",
+      "summary": "Commands from core and addons, fuzzy filtered, with their shortcuts.",
+      "loc": 353
+    },
+    {
+      "id": "cmp:DocumentTabs",
+      "label": "DocumentTabs.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/DocumentTabs.tsx",
+      "loc": 403
+    },
+    {
+      "id": "cmp:FindBar",
+      "label": "FindBar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/FindBar.tsx",
+      "summary": "Find results and counts; typing is debounced to the worker.",
+      "loc": 118
+    },
+    {
+      "id": "cmp:FormattingToolbar",
+      "label": "FormattingToolbar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/FormattingToolbar.tsx",
+      "loc": 622
+    },
+    {
+      "id": "cmp:Toolbar",
+      "label": "EditorToolbar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/EditorToolbar.tsx",
+      "loc": 482
+    },
+    {
+      "id": "cmp:Titlebar",
+      "label": "Titlebar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/Titlebar.tsx",
+      "loc": 358
+    },
+    {
+      "id": "cmp:WorkspaceSidebar",
+      "label": "WorkspaceSidebar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/WorkspaceSidebar.tsx",
+      "loc": 344
+    },
+    {
+      "id": "cmp:TableLayout",
+      "label": "table-layout.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/table-layout.ts",
+      "loc": 616
+    },
+    {
+      "id": "cmp:Introduction",
+      "label": "Introduction.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/Introduction.tsx",
+      "loc": 476
+    },
+    {
+      "id": "cmp:LiteralMarkdown",
+      "label": "LiteralMarkdown.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/LiteralMarkdown.ts",
+      "loc": 30
+    },
+    {
+      "id": "state:Documents",
+      "label": "document state",
+      "kind": "state",
+      "group": "state",
+      "path": "src/renderer/src/main.tsx",
+      "summary": "Open DocumentState list, active id, view mode and tab metadata.",
+      "loc": 3315
+    },
+    {
+      "id": "state:Runtimes",
+      "label": "runtime registry",
+      "kind": "state",
+      "group": "state",
+      "path": "src/renderer/src/document-runtime.ts",
+      "loc": 638
+    },
+    {
+      "id": "state:AddonRuntime",
+      "label": "addon runtime",
+      "kind": "state",
+      "group": "state",
+      "path": "src/renderer/src/addons.ts",
+      "loc": 2648
+    },
+    {
+      "id": "cmd:Palette",
+      "label": "Command palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+k"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:Save",
+      "label": "Save",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+s"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:Find",
+      "label": "Find",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+f"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:SourceView",
+      "label": "Source view",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+shift+]"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:SideBySide",
+      "label": "Side-by-side view",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+shift+\\"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:NewDocument",
+      "label": "New document",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+n"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:CloseTab",
+      "label": "Close tab",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+w"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "ipc:Documents",
+      "label": "DOCUMENT_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/desktop.ts",
+      "loc": 545
+    },
+    {
+      "id": "ipc:Workspace",
+      "label": "WORKSPACE_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/workspace.ts",
+      "loc": 280
+    },
+    {
+      "id": "ipc:AddonChannels",
+      "label": "ADDON_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/addons/api.ts",
+      "loc": 1094
+    },
+    {
+      "id": "ipc:Diagnostics",
+      "label": "DIAGNOSTIC_CHANNEL",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/local-diagnostics.ts",
+      "loc": 433
+    },
+    {
+      "id": "shared:Ui",
+      "label": "src/ui",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/Controls.tsx",
+      "summary": "Buttons, inputs, sidebar, dialogs and toasts used by every screen.",
+      "loc": 242
+    },
+    {
+      "id": "shared:SourceEngine",
+      "label": "source-buffer.ts",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/shared/source-buffer.ts",
+      "loc": 1085
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:CodeMirror",
+      "label": "@codemirror",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:React",
+      "label": "react 19",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Marked",
+      "label": "marked",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:DOMPurify",
+      "label": "dompurify",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:AddonApi",
+      "label": "addons/api",
+      "kind": "external",
+      "group": "external",
+      "path": "src/addons/api.ts",
+      "loc": 1094
+    },
+    {
+      "id": "ext:Main",
+      "label": "main process",
+      "kind": "external",
+      "group": "external",
+      "path": "src/main/index.ts",
+      "loc": 2439
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:App",
+      "to": "cmp:Editor",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:SourceEditor",
+      "kind": "renders",
+      "label": "source and split"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:DocumentTabs",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Palette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Settings",
+      "kind": "renders",
+      "label": "lazy"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:AddonGarden",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:AddonSidebar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:WorkspaceSidebar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Titlebar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:FindBar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Introduction",
+      "kind": "renders",
+      "label": "no document"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:AddonHost",
+      "kind": "calls",
+      "label": "useAddons"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:DocumentRuntime",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:WorkerClient",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:App",
+      "to": "state:Documents",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:App",
+      "to": "state:Documents",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:App",
+      "to": "state:AddonRuntime",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ipc:Documents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ipc:Workspace",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ipc:Diagnostics",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:App",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:DocumentRuntime",
+      "kind": "calls",
+      "label": "edits mark dirty"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:PlainSourceSync",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:RichSourceSession",
+      "kind": "calls",
+      "label": "extension"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:TableLayout",
+      "kind": "calls",
+      "label": "extension"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:CompletionBroker",
+      "kind": "calls",
+      "label": "slash and completions"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:AddonHost",
+      "kind": "calls",
+      "label": "rich extensions"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:FormattingToolbar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "ext:CodeMirror",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "shared:SourceEngine",
+      "kind": "reads",
+      "label": "snapshots"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "cmp:DocumentRuntime",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:MarkdownSource",
+      "to": "cmp:SourceEditor",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:MarkdownSource",
+      "to": "cmp:LiteralMarkdown",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:PlainSourceSync",
+      "to": "shared:SourceEngine",
+      "kind": "writes",
+      "label": "source operations"
+    },
+    {
+      "from": "cmp:RichSourceSession",
+      "to": "cmp:DocumentRuntime",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DocumentRuntime",
+      "to": "state:Runtimes",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:DocumentRuntime",
+      "to": "shared:SourceEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentRuntime",
+      "to": "ipc:Documents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:WorkerClient",
+      "to": "ipc:Documents",
+      "kind": "ipc",
+      "label": "worker transport"
+    },
+    {
+      "from": "cmp:CompletionBroker",
+      "to": "cmp:AddonHost",
+      "kind": "reads",
+      "label": "providers"
+    },
+    {
+      "from": "cmp:AddonHost",
+      "to": "ext:AddonApi",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:AddonHost",
+      "to": "state:AddonRuntime",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AddonHost",
+      "to": "ipc:AddonChannels",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AddonHost",
+      "to": "shared:Ui",
+      "kind": "imports",
+      "label": "menus, dialogs"
+    },
+    {
+      "from": "cmp:AddonGarden",
+      "to": "cmp:AddonHost",
+      "kind": "calls",
+      "label": "install"
+    },
+    {
+      "from": "cmp:AddonSettings",
+      "to": "cmp:AddonHost",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:AddonSettings",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:AddonHost",
+      "kind": "reads",
+      "label": "commands"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:FindBar",
+      "to": "cmp:WorkerClient",
+      "kind": "calls",
+      "label": "find requests"
+    },
+    {
+      "from": "cmp:DocumentTabs",
+      "to": "state:Documents",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:WorkspaceSidebar",
+      "to": "shared:Ui",
+      "kind": "imports",
+      "label": "shared sidebar"
+    },
+    {
+      "from": "cmp:Toolbar",
+      "to": "cmp:AddonHost",
+      "kind": "reads",
+      "label": "toolbar items"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ext:React",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ext:Main",
+      "kind": "calls",
+      "label": "window.hibi"
+    },
+    {
+      "from": "cmd:Palette",
+      "to": "cmp:Palette",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Save",
+      "to": "cmp:DocumentRuntime",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Find",
+      "to": "cmp:FindBar",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SourceView",
+      "to": "cmp:MarkdownSource",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SideBySide",
+      "to": "cmp:Editor",
+      "kind": "commands",
+      "label": "split with source"
+    },
+    {
+      "from": "cmd:NewDocument",
+      "to": "cmp:DocumentRuntime",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:CloseTab",
+      "to": "cmp:DocumentTabs",
+      "kind": "commands"
+    }
+  ],
+  "flows": [
+    {
+      "id": "mount",
+      "name": "Mount the app",
+      "trigger": "index.html loads main.tsx",
+      "steps": [
+        "cmp:App",
+        "ext:Main",
+        "ipc:Workspace",
+        "state:Documents"
+      ],
+      "summary": "Bootstrap state arrives, then tabs and the last document are restored."
+    },
+    {
+      "id": "open",
+      "name": "Open a document",
+      "trigger": "Click a row in the sidebar",
+      "steps": [
+        "cmp:WorkspaceSidebar",
+        "cmp:App",
+        "ipc:Documents",
+        "cmp:DocumentRuntime",
+        "cmp:Editor"
+      ],
+      "summary": "Main returns text and journal; a runtime is created per document id."
+    },
+    {
+      "id": "type",
+      "name": "Type",
+      "trigger": "A keystroke in the rich editor",
+      "steps": [
+        "cmp:Editor",
+        "cmp:PlainSourceSync",
+        "shared:SourceEngine",
+        "cmp:DocumentRuntime"
+      ],
+      "summary": "ProseMirror steps become source operations; the document turns dirty."
+    },
+    {
+      "id": "source",
+      "name": "Switch to source",
+      "trigger": "Ctrl+Shift+]",
+      "steps": [
+        "cmd:SourceView",
+        "cmp:MarkdownSource",
+        "cmp:SourceEditor",
+        "shared:SourceEngine"
+      ],
+      "summary": "CodeMirror binds to the same source snapshot, so the text is already current."
+    },
+    {
+      "id": "save",
+      "name": "Save",
+      "trigger": "Ctrl+S",
+      "steps": [
+        "cmd:Save",
+        "cmp:DocumentRuntime",
+        "ipc:Documents"
+      ],
+      "summary": "Dirty documents take one guarded save path, then external-change stamps update."
+    },
+    {
+      "id": "find",
+      "name": "Find",
+      "trigger": "Ctrl+F",
+      "steps": [
+        "cmd:Find",
+        "cmp:FindBar",
+        "cmp:WorkerClient",
+        "cmp:Editor"
+      ],
+      "summary": "The worker searches the snapshot; the bar reveals hits in the active view."
+    },
+    {
+      "id": "addon",
+      "name": "Install an addon",
+      "trigger": "Install in the Addon Garden",
+      "steps": [
+        "cmp:AddonGarden",
+        "cmp:AddonHost",
+        "ipc:AddonChannels",
+        "state:AddonRuntime"
+      ],
+      "summary": "The renderer asks main to install; the new addon's commands appear after reload."
+    }
+  ],
+  "notes": [
+    {
+      "title": "One App component owns the shell",
+      "body": "main.tsx is 3,315 lines; App() holds workspace, documents, tabs, dialogs, hotkeys, autosave and view mode. The lazy imports (Introduction, Settings, History, Backlinks) are the only split points.",
+      "severity": "warn",
+      "path": "src/renderer/src/main.tsx"
+    },
+    {
+      "title": "The rich editor is its own 3k-line file",
+      "body": "Editor.tsx is 3,367 lines; table layout, mirror cursors, drag handles, math and the addon extensions all live in it, with only table-layout.ts and rich-source-session.ts extracted.",
+      "severity": "warn",
+      "path": "src/renderer/src/Editor.tsx"
+    },
+    {
+      "title": "Two editors, one buffer",
+      "body": "PlainSourceSync turns TipTap transactions into SourceOperations and RichSourceSession echoes them back, so switching to CodeMirror (SourceEditor.tsx) never loses an edit.",
+      "severity": "info",
+      "path": "src/renderer/src/plain-source-sync.ts"
+    },
+    {
+      "title": "Addons own their UI surface",
+      "body": "useAddons (addons.ts, 2,648 lines) merges command, panel, view, flavor, syntax and toolbar contributions, so the shell only renders what addons declare.",
+      "severity": "info",
+      "path": "src/renderer/src/addons.ts"
+    },
+    {
+      "title": "Search runs off the main thread",
+      "body": "document-worker-client.ts owns a Worker with a restart timer and a stall check; metadata, semantics and find all go through it, keeping the editor responsive.",
+      "severity": "info",
+      "path": "src/renderer/src/document-worker-client.ts"
+    },
+    {
+      "title": "Completion is brokered, not hard-coded",
+      "body": "completion-broker.ts ranks providers registered by addons (dictionary, autocomplete, slash commands) for a cursor context, so core does not know them.",
+      "severity": "info",
+      "path": "src/renderer/src/completion-broker.ts"
+    }
+  ]
+}

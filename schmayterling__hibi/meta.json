@@ -1,0 +1,24 @@
+{
+  "slug": "schmayterling__hibi",
+  "name": "hibi",
+  "github": "https://github.com/schmayterling/hibi",
+  "license": "GPL-3.0-only",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Electron note editor: rich and source views over one document engine, with 42 bundled addons.",
+  "stack": ["typescript", "electron", "react", "tiptap", "codemirror", "markdown", "node"],
+  "reports": [
+    "report.md",
+    "scan-overview.json",
+    "scan-overview.html",
+    "scan-main.json",
+    "scan-main.html",
+    "scan-renderer.json",
+    "scan-renderer.html",
+    "scan-addons.json",
+    "scan-addons.html",
+    "scan-shared.json",
+    "scan-shared.html"
+  ]
+}

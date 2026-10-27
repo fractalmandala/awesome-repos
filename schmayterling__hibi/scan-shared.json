@@ -1,0 +1,628 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "hibi",
+    "slug": "schmayterling__hibi",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "shared",
+    "name": "Shared engine and contracts",
+    "entryLayout": "src/shared/desktop.ts",
+    "root": "src/shared",
+    "summary": "Source buffer, session and journal, worker protocol, Markdown model, contracts",
+    "externalModules": [
+      "main",
+      "renderer",
+      "addons",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 34,
+    "edges": 33,
+    "components": 23,
+    "stateFiles": 3,
+    "commands": 0,
+    "ipcCalls": 1,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Desktop",
+      "label": "desktop.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shared/desktop.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Channel names and the DesktopApi type both sides compile against.",
+      "loc": 545
+    },
+    {
+      "id": "cmp:SourceStore",
+      "label": "source-buffer.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-buffer.ts",
+      "summary": "Persistent chunk tree: immutable snapshots, subtree sums, prefix edits.",
+      "loc": 1085
+    },
+    {
+      "id": "cmp:SourceOperations",
+      "label": "source-operations.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-operations.ts",
+      "summary": "RawEdit / SourceOperation in UTF-16 pre-state coordinates, validated on parse.",
+      "loc": 216
+    },
+    {
+      "id": "cmp:SourceOwners",
+      "label": "source-owners.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-owners.ts",
+      "summary": "Coarse contiguous owners; positions live in subtree sums, not per record.",
+      "loc": 695
+    },
+    {
+      "id": "cmp:SourceReferences",
+      "label": "source-references.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-references.ts",
+      "loc": 358
+    },
+    {
+      "id": "cmp:SourceMaintenance",
+      "label": "source-maintenance.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-maintenance.ts",
+      "loc": 119
+    },
+    {
+      "id": "cmp:SourceSearch",
+      "label": "source-search.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-search.ts",
+      "loc": 121
+    },
+    {
+      "id": "cmp:SourceSearchIndex",
+      "label": "source-search-index.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-search-index.ts",
+      "summary": "Ranked literal matches over snapshots.",
+      "loc": 119
+    },
+    {
+      "id": "cmp:SourceProjection",
+      "label": "source-projection.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-projection.ts",
+      "loc": 112
+    },
+    {
+      "id": "cmp:DocumentSession",
+      "label": "document-session.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-session.ts",
+      "summary": "Source store plus history groups, selections and projections.",
+      "loc": 634
+    },
+    {
+      "id": "cmp:DocumentJournal",
+      "label": "document-journal.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-journal.ts",
+      "summary": "Crash journal: checkpoints, head, replay and verification.",
+      "loc": 551
+    },
+    {
+      "id": "cmp:DocumentCheckpoint",
+      "label": "document-checkpoint.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-checkpoint.ts",
+      "loc": 81
+    },
+    {
+      "id": "cmp:WorkerProtocol",
+      "label": "worker protocol",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-worker-protocol.ts",
+      "summary": "load/edit/find/cancel/metadata messages with epochs and versions.",
+      "loc": 101
+    },
+    {
+      "id": "cmp:WorkerService",
+      "label": "document-worker-service.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-worker-service.ts",
+      "summary": "Worker side: owns a SourceStore, answers semantics and metadata.",
+      "loc": 581
+    },
+    {
+      "id": "cmp:MarkdownModel",
+      "label": "markdown-source-model.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/markdown-source-model.ts",
+      "summary": "Owner pages and semantic rows used by both editors.",
+      "loc": 407
+    },
+    {
+      "id": "cmp:MarkdownSemanticCache",
+      "label": "semantic cache",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/markdown-semantic-cache.ts",
+      "summary": "Bounded token cache keyed by source version.",
+      "loc": 125
+    },
+    {
+      "id": "cmp:MarkdownSyntax",
+      "label": "markdown-syntax.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/markdown-syntax.ts",
+      "loc": 41
+    },
+    {
+      "id": "cmp:Frontmatter",
+      "label": "frontmatter",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/frontmatter.ts",
+      "loc": 32
+    },
+    {
+      "id": "cmp:AddonManifest",
+      "label": "addon-manifest.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/addon-manifest.ts",
+      "loc": 404
+    },
+    {
+      "id": "cmp:Contracts",
+      "label": "foundation-contracts.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/foundation-contracts.ts",
+      "summary": "AddonId, FileId, WorkspaceTarget and command context.",
+      "loc": 111
+    },
+    {
+      "id": "cmp:Diagnostics",
+      "label": "local-diagnostics.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/local-diagnostics.ts",
+      "loc": 433
+    },
+    {
+      "id": "cmp:WorkspaceQuery",
+      "label": "workspace-query.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/workspace-query.ts",
+      "loc": 154
+    },
+    {
+      "id": "cmp:AddonDependencies",
+      "label": "addon-dependencies.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/addon-dependencies.ts",
+      "loc": 216
+    },
+    {
+      "id": "state:Snapshots",
+      "label": "snapshots",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/source-buffer.ts",
+      "loc": 1085
+    },
+    {
+      "id": "state:History",
+      "label": "history groups",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/document-session.ts",
+      "loc": 634
+    },
+    {
+      "id": "state:Hotkeys",
+      "label": "hotkeys.ts",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/hotkeys.ts",
+      "loc": 329
+    },
+    {
+      "id": "ipc:Worker",
+      "label": "postMessage",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/document-worker-protocol.ts",
+      "loc": 101
+    },
+    {
+      "id": "shared:Main",
+      "label": "main process",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/main/index.ts",
+      "loc": 2439
+    },
+    {
+      "id": "shared:Renderer",
+      "label": "renderer",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/renderer/src/main.tsx",
+      "loc": 3315
+    },
+    {
+      "id": "ext:Marked",
+      "label": "marked",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "summary": "Token types the Markdown model and worker protocol reuse.",
+      "loc": 140
+    },
+    {
+      "id": "ext:Lezer",
+      "label": "@lezer/markdown",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap/core",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:CodeMirror",
+      "label": "@codemirror/language",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Yaml",
+      "label": "yaml",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Desktop",
+      "to": "cmp:Contracts",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Desktop",
+      "to": "cmp:Diagnostics",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:SourceStore",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:SourceOperations",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:SourceOwners",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:MarkdownModel",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "state:History",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:SourceStore",
+      "to": "cmp:SourceOperations",
+      "kind": "calls",
+      "label": "prepare"
+    },
+    {
+      "from": "cmp:SourceStore",
+      "to": "cmp:SourceOwners",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SourceStore",
+      "to": "cmp:SourceMaintenance",
+      "kind": "calls",
+      "label": "compaction"
+    },
+    {
+      "from": "cmp:SourceStore",
+      "to": "state:Snapshots",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:SourceOwners",
+      "to": "cmp:SourceReferences",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SourceSearchIndex",
+      "to": "cmp:SourceSearch",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SourceSearchIndex",
+      "to": "cmp:SourceStore",
+      "kind": "reads",
+      "label": "snapshots"
+    },
+    {
+      "from": "cmp:SourceProjection",
+      "to": "cmp:SourceStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:WorkerService",
+      "to": "cmp:WorkerProtocol",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:WorkerService",
+      "to": "cmp:SourceStore",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:WorkerService",
+      "to": "cmp:SourceSearchIndex",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:WorkerService",
+      "to": "cmp:MarkdownSemanticCache",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:WorkerService",
+      "to": "cmp:MarkdownModel",
+      "kind": "writes",
+      "label": "semantic rows"
+    },
+    {
+      "from": "cmp:MarkdownSemanticCache",
+      "to": "cmp:MarkdownModel",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MarkdownModel",
+      "to": "ext:Marked",
+      "kind": "imports",
+      "label": "Token types"
+    },
+    {
+      "from": "cmp:WorkerProtocol",
+      "to": "ext:Marked",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SourceSearch",
+      "to": "cmp:SourceProjection",
+      "kind": "calls",
+      "label": "normalized chunks"
+    },
+    {
+      "from": "cmp:DocumentJournal",
+      "to": "cmp:DocumentCheckpoint",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentJournal",
+      "to": "cmp:Desktop",
+      "kind": "reads",
+      "label": "DocumentState"
+    },
+    {
+      "from": "cmp:DocumentJournal",
+      "to": "cmp:SourceOperations",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AddonManifest",
+      "to": "cmp:Contracts",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AddonDependencies",
+      "to": "cmp:AddonManifest",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Frontmatter",
+      "to": "ext:Yaml",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:MarkdownSyntax",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:MarkdownSyntax",
+      "to": "ext:CodeMirror",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:WorkspaceQuery",
+      "to": "cmp:Contracts",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "edit",
+      "name": "Apply an edit",
+      "trigger": "An editor sends a SourceOperation",
+      "steps": [
+        "cmp:DocumentSession",
+        "cmp:SourceOperations",
+        "cmp:SourceStore",
+        "state:Snapshots"
+      ],
+      "summary": "Validated against the pre-state, applied to the tree, a new snapshot published."
+    },
+    {
+      "id": "history",
+      "name": "Undo one gesture",
+      "trigger": "Undo after a burst of edits",
+      "steps": [
+        "state:History",
+        "cmp:DocumentSession",
+        "cmp:SourceStore"
+      ],
+      "summary": "One group holds forward and inverse edits, so a gesture undoes in one step."
+    },
+    {
+      "id": "find",
+      "name": "Find in a document",
+      "trigger": "A find request from the bar",
+      "steps": [
+        "ipc:Worker",
+        "cmp:WorkerService",
+        "cmp:SourceSearchIndex",
+        "cmp:SourceSearch"
+      ],
+      "summary": "The worker searches its own store; replies carry versions so stale results drop."
+    },
+    {
+      "id": "semantics",
+      "name": "Reparse a changed region",
+      "trigger": "A snapshot changes",
+      "steps": [
+        "cmp:WorkerService",
+        "cmp:MarkdownSemanticCache",
+        "cmp:MarkdownModel"
+      ],
+      "summary": "Only the damaged region is retokenised, bounded by the cache budget."
+    },
+    {
+      "id": "journal",
+      "name": "Recover after a crash",
+      "trigger": "The app restarts with a journal",
+      "steps": [
+        "cmp:DocumentJournal",
+        "cmp:DocumentCheckpoint",
+        "cmp:DocumentSession"
+      ],
+      "summary": "The checkpoint is verified, operations replayed, then a session takes the store."
+    },
+    {
+      "id": "bootstrap",
+      "name": "Bootstrap the renderer",
+      "trigger": "App start",
+      "steps": [
+        "cmp:Desktop",
+        "cmp:Contracts",
+        "shared:Renderer"
+      ],
+      "summary": "Channel names and the DesktopApi type are the only contract the two sides share."
+    }
+  ],
+  "notes": [
+    {
+      "title": "The text engine is the centre of gravity",
+      "body": "source-buffer.ts (1,085), source-owners.ts (695) and document-session.ts (634) implement a chunk tree with subtree sums, immutable snapshots and owner ranges; editors, search and journal sit on it.",
+      "severity": "info",
+      "path": "src/shared/source-buffer.ts"
+    },
+    {
+      "title": "Coordinates are UTF-16 pre-state, deliberately",
+      "body": "source-operations.ts defines RawEdit in the immutable pre-state and validates each operation before applying; the test suite includes a 100k-line prefix-edit case to keep that bounded.",
+      "severity": "info",
+      "path": "src/shared/source-operations.ts"
+    },
+    {
+      "title": "The worker gets a whole store, not chunks",
+      "body": "document-worker-protocol.ts sends load/edit/find with an epoch and version, and document-worker-service.ts keeps its own SourceStore, so searching never blocks the UI thread.",
+      "severity": "info",
+      "path": "src/shared/document-worker-protocol.ts"
+    },
+    {
+      "title": "Contracts are one directory both sides import",
+      "body": "desktop.ts holds channel names and DesktopApi, foundation-contracts.ts ids and targets, addon-manifest.ts the manifest schema; main, preload, renderer and addons import these, not each other.",
+      "severity": "info",
+      "path": "src/shared/desktop.ts"
+    },
+    {
+      "title": "Diagnostics never carry document text",
+      "body": "local-diagnostics.ts states it accepts no free-form metadata or document identifiers; profiles bound frames and budgets, and the queue is shared with the main sink.",
+      "severity": "info",
+      "path": "src/shared/local-diagnostics.ts"
+    }
+  ]
+}

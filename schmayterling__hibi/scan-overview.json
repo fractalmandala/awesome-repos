@@ -1,0 +1,1150 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "hibi",
+    "slug": "schmayterling__hibi",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "hibi",
+    "entryLayout": "src/main/index.ts",
+    "root": ".",
+    "summary": "Electron note editor: main, bridge, React renderer, source engine, 42 addons",
+    "externalModules": [
+      "main",
+      "renderer",
+      "addons",
+      "shared"
+    ]
+  },
+  "stats": {
+    "nodes": 63,
+    "edges": 74,
+    "components": 33,
+    "stateFiles": 4,
+    "commands": 8,
+    "ipcCalls": 7,
+    "flows": 8
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Main",
+      "label": "main/index.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/main/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Electron main: one window, the menu, and 130 IPC channels behind one guard.",
+      "loc": 2439
+    },
+    {
+      "id": "cmp:RendererRoot",
+      "label": "renderer/main.tsx",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/renderer/src/main.tsx",
+      "tags": [
+        "root"
+      ],
+      "summary": "React App(): tabs, documents, sidebars, dialogs and command wiring.",
+      "loc": 3315
+    },
+    {
+      "id": "cmp:Preload",
+      "label": "preload/index.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/preload/index.ts",
+      "loc": 606
+    },
+    {
+      "id": "cmp:Editor",
+      "label": "Editor.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/Editor.tsx",
+      "summary": "Rich TipTap editor: extensions per flavor, tables, math, drag handles.",
+      "loc": 3367
+    },
+    {
+      "id": "cmp:SourceEditor",
+      "label": "SourceEditor.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/SourceEditor.tsx",
+      "summary": "CodeMirror source view, vim mode, mirror cursor between views.",
+      "loc": 1891
+    },
+    {
+      "id": "cmp:DocumentRuntime",
+      "label": "document-runtime.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/document-runtime.ts",
+      "summary": "Per-document runtime: dirty state, save, external-change checks.",
+      "loc": 638
+    },
+    {
+      "id": "cmp:CompletionBroker",
+      "label": "completion-broker.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/completion-broker.ts",
+      "loc": 689
+    },
+    {
+      "id": "cmp:AddonHostRenderer",
+      "label": "renderer/addons.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/addons.ts",
+      "summary": "useAddons/useEditorAddons: loads enabled addons and merges their commands.",
+      "loc": 2648
+    },
+    {
+      "id": "cmp:Sidebar",
+      "label": "ui/Sidebar.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/ui/Sidebar.tsx",
+      "summary": "Shared sidebar: tree rows, drag/drop, keyboard navigation, settings.",
+      "loc": 935
+    },
+    {
+      "id": "cmp:SettingsScreen",
+      "label": "SettingsScreen.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/SettingsScreen.tsx",
+      "loc": 899
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "CommandPalette.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/renderer/src/CommandPalette.tsx",
+      "loc": 353
+    },
+    {
+      "id": "cmp:AddonApi",
+      "label": "addons/api.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/api.ts",
+      "summary": "defineAddon plus the capability set (ui, rich, source, markdown), API v2.",
+      "loc": 1094
+    },
+    {
+      "id": "cmp:BundledAddons",
+      "label": "markdown addon",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/markdown/index.tsx",
+      "summary": "One of 42 bundled addons; each ships index.tsx, manifest.ts and hibi-addon.json.",
+      "loc": 147
+    },
+    {
+      "id": "cmp:AddonShared",
+      "label": "_shared/formats",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/_shared/format-specs.ts",
+      "loc": 34
+    },
+    {
+      "id": "cmp:WorkspaceMain",
+      "label": "main/workspace.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace.ts",
+      "summary": "Workspace open/index/watch; paths validated relative to the canonical folder.",
+      "loc": 1132
+    },
+    {
+      "id": "cmp:WorkspaceFiles",
+      "label": "workspace-files.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace-files.ts",
+      "loc": 949
+    },
+    {
+      "id": "cmp:DocumentMain",
+      "label": "main/document.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/document.ts",
+      "summary": "Document open/save/replace, journal checkpoint, 8 MiB image reads.",
+      "loc": 1043
+    },
+    {
+      "id": "cmp:AddonHostMain",
+      "label": "main/addons.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addons.ts",
+      "summary": "Native addon host: catalog, enable/disable, dependency resolution, invocation.",
+      "loc": 761
+    },
+    {
+      "id": "cmp:AddonTrust",
+      "label": "addon-trust.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addon-trust.ts",
+      "loc": 248
+    },
+    {
+      "id": "cmp:AddonInventory",
+      "label": "addon-inventory.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addon-inventory.ts",
+      "loc": 588
+    },
+    {
+      "id": "cmp:HostServices",
+      "label": "host-network.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/host-network.ts",
+      "loc": 771
+    },
+    {
+      "id": "cmp:DiagnosticsMain",
+      "label": "local-diagnostics/sink.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/local-diagnostics/sink.ts",
+      "loc": 606
+    },
+    {
+      "id": "cmp:UpdatesMain",
+      "label": "main/updates.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/updates.ts",
+      "loc": 349
+    },
+    {
+      "id": "cmp:Security",
+      "label": "main/security.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/security.ts",
+      "loc": 63
+    },
+    {
+      "id": "cmp:Background",
+      "label": "main/background.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/background.ts",
+      "loc": 115
+    },
+    {
+      "id": "cmp:GlobalShortcuts",
+      "label": "global-shortcuts.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/global-shortcuts.ts",
+      "loc": 144
+    },
+    {
+      "id": "cmp:SourceEngine",
+      "label": "source-buffer.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-buffer.ts",
+      "loc": 1085
+    },
+    {
+      "id": "cmp:DocumentSession",
+      "label": "document-session.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/document-session.ts",
+      "summary": "Source store plus history groups, projections and selections.",
+      "loc": 634
+    },
+    {
+      "id": "cmp:MarkdownSemantics",
+      "label": "markdown-source-model.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/markdown-source-model.ts",
+      "loc": 407
+    },
+    {
+      "id": "cmp:SearchIndex",
+      "label": "source-search-index.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shared/source-search-index.ts",
+      "loc": 119
+    },
+    {
+      "id": "cmp:SiteViewer",
+      "label": "site/main.tsx",
+      "kind": "component",
+      "group": "components",
+      "path": "src/site/main.tsx",
+      "summary": "Read-only docs site: marked + MiniSearch + graph, runs without the bridge.",
+      "loc": 893
+    },
+    {
+      "id": "cmp:AddonSdk",
+      "label": "@hibi/addon-sdk",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/addon-sdk/types/index.d.ts",
+      "tags": [
+        "api v2"
+      ],
+      "loc": 4
+    },
+    {
+      "id": "cmp:DocsPipeline",
+      "label": "scripts/docs.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "scripts/docs.mjs",
+      "loc": 55
+    },
+    {
+      "id": "state:Hotkeys",
+      "label": "hotkeys.ts",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/hotkeys.ts",
+      "loc": 329
+    },
+    {
+      "id": "state:Appearance",
+      "label": "colorschemes.ts",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/colorschemes.ts",
+      "loc": 175
+    },
+    {
+      "id": "state:WorkspaceState",
+      "label": "shared/workspace.ts",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/workspace.ts",
+      "loc": 280
+    },
+    {
+      "id": "state:AddonStorage",
+      "label": "addon-storage.ts",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/addon-storage.ts",
+      "loc": 99
+    },
+    {
+      "id": "cmd:Palette",
+      "label": "Command palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+k"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:Save",
+      "label": "Save document",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+s"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:Find",
+      "label": "Find in document",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+f"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:OpenWorkspace",
+      "label": "Open workspace",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+shift+o"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:SourceView",
+      "label": "Source view",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "control+shift+]"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:InstallAddon",
+      "label": "Install addon",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shared/hotkeys.ts",
+      "tags": [
+        "palette"
+      ],
+      "loc": 329
+    },
+    {
+      "id": "cmd:QuickNote",
+      "label": "Quick note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/main/background.ts",
+      "tags": [
+        "tray"
+      ],
+      "loc": 115
+    },
+    {
+      "id": "cmd:ExportSite",
+      "label": "Export site",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/addons/documentation/site.ts",
+      "tags": [
+        "addon command"
+      ],
+      "loc": 593
+    },
+    {
+      "id": "ipc:Bootstrap",
+      "label": "BOOTSTRAP_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/desktop.ts",
+      "loc": 545
+    },
+    {
+      "id": "ipc:Documents",
+      "label": "DOCUMENT_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/desktop.ts",
+      "summary": "Open, save, replace, journal and worker requests.",
+      "loc": 545
+    },
+    {
+      "id": "ipc:Workspace",
+      "label": "WORKSPACE_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/workspace.ts",
+      "loc": 280
+    },
+    {
+      "id": "ipc:AddonChannels",
+      "label": "ADDON_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/addons/api.ts",
+      "loc": 1094
+    },
+    {
+      "id": "ipc:HostNetwork",
+      "label": "HOST_NETWORK_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/host-network.ts",
+      "loc": 94
+    },
+    {
+      "id": "ipc:Diagnostics",
+      "label": "DIAGNOSTIC_CHANNEL",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/local-diagnostics.ts",
+      "loc": 433
+    },
+    {
+      "id": "ipc:Updates",
+      "label": "UPDATE_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/updates.ts",
+      "loc": 133
+    },
+    {
+      "id": "shared:Ui",
+      "label": "ui/Controls.tsx",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/Controls.tsx",
+      "loc": 242
+    },
+    {
+      "id": "shared:Contracts",
+      "label": "foundation-contracts.ts",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/shared/foundation-contracts.ts",
+      "loc": 111
+    },
+    {
+      "id": "ext:Electron",
+      "label": "electron 45",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap 3.32",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:CodeMirror",
+      "label": "@codemirror 6",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:MarkdownTools",
+      "label": "marked / markdoc / mdx",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Typst",
+      "label": "typst-ts",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Mermaid",
+      "label": "mermaid 12",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:KaTeX",
+      "label": "katex 0.18",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:DOMPurify",
+      "label": "dompurify",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:MiniSearch",
+      "label": "minisearch",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Preload",
+      "kind": "calls",
+      "label": "window preload script"
+    },
+    {
+      "from": "cmp:Preload",
+      "to": "cmp:RendererRoot",
+      "kind": "dispatches",
+      "label": "window.hibi"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:RendererRoot",
+      "kind": "renders",
+      "label": "BrowserWindow loadURL"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Security",
+      "kind": "calls",
+      "label": "trustedWindow on every call"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:WorkspaceMain",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:DocumentMain",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:AddonHostMain",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:DiagnosticsMain",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Background",
+      "kind": "calls",
+      "label": "tray and quick note"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:GlobalShortcuts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:UpdatesMain",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ext:Electron",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:Editor",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:SourceEditor",
+      "kind": "renders",
+      "label": "source / side-by-side"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:Sidebar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:SettingsScreen",
+      "kind": "renders",
+      "label": "lazy"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:Palette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:AddonHostRenderer",
+      "kind": "calls",
+      "label": "useAddons"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "cmp:DocumentRuntime",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "state:Hotkeys",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "state:WorkspaceState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "state:Appearance",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "ipc:Bootstrap",
+      "kind": "ipc",
+      "label": "startup"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "ipc:Documents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RendererRoot",
+      "to": "ipc:Workspace",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:DocumentRuntime",
+      "kind": "calls",
+      "label": "edits, dirty"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:AddonHostRenderer",
+      "kind": "calls",
+      "label": "rich extensions"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "ext:CodeMirror",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "cmp:DocumentSession",
+      "kind": "calls",
+      "label": "source owner"
+    },
+    {
+      "from": "cmp:SourceEditor",
+      "to": "cmp:AddonHostRenderer",
+      "kind": "calls",
+      "label": "vim, flavors"
+    },
+    {
+      "from": "cmp:DocumentRuntime",
+      "to": "ipc:Documents",
+      "kind": "ipc",
+      "label": "save, replace"
+    },
+    {
+      "from": "cmp:DocumentRuntime",
+      "to": "cmp:DocumentSession",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AddonHostRenderer",
+      "to": "cmp:AddonApi",
+      "kind": "reads",
+      "label": "defineAddon contract"
+    },
+    {
+      "from": "cmp:AddonHostRenderer",
+      "to": "cmp:BundledAddons",
+      "kind": "imports",
+      "label": "catalog entries"
+    },
+    {
+      "from": "cmp:AddonHostRenderer",
+      "to": "state:AddonStorage",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "cmp:AddonApi",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "cmp:AddonShared",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "ext:Typst",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "ext:Mermaid",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "ext:KaTeX",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BundledAddons",
+      "to": "cmp:SiteViewer",
+      "kind": "calls",
+      "label": "site export"
+    },
+    {
+      "from": "cmp:AddonApi",
+      "to": "shared:Contracts",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:AddonApi",
+      "to": "state:AddonStorage",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "state:WorkspaceState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:SettingsScreen",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:WorkspaceMain",
+      "to": "cmp:WorkspaceFiles",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:WorkspaceMain",
+      "to": "cmp:SearchIndex",
+      "kind": "calls",
+      "label": "index jobs"
+    },
+    {
+      "from": "cmp:WorkspaceFiles",
+      "to": "cmp:Security",
+      "kind": "calls",
+      "label": "path validation"
+    },
+    {
+      "from": "cmp:DocumentMain",
+      "to": "cmp:DocumentSession",
+      "kind": "reads",
+      "label": "journal replay"
+    },
+    {
+      "from": "cmp:DocumentMain",
+      "to": "cmp:SourceEngine",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DocumentMain",
+      "to": "ipc:Documents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AddonHostMain",
+      "to": "cmp:AddonTrust",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AddonHostMain",
+      "to": "cmp:AddonInventory",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AddonInventory",
+      "to": "cmp:AddonTrust",
+      "kind": "reads",
+      "label": "signature check"
+    },
+    {
+      "from": "cmp:HostServices",
+      "to": "ipc:HostNetwork",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:GlobalShortcuts",
+      "to": "cmd:QuickNote",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:SourceEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocumentSession",
+      "to": "cmp:MarkdownSemantics",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:SearchIndex",
+      "to": "cmp:SourceEngine",
+      "kind": "reads",
+      "label": "snapshots"
+    },
+    {
+      "from": "cmp:SiteViewer",
+      "to": "ext:MarkdownTools",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SiteViewer",
+      "to": "ext:MiniSearch",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SiteViewer",
+      "to": "ext:DOMPurify",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:DocsPipeline",
+      "to": "cmp:AddonSdk",
+      "kind": "reads",
+      "label": "declarations"
+    },
+    {
+      "from": "cmd:Palette",
+      "to": "cmp:Palette",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Save",
+      "to": "cmp:DocumentRuntime",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Find",
+      "to": "cmp:Editor",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:OpenWorkspace",
+      "to": "cmp:WorkspaceMain",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SourceView",
+      "to": "cmp:SourceEditor",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:InstallAddon",
+      "to": "cmp:AddonHostRenderer",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:QuickNote",
+      "to": "cmp:Background",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ExportSite",
+      "to": "cmp:SiteViewer",
+      "kind": "commands"
+    }
+  ],
+  "flows": [
+    {
+      "id": "launch",
+      "name": "Launch",
+      "trigger": "Starting hibi",
+      "steps": [
+        "cmp:Main",
+        "cmp:Preload",
+        "cmp:RendererRoot",
+        "ipc:Bootstrap",
+        "state:WorkspaceState"
+      ],
+      "summary": "Main opens the window; preload exposes named calls; the renderer bootstraps."
+    },
+    {
+      "id": "workspace",
+      "name": "Open a workspace",
+      "trigger": "Ctrl+Shift+O",
+      "steps": [
+        "cmd:OpenWorkspace",
+        "cmp:WorkspaceMain",
+        "ipc:Workspace",
+        "cmp:Sidebar"
+      ],
+      "summary": "Folder dialog, canonical scan and index, then the tree is handed to the sidebar."
+    },
+    {
+      "id": "open-doc",
+      "name": "Open a note",
+      "trigger": "Click a file in the sidebar",
+      "steps": [
+        "cmp:Sidebar",
+        "cmp:RendererRoot",
+        "ipc:Documents",
+        "cmp:DocumentMain",
+        "cmp:Editor"
+      ],
+      "summary": "Renderer asks for the document; main reads and journals it; the editor loads."
+    },
+    {
+      "id": "type",
+      "name": "Type and autosave",
+      "trigger": "A keystroke in the rich editor",
+      "steps": [
+        "cmp:Editor",
+        "cmp:DocumentRuntime",
+        "cmp:DocumentSession",
+        "ipc:Documents",
+        "cmp:DocumentMain"
+      ],
+      "summary": "Edits reach the shared session, the runtime marks dirty, save goes through IPC."
+    },
+    {
+      "id": "source",
+      "name": "Switch to source",
+      "trigger": "Ctrl+Shift+]",
+      "steps": [
+        "cmd:SourceView",
+        "cmp:SourceEditor",
+        "cmp:DocumentSession",
+        "cmp:MarkdownSemantics"
+      ],
+      "summary": "The same source model drives CodeMirror, so both views edit one buffer."
+    },
+    {
+      "id": "addon",
+      "name": "Install an addon",
+      "trigger": "Install addon from the palette",
+      "steps": [
+        "cmd:InstallAddon",
+        "cmp:AddonHostRenderer",
+        "cmp:AddonInventory",
+        "cmp:AddonTrust",
+        "cmp:AddonHostMain"
+      ],
+      "summary": "Unzipped and validated, signature checked, then enabled for the renderer."
+    },
+    {
+      "id": "find",
+      "name": "Find in the document",
+      "trigger": "Ctrl+F",
+      "steps": [
+        "cmd:Find",
+        "cmp:SearchIndex",
+        "cmp:SourceEngine",
+        "cmp:Editor"
+      ],
+      "summary": "Literal search runs over source snapshots; the active view reveals the hits."
+    },
+    {
+      "id": "export",
+      "name": "Export a site",
+      "trigger": "Export site from the documentation addon",
+      "steps": [
+        "cmd:ExportSite",
+        "cmp:BundledAddons",
+        "cmp:SiteViewer"
+      ],
+      "summary": "The documentation addon writes static pages; the site viewer is the same UI."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Two 3k-line files hold the app shell",
+      "body": "src/renderer/src/main.tsx is 3,315 lines (one App component with tabs, dialogs, sidebars, hotkeys) and Editor.tsx 3,367. Everything the shell does is reachable from those two files.",
+      "severity": "warn",
+      "path": "src/renderer/src/main.tsx"
+    },
+    {
+      "title": "One guarded gate for 130 IPC channels",
+      "body": "src/main/index.ts registers every channel through a local `handle()` (line 1340) that calls `trustedWindow(...)` first and can inject benchmark timing; 130 channels share that one check.",
+      "severity": "info",
+      "path": "src/main/index.ts"
+    },
+    {
+      "title": "Rich and source views share one model",
+      "body": "TipTap (Editor.tsx) and CodeMirror (SourceEditor.tsx) both edit the `SourceStore` from src/shared/source-buffer.ts; plain-source-sync.ts keeps positions mapped, so a switch does not lose edits.",
+      "severity": "info",
+      "path": "src/shared/source-buffer.ts"
+    },
+    {
+      "title": "42 addons, one versioned contract",
+      "body": "ADDON_API_VERSION = 2 in src/addons/api.ts, with capabilities ui, rich, source, markdown and modalEditing; each addon ships index.tsx, manifest.ts and hibi-addon.json.",
+      "severity": "info",
+      "path": "src/addons/api.ts"
+    },
+    {
+      "title": "docs/ is a generated snapshot",
+      "body": ".gitignore ignores /docs except ai-agents and licenses; docs-revision pins a commit and `npm run docs` regenerates API pages from declarations, so reading guides offline needs that step.",
+      "severity": "info",
+      "path": ".gitignore"
+    },
+    {
+      "title": "The test suite dwarfs the app",
+      "body": "346 test files and 105,327 lines against 102,730 lines of src; CI runs them on 3 operating systems × 4 shards (.github/workflows/check.yml).",
+      "severity": "info",
+      "path": "tests"
+    }
+  ]
+}

@@ -1,0 +1,850 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "hibi",
+    "slug": "schmayterling__hibi",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "main",
+    "name": "Electron main",
+    "entryLayout": "src/main/index.ts",
+    "root": "src/main",
+    "summary": "Window, menu, 130 guarded IPC channels, workspace and document access, addons",
+    "externalModules": [
+      "renderer",
+      "shared",
+      "addons"
+    ]
+  },
+  "stats": {
+    "nodes": 48,
+    "edges": 50,
+    "components": 28,
+    "stateFiles": 3,
+    "commands": 3,
+    "ipcCalls": 7,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Main",
+      "label": "index.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/main/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Creates window and menu; 130 channels behind one guarded handle().",
+      "loc": 2439
+    },
+    {
+      "id": "cmp:Security",
+      "label": "security.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/security.ts",
+      "summary": "CSP, exact renderer URL, main-frame check, asset path resolution.",
+      "loc": 63
+    },
+    {
+      "id": "cmp:Workspace",
+      "label": "workspace.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace.ts",
+      "summary": "Open/close a folder, canonical paths, change snapshots and cursors.",
+      "loc": 1132
+    },
+    {
+      "id": "cmp:WorkspaceFiles",
+      "label": "workspace-files.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace-files.ts",
+      "loc": 949
+    },
+    {
+      "id": "cmp:WorkspaceReferences",
+      "label": "workspace-reference-index.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace-reference-index.ts",
+      "loc": 720
+    },
+    {
+      "id": "cmp:WorkspaceIndexJob",
+      "label": "workspace-index-job.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace-index-job.ts",
+      "loc": 85
+    },
+    {
+      "id": "cmp:WorkspaceChangeStream",
+      "label": "workspace-change-stream.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/workspace-change-stream.ts",
+      "loc": 149
+    },
+    {
+      "id": "cmp:Document",
+      "label": "document.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/document.ts",
+      "summary": "Open documents, save/replace, journal checkpoints, tab preferences.",
+      "loc": 1043
+    },
+    {
+      "id": "cmp:History",
+      "label": "history.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/history.ts",
+      "loc": 95
+    },
+    {
+      "id": "cmp:Images",
+      "label": "images.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/images.ts",
+      "summary": "Resolves document-relative images, validates MIME, 8 MiB cap.",
+      "loc": 185
+    },
+    {
+      "id": "cmp:Addons",
+      "label": "addons.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addons.ts",
+      "summary": "Catalog, enable/disable with dependencies, native invocation.",
+      "loc": 761
+    },
+    {
+      "id": "cmp:AddonTrust",
+      "label": "addon-trust.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addon-trust.ts",
+      "loc": 248
+    },
+    {
+      "id": "cmp:AddonInventory",
+      "label": "addon-inventory.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/addon-inventory.ts",
+      "loc": 588
+    },
+    {
+      "id": "cmp:Sideload",
+      "label": "sideload.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/sideload.ts",
+      "loc": 740
+    },
+    {
+      "id": "cmp:HostNetwork",
+      "label": "host-network.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/host-network.ts",
+      "loc": 771
+    },
+    {
+      "id": "cmp:HostCredentials",
+      "label": "host-credentials.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/host-credentials.ts",
+      "summary": "safeStorage-backed credentials for addons such as git.",
+      "loc": 833
+    },
+    {
+      "id": "cmp:HostIo",
+      "label": "host-selected-io.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/host-selected-io.ts",
+      "loc": 587
+    },
+    {
+      "id": "cmp:Diagnostics",
+      "label": "local-diagnostics/sink.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/local-diagnostics/sink.ts",
+      "summary": "Bounded, redacted log; rotates and caps bytes.",
+      "loc": 606
+    },
+    {
+      "id": "cmp:Updates",
+      "label": "updates.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/updates.ts",
+      "loc": 349
+    },
+    {
+      "id": "cmp:Background",
+      "label": "background.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/background.ts",
+      "summary": "Tray icon, close-to-tray preference, quick-note entry.",
+      "loc": 115
+    },
+    {
+      "id": "cmp:GlobalShortcuts",
+      "label": "global-shortcuts.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/global-shortcuts.ts",
+      "loc": 144
+    },
+    {
+      "id": "cmp:FileAssociations",
+      "label": "file-associations.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/file-associations.ts",
+      "loc": 187
+    },
+    {
+      "id": "cmp:Imports",
+      "label": "import-files.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/import-files.ts",
+      "loc": 160
+    },
+    {
+      "id": "cmp:RecentWorkspaces",
+      "label": "recent-workspaces.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/recent-workspaces.ts",
+      "loc": 140
+    },
+    {
+      "id": "cmp:FileOperations",
+      "label": "file-operation-dialog.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/file-operation-dialog.ts",
+      "loc": 45
+    },
+    {
+      "id": "cmp:AtomicRename",
+      "label": "atomic-rename.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/atomic-rename.ts",
+      "loc": 28
+    },
+    {
+      "id": "cmp:Appearance",
+      "label": "appearance.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/appearance.ts",
+      "loc": 98
+    },
+    {
+      "id": "cmp:ToolPaths",
+      "label": "tool-paths.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "src/main/tool-paths.ts",
+      "loc": 60
+    },
+    {
+      "id": "state:Trust",
+      "label": "trust settings",
+      "kind": "state",
+      "group": "state",
+      "path": "src/main/addon-trust.ts",
+      "loc": 248
+    },
+    {
+      "id": "state:Recent",
+      "label": "known workspaces",
+      "kind": "state",
+      "group": "state",
+      "path": "src/main/recent-workspaces.ts",
+      "loc": 140
+    },
+    {
+      "id": "state:DiagnosticBudget",
+      "label": "diagnostic budget",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/local-diagnostics-budget.ts",
+      "loc": 119
+    },
+    {
+      "id": "cmd:MenuAction",
+      "label": "App menu item",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/main/index.ts",
+      "tags": [
+        "app:command"
+      ],
+      "summary": "installMenu sends an AppCommand to the renderer instead of acting.",
+      "loc": 2439
+    },
+    {
+      "id": "cmd:OpenWorkspaceDialog",
+      "label": "Open workspace dialog",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/main/workspace.ts",
+      "tags": [
+        "menu"
+      ],
+      "loc": 1132
+    },
+    {
+      "id": "cmd:QuickNote",
+      "label": "Quick note",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/main/background.ts",
+      "tags": [
+        "tray",
+        "global shortcut"
+      ],
+      "loc": 115
+    },
+    {
+      "id": "ipc:Bootstrap",
+      "label": "BOOTSTRAP_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/desktop.ts",
+      "loc": 545
+    },
+    {
+      "id": "ipc:Documents",
+      "label": "DOCUMENT_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/desktop.ts",
+      "loc": 545
+    },
+    {
+      "id": "ipc:Workspace",
+      "label": "WORKSPACE_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/workspace.ts",
+      "loc": 280
+    },
+    {
+      "id": "ipc:AddonChannels",
+      "label": "ADDON_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/addons/api.ts",
+      "loc": 1094
+    },
+    {
+      "id": "ipc:HostNetwork",
+      "label": "HOST_NETWORK_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/host-network.ts",
+      "loc": 94
+    },
+    {
+      "id": "ipc:Diagnostics",
+      "label": "DIAGNOSTIC_CHANNEL",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/local-diagnostics.ts",
+      "loc": 433
+    },
+    {
+      "id": "ipc:Updates",
+      "label": "UPDATE_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/updates.ts",
+      "loc": 133
+    },
+    {
+      "id": "shared:Contracts",
+      "label": "foundation-contracts.ts",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/shared/foundation-contracts.ts",
+      "loc": 111
+    },
+    {
+      "id": "ext:Electron",
+      "label": "electron",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "summary": "app, BrowserWindow, ipcMain, Menu, Tray, safeStorage, protocol.",
+      "loc": 140
+    },
+    {
+      "id": "ext:Node",
+      "label": "node:fs / crypto / zlib",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Unzipper",
+      "label": "unzipper",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:AddonCatalog",
+      "label": "virtual:hibi-addon-catalog/main",
+      "kind": "external",
+      "group": "external",
+      "path": "src/main/addons.ts",
+      "loc": 761
+    },
+    {
+      "id": "ext:Renderer",
+      "label": "renderer",
+      "kind": "external",
+      "group": "external",
+      "path": "src/renderer/src/main.tsx",
+      "loc": 3315
+    },
+    {
+      "id": "ext:SharedTypes",
+      "label": "src/shared",
+      "kind": "external",
+      "group": "external",
+      "path": "src/shared/desktop.ts",
+      "loc": 545
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Security",
+      "kind": "calls",
+      "label": "trustedWindow first"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Workspace",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Document",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Addons",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Images",
+      "kind": "calls",
+      "label": "media protocol"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:HostNetwork",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:HostCredentials",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Diagnostics",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Updates",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Background",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:GlobalShortcuts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:FileAssociations",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmd:MenuAction",
+      "kind": "commands",
+      "label": "installMenu"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ext:Electron",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ext:Renderer",
+      "kind": "renders",
+      "label": "loadURL"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ext:AddonCatalog",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:WorkspaceFiles",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:WorkspaceChangeStream",
+      "kind": "calls",
+      "label": "watch events"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:WorkspaceIndexJob",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:WorkspaceReferences",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:Security",
+      "kind": "calls",
+      "label": "relative path checks"
+    },
+    {
+      "from": "cmp:WorkspaceFiles",
+      "to": "cmp:AtomicRename",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Document",
+      "to": "cmp:History",
+      "kind": "calls",
+      "label": "recordVersion"
+    },
+    {
+      "from": "cmp:Document",
+      "to": "cmp:Images",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Document",
+      "to": "cmp:FileOperations",
+      "kind": "calls",
+      "label": "operation guard"
+    },
+    {
+      "from": "cmp:Document",
+      "to": "ext:SharedTypes",
+      "kind": "imports",
+      "label": "journal protocol"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "cmp:AddonTrust",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "cmp:AddonInventory",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "cmp:Sideload",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "cmp:Appearance",
+      "kind": "reads",
+      "label": "exported appearance"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "state:Trust",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AddonInventory",
+      "to": "ext:Unzipper",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AddonInventory",
+      "to": "ext:Node",
+      "kind": "imports",
+      "label": "crc32 + zlib"
+    },
+    {
+      "from": "cmp:HostNetwork",
+      "to": "ipc:HostNetwork",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:HostCredentials",
+      "to": "ext:Electron",
+      "kind": "imports",
+      "label": "safeStorage"
+    },
+    {
+      "from": "cmp:Diagnostics",
+      "to": "state:DiagnosticBudget",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RecentWorkspaces",
+      "to": "state:Recent",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:GlobalShortcuts",
+      "to": "cmd:QuickNote",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Background",
+      "to": "cmd:QuickNote",
+      "kind": "commands",
+      "label": "tray item"
+    },
+    {
+      "from": "cmp:Background",
+      "to": "ext:Electron",
+      "kind": "imports",
+      "label": "Tray"
+    },
+    {
+      "from": "cmd:MenuAction",
+      "to": "ext:Renderer",
+      "kind": "dispatches",
+      "label": "app:command"
+    },
+    {
+      "from": "cmd:OpenWorkspaceDialog",
+      "to": "cmp:Workspace",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:QuickNote",
+      "to": "cmp:Document",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:Bootstrap",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:Documents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:Workspace",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:AddonChannels",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:Diagnostics",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "ipc:Updates",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Addons",
+      "to": "shared:Contracts",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "window",
+      "name": "Create the window",
+      "trigger": "app.whenReady()",
+      "steps": [
+        "cmp:Main",
+        "cmp:Security",
+        "ext:Electron",
+        "ext:Renderer"
+      ],
+      "summary": "Menu, CSP and protocol first, then BrowserWindow loads the renderer URL."
+    },
+    {
+      "id": "workspace",
+      "name": "Open a workspace",
+      "trigger": "Open workspace dialog",
+      "steps": [
+        "cmd:OpenWorkspaceDialog",
+        "cmp:Workspace",
+        "cmp:WorkspaceFiles",
+        "cmp:WorkspaceIndexJob",
+        "ipc:Workspace"
+      ],
+      "summary": "Canonical root, scan and index job, then a snapshot goes to the renderer."
+    },
+    {
+      "id": "save",
+      "name": "Save a document",
+      "trigger": "renderer save request",
+      "steps": [
+        "ipc:Documents",
+        "cmp:Document",
+        "cmp:FileOperations",
+        "cmp:History"
+      ],
+      "summary": "Guarded write through the operation lock, then a version is recorded."
+    },
+    {
+      "id": "addon",
+      "name": "Enable an addon",
+      "trigger": "Enable in the Addon Garden",
+      "steps": [
+        "ipc:AddonChannels",
+        "cmp:Addons",
+        "cmp:AddonTrust",
+        "cmp:AddonInventory"
+      ],
+      "summary": "Dependencies resolve, the package is validated, trust is read, then it loads."
+    },
+    {
+      "id": "image",
+      "name": "Read a document image",
+      "trigger": "The editor requests a relative image",
+      "steps": [
+        "cmp:Main",
+        "cmp:Images",
+        "cmp:Security",
+        "ext:Node"
+      ],
+      "summary": "Resolve from the document path, reject outside the root, cap at 8 MiB."
+    },
+    {
+      "id": "diagnostics",
+      "name": "Write diagnostics",
+      "trigger": "A renderer diagnostic event",
+      "steps": [
+        "ipc:Diagnostics",
+        "cmp:Diagnostics",
+        "state:DiagnosticBudget"
+      ],
+      "summary": "Bounded queue, redaction, atomic rotating file in userData."
+    }
+  ],
+  "notes": [
+    {
+      "title": "One guard, 130 channels",
+      "body": "`handle()` (index.ts:1340) wraps every registration with trustedWindow and optional benchmark hooks; 130 call sites use it, so a new channel inherits the sender and URL check.",
+      "severity": "info",
+      "path": "src/main/index.ts"
+    },
+    {
+      "title": "index.ts carries window, menu and routing",
+      "body": "2,439 lines: createWindow (849), installMenu (1131) and the channel table. A change to any of the three edits the same file.",
+      "severity": "warn",
+      "path": "src/main/index.ts"
+    },
+    {
+      "title": "Workspace I/O is split by concern",
+      "body": "workspace.ts owns the root and snapshots, workspace-files.ts reads and writes, workspace-change-stream.ts watches, workspace-index-job.ts keeps the newest index.",
+      "severity": "info",
+      "path": "src/main/workspace.ts"
+    },
+    {
+      "title": "Trust and inventory are separate steps",
+      "body": "addon-inventory.ts unzips with crc32 and bounded sizes; addon-trust.ts decides whether the signature is acceptable. Neither imports the other's policy, which makes the trust gate auditable on its own.",
+      "severity": "info",
+      "path": "src/main/addon-trust.ts"
+    },
+    {
+      "title": "Document writes share an operation lock",
+      "body": "file-operation-dialog.ts guards document replacement, export and addon preference writes; closing the app waits for the active operation and checks unsaved edits.",
+      "severity": "info",
+      "path": "src/main/file-operation-dialog.ts"
+    },
+    {
+      "title": "The menu dispatches instead of acting",
+      "body": "installMenu sends `app:command` with an AppCommand id (hotkeys.ts) rather than calling functions, so the renderer owns behaviour and the menu stays a thin surface.",
+      "severity": "info",
+      "path": "src/main/index.ts"
+    }
+  ]
+}

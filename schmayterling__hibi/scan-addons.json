@@ -1,0 +1,749 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "hibi",
+    "slug": "schmayterling__hibi",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "addons",
+    "name": "Addons",
+    "entryLayout": "src/addons/api.ts",
+    "root": "src/addons",
+    "summary": "One API v2 contract, 42 bundled addons contributing editors, commands and panels",
+    "externalModules": [
+      "renderer",
+      "main",
+      "shared",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 43,
+    "edges": 39,
+    "components": 25,
+    "stateFiles": 2,
+    "commands": 3,
+    "ipcCalls": 4,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Api",
+      "label": "api.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/addons/api.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "1,094 lines: defineAddon, capabilities, commands, panels, flavors, API v2.",
+      "loc": 1094
+    },
+    {
+      "id": "cmp:Markdown",
+      "label": "markdown",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/markdown/index.tsx",
+      "summary": "GitHub and Obsidian flavors, alerts, footnotes, tables; the default addon.",
+      "loc": 147
+    },
+    {
+      "id": "cmp:Dictionary",
+      "label": "dictionary",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/dictionary/index.tsx",
+      "summary": "5.2k lines: packs, offline and online providers, side view, custom words.",
+      "loc": 603
+    },
+    {
+      "id": "cmp:DictionaryPacks",
+      "label": "dictionary packs",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/dictionary/pack-store.ts",
+      "summary": "Download, convert and index dictionary packs.",
+      "loc": 531
+    },
+    {
+      "id": "cmp:Autocomplete",
+      "label": "autocomplete",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/autocomplete/index.tsx",
+      "summary": "Learned suggestions and completion providers for the broker.",
+      "loc": 196
+    },
+    {
+      "id": "cmp:AutocompleteModel",
+      "label": "autocomplete model",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/autocomplete/model.ts",
+      "loc": 594
+    },
+    {
+      "id": "cmp:Documentation",
+      "label": "documentation",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/documentation/site.ts",
+      "summary": "Static site export: pages, assets, search index.",
+      "loc": 593
+    },
+    {
+      "id": "cmp:Typst",
+      "label": "typst",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/typst/compiler.ts",
+      "summary": "Typst compile in a worker, plus a system compiler fallback.",
+      "loc": 505
+    },
+    {
+      "id": "cmp:McpServer",
+      "label": "mcp-server",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/mcp-server/server.ts",
+      "loc": 452
+    },
+    {
+      "id": "cmp:McpTools",
+      "label": "mcp tools",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/mcp-server/tools.ts",
+      "loc": 556
+    },
+    {
+      "id": "cmp:Graph",
+      "label": "graph",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/graph/Canvas.tsx",
+      "loc": 481
+    },
+    {
+      "id": "cmp:Git",
+      "label": "git",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/git/index.tsx",
+      "loc": 54
+    },
+    {
+      "id": "cmp:Vim",
+      "label": "vim",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/vim/index.ts",
+      "loc": 61
+    },
+    {
+      "id": "cmp:QuickNote",
+      "label": "quick-note",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/quick-note/index.tsx",
+      "loc": 66
+    },
+    {
+      "id": "cmp:Tags",
+      "label": "tags",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/tags/index.tsx",
+      "loc": 184
+    },
+    {
+      "id": "cmp:Math",
+      "label": "math",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/math/index.ts",
+      "loc": 31
+    },
+    {
+      "id": "cmp:Mermaid",
+      "label": "mermaid",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/mermaid/index.tsx",
+      "loc": 116
+    },
+    {
+      "id": "cmp:DiagnosticsAddon",
+      "label": "diagnostics",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/diagnostics/index.ts",
+      "loc": 16
+    },
+    {
+      "id": "cmp:Keybeats",
+      "label": "keybeats",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/keybeats/engine.ts",
+      "loc": 164
+    },
+    {
+      "id": "cmp:DiscordPresence",
+      "label": "discord-presence",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/discord-presence/index.ts",
+      "loc": 40
+    },
+    {
+      "id": "cmp:SlashCommands",
+      "label": "slash-commands",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/slash-commands/index.ts",
+      "loc": 20
+    },
+    {
+      "id": "cmp:Frontmatter",
+      "label": "frontmatter",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/frontmatter/index.ts",
+      "loc": 33
+    },
+    {
+      "id": "cmp:Formats",
+      "label": "_shared formats",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/_shared/format-specs.ts",
+      "summary": "Format specs shared by every document-type addon.",
+      "loc": 34
+    },
+    {
+      "id": "cmp:FormatWorker",
+      "label": "_shared worker",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/_shared/format-worker.ts",
+      "loc": 417
+    },
+    {
+      "id": "cmp:FormatToolbar",
+      "label": "_shared toolbar",
+      "kind": "component",
+      "group": "components",
+      "path": "src/addons/_shared/format-toolbar.ts",
+      "loc": 515
+    },
+    {
+      "id": "state:AddonStorage",
+      "label": "addon storage",
+      "kind": "state",
+      "group": "state",
+      "path": "src/shared/addon-storage.ts",
+      "summary": "Per-addon files through the main process, with a revision guard.",
+      "loc": 99
+    },
+    {
+      "id": "state:Preferences",
+      "label": "addon preferences",
+      "kind": "state",
+      "group": "state",
+      "path": "src/addons/mcp-server/preferences.ts",
+      "summary": "Each addon keeps its own preferences module over the storage API.",
+      "loc": 34
+    },
+    {
+      "id": "cmd:AddonCommand",
+      "label": "Addon command",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/addons/api.ts",
+      "tags": [
+        "palette",
+        "menus"
+      ],
+      "loc": 1094
+    },
+    {
+      "id": "cmd:SlashCommand",
+      "label": "Slash command",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/addons/slash-commands/index.ts",
+      "tags": [
+        "/"
+      ],
+      "loc": 20
+    },
+    {
+      "id": "cmd:ExportSite",
+      "label": "Export site",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/addons/documentation/index.tsx",
+      "tags": [
+        "export"
+      ],
+      "loc": 176
+    },
+    {
+      "id": "ipc:AddonChannels",
+      "label": "ADDON_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/addons/api.ts",
+      "loc": 1094
+    },
+    {
+      "id": "ipc:HostNetwork",
+      "label": "HOST_NETWORK_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/host-network.ts",
+      "loc": 94
+    },
+    {
+      "id": "ipc:HostCredentials",
+      "label": "HOST_CREDENTIAL_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/host-credentials.ts",
+      "loc": 62
+    },
+    {
+      "id": "ipc:Media",
+      "label": "MEDIA_CHANNELS",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/shared/media.ts",
+      "loc": 47
+    },
+    {
+      "id": "shared:Manifest",
+      "label": "addon-manifest.ts",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/shared/addon-manifest.ts",
+      "summary": "Manifest schema and compatibility checks shared with main.",
+      "loc": 404
+    },
+    {
+      "id": "shared:Ui",
+      "label": "src/ui",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/Controls.tsx",
+      "loc": 242
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:CodeMirror",
+      "label": "@codemirror",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Typst",
+      "label": "typst-ts",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Mermaid",
+      "label": "mermaid",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:MarkdownTools",
+      "label": "marked / markdoc / mdx / svelte",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:KaTeX",
+      "label": "katex",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 140
+    },
+    {
+      "id": "ext:Host",
+      "label": "renderer host",
+      "kind": "external",
+      "group": "external",
+      "path": "src/renderer/src/addons.ts",
+      "summary": "Loads each addon and provides the APIs it asks for.",
+      "loc": 2648
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Api",
+      "to": "shared:Manifest",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Api",
+      "to": "state:AddonStorage",
+      "kind": "reads",
+      "label": "StorageApi"
+    },
+    {
+      "from": "cmp:Api",
+      "to": "ipc:AddonChannels",
+      "kind": "ipc"
+    },
+    {
+      "from": "ext:Host",
+      "to": "cmp:Api",
+      "kind": "imports",
+      "label": "defineAddon"
+    },
+    {
+      "from": "ext:Host",
+      "to": "state:AddonStorage",
+      "kind": "writes"
+    },
+    {
+      "from": "ext:Host",
+      "to": "ipc:AddonChannels",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "cmp:Api",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "ext:TipTap",
+      "kind": "imports",
+      "label": "rich extensions"
+    },
+    {
+      "from": "cmp:Dictionary",
+      "to": "cmp:DictionaryPacks",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Dictionary",
+      "to": "ipc:HostNetwork",
+      "kind": "ipc",
+      "label": "online lookups"
+    },
+    {
+      "from": "cmp:Dictionary",
+      "to": "state:AddonStorage",
+      "kind": "reads",
+      "label": "packs and words"
+    },
+    {
+      "from": "cmp:DictionaryPacks",
+      "to": "ipc:HostNetwork",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Autocomplete",
+      "to": "cmp:AutocompleteModel",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Autocomplete",
+      "to": "cmp:Dictionary",
+      "kind": "calls",
+      "label": "word source"
+    },
+    {
+      "from": "cmp:Autocomplete",
+      "to": "state:AddonStorage",
+      "kind": "reads",
+      "label": "learned words"
+    },
+    {
+      "from": "cmp:Documentation",
+      "to": "cmp:Formats",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Documentation",
+      "to": "ext:MarkdownTools",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Typst",
+      "to": "ext:Typst",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Typst",
+      "to": "cmp:FormatWorker",
+      "kind": "calls",
+      "label": "compile worker"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "cmp:McpTools",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "state:Preferences",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Graph",
+      "to": "cmp:Api",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Git",
+      "to": "ipc:HostCredentials",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Vim",
+      "to": "ext:CodeMirror",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:QuickNote",
+      "to": "cmp:Api",
+      "kind": "imports",
+      "label": "ui capability window"
+    },
+    {
+      "from": "cmp:Tags",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Math",
+      "to": "ext:KaTeX",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Mermaid",
+      "to": "ext:Mermaid",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Keybeats",
+      "to": "state:Preferences",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DiagnosticsAddon",
+      "to": "ipc:AddonChannels",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Formats",
+      "to": "shared:Ui",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:FormatWorker",
+      "to": "ext:MarkdownTools",
+      "kind": "imports",
+      "label": "svelte render"
+    },
+    {
+      "from": "cmp:FormatToolbar",
+      "to": "cmp:Formats",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:SlashCommands",
+      "to": "cmd:SlashCommand",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Frontmatter",
+      "to": "shared:Manifest",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Markdown",
+      "to": "state:Preferences",
+      "kind": "reads",
+      "label": "flavor choice"
+    },
+    {
+      "from": "cmd:AddonCommand",
+      "to": "ext:Host",
+      "kind": "dispatches",
+      "label": "run(context)"
+    },
+    {
+      "from": "cmd:SlashCommand",
+      "to": "cmp:SlashCommands",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ExportSite",
+      "to": "cmp:Documentation",
+      "kind": "commands"
+    }
+  ],
+  "flows": [
+    {
+      "id": "load",
+      "name": "Load the enabled addons",
+      "trigger": "The renderer starts",
+      "steps": [
+        "ext:Host",
+        "cmp:Api",
+        "state:AddonStorage",
+        "shared:Manifest"
+      ],
+      "summary": "Manifests are checked for API v2, enabled addons import, each gets its APIs."
+    },
+    {
+      "id": "command",
+      "name": "Run an addon command",
+      "trigger": "Picking an addon command in the palette",
+      "steps": [
+        "cmd:AddonCommand",
+        "ext:Host",
+        "cmp:Api"
+      ],
+      "summary": "Commands are prefixed with the addon id and filtered by their `when` context."
+    },
+    {
+      "id": "spell",
+      "name": "Look a word up",
+      "trigger": "Hovering a misspelled word",
+      "steps": [
+        "cmp:Dictionary",
+        "cmp:DictionaryPacks",
+        "ipc:HostNetwork"
+      ],
+      "summary": "Offline packs answer first; the online provider is asked only when allowed."
+    },
+    {
+      "id": "complete",
+      "name": "Accept a completion",
+      "trigger": "Typing a word with suggestions",
+      "steps": [
+        "ext:Host",
+        "cmp:Autocomplete",
+        "cmp:AutocompleteModel"
+      ],
+      "summary": "The broker asks the autocomplete provider; the accepted word is learned locally."
+    },
+    {
+      "id": "export",
+      "name": "Export a site",
+      "trigger": "Export site from the palette",
+      "steps": [
+        "cmd:ExportSite",
+        "cmp:Documentation",
+        "cmp:Formats"
+      ],
+      "summary": "Pages and assets are rendered through the shared format pipeline."
+    },
+    {
+      "id": "mcp",
+      "name": "Let an agent edit",
+      "trigger": "An MCP client calls edit_document",
+      "steps": [
+        "cmp:McpServer",
+        "cmp:McpTools",
+        "state:Preferences"
+      ],
+      "summary": "The tool plans edits against open tabs and returns them as unsaved changes."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Capabilities gate what an addon can touch",
+      "body": "AddonCapability (api.ts:110) is ui, rich, source, markdown or modalEditing; vim claims the single modalEditing slot, quick-note the ui window. The host decides from the manifest before code loads.",
+      "severity": "info",
+      "path": "src/addons/api.ts"
+    },
+    {
+      "title": "42 addons, one file layout",
+      "body": "Every folder has hibi-addon.json, manifest.ts and an index, plus optional Settings.tsx, native.ts and preferences.ts. scripts/addon-packages.ts builds them, so the shape is mechanical.",
+      "severity": "info",
+      "path": "src/addons/markdown/manifest.ts"
+    },
+    {
+      "title": "The addon directory is not the code path",
+      "body": "Installed addons are imported by the renderer from the build catalog (virtual:hibi-addon-catalog), and main validates packages in addon-inventory.ts; a workspace is never treated as addon code.",
+      "severity": "info",
+      "path": "src/main/addon-inventory.ts"
+    },
+    {
+      "title": "Two addons carry most of the weight",
+      "body": "dictionary is 5,202 lines and autocomplete 1,686, together a quarter of src/addons. Dictionary alone has 30 files: packs, converters, providers, workers, side view.",
+      "severity": "warn",
+      "path": "src/addons/dictionary"
+    },
+    {
+      "title": "Addon UI is first-class",
+      "body": "Addons contribute panels (tags, graph, git), settings screens, toolbar items, editor decorations and whole windows (quick-note, mcp settings), not just parsers.",
+      "severity": "info",
+      "path": "src/addons/quick-note/index.tsx"
+    },
+    {
+      "title": "Shared format pipeline",
+      "body": "_shared/format-specs.ts and format-worker.ts give every document-type addon (md, typst, html, rst, org, asciidoc…) one export/preview path instead of one per addon.",
+      "severity": "info",
+      "path": "src/addons/_shared/format-specs.ts"
+    }
+  ]
+}
