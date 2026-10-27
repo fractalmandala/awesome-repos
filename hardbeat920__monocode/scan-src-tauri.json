@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "monocode",
+    "slug": "hardbeat920__monocode",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "src-tauri",
+    "name": "src-tauri (rust core)",
+    "entryLayout": "src-tauri/src/lib.rs",
+    "root": "src-tauri",
+    "summary": "Rust core: 308 Tauri commands over 59 modules: fs, harness, pty, git, mcp.",
+    "externalModules": [
+      "sessions",
+      "host",
+      "connections"
+    ]
+  },
+  "stats": {
+    "nodes": 15,
+    "edges": 15,
+    "components": 3,
+    "stateFiles": 2,
+    "commands": 1,
+    "ipcCalls": 7,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:TauriLib",
+      "kind": "layout",
+      "group": "layout",
+      "label": "lib.rs",
+      "path": "src-tauri/src/lib.rs",
+      "loc": 746,
+      "summary": "Module root: registers ~308 commands across 59 modules; build-time setup."
+    },
+    {
+      "id": "ipc:FtaFs",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "fs.rs",
+      "path": "src-tauri/src/fs.rs",
+      "loc": 9721,
+      "summary": "Every file read/write/list/diff surface; biggest single file in the project."
+    },
+    {
+      "id": "cmp:FtaHarnessMod",
+      "kind": "component",
+      "group": "components",
+      "label": "harness.rs",
+      "path": "src-tauri/src/harness.rs",
+      "loc": 4319,
+      "summary": "Agent CLI spawn/orchestration from the webview."
+    },
+    {
+      "id": "ipc:FtaPspeckle",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mcp.rs",
+      "path": "src-tauri/src/mcp.rs",
+      "loc": 1224,
+      "summary": "Local MCP server bridging editor context to agent tool calls."
+    },
+    {
+      "id": "ipc:PtaSpy",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "pty.rs",
+      "path": "src-tauri/src/pty.rs",
+      "summary": "Terminal pane sessions behind tauri webview."
+    },
+    {
+      "id": "ipc:GitTracker",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "worktrees.rs",
+      "path": "src-tauri/src/worktrees.rs",
+      "summary": "Worktree create/list/switch/status from source-control feature."
+    },
+    {
+      "id": "ipc:FtaCheckpoint",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "checkpoint.rs",
+      "path": "src-tauri/src/checkpoint.rs",
+      "loc": 2172,
+      "summary": "Checkpoints powering one-click rollback of agent file edits."
+    },
+    {
+      "id": "state:FtaSessionStore",
+      "kind": "state",
+      "group": "state",
+      "label": "session_store.rs",
+      "path": "src-tauri/src/session_store.rs",
+      "loc": 3777,
+      "summary": "Persisted session records in SQLite-style file storage."
+    },
+    {
+      "id": "state:FtaAutoms",
+      "kind": "state",
+      "group": "state",
+      "label": "automations.rs",
+      "path": "src-tauri/src/automations.rs",
+      "loc": 1302,
+      "summary": "Scheduled agent tasks / reminders on the OS scheduler."
+    },
+    {
+      "id": "cmp:FtaWindow",
+      "kind": "component",
+      "group": "components",
+      "label": "window.rs / windows.rs",
+      "path": "src-tauri/src/windows.rs",
+      "summary": "Window management, pane resizing, drag state, overlay windows."
+    },
+    {
+      "id": "cmd:CliCommands",
+      "kind": "command",
+      "group": "commands",
+      "label": "control_cli",
+      "path": "src-tauri/src/control_cli.rs",
+      "summary": "Internal CLI dispatch surfaces (monocode control binary)."
+    },
+    {
+      "id": "ipc:RemoteSsh",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "remote_ssh.rs",
+      "path": "src-tauri/src/remote_ssh.rs",
+      "summary": "Remote SSH run support with remote_bootstrap.sh streaming."
+    },
+    {
+      "id": "ipc:CallMobile",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mobile_router.rs",
+      "path": "src-tauri/src/mobile_router.rs",
+      "summary": "Query surfacing for the companion mobile app ingest."
+    },
+    {
+      "id": "ext:SessionsUI",
+      "kind": "external",
+      "group": "external",
+      "label": "sessions feature",
+      "path": "src/features/sessions",
+      "summary": "Main TS caller of harness/checkpoint/session_store commands."
+    },
+    {
+      "id": "ext:HostSvc",
+      "kind": "external",
+      "group": "external",
+      "label": "host service",
+      "path": "host/server.ts",
+      "summary": "Node host used only for remote/mobile; not invoked by rust core."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:TauriLib",
+      "to": "ipc:FtaFs",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriLib",
+      "to": "cmp:FtaHarnessMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriLib",
+      "to": "cmp:FtaWindow",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:FtaHarnessMod",
+      "to": "state:FtaSessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:FtaHarnessMod",
+      "to": "ipc:PtaSpy",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:FtaPspeckle",
+      "to": "cmp:FtaHarnessMod",
+      "kind": "ipc",
+      "label": "tool calls"
+    },
+    {
+      "from": "ext:SessionsUI",
+      "to": "ipc:FtaFs",
+      "kind": "ipc"
+    },
+    {
+      "from": "ext:SessionsUI",
+      "to": "ipc:FtaCheckpoint",
+      "kind": "ipc"
+    },
+    {
+      "from": "ext:SessionsUI",
+      "to": "cmp:FtaHarnessMod",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:FtaCheckpoint",
+      "to": "ipc:FtaFs",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:FtaCheckpoint",
+      "to": "state:FtaSessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "state:FtaAutoms",
+      "to": "cmp:FtaHarnessMod",
+      "kind": "calls",
+      "label": "runs"
+    },
+    {
+      "from": "ipc:GitTracker",
+      "to": "ipc:FtaFs",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:CliCommands",
+      "to": "cmp:TauriLib",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:CallMobile",
+      "to": "ipc:RemoteSsh",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "agent-spawn",
+      "name": "Spawn a run",
+      "trigger": "webview invoke of a harness command",
+      "steps": [
+        "ext:SessionsUI",
+        "cmp:FtaHarnessMod",
+        "state:FtaSessionStore"
+      ],
+      "summary": "Process snapshot recorded so a restart can't lose the session."
+    },
+    {
+      "id": "file-edit-checkpoint",
+      "name": "Edit and checkpoint",
+      "trigger": "FS write after an agent batch",
+      "steps": [
+        "ext:SessionsUI",
+        "ipc:FtaFs",
+        "ipc:FtaCheckpoint",
+        "state:FtaSessionStore"
+      ],
+      "summary": "snapshot paths recorded; rollback walks the checkpoint index."
+    },
+    {
+      "id": "terminal-pane",
+      "name": "Terminal pane",
+      "trigger": "open terminal tab",
+      "steps": [
+        "ext:SessionsUI",
+        "ipc:PtaSpy",
+        "cmp:FtaWindow"
+      ],
+      "summary": "PTY stream rendered in a webview terminal with crossterm state."
+    }
+  ],
+  "notes": [
+    {
+      "title": "fs.rs is 9.7k LOC",
+      "body": "Every file/dir form lives in one module: reader/writers, diff walking, watchers, and path safety \u2014 the hot seam for splitting.",
+      "severity": "alert",
+      "path": "src-tauri/src/fs.rs"
+    },
+    {
+      "title": "commands cover ~10 domains",
+      "body": "lib.rs aggregates 308 #[tauri::command] fns across fs, harness, git, notes, ios/mobile, tray, searches, and notification surfaces.",
+      "severity": "info",
+      "path": "src-tauri/src/lib.rs"
+    },
+    {
+      "title": "checkpoint discipline",
+      "body": "checkpoint.rs snapshots ahead of each mutation; rust side owns writes, TS only maps UI semantics.",
+      "severity": "info",
+      "path": "src-tauri/src/checkpoint.rs"
+    }
+  ]
+}

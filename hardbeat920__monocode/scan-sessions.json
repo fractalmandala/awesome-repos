@@ -1,0 +1,313 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "monocode",
+    "slug": "hardbeat920__monocode",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "sessions",
+    "name": "sessions feature",
+    "entryLayout": "src/features/sessions/ui/SessionTab.tsx",
+    "root": "src/features/sessions",
+    "summary": "Agent session tabs: transcript, composer, approvals, checkpoints, drafts.",
+    "externalModules": [
+      "host",
+      "connections",
+      "harness",
+      "workspace"
+    ]
+  },
+  "stats": {
+    "nodes": 14,
+    "edges": 16,
+    "components": 6,
+    "stateFiles": 0,
+    "commands": 1,
+    "ipcCalls": 2,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:SessionTab",
+      "kind": "layout",
+      "group": "layout",
+      "label": "SessionTab",
+      "path": "src/features/sessions/ui",
+      "summary": "Composed tab: sidebar sub-tree AgentTabView + prompt + files panel."
+    },
+    {
+      "id": "cmp:AgentTabView",
+      "kind": "component",
+      "group": "components",
+      "label": "AgentTabView.tsx",
+      "path": "src/features/sessions/ui/AgentTabView.tsx",
+      "summary": "Per-tab view state and layout wrappers."
+    },
+    {
+      "id": "cmp:AgentTranscript",
+      "kind": "component",
+      "group": "components",
+      "label": "AgentTranscript.tsx",
+      "path": "src/features/sessions/ui/AgentTranscript.tsx",
+      "summary": "Streamed turns with pacing, folding, interjections: 13 focused test files."
+    },
+    {
+      "id": "cmp:ComposerWidget",
+      "kind": "component",
+      "group": "components",
+      "label": "Composer",
+      "path": "src/features/sessions/ui",
+      "summary": "Prompt input with attachment chips, slash commands, draft cache."
+    },
+    {
+      "id": "cmp:ApprovalToasts",
+      "kind": "component",
+      "group": "components",
+      "label": "ApprovalToasts.tsx",
+      "path": "src/features/sessions/ui/ApprovalToasts.tsx",
+      "summary": "Toast surface bound to the inbox flow."
+    },
+    {
+      "id": "fn:ComposerRunner",
+      "kind": "function",
+      "group": "components",
+      "label": "composerRunner.ts",
+      "path": "src/features/sessions/model/composerRunner.ts",
+      "summary": "Turns composer text+attachments into harness session input."
+    },
+    {
+      "id": "fn:SessionModel",
+      "kind": "function",
+      "group": "components",
+      "label": "model/session.ts",
+      "path": "src/features/sessions/model/session.ts",
+      "summary": "Session types, titles, work items; pure helpers under 1 file per concern."
+    },
+    {
+      "id": "cmp:ChecksMod",
+      "kind": "component",
+      "group": "components",
+      "label": "checkpoint*.ts",
+      "path": "src/features/sessions/model/checkpoint.ts",
+      "summary": "Checkpoint/rollback of workspace edits tied to a chat turn."
+    },
+    {
+      "id": "fn:CompactMod",
+      "kind": "function",
+      "group": "components",
+      "label": "compact.ts + contextUsage.ts",
+      "path": "src/features/sessions/model/compact.ts",
+      "summary": "Summarize long conversations; context budget metering."
+    },
+    {
+      "id": "cmd:Send",
+      "kind": "command",
+      "group": "commands",
+      "label": "send the prompt",
+      "path": "src/features/sessions/model/composerRunner.ts",
+      "summary": "Enter/queued send; slash commands route to monos.",
+      "tags": [
+        "enter",
+        "/operator"
+      ]
+    },
+    {
+      "id": "ipc:TauriSession",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "tauri session ipc",
+      "path": "src/features/sessions/data",
+      "summary": "invoke bridges; session_store.rs and checkpoint.rs on the rust side."
+    },
+    {
+      "id": "ipc:AttachmentIO",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "attachments ingest",
+      "path": "src/features/sessions/model/attachments.ts",
+      "summary": "Vision-only image handling; path vs bytes via tauri + host."
+    },
+    {
+      "id": "ext:Harness",
+      "kind": "external",
+      "group": "external",
+      "label": "harness adapters",
+      "path": "src/integrations/harness/index.ts",
+      "summary": "runs from integrations module; provider event streams."
+    },
+    {
+      "id": "ext:InboxFlow",
+      "kind": "external",
+      "group": "external",
+      "label": "inbox feature",
+      "path": "src/features/inbox",
+      "summary": "approval items surfaced twice: toast and inbox list."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:SessionTab",
+      "to": "cmp:AgentTabView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AgentTabView",
+      "to": "cmp:AgentTranscript",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AgentTabView",
+      "to": "cmp:ComposerWidget",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AgentTabView",
+      "to": "cmp:ApprovalToasts",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComposerWidget",
+      "to": "fn:ComposerRunner",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ComposerWidget",
+      "to": "ipc:AttachmentIO",
+      "kind": "ipc"
+    },
+    {
+      "from": "fn:ComposerRunner",
+      "to": "ext:Harness",
+      "kind": "calls"
+    },
+    {
+      "from": "ext:Harness",
+      "to": "fn:SessionModel",
+      "kind": "writes"
+    },
+    {
+      "from": "fn:SessionModel",
+      "to": "cmp:AgentTranscript",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ChecksMod",
+      "to": "ipc:TauriSession",
+      "kind": "ipc"
+    },
+    {
+      "from": "fn:SessionModel",
+      "to": "cmp:ChecksMod",
+      "kind": "calls"
+    },
+    {
+      "from": "fn:SessionModel",
+      "to": "fn:CompactMod",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:Send",
+      "to": "fn:ComposerRunner",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ApprovalToasts",
+      "to": "ext:InboxFlow",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmp:ComposerWidget",
+      "to": "fn:ComposerRunner",
+      "kind": "calls",
+      "label": "drafts"
+    },
+    {
+      "from": "ipc:TauriSession",
+      "to": "fn:SessionModel",
+      "kind": "writes",
+      "label": "restores"
+    }
+  ],
+  "flows": [
+    {
+      "id": "send-message",
+      "name": "Send a message",
+      "trigger": "enter in the composer",
+      "steps": [
+        "cmd:Send",
+        "fn:ComposerRunner",
+        "ext:Harness",
+        "fn:SessionModel",
+        "cmp:AgentTranscript"
+      ],
+      "summary": "Turn submission streams into a session; transcript renders incrementally."
+    },
+    {
+      "id": "approve-tool",
+      "name": "Approve a tool",
+      "trigger": "toast allow/deny",
+      "steps": [
+        "ext:InboxFlow",
+        "cmp:ApprovalToasts",
+        "ext:Harness"
+      ],
+      "summary": "Approval answers the pending request; inbox record is kept."
+    },
+    {
+      "id": "checkpoint-restore",
+      "name": "Rollback with checkpoints",
+      "trigger": "checkpoint row in the transcript",
+      "steps": [
+        "cmp:AgentTranscript",
+        "cmp:ChecksMod",
+        "ipc:TauriSession"
+      ],
+      "summary": "Snapshot based file rollback through rust command checkpoint.rs."
+    }
+  ],
+  "notes": [
+    {
+      "title": "small modules, heavy tests",
+      "body": "Most model files are 100-400 LOC with a 1:1 .test.ts; ui/ tests dominate with transcript pacing and bubble width cases.",
+      "severity": "info",
+      "path": "src/features/sessions"
+    },
+    {
+      "title": "session model is pure TS",
+      "body": "model/session.ts keeps titles/work items provider-agnostic; provider dumps only in integrations/harness.",
+      "severity": "info",
+      "path": "src/features/sessions/model/session.ts"
+    },
+    {
+      "title": "checkpoints ride rust",
+      "body": "checkpoint.rs does the disk work; model/checkpoint.ts only maps events.",
+      "severity": "info",
+      "path": "src-tauri/src/checkpoint.rs"
+    }
+  ]
+}

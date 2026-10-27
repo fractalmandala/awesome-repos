@@ -1,0 +1,569 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "monocode",
+    "slug": "hardbeat920__monocode",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "monocode",
+    "entryLayout": "src/main.tsx",
+    "root": ".",
+    "summary": "Tauri GUI for local coding agents: sessions, monos, host service.",
+    "externalModules": [
+      "host",
+      "sessions",
+      "src-tauri"
+    ]
+  },
+  "stats": {
+    "nodes": 27,
+    "edges": 33,
+    "components": 9,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 6,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Features"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "Engines"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Screen",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.tsx",
+      "path": "src/main.tsx"
+    },
+    {
+      "id": "cmp:AppRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.tsx",
+      "path": "src/app/App.tsx",
+      "loc": 15062,
+      "summary": "15k-LOC shell: workspaces, tabs, split panes, keybindings, window events."
+    },
+    {
+      "id": "shared:ShellMods",
+      "kind": "shared",
+      "group": "shared",
+      "label": "app/shell",
+      "path": "src/app/shell"
+    },
+    {
+      "id": "cmp:Sessions",
+      "kind": "component",
+      "group": "components",
+      "label": "sessions feature",
+      "path": "src/features/sessions",
+      "loc": 68386,
+      "summary": "Agent tabs, transcripts, composer, checkpoints, approvals."
+    },
+    {
+      "id": "cmp:Monos",
+      "kind": "component",
+      "group": "components",
+      "label": "monos feature",
+      "path": "src/features/monos",
+      "loc": 16727
+    },
+    {
+      "id": "cmp:Inbox",
+      "kind": "component",
+      "group": "components",
+      "label": "inbox feature",
+      "path": "src/features/inbox",
+      "loc": 20360
+    },
+    {
+      "id": "cmp:Files",
+      "kind": "component",
+      "group": "components",
+      "label": "files feature",
+      "path": "src/features/files",
+      "loc": 16619,
+      "summary": "File tree, diff viewer, editor surface over workspace paths."
+    },
+    {
+      "id": "cmp:SourceControl",
+      "kind": "component",
+      "group": "components",
+      "label": "source-control feature",
+      "path": "src/features/source-control",
+      "loc": 14566
+    },
+    {
+      "id": "shared:OtherFeatures",
+      "kind": "shared",
+      "group": "shared",
+      "label": "other features",
+      "path": "src/features"
+    },
+    {
+      "id": "cmp:Integrations",
+      "kind": "component",
+      "group": "components",
+      "label": "harness integrations",
+      "path": "src/integrations/harness",
+      "summary": "Provider adapters (claude, codex, cursor, devin, ...) + core event model."
+    },
+    {
+      "id": "ipc:MobileApp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mobile app",
+      "path": "mobile"
+    },
+    {
+      "id": "cmp:CliEntry",
+      "kind": "component",
+      "group": "components",
+      "label": "host cli",
+      "path": "host/cli.ts",
+      "loc": 320
+    },
+    {
+      "id": "state:HostStore",
+      "kind": "state",
+      "group": "state",
+      "label": "HostStore",
+      "path": "host/store.ts",
+      "loc": 363
+    },
+    {
+      "id": "state:SessionStore",
+      "kind": "state",
+      "group": "state",
+      "label": "session_store.rs",
+      "path": "src-tauri/src/session_store.rs",
+      "loc": 3777,
+      "summary": "Rust persisted sessions behind app restore and harness runs."
+    },
+    {
+      "id": "cmd:ComposerMsg",
+      "kind": "command",
+      "group": "commands",
+      "label": "send a message",
+      "path": "src/features/sessions",
+      "summary": "Composer send streams the next turn to the agent.",
+      "tags": [
+        "enter"
+      ]
+    },
+    {
+      "id": "cmd:OperatorCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "/operator",
+      "path": "src/features/monos",
+      "summary": "Composer directive: open sessions, manage worktrees/notes via a mono agent.",
+      "tags": [
+        "/operator"
+      ]
+    },
+    {
+      "id": "cmd:SplitPane",
+      "kind": "command",
+      "group": "commands",
+      "label": "split panes / tabs",
+      "path": "src/app/App.tsx",
+      "tags": [
+        "keys"
+      ]
+    },
+    {
+      "id": "cmd:MobileLink",
+      "kind": "command",
+      "group": "commands",
+      "label": "mobile link",
+      "path": "src-tauri/src/mobile_access.rs",
+      "tags": [
+        "pairing"
+      ]
+    },
+    {
+      "id": "ipc:HostServer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "host/server.ts",
+      "path": "host/server.ts",
+      "loc": 630,
+      "summary": "Node http host: worktrees, files, diffs, model discovery, transfer."
+    },
+    {
+      "id": "ipc:HostEngine",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "host/engine.ts",
+      "path": "host/engine.ts",
+      "loc": 926,
+      "summary": "Harness event application, batching (120ms), session lifecycle on host."
+    },
+    {
+      "id": "ipc:TauriCommands",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "tauri commands",
+      "path": "src-tauri/src/lib.rs",
+      "summary": "~60 Tauri command groups incl. pty, git worktrees, checkpoints, automations."
+    },
+    {
+      "id": "ipc:PtySurf",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "pty.rs",
+      "path": "src-tauri/src/pty.rs"
+    },
+    {
+      "id": "ipc:MobileLinkCrate",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mobile-link crate",
+      "path": "crates/mobile-link"
+    },
+    {
+      "id": "shared:HarnessCore",
+      "kind": "shared",
+      "group": "shared",
+      "label": "harness/core",
+      "path": "src/integrations/harness/core",
+      "summary": "Provider-agnostic event/apply protocol shared by app and host."
+    },
+    {
+      "id": "ext:AgentCli",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "src/integrations/harness/providers",
+      "summary": "claude, codex, cursor, grok, pi, omp, fx, hermes, devin..."
+    },
+    {
+      "id": "ext:Git",
+      "kind": "external",
+      "group": "external",
+      "label": "git",
+      "path": "host/git-worktrees.ts"
+    },
+    {
+      "id": "ext:OSWindow",
+      "kind": "external",
+      "group": "external",
+      "label": "window/OS shells",
+      "path": "src-tauri/tauri.conf.json"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Screen",
+      "to": "cmp:AppRoot",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "shared:ShellMods",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:Sessions",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:Files",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "state:SessionStore",
+      "kind": "ipc",
+      "label": "restore sessions"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "shared:OtherFeatures",
+      "kind": "renders",
+      "label": "feature panes"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "shared:HarnessCore",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "cmd:ComposerMsg",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "ipc:TauriCommands",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Monos",
+      "to": "cmd:OperatorCmd",
+      "kind": "commands"
+    },
+    {
+      "from": "shared:HarnessCore",
+      "to": "ext:AgentCli",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Integrations",
+      "to": "shared:HarnessCore",
+      "kind": "renders",
+      "label": "core+providers"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "cmp:Integrations",
+      "kind": "imports"
+    },
+    {
+      "from": "ipc:HostEngine",
+      "to": "shared:HarnessCore",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:HostServer",
+      "to": "ipc:HostEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:HostServer",
+      "to": "state:HostStore",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:HostServer",
+      "to": "ext:Git",
+      "kind": "calls",
+      "label": "worktrees"
+    },
+    {
+      "from": "cmp:CliEntry",
+      "to": "ipc:HostServer",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:MobileLink",
+      "to": "ipc:MobileLinkCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:HostServer",
+      "to": "ipc:MobileApp",
+      "kind": "calls",
+      "label": "mobile payloads"
+    },
+    {
+      "from": "cmp:SourceControl",
+      "to": "ipc:TauriCommands",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:TauriCommands",
+      "to": "ext:AgentCli",
+      "kind": "calls",
+      "label": "spawn agents"
+    },
+    {
+      "from": "ipc:TauriCommands",
+      "to": "ext:Git",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:TauriCommands",
+      "to": "state:SessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Files",
+      "to": "ipc:TauriCommands",
+      "kind": "ipc",
+      "label": "fs.rs"
+    },
+    {
+      "from": "shared:OtherFeatures",
+      "to": "ipc:TauriCommands",
+      "kind": "ipc",
+      "label": "pty/terminal"
+    },
+    {
+      "from": "ipc:TauriCommands",
+      "to": "ipc:PtySurf",
+      "kind": "calls"
+    },
+    {
+      "from": "state:SessionStore",
+      "to": "state:HostStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:SplitPane",
+      "to": "cmp:AppRoot",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ComposerMsg",
+      "to": "shared:HarnessCore",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:OperatorCmd",
+      "to": "state:SessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "shared:ShellMods",
+      "to": "ext:AgentCli",
+      "kind": "reads",
+      "label": "provider badging"
+    },
+    {
+      "from": "cmp:Inbox",
+      "to": "state:SessionStore",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "start-session",
+      "name": "Send a message",
+      "trigger": "composer enter",
+      "steps": [
+        "cmd:ComposerMsg",
+        "shared:HarnessCore",
+        "ipc:TauriCommands",
+        "ext:AgentCli"
+      ],
+      "summary": "Command appears in the transcript tab; streamed by provider CLI."
+    },
+    {
+      "id": "watch-stream",
+      "name": "Watch the transcript",
+      "trigger": "harness delta events",
+      "steps": [
+        "shared:HarnessCore",
+        "cmp:Integrations",
+        "cmp:Sessions",
+        "state:SessionStore"
+      ],
+      "summary": "Batches message.delta into AgentTranscript with approvals/ordering."
+    },
+    {
+      "id": "monos-task",
+      "name": "/operator a task",
+      "trigger": "start a message with /operator",
+      "steps": [
+        "cmd:OperatorCmd",
+        "cmp:Monos",
+        "state:SessionStore",
+        "ipc:TauriCommands"
+      ],
+      "summary": "Opening sessions and git worktrees/notes; scheduling stays on monos."
+    },
+    {
+      "id": "files-and-review",
+      "name": "Edit and review files",
+      "trigger": "select a file in the file tree",
+      "steps": [
+        "cmp:Files",
+        "ipc:TauriCommands",
+        "cmp:SourceControl",
+        "ext:Git"
+      ],
+      "summary": "Read/write via fs.rs; diffs arrive from git through tauri commands."
+    },
+    {
+      "id": "remote-link",
+      "name": "Pair a phone",
+      "trigger": "mobile link from settings",
+      "steps": [
+        "cmd:MobileLink",
+        "ipc:MobileLinkCrate",
+        "ipc:HostServer",
+        "ipc:MobileApp"
+      ],
+      "summary": "Phone pairs with host service to steer sessions remotely."
+    },
+    {
+      "id": "mobile-drive",
+      "name": "Mobile drives sessions",
+      "trigger": "send from the mobile app",
+      "steps": [
+        "ipc:MobileApp",
+        "ipc:HostServer",
+        "ipc:HostEngine",
+        "ext:AgentCli"
+      ],
+      "summary": "Host runs the same harness protocol and flushes streamed batches."
+    }
+  ],
+  "notes": [
+    {
+      "title": "three backends, one protocol",
+      "body": "The same harness/core protocol is driven by the Tauri process (spawn) and by the Node host service for remote/mobile (host/engine.ts).",
+      "severity": "info",
+      "path": "src/integrations/harness/core"
+    },
+    {
+      "title": "test density is the standout",
+      "body": "869 src test files (~4,841 test cases) alongside 24 host tests; vitest+playwright then clippy -D warnings in check.",
+      "severity": "info",
+      "path": "src"
+    },
+    {
+      "title": "App.tsx monolith",
+      "body": "src/app/App.tsx is 15,062 LOC and src-tauri/src/fs.rs is 9,721 LOC in one flat 59-file Rust module \u2014 biggest scaling pressure points.",
+      "severity": "warn",
+      "path": "src/app/App.tsx"
+    },
+    {
+      "title": "many external CLIs",
+      "body": "Provider catalogs live under src/integrations/harness/providers (11 adapters); spawn\u80fd\u529b\u548c model discovery tracks each separately.",
+      "severity": "info",
+      "path": "src/integrations/harness/providers"
+    },
+    {
+      "title": "one patch, vendor-free",
+      "body": "No vendored frameworks: npm deps + Cargo (profile {}) directly; crates/mobile-link is the only local rust crate.",
+      "severity": "info",
+      "path": "Cargo.lock"
+    }
+  ]
+}

@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "monocode",
+    "slug": "hardbeat920__monocode",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "host",
+    "name": "host service",
+    "entryLayout": "host/server.ts",
+    "root": "host",
+    "summary": "Node headless host: rpc server, engine, workspace commands, service install.",
+    "externalModules": [
+      "src-tauri",
+      "sessions",
+      "connections"
+    ]
+  },
+  "stats": {
+    "nodes": 17,
+    "edges": 19,
+    "components": 6,
+    "stateFiles": 1,
+    "commands": 0,
+    "ipcCalls": 5,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:CliEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "cli.ts",
+      "path": "host/cli.ts",
+      "loc": 320,
+      "summary": "Host entry: spawns child backend, engine, then createHostServer rpc."
+    },
+    {
+      "id": "cmp:ServerMod",
+      "kind": "component",
+      "group": "components",
+      "label": "server.ts",
+      "path": "host/server.ts",
+      "loc": 630,
+      "summary": "Node http with /rpc and /lifecycle; MAX_BODY capped; versioned catalogs."
+    },
+    {
+      "id": "cmp:HostEngine",
+      "kind": "component",
+      "group": "components",
+      "label": "engine.ts",
+      "path": "host/engine.ts",
+      "loc": 926,
+      "summary": "HostEngine: applies harness events, batched flush 120ms, model lifecycle."
+    },
+    {
+      "id": "cmp:WorkspaceCommands",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace-commands.ts",
+      "path": "host/workspace-commands.ts",
+      "loc": 810,
+      "summary": "RPC dispatch: list/read/write files, diffs, search, indexHostFiles."
+    },
+    {
+      "id": "cmp:WorkspaceMod",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace.ts",
+      "path": "host/workspace.ts",
+      "loc": 843,
+      "summary": "File/search primitives used by WorkspaceCommands and server routes."
+    },
+    {
+      "id": "cmp:ChildBackend",
+      "kind": "component",
+      "group": "components",
+      "label": "child-backend.ts",
+      "path": "host/child-backend.ts",
+      "loc": 474,
+      "summary": "Bridge to the app's child harness backend somehow via IPC bridge."
+    },
+    {
+      "id": "state:HostStore",
+      "kind": "state",
+      "group": "state",
+      "label": "store.ts",
+      "path": "host/store.ts",
+      "loc": 363,
+      "summary": "Sessions, providers and attachment dirs on disk."
+    },
+    {
+      "id": "fn:Service",
+      "kind": "function",
+      "group": "components",
+      "label": "service.ts",
+      "path": "host/service.ts",
+      "loc": 331,
+      "summary": "Install/uninstall launchd + windows service wrapper (dashboard-free host)."
+    },
+    {
+      "id": "fn:GitWorktrees",
+      "kind": "function",
+      "group": "components",
+      "label": "git-worktrees.ts",
+      "path": "host/git-worktrees.ts",
+      "loc": 241,
+      "summary": "Create/resolve worktrees; named worktree branches."
+    },
+    {
+      "id": "ipc:EngineEvents",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "engine event stream",
+      "path": "host/engine.ts",
+      "summary": "HarnessEvent stream pushed to mobile; batching for message.delta picks."
+    },
+    {
+      "id": "ipc:ServerRpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "/rpc endpoints",
+      "path": "host/server.ts",
+      "summary": "JSON rpc surface: workspace, sessions, models, transfer, branches."
+    },
+    {
+      "id": "ipc:ProviderBinaries",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "providerBinaries",
+      "path": "host/server.ts",
+      "summary": "Realpath+mtime probe invalidates stale model catalogs."
+    },
+    {
+      "id": "ipc:SyncTransfer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "sync-transfer.ts",
+      "path": "host/sync-transfer.ts",
+      "loc": 96,
+      "summary": "Attachment/asset transfer between host and mobile/app."
+    },
+    {
+      "id": "ipc:PtyProxy",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "process calls",
+      "path": "host/process.ts",
+      "loc": 223,
+      "summary": "Detached process spawn + logging used by engine commands."
+    },
+    {
+      "id": "ext:HarnessCore",
+      "kind": "external",
+      "group": "external",
+      "label": "harness/core",
+      "path": "src/integrations/harness/core",
+      "summary": "Same event/apply code the desktop app uses."
+    },
+    {
+      "id": "ext:Connections",
+      "kind": "external",
+      "group": "external",
+      "label": "connections protocol",
+      "path": "src/features/connections/model/protocol.ts",
+      "summary": "Typed HostCommand/session contract imported from the app tree."
+    },
+    {
+      "id": "ext:CliSpawn",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "src/integrations/harness/providers",
+      "summary": "claude / codex / cursor binaries discovered on the host box."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:CliEntry",
+      "to": "cmp:ChildBackend",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CliEntry",
+      "to": "cmp:HostEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CliEntry",
+      "to": "cmp:ServerMod",
+      "kind": "calls",
+      "label": "HostServer"
+    },
+    {
+      "from": "cmp:ServerMod",
+      "to": "cmp:HostEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:ServerRpc",
+      "to": "cmp:WorkspaceCommands",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:WorkspaceCommands",
+      "to": "cmp:WorkspaceMod",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:WorkspaceCommands",
+      "to": "fn:GitWorktrees",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:HostEngine",
+      "to": "ipc:EngineEvents",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:HostEngine",
+      "to": "ext:HarnessCore",
+      "kind": "calls",
+      "label": "applyHarnessEvent"
+    },
+    {
+      "from": "cmp:HostEngine",
+      "to": "state:HostStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ChildBackend",
+      "to": "ext:CliSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "fn:Service",
+      "to": "ipc:ServerRpc",
+      "kind": "calls",
+      "label": "installs engine"
+    },
+    {
+      "from": "ipc:ServerRpc",
+      "to": "state:HostStore",
+      "kind": "reads"
+    },
+    {
+      "from": "ipc:ServerRpc",
+      "to": "ipc:ProviderBinaries",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:ServerRpc",
+      "to": "ipc:SyncTransfer",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:ServerRpc",
+      "to": "ipc:PtyProxy",
+      "kind": "calls"
+    },
+    {
+      "from": "state:HostStore",
+      "to": "ext:Connections",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:WorkspaceMod",
+      "to": "ext:Connections",
+      "kind": "reads",
+      "label": "paths"
+    },
+    {
+      "from": "cmp:ServerMod",
+      "to": "fn:Service",
+      "kind": "navigates",
+      "label": "install/uninstall lifecycle"
+    }
+  ],
+  "flows": [
+    {
+      "id": "headless-boot",
+      "name": "Start the host",
+      "trigger": "installed service launch or cli",
+      "steps": [
+        "fn:Service",
+        "cmp:CliEntry",
+        "cmp:HostEngine",
+        "cmp:ServerMod",
+        "ipc:ServerRpc"
+      ],
+      "summary": "launchd/Windows service wraps this node process as the desktop bridge."
+    },
+    {
+      "id": "remote-rpc",
+      "name": "Serve the phone",
+      "trigger": "mobile app rpc call",
+      "steps": [
+        "ipc:ServerRpc",
+        "cmp:WorkspaceCommands",
+        "cmp:WorkspaceMod",
+        "ipc:EngineEvents"
+      ],
+      "summary": "File/git queries run cleanly; engine events stream back in batches."
+    },
+    {
+      "id": "host-agent-run",
+      "name": "Run agent on host",
+      "trigger": "remote session send",
+      "steps": [
+        "cmp:ChildBackend",
+        "ext:CliSpawn",
+        "cmp:HostEngine",
+        "ipc:ServerRpc"
+      ],
+      "summary": "Harness child backend spawns agent CLIs on the host machine."
+    }
+  ],
+  "notes": [
+    {
+      "title": "rpc over http, no ws",
+      "body": "/rpc and /lifecycle only (server.ts); streamed events ride chunked responses instead of websockets.",
+      "severity": "info",
+      "path": "host/server.ts"
+    },
+    {
+      "title": "catalogs keyed by binary",
+      "body": "Catalog caches invalidate on provider binary realpath+mtime change so CLI upgrades show instant new model lists.",
+      "severity": "info",
+      "path": "host/server.ts"
+    },
+    {
+      "title": "engine is thin, shared code",
+      "body": "engine imports applyHarnessEvent and session model straight from src/features \u2014 no duplicated protocol.",
+      "severity": "info",
+      "path": "host/engine.ts"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 9,
+  "count": 10,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -234,6 +234,37 @@
         "scan-addons.html",
         "scan-shared.json",
         "scan-shared.html"
+      ]
+    },
+    {
+      "slug": "hardbeat920__monocode",
+      "name": "monocode",
+      "github": "https://github.com/hardbeat920/monocode",
+      "license": "MIT",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Tauri GUI for local coding agents: sessions, monos, host service.",
+      "stack": [
+        "typescript",
+        "react",
+        "tauri",
+        "rust",
+        "node",
+        "vitest",
+        "playwright",
+        "vite"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-host.json",
+        "scan-host.html",
+        "scan-sessions.json",
+        "scan-sessions.html",
+        "scan-src-tauri.json",
+        "scan-src-tauri.html"
       ]
     },
     {
