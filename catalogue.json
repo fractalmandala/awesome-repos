@@ -1,5 +1,32 @@
 {
   "version": 1,
-  "count": 0,
-  "entries": []
+  "count": 1,
+  "entries": [
+    {
+      "slug": "local__gr8r-studio",
+      "name": "Gr8r Studio",
+      "github": "unknown",
+      "license": "unknown",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "ok",
+      "summary": "Polished dependency-free PM SPA: coherent layers, hand-rolled focus, no tests or license.",
+      "stack": [
+        "javascript",
+        "css",
+        "vite",
+        "spa",
+        "localstorage"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-actions.json",
+        "scan-actions.html",
+        "scan-shell.json",
+        "scan-shell.html"
+      ]
+    }
+  ]
 }

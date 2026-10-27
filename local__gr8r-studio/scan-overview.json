@@ -1,0 +1,1365 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "Gr8r Studio",
+    "slug": "local__gr8r-studio",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "Repo overview",
+    "entryLayout": "src/main.js",
+    "root": ".",
+    "summary": "Plain-JS SPA: string templates, one global store, delegated action table",
+    "externalModules": [
+      "actions",
+      "shell"
+    ]
+  },
+  "stats": {
+    "nodes": 55,
+    "edges": 115,
+    "components": 33,
+    "stateFiles": 2,
+    "commands": 8,
+    "ipcCalls": 3,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Pages & Views"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Keys"
+    },
+    {
+      "id": "ipc",
+      "label": "Boundaries"
+    },
+    {
+      "id": "shared",
+      "label": "Shared UI & Core"
+    },
+    {
+      "id": "external",
+      "label": "Third-party"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Main",
+      "label": "main.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/main.js",
+      "loc": 79,
+      "tags": [
+        "entry"
+      ],
+      "summary": "Imports every module in order, then boots route and auth from the hash."
+    },
+    {
+      "id": "cmp:Shell",
+      "label": "shell/layout.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/layout.js",
+      "loc": 211,
+      "tags": [
+        "root-view"
+      ],
+      "summary": "Root HTML: sidebar, topbar, crumbs, content, bottom nav, route switch."
+    },
+    {
+      "id": "cmp:Router",
+      "label": "shell/render.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/render.js",
+      "loc": 230,
+      "tags": [
+        "router",
+        "render-loop"
+      ],
+      "summary": "Full re-render on state change; restores focus, caret and scroll by hand."
+    },
+    {
+      "id": "cmp:ViewEngine",
+      "label": "view-engine.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/view-engine.js",
+      "loc": 190,
+      "tags": [
+        "filters",
+        "grouping"
+      ],
+      "summary": "Filter, sort and group engine plus the shared view toolbar and chips."
+    },
+    {
+      "id": "cmp:HomePage",
+      "label": "home.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/home.js",
+      "loc": 111
+    },
+    {
+      "id": "cmp:ProjectPage",
+      "label": "project.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/project.js",
+      "loc": 106,
+      "tags": [
+        "tabs"
+      ],
+      "summary": "Project header and 8 tabs; saved views resolve to list or board."
+    },
+    {
+      "id": "cmp:ProjectsPage",
+      "label": "projects.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/projects.js",
+      "loc": 84
+    },
+    {
+      "id": "cmp:MyTasksPage",
+      "label": "my-tasks.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/my-tasks.js",
+      "loc": 54
+    },
+    {
+      "id": "cmp:TasksPage",
+      "label": "tasks.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/tasks.js",
+      "loc": 33
+    },
+    {
+      "id": "cmp:InboxPage",
+      "label": "inbox.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/inbox.js",
+      "loc": 87
+    },
+    {
+      "id": "cmp:NotificationsPage",
+      "label": "notifications.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/notifications.js",
+      "loc": 47
+    },
+    {
+      "id": "cmp:FavoritesPage",
+      "label": "favorites.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/favorites.js",
+      "loc": 22
+    },
+    {
+      "id": "cmp:MembersPage",
+      "label": "members.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/members.js",
+      "loc": 149,
+      "tags": [
+        "teams"
+      ]
+    },
+    {
+      "id": "cmp:ActivityPage",
+      "label": "activity.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/activity.js",
+      "loc": 45
+    },
+    {
+      "id": "cmp:SearchPage",
+      "label": "search.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/search.js",
+      "loc": 100,
+      "tags": [
+        "search"
+      ]
+    },
+    {
+      "id": "cmp:SettingsPage",
+      "label": "settings.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/settings.js",
+      "loc": 435,
+      "tags": [
+        "prefs"
+      ],
+      "summary": "20 settings sections: appearance, members, notifications, security, billing."
+    },
+    {
+      "id": "cmp:AuthPage",
+      "label": "auth.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/auth.js",
+      "loc": 155,
+      "tags": [
+        "login",
+        "onboarding"
+      ],
+      "summary": "Login, signup, reset, verify and a 4-step onboarding wizard."
+    },
+    {
+      "id": "cmp:DesignSystemPage",
+      "label": "design-system.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/pages/design-system.js",
+      "loc": 176,
+      "tags": [
+        "tokens",
+        "states"
+      ]
+    },
+    {
+      "id": "cmp:ArchivePage",
+      "label": "features/archive.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/features/archive.js",
+      "loc": 50
+    },
+    {
+      "id": "cmp:SubtaskPanel",
+      "label": "features/subtasks.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/features/subtasks.js",
+      "loc": 31
+    },
+    {
+      "id": "cmp:TeamModal",
+      "label": "features/teams.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/features/teams.js",
+      "loc": 37
+    },
+    {
+      "id": "cmp:BoardView",
+      "label": "views/board.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/board.js",
+      "loc": 51,
+      "summary": "Five status columns, cards, inline composer, drag targets."
+    },
+    {
+      "id": "cmp:TableView",
+      "label": "views/table.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/table.js",
+      "loc": 81
+    },
+    {
+      "id": "cmp:CalendarView",
+      "label": "views/calendar.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/calendar.js",
+      "loc": 107
+    },
+    {
+      "id": "cmp:TimelineView",
+      "label": "views/timeline.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/timeline.js",
+      "loc": 190
+    },
+    {
+      "id": "cmp:FilesView",
+      "label": "views/files.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/files.js",
+      "loc": 56
+    },
+    {
+      "id": "cmp:ProjectOverview",
+      "label": "project-overview.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/views/project-overview.js",
+      "loc": 72
+    },
+    {
+      "id": "cmp:TaskList",
+      "label": "task-list.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/components/task-list.js",
+      "loc": 147,
+      "summary": "Shared list rows and cell renderers for status, assignee, due, labels."
+    },
+    {
+      "id": "cmp:Drawer",
+      "label": "drawer.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/overlays/drawer.js",
+      "loc": 145,
+      "summary": "Task drawer: properties, rich description, comments, files, activity."
+    },
+    {
+      "id": "cmp:Modals",
+      "label": "modals.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/overlays/modals.js",
+      "loc": 290
+    },
+    {
+      "id": "cmp:Popovers",
+      "label": "popovers.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/overlays/popovers.js",
+      "loc": 398,
+      "summary": "Every inline editor: status, assignee, date, labels, filters, menus."
+    },
+    {
+      "id": "cmp:ContextMenu",
+      "label": "context-menu.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/overlays/context-menu.js",
+      "loc": 88
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "palette.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/overlays/palette.js",
+      "loc": 238,
+      "summary": "Command palette: 17 commands, nav, recent tasks, scoped search."
+    },
+    {
+      "id": "state:Store",
+      "label": "core/store.js",
+      "kind": "state",
+      "group": "state",
+      "path": "src/core/store.js",
+      "loc": 141,
+      "tags": [
+        "localstorage",
+        "singleton"
+      ],
+      "summary": "Global S/D singleton, 43 UI flags, lookups, debounced localStorage save."
+    },
+    {
+      "id": "state:SeedData",
+      "label": "data/seed.js",
+      "kind": "state",
+      "group": "state",
+      "path": "src/data/seed.js",
+      "loc": 544,
+      "tags": [
+        "demo-data"
+      ],
+      "summary": "Demo workspace: 6 people, 4 projects, tasks, comments, files, events."
+    },
+    {
+      "id": "cmd:OpenPalette",
+      "label": "Open command palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "⌘K"
+      ]
+    },
+    {
+      "id": "cmd:GoRoute",
+      "label": "go(route)",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.js",
+      "loc": 230,
+      "tags": [
+        "sidebar",
+        "G chords"
+      ]
+    },
+    {
+      "id": "cmd:NewTask",
+      "label": "New task",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "N"
+      ]
+    },
+    {
+      "id": "cmd:NewProject",
+      "label": "New project",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "P"
+      ]
+    },
+    {
+      "id": "cmd:ToggleDone",
+      "label": "Toggle done",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "context menu"
+      ]
+    },
+    {
+      "id": "cmd:DragCard",
+      "label": "Drag & drop",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/drag-drop.js",
+      "loc": 269,
+      "tags": [
+        "drag"
+      ]
+    },
+    {
+      "id": "cmd:SaveView",
+      "label": "Save view",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "project tab"
+      ]
+    },
+    {
+      "id": "cmd:SignIn",
+      "label": "Sign in",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "form submit"
+      ]
+    },
+    {
+      "id": "ipc:LocalStorage",
+      "label": "localStorage",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/core/store.js",
+      "loc": 141,
+      "tags": [
+        "gr8r.v2"
+      ]
+    },
+    {
+      "id": "ipc:Clipboard",
+      "label": "copy()",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/actions/actions.js",
+      "loc": 2293
+    },
+    {
+      "id": "ipc:Upload",
+      "label": "handleFiles()",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/actions/actions.js",
+      "loc": 2293
+    },
+    {
+      "id": "ext:Lucide",
+      "label": "lucide subset",
+      "kind": "external",
+      "group": "external",
+      "path": "vite.config.js",
+      "loc": 70,
+      "summary": "Vite plugin scans src for icon names and inlines only the used SVGs."
+    },
+    {
+      "id": "ext:GoogleFonts",
+      "label": "Google Fonts",
+      "kind": "external",
+      "group": "external",
+      "path": "index.html",
+      "loc": 24
+    },
+    {
+      "id": "shared:Helpers",
+      "label": "ui/helpers.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/helpers.js",
+      "loc": 112,
+      "summary": "Avatars, status glyphs, pills, progress bars, comment formatting."
+    },
+    {
+      "id": "shared:SelectUI",
+      "label": "ui/select.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/select.js",
+      "loc": 129
+    },
+    {
+      "id": "shared:Toast",
+      "label": "ui/toast.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/ui/toast.js",
+      "loc": 38
+    },
+    {
+      "id": "shared:Icons",
+      "label": "core/icons.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/core/icons.js",
+      "loc": 24
+    },
+    {
+      "id": "shared:Utils",
+      "label": "core/utils.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/core/utils.js",
+      "loc": 84
+    },
+    {
+      "id": "shared:Constants",
+      "label": "core/constants.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/core/constants.js",
+      "loc": 70
+    },
+    {
+      "id": "shared:Theme",
+      "label": "core/theme.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "src/core/theme.js",
+      "loc": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Main",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "imports S, D"
+    },
+    {
+      "from": "cmp:Main",
+      "to": "cmp:Router",
+      "kind": "calls",
+      "label": "render() on boot"
+    },
+    {
+      "from": "state:Store",
+      "to": "ipc:LocalStorage",
+      "kind": "ipc",
+      "label": "load / debounced save"
+    },
+    {
+      "from": "state:Store",
+      "to": "state:SeedData",
+      "kind": "reads",
+      "label": "seed() fallback"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "cmp:Shell",
+      "kind": "renders",
+      "label": "renderShell()"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "cmp:AuthPage",
+      "kind": "renders",
+      "label": "renderAuth() when auth is set"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "cmp:Drawer",
+      "kind": "renders",
+      "label": "renderLayer()"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "route, params, history, fx"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "shared:SelectUI",
+      "kind": "calls",
+      "label": "enhanceSelects"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "shared:Theme",
+      "kind": "calls",
+      "label": "applyPrefs()"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "cmp:TimelineView",
+      "kind": "calls",
+      "label": "tlAfter()"
+    },
+    {
+      "from": "cmp:Router",
+      "to": "cmp:ProjectPage",
+      "kind": "imports",
+      "label": "PTABS for the page title"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "unread counts, prefs, route"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:HomePage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:ProjectPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:ProjectsPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:MyTasksPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:TasksPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:InboxPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:NotificationsPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:FavoritesPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:MembersPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:ActivityPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:SearchPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:SettingsPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:DesignSystemPage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:ArchivePage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:CalendarView",
+      "kind": "renders",
+      "label": "workspace calendar"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "cmp:TimelineView",
+      "kind": "renders",
+      "label": "workspace timeline"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "shared:Helpers",
+      "kind": "calls",
+      "label": "av()"
+    },
+    {
+      "from": "cmp:Shell",
+      "to": "shared:Icons",
+      "kind": "calls",
+      "label": "ic()"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:BoardView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:TaskList",
+      "kind": "renders",
+      "label": "list tab"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:TableView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:CalendarView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:TimelineView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:FilesView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:ProjectOverview",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectPage",
+      "to": "cmp:ViewEngine",
+      "kind": "reads",
+      "label": "viewOf / applyView"
+    },
+    {
+      "from": "cmp:HomePage",
+      "to": "cmp:TaskList",
+      "kind": "renders",
+      "label": "miniRow / actHtml"
+    },
+    {
+      "from": "cmp:HomePage",
+      "to": "cmp:ViewEngine",
+      "kind": "calls",
+      "label": "sortTasks"
+    },
+    {
+      "from": "cmp:HomePage",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MyTasksPage",
+      "to": "cmp:TaskList",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:MyTasksPage",
+      "to": "cmp:CalendarView",
+      "kind": "renders",
+      "label": "calendar mode"
+    },
+    {
+      "from": "cmp:MyTasksPage",
+      "to": "cmp:ViewEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:TasksPage",
+      "to": "cmp:TaskList",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TasksPage",
+      "to": "cmp:BoardView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TasksPage",
+      "to": "cmp:TableView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TasksPage",
+      "to": "cmp:ViewEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ProjectOverview",
+      "to": "cmp:TaskList",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProjectOverview",
+      "to": "cmp:ViewEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ProjectsPage",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ProjectsPage",
+      "to": "shared:Helpers",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SearchPage",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "searchAll over D()"
+    },
+    {
+      "from": "cmp:InboxPage",
+      "to": "cmp:Drawer",
+      "kind": "calls",
+      "label": "commentHtml"
+    },
+    {
+      "from": "cmp:InboxPage",
+      "to": "cmp:TaskList",
+      "kind": "calls",
+      "label": "cell renderers"
+    },
+    {
+      "from": "cmp:SettingsPage",
+      "to": "cmp:MembersPage",
+      "kind": "calls",
+      "label": "permsTable / teamsGrid"
+    },
+    {
+      "from": "cmp:SettingsPage",
+      "to": "cmp:Modals",
+      "kind": "calls",
+      "label": "SHORTCUTS"
+    },
+    {
+      "from": "cmp:ActivityPage",
+      "to": "cmp:TaskList",
+      "kind": "calls",
+      "label": "actHtml"
+    },
+    {
+      "from": "cmp:DesignSystemPage",
+      "to": "cmp:Shell",
+      "kind": "calls",
+      "label": "sItem"
+    },
+    {
+      "from": "cmp:DesignSystemPage",
+      "to": "cmp:BoardView",
+      "kind": "calls",
+      "label": "kcard"
+    },
+    {
+      "from": "cmp:ArchivePage",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ArchivePage",
+      "to": "shared:Helpers",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AuthPage",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "auth step, errors"
+    },
+    {
+      "from": "cmp:AuthPage",
+      "to": "shared:Theme",
+      "kind": "reads",
+      "label": "effectiveDark"
+    },
+    {
+      "from": "cmp:AuthPage",
+      "to": "cmp:Modals",
+      "kind": "calls",
+      "label": "TEMPLATES"
+    },
+    {
+      "from": "cmp:TimelineView",
+      "to": "cmp:CalendarView",
+      "kind": "calls",
+      "label": "startOfWeek"
+    },
+    {
+      "from": "cmp:CalendarView",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:TableView",
+      "to": "cmp:ViewEngine",
+      "kind": "calls",
+      "label": "groupTasks / viewOf"
+    },
+    {
+      "from": "cmp:TaskList",
+      "to": "shared:Helpers",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:TaskList",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "shared:Constants",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "shared:Helpers",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "cmp:TaskList",
+      "kind": "calls",
+      "label": "cellStatus and friends"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "cmp:Popovers",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "cmp:Modals",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "cmp:Palette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "cmp:SubtaskPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "ipc:Clipboard",
+      "kind": "ipc",
+      "label": "copy link"
+    },
+    {
+      "from": "cmp:Drawer",
+      "to": "ipc:Upload",
+      "kind": "ipc",
+      "label": "drop a file"
+    },
+    {
+      "from": "cmp:Modals",
+      "to": "cmp:TeamModal",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Modals",
+      "to": "shared:Helpers",
+      "kind": "calls",
+      "label": "pills"
+    },
+    {
+      "from": "cmp:Popovers",
+      "to": "cmp:ContextMenu",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Popovers",
+      "to": "cmp:ViewEngine",
+      "kind": "reads",
+      "label": "FIELDS / viewOf"
+    },
+    {
+      "from": "cmp:Popovers",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "S.ui.pop"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:SearchPage",
+      "kind": "calls",
+      "label": "searchAll"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:Modals",
+      "kind": "calls",
+      "label": "openModal for file preview"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "cmp:Router",
+      "kind": "calls",
+      "label": "go()"
+    },
+    {
+      "from": "cmp:Palette",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ContextMenu",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:FilesView",
+      "to": "ipc:Upload",
+      "kind": "ipc",
+      "label": "file input"
+    },
+    {
+      "from": "shared:Icons",
+      "to": "ext:Lucide",
+      "kind": "imports",
+      "label": "virtual:icons"
+    },
+    {
+      "from": "shared:Utils",
+      "to": "ext:GoogleFonts",
+      "kind": "ipc",
+      "label": "flips media=print font link"
+    },
+    {
+      "from": "shared:Theme",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "S.prefs"
+    },
+    {
+      "from": "shared:Toast",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "S.ui.offline"
+    },
+    {
+      "from": "shared:Helpers",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "mem / pColor"
+    },
+    {
+      "from": "shared:Helpers",
+      "to": "shared:Constants",
+      "kind": "reads",
+      "label": "ST / PR / LB"
+    },
+    {
+      "from": "shared:SelectUI",
+      "to": "shared:Icons",
+      "kind": "calls",
+      "label": "ic()"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "S.ui.palette"
+    },
+    {
+      "from": "cmd:GoRoute",
+      "to": "cmp:Router",
+      "kind": "calls",
+      "label": "go()"
+    },
+    {
+      "from": "cmd:GoRoute",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "route, params"
+    },
+    {
+      "from": "cmd:NewTask",
+      "to": "cmp:Modals",
+      "kind": "calls",
+      "label": "openModal({type:'task'})"
+    },
+    {
+      "from": "cmd:NewTask",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "S.ui.form"
+    },
+    {
+      "from": "cmd:NewProject",
+      "to": "cmp:Modals",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:NewProject",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "createProject"
+    },
+    {
+      "from": "cmd:ToggleDone",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "applyPatch(status)"
+    },
+    {
+      "from": "cmd:ToggleDone",
+      "to": "shared:Toast",
+      "kind": "calls",
+      "label": "Undo toast"
+    },
+    {
+      "from": "cmd:DragCard",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "status / order / dates"
+    },
+    {
+      "from": "cmd:DragCard",
+      "to": "shared:Toast",
+      "kind": "calls",
+      "label": "moved / rescheduled"
+    },
+    {
+      "from": "cmd:SaveView",
+      "to": "cmp:Modals",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:SaveView",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "D().savedViews"
+    },
+    {
+      "from": "cmd:SignIn",
+      "to": "state:Store",
+      "kind": "writes",
+      "label": "S.ui.auth / errors"
+    },
+    {
+      "from": "cmd:SignIn",
+      "to": "cmp:Router",
+      "kind": "calls",
+      "label": "enterApp → go()"
+    }
+  ],
+  "flows": [
+    {
+      "id": "boot",
+      "name": "Boot the saved workspace",
+      "trigger": "Open the app",
+      "steps": [
+        "cmp:Main",
+        "state:Store",
+        "ipc:LocalStorage",
+        "state:SeedData",
+        "cmp:Router",
+        "cmp:Shell",
+        "cmp:HomePage"
+      ],
+      "summary": "Store loads gr8r.v2 or seeds demo data, then the router renders Home."
+    },
+    {
+      "id": "palette",
+      "name": "Jump with the palette",
+      "trigger": "⌘K / Ctrl K",
+      "steps": [
+        "cmd:OpenPalette",
+        "state:Store",
+        "cmp:Router",
+        "cmp:Palette",
+        "cmp:SearchPage"
+      ],
+      "summary": "Palette opens in command mode; Tab searches, Enter runs, results page follows."
+    },
+    {
+      "id": "create-task",
+      "name": "Create a task from a board",
+      "trigger": "New task / N",
+      "steps": [
+        "cmd:NewTask",
+        "cmp:Modals",
+        "state:Store",
+        "ipc:LocalStorage",
+        "cmp:Router",
+        "cmp:BoardView"
+      ],
+      "summary": "Modal form creates the task, logs activity, saves and re-renders the board."
+    },
+    {
+      "id": "move-card",
+      "name": "Move a card to another column",
+      "trigger": "Drag a board card",
+      "steps": [
+        "cmd:DragCard",
+        "state:Store",
+        "ipc:LocalStorage",
+        "cmp:Router",
+        "cmp:BoardView"
+      ],
+      "summary": "Drop rewrites status and fractional order, toasts, then redraws."
+    },
+    {
+      "id": "save-view",
+      "name": "Save a filtered view as a tab",
+      "trigger": "Save view + in the project tabs",
+      "steps": [
+        "cmp:ViewEngine",
+        "cmd:SaveView",
+        "cmp:Modals",
+        "state:Store",
+        "cmd:GoRoute",
+        "cmp:ProjectPage"
+      ],
+      "summary": "Filters are copied into D().savedViews and opened as a v:<id> tab."
+    },
+    {
+      "id": "sign-in",
+      "name": "Sign in and land on Home",
+      "trigger": "Sign in button",
+      "steps": [
+        "cmp:AuthPage",
+        "cmd:SignIn",
+        "state:Store",
+        "cmd:GoRoute",
+        "cmp:Shell",
+        "cmp:HomePage"
+      ],
+      "summary": "Client-side validation, fake delay, then enterApp routes to prefs.home."
+    },
+    {
+      "id": "upload",
+      "name": "Attach a file to a task",
+      "trigger": "Drop a file on the task drawer",
+      "steps": [
+        "cmp:Drawer",
+        "ipc:Upload",
+        "state:Store",
+        "ipc:LocalStorage",
+        "cmp:FilesView"
+      ],
+      "summary": "Simulated progress writes a file record, attaches it and lists it."
+    }
+  ],
+  "notes": [
+    {
+      "title": "actions.js is 2,293 lines and owns everything",
+      "body": "182 A handlers, 36 IN, 7 KEY plus forms, auth, settings and prototype controls in one file: 26% of app JS. Domain splits (tasks, projects, account) are absent.",
+      "severity": "alert",
+      "path": "src/actions/actions.js"
+    },
+    {
+      "title": "Every keystroke rebuilds the whole app",
+      "body": "render() replaces #app.innerHTML and #layer.innerHTML; IN.palQ, IN.viewQ, IN.searchQ and IN.draft call it on input. Focus, caret and scroll are restored by hand across 176 render() sites.",
+      "severity": "warn",
+      "path": "src/shell/render.js"
+    },
+    {
+      "title": "Task descriptions are stored and injected raw",
+      "body": "actions.js:928 and :937 assign contenteditable innerHTML to t.desc; drawer.js:91 interpolates it unescaped. Pasted markup runs on the next render. Everything else goes through esc().",
+      "severity": "warn",
+      "path": "src/actions/actions.js"
+    },
+    {
+      "title": "Global store is the only coupling point",
+      "body": "45 of the 52 JS files import core/store.js; S.ui carries 43 flags and any module may mutate them. No selectors, no events, one debounced JSON blob in localStorage.",
+      "severity": "info",
+      "path": "src/core/store.js"
+    },
+    {
+      "title": "No tests; CI only lints, formats and builds",
+      "body": ".github/workflows/ci.yml runs npm ci, lint, format:check and vite build. Zero test files, no test script, no assertions anywhere in the repo.",
+      "severity": "warn",
+      "path": ".github/workflows/ci.yml"
+    },
+    {
+      "title": "Saved views keep filters, not sort or grouping",
+      "body": "saveViewSubmit copies viewOf(key).filters only; sort, group and hidden columns reset. The view then renders as a plain list or board tab.",
+      "severity": "info",
+      "path": "src/actions/actions.js"
+    }
+  ]
+}

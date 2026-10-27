@@ -1,0 +1,730 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Gr8r Studio",
+    "slug": "local__gr8r-studio",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "actions",
+    "name": "Actions & input",
+    "entryLayout": "src/actions/actions.js",
+    "root": "src/actions",
+    "summary": "Event wiring, 182 action handlers, drag & drop, keyboard, mutation pipeline",
+    "externalModules": [
+      "shell",
+      "overlays",
+      "core",
+      "ui",
+      "pages",
+      "data"
+    ]
+  },
+  "stats": {
+    "nodes": 25,
+    "edges": 58,
+    "components": 7,
+    "stateFiles": 0,
+    "commands": 6,
+    "ipcCalls": 2,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Module entry"
+    },
+    {
+      "id": "components",
+      "label": "Handlers"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "Boundaries"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Actions",
+      "label": "actions.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "action-table",
+        "god-file"
+      ],
+      "summary": "182 handlers: A (click), IN (input), KEY, DBL, BLUR registries."
+    },
+    {
+      "id": "cmp:Events",
+      "label": "events.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/events.js",
+      "loc": 97,
+      "tags": [
+        "delegation"
+      ]
+    },
+    {
+      "id": "cmp:Keyboard",
+      "label": "keyboard.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/keyboard.js",
+      "loc": 228,
+      "tags": [
+        "keymap"
+      ]
+    },
+    {
+      "id": "cmp:DragDrop",
+      "label": "drag-drop.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/drag-drop.js",
+      "loc": 269,
+      "tags": [
+        "drag"
+      ]
+    },
+    {
+      "id": "cmp:TeamActions",
+      "label": "teams.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/teams.js",
+      "loc": 124
+    },
+    {
+      "id": "cmp:SubtaskActions",
+      "label": "subtasks.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/subtasks.js",
+      "loc": 80
+    },
+    {
+      "id": "cmp:ArchiveActions",
+      "label": "archive.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/actions/archive.js",
+      "loc": 31
+    },
+    {
+      "id": "fn:TaskMutations",
+      "label": "task mutations",
+      "kind": "function",
+      "group": "components",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "summary": "createTask, applyPatch, updateTask, deleteTasks, recurrence, activity log."
+    },
+    {
+      "id": "cmd:SubmitTask",
+      "label": "Submit task form",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "⌘↵"
+      ]
+    },
+    {
+      "id": "cmd:UpdateField",
+      "label": "Pick a field value",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "popover"
+      ]
+    },
+    {
+      "id": "cmd:ToggleDone",
+      "label": "Toggle done",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293
+    },
+    {
+      "id": "cmd:DeleteTask",
+      "label": "Delete task",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "context menu"
+      ]
+    },
+    {
+      "id": "cmd:NewProject",
+      "label": "Create project",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "P"
+      ]
+    },
+    {
+      "id": "cmd:Login",
+      "label": "Sign in",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/actions/actions.js",
+      "loc": 2293,
+      "tags": [
+        "form submit"
+      ]
+    },
+    {
+      "id": "ipc:Clipboard",
+      "label": "navigator.clipboard",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/actions/actions.js",
+      "loc": 2293
+    },
+    {
+      "id": "ipc:Upload",
+      "label": "handleFiles()",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "src/actions/actions.js",
+      "loc": 2293
+    },
+    {
+      "id": "ext:Store",
+      "label": "core/store.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/core/store.js",
+      "loc": 141
+    },
+    {
+      "id": "ext:Render",
+      "label": "shell/render.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/shell/render.js",
+      "loc": 230
+    },
+    {
+      "id": "ext:Modals",
+      "label": "overlays/modals.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/overlays/modals.js",
+      "loc": 290
+    },
+    {
+      "id": "ext:Popovers",
+      "label": "overlays/popovers.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/overlays/popovers.js",
+      "loc": 398
+    },
+    {
+      "id": "ext:ViewEngine",
+      "label": "shell/view-engine.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/shell/view-engine.js",
+      "loc": 190
+    },
+    {
+      "id": "ext:Toast",
+      "label": "ui/toast.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/ui/toast.js",
+      "loc": 38
+    },
+    {
+      "id": "ext:Helpers",
+      "label": "ui/helpers.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/ui/helpers.js",
+      "loc": 112
+    },
+    {
+      "id": "ext:Settings",
+      "label": "pages/settings.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/pages/settings.js",
+      "loc": 435
+    },
+    {
+      "id": "ext:Seed",
+      "label": "data/seed.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/data/seed.js",
+      "loc": 544
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Events",
+      "to": "cmp:Actions",
+      "kind": "dispatches",
+      "label": "A[el.dataset.a]"
+    },
+    {
+      "from": "cmp:Events",
+      "to": "ext:Store",
+      "kind": "reads",
+      "label": "S.ui.suppressClick / pop"
+    },
+    {
+      "from": "cmp:Events",
+      "to": "ext:Render",
+      "kind": "calls",
+      "label": "render() after closing a pop"
+    },
+    {
+      "from": "cmp:Keyboard",
+      "to": "cmp:Actions",
+      "kind": "commands",
+      "label": "A.openPalette / openTask / palRun"
+    },
+    {
+      "from": "cmp:Keyboard",
+      "to": "ext:Modals",
+      "kind": "calls",
+      "label": "closeModal on Esc"
+    },
+    {
+      "from": "cmp:Keyboard",
+      "to": "ext:Popovers",
+      "kind": "calls",
+      "label": "closePop on Esc"
+    },
+    {
+      "from": "cmp:Keyboard",
+      "to": "ext:Render",
+      "kind": "calls",
+      "label": "render()"
+    },
+    {
+      "from": "cmp:Keyboard",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "S.ui.palette.hl"
+    },
+    {
+      "from": "cmp:DragDrop",
+      "to": "fn:TaskMutations",
+      "kind": "calls",
+      "label": "applyPatch / updateTask"
+    },
+    {
+      "from": "cmp:DragDrop",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "order, status, projOrder"
+    },
+    {
+      "from": "cmp:DragDrop",
+      "to": "ext:Render",
+      "kind": "calls",
+      "label": "fxSet / render"
+    },
+    {
+      "from": "cmp:DragDrop",
+      "to": "ipc:Upload",
+      "kind": "ipc",
+      "label": "files dropped"
+    },
+    {
+      "from": "cmp:DragDrop",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "moved / rescheduled"
+    },
+    {
+      "from": "cmp:TeamActions",
+      "to": "cmp:Actions",
+      "kind": "calls",
+      "label": "openModal / confirmDlg / snapshot"
+    },
+    {
+      "from": "cmp:TeamActions",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "D().teams, member.team"
+    },
+    {
+      "from": "cmp:TeamActions",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SubtaskActions",
+      "to": "cmp:Actions",
+      "kind": "calls",
+      "label": "createTask"
+    },
+    {
+      "from": "cmp:SubtaskActions",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "t.subtasks"
+    },
+    {
+      "from": "cmp:SubtaskActions",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ArchiveActions",
+      "to": "cmp:Actions",
+      "kind": "calls",
+      "label": "deleteTasks / confirmDlg"
+    },
+    {
+      "from": "cmp:ArchiveActions",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "archived flags"
+    },
+    {
+      "from": "cmp:ArchiveActions",
+      "to": "ext:Toast",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:SubmitTask",
+      "to": "fn:TaskMutations",
+      "kind": "commands",
+      "label": "createTask / applyPatch"
+    },
+    {
+      "from": "cmd:SubmitTask",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "S.ui.form → D().tasks"
+    },
+    {
+      "from": "cmd:SubmitTask",
+      "to": "ext:Modals",
+      "kind": "calls",
+      "label": "close modal, refocus"
+    },
+    {
+      "from": "cmd:SubmitTask",
+      "to": "ext:Toast",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:UpdateField",
+      "to": "fn:TaskMutations",
+      "kind": "commands",
+      "label": "updateTask → applyPatch"
+    },
+    {
+      "from": "cmd:UpdateField",
+      "to": "ext:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmd:ToggleDone",
+      "to": "fn:TaskMutations",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ToggleDone",
+      "to": "ext:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmd:ToggleDone",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "Undo"
+    },
+    {
+      "from": "cmd:DeleteTask",
+      "to": "fn:TaskMutations",
+      "kind": "commands",
+      "label": "deleteTasks"
+    },
+    {
+      "from": "cmd:DeleteTask",
+      "to": "ext:Modals",
+      "kind": "calls",
+      "label": "confirmDlg"
+    },
+    {
+      "from": "cmd:DeleteTask",
+      "to": "ext:Toast",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:NewProject",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "createProject"
+    },
+    {
+      "from": "cmd:NewProject",
+      "to": "ext:Modals",
+      "kind": "calls",
+      "label": "openModal"
+    },
+    {
+      "from": "cmd:Login",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "S.ui.auth / errors"
+    },
+    {
+      "from": "cmd:Login",
+      "to": "ext:Render",
+      "kind": "calls",
+      "label": "enterApp → go()"
+    },
+    {
+      "from": "cmd:Login",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "Signed in as…"
+    },
+    {
+      "from": "fn:TaskMutations",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "tasks, activity, comments"
+    },
+    {
+      "from": "fn:TaskMutations",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "recurrence message"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ipc:Clipboard",
+      "kind": "ipc",
+      "label": "copy()"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ipc:Upload",
+      "kind": "ipc",
+      "label": "IN.uploadFiles"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:ViewEngine",
+      "kind": "reads",
+      "label": "viewOf / S.views"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Modals",
+      "kind": "calls",
+      "label": "openModal / closeModal"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Popovers",
+      "kind": "calls",
+      "label": "openPop / closePop / tgt"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Helpers",
+      "kind": "calls",
+      "label": "fileType / fsize"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Settings",
+      "kind": "calls",
+      "label": "strengthMeter"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Seed",
+      "kind": "calls",
+      "label": "seed() on demo reset"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "toast / mutate"
+    },
+    {
+      "from": "ipc:Clipboard",
+      "to": "ext:Toast",
+      "kind": "calls",
+      "label": "fallback message"
+    },
+    {
+      "from": "ipc:Upload",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "D().files"
+    },
+    {
+      "from": "ipc:Upload",
+      "to": "ext:Toast",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:Upload",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "ext:Popovers",
+      "to": "cmd:UpdateField",
+      "kind": "dispatches",
+      "label": "data-a=popPick"
+    },
+    {
+      "from": "ext:Modals",
+      "to": "cmd:SubmitTask",
+      "kind": "dispatches",
+      "label": "data-submit / ⌘↵"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-card",
+      "name": "Open a task from a card",
+      "trigger": "Task card click",
+      "steps": [
+        "cmp:Events",
+        "cmp:Actions",
+        "ext:Store",
+        "ext:Render"
+      ],
+      "summary": "Delegated click sets S.ui.drawer; renderLayer draws the drawer."
+    },
+    {
+      "id": "submit-task",
+      "name": "Create a task from the modal",
+      "trigger": "Task modal submit (⌘↵)",
+      "steps": [
+        "cmd:SubmitTask",
+        "fn:TaskMutations",
+        "ext:Store",
+        "ext:Toast",
+        "ext:Render"
+      ],
+      "summary": "Title validated, createTask logs activity, save() persists, toast offers Open."
+    },
+    {
+      "id": "drag-card",
+      "name": "Drag a card to Done",
+      "trigger": "Drop on a board column",
+      "steps": [
+        "cmp:DragDrop",
+        "fn:TaskMutations",
+        "ext:Store",
+        "ext:Toast",
+        "ext:Render"
+      ],
+      "summary": "Fractional order and status are patched; moved toast then redraw."
+    },
+    {
+      "id": "complete",
+      "name": "Complete a task with undo",
+      "trigger": "Check button or context menu",
+      "steps": [
+        "cmd:ToggleDone",
+        "fn:TaskMutations",
+        "ext:Store",
+        "ext:Toast",
+        "ext:Render"
+      ],
+      "summary": "Status flips, prevStatus is kept, toast Undo calls updateTask back."
+    },
+    {
+      "id": "delete",
+      "name": "Delete a task",
+      "trigger": "Delete in the context menu",
+      "steps": [
+        "cmd:DeleteTask",
+        "ext:Modals",
+        "fn:TaskMutations",
+        "ext:Store",
+        "ext:Toast"
+      ],
+      "summary": "Confirm, then deleteTasks purges deps and comments; Undo restores a snapshot."
+    },
+    {
+      "id": "sign-in",
+      "name": "Sign in",
+      "trigger": "Sign in button",
+      "steps": [
+        "cmd:Login",
+        "ext:Store",
+        "ext:Render",
+        "ext:Toast"
+      ],
+      "summary": "Email/password checks, fake 750 ms delay, then enterApp greets and routes."
+    }
+  ],
+  "notes": [
+    {
+      "title": "2,293 lines, 182 handlers, one file",
+      "body": "A/IN/KEY/DBL/BLUR live in actions.js and cover tasks, projects, sharing, members, notifications, settings, auth and prototype tools. 422 data-a sites reference it.",
+      "severity": "alert",
+      "path": "src/actions/actions.js"
+    },
+    {
+      "title": "The action table has no schema",
+      "body": "events.js does const fn = A[el.dataset.a]; if (fn) fn(el, e). A renamed or misspelled data-a attribute silently does nothing: no warning, no type, no test.",
+      "severity": "warn",
+      "path": "src/actions/events.js"
+    },
+    {
+      "title": "mutate() is the one choke point",
+      "body": "ui/toast.js mutate(fn) guards S.ui.offline, runs the write, debounces save() and calls render(). Worth copying: most writes cannot forget to persist.",
+      "severity": "info",
+      "path": "src/ui/toast.js"
+    },
+    {
+      "title": "Form submits read the DOM back into state",
+      "body": "submitTask reads $('#f-title').value and $('#f-desc').value, then patches S.ui.form. Values from unmounted fields fall back to state, so the source of truth alternates.",
+      "severity": "info",
+      "path": "src/actions/actions.js"
+    }
+  ]
+}

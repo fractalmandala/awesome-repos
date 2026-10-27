@@ -1,0 +1,448 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Gr8r Studio",
+    "slug": "local__gr8r-studio",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "shell",
+    "name": "Shell & render loop",
+    "entryLayout": "src/shell/render.js",
+    "root": "src/shell",
+    "summary": "Render loop, in-memory router, root layout, focus restoration, view engine",
+    "externalModules": [
+      "core",
+      "pages",
+      "views",
+      "overlays",
+      "ui",
+      "features"
+    ]
+  },
+  "stats": {
+    "nodes": 16,
+    "edges": 27,
+    "components": 4,
+    "stateFiles": 0,
+    "commands": 3,
+    "ipcCalls": 0,
+    "flows": 4
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Module entry"
+    },
+    {
+      "id": "components",
+      "label": "Render & Layout"
+    },
+    {
+      "id": "commands",
+      "label": "Navigation"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Render",
+      "label": "render.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "src/shell/render.js",
+      "loc": 230,
+      "tags": [
+        "router",
+        "render-loop"
+      ],
+      "summary": "render() rebuilds #app and #layer; go() routes; focus and scroll restored."
+    },
+    {
+      "id": "cmp:Layout",
+      "label": "layout.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/layout.js",
+      "loc": 211,
+      "summary": "renderShell: sidebar, topbar, crumbs, bottom nav and the route switch."
+    },
+    {
+      "id": "cmp:ViewEngine",
+      "label": "view-engine.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/view-engine.js",
+      "loc": 190,
+      "summary": "Filter, sort and group engine plus the shared view toolbar and chips."
+    },
+    {
+      "id": "cmp:Skeletons",
+      "label": "skeletons.js",
+      "kind": "component",
+      "group": "components",
+      "path": "src/shell/skeletons.js",
+      "loc": 32
+    },
+    {
+      "id": "cmd:Navigate",
+      "label": "goto(route)",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.js",
+      "loc": 230,
+      "tags": [
+        "sidebar",
+        "palette"
+      ],
+      "summary": "go(route, params) clears surfaces, pushes history, re-renders, resets scroll."
+    },
+    {
+      "id": "cmd:Back",
+      "label": "go back",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.js",
+      "loc": 230
+    },
+    {
+      "id": "cmd:SwitchTab",
+      "label": "Project tab",
+      "kind": "command",
+      "group": "commands",
+      "path": "src/shell/render.js",
+      "loc": 230,
+      "tags": [
+        "tab"
+      ]
+    },
+    {
+      "id": "ext:Store",
+      "label": "core/store.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/core/store.js",
+      "loc": 141,
+      "summary": "S.ui.route, params, history and prefs are the router's only state."
+    },
+    {
+      "id": "ext:Pages",
+      "label": "src/pages",
+      "kind": "external",
+      "group": "external",
+      "path": "src/pages",
+      "loc": 1689
+    },
+    {
+      "id": "ext:Views",
+      "label": "src/views",
+      "kind": "external",
+      "group": "external",
+      "path": "src/views",
+      "loc": 557
+    },
+    {
+      "id": "ext:Overlays",
+      "label": "src/overlays",
+      "kind": "external",
+      "group": "external",
+      "path": "src/overlays",
+      "loc": 1159,
+      "summary": "renderLayer() output: drawer, modals, palette, popovers, context menu."
+    },
+    {
+      "id": "ext:Select",
+      "label": "ui/select.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/ui/select.js",
+      "loc": 129
+    },
+    {
+      "id": "ext:Theme",
+      "label": "core/theme.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/core/theme.js",
+      "loc": 22
+    },
+    {
+      "id": "ext:Helpers",
+      "label": "ui/helpers.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/ui/helpers.js",
+      "loc": 112
+    },
+    {
+      "id": "ext:Constants",
+      "label": "core/constants.js",
+      "kind": "external",
+      "group": "external",
+      "path": "src/core/constants.js",
+      "loc": 70
+    },
+    {
+      "id": "ext:Features",
+      "label": "src/features",
+      "kind": "external",
+      "group": "external",
+      "path": "src/features",
+      "loc": 118
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmd:Navigate",
+      "to": "cmp:Render",
+      "kind": "commands",
+      "label": "go()"
+    },
+    {
+      "from": "cmd:Navigate",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "route, params, history"
+    },
+    {
+      "from": "cmd:Back",
+      "to": "cmd:Navigate",
+      "kind": "commands",
+      "label": "go(..., {back:true})"
+    },
+    {
+      "from": "cmd:SwitchTab",
+      "to": "cmd:Navigate",
+      "kind": "commands",
+      "label": "go(route, {tab:true})"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "cmp:Layout",
+      "kind": "renders",
+      "label": "renderShell()"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Pages",
+      "kind": "renders",
+      "label": "renderAuth() / PTABS"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Overlays",
+      "kind": "renders",
+      "label": "renderLayer()"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Store",
+      "kind": "writes",
+      "label": "fx flags, modal openers"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Select",
+      "kind": "calls",
+      "label": "enhanceSelects"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Theme",
+      "kind": "calls",
+      "label": "applyPrefs()"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "ext:Views",
+      "kind": "calls",
+      "label": "tlAfter()"
+    },
+    {
+      "from": "cmp:Render",
+      "to": "cmp:Skeletons",
+      "kind": "renders",
+      "label": "while S.ui.loading"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "ext:Pages",
+      "kind": "renders",
+      "label": "21-entry route table"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "ext:Views",
+      "kind": "renders",
+      "label": "calendar / timeline routes"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "ext:Features",
+      "kind": "renders",
+      "label": "archive route"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "ext:Store",
+      "kind": "reads",
+      "label": "unread counts, prefs"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "ext:Helpers",
+      "kind": "calls",
+      "label": "av()"
+    },
+    {
+      "from": "cmp:Layout",
+      "to": "cmp:Skeletons",
+      "kind": "renders",
+      "label": "u.loading"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "ext:Store",
+      "kind": "reads",
+      "label": "D(), S.views, members"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "ext:Helpers",
+      "kind": "calls",
+      "label": "av / prIcon / stIcon"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "ext:Constants",
+      "kind": "reads",
+      "label": "STATUSES / PRIOS / LABELS"
+    },
+    {
+      "from": "cmp:ViewEngine",
+      "to": "ext:Overlays",
+      "kind": "dispatches",
+      "label": "data-a=pop for filter/sort"
+    },
+    {
+      "from": "cmp:Skeletons",
+      "to": "ext:Store",
+      "kind": "reads",
+      "label": "route, params.tab"
+    },
+    {
+      "from": "ext:Pages",
+      "to": "cmd:Navigate",
+      "kind": "dispatches",
+      "label": "data-a=go"
+    },
+    {
+      "from": "ext:Overlays",
+      "to": "cmd:Navigate",
+      "kind": "dispatches",
+      "label": "go from palette / drawer"
+    },
+    {
+      "from": "ext:Overlays",
+      "to": "ext:Pages",
+      "kind": "navigates",
+      "label": "drawer project pill"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-project",
+      "name": "Open a project from the sidebar",
+      "trigger": "Sidebar project item",
+      "steps": [
+        "cmd:Navigate",
+        "ext:Store",
+        "cmp:Render",
+        "cmp:Layout",
+        "ext:Pages",
+        "ext:Views"
+      ],
+      "summary": "go('project') stores the params, clears surfaces, then renders header and board."
+    },
+    {
+      "id": "switch-tab",
+      "name": "Switch a project tab",
+      "trigger": "Board / List / Table tab",
+      "steps": [
+        "cmd:SwitchTab",
+        "cmd:Navigate",
+        "cmp:Render",
+        "cmp:Layout",
+        "ext:Pages"
+      ],
+      "summary": "Tab clicks reuse go() with {tab:true}, which only animates the tab panel."
+    },
+    {
+      "id": "filter-view",
+      "name": "Filter and group a task view",
+      "trigger": "Filter / Sort / Group buttons",
+      "steps": [
+        "cmp:ViewEngine",
+        "ext:Overlays",
+        "ext:Store",
+        "cmp:Render",
+        "cmp:Layout"
+      ],
+      "summary": "Toolbar popover changes S.views[key]; the re-render applies filter and group."
+    },
+    {
+      "id": "skeleton",
+      "name": "Replay the page skeleton",
+      "trigger": "Replay page skeleton (design system)",
+      "steps": [
+        "ext:Store",
+        "cmp:Render",
+        "cmp:Skeletons",
+        "cmp:Layout"
+      ],
+      "summary": "A.reloadPage sets S.ui.loading for 1.4 s; the route branch renders a skeleton."
+    }
+  ],
+  "notes": [
+    {
+      "title": "No URL sync; browser Back leaves the app",
+      "body": "location.hash is read once at boot (main.js:70); go() only writes S.ui.route and a private history array. No pushState, no hashchange, no popstate, so refresh returns to prefs.home.",
+      "severity": "warn",
+      "path": "src/shell/render.js"
+    },
+    {
+      "title": "Focus, caret and scroll are restored by hand",
+      "body": "render() records document.activeElement as a stable CSS key (FKEYS), selectionStart/End and every [data-keep] scrollTop before replacing innerHTML, then puts them back.",
+      "severity": "info",
+      "path": "src/shell/render.js"
+    },
+    {
+      "title": "Every route is imported eagerly",
+      "body": "layout.js statically imports every page, view and feature module for its 21-entry route table, so Vite emits one 358 kB JS chunk. No lazy() anywhere.",
+      "severity": "info",
+      "path": "src/shell/layout.js"
+    },
+    {
+      "title": "A circular import chain depends on hoisting",
+      "body": "render.js → layout.js → pages/settings.js → overlays/modals.js → render.js, with drawer/palette loops too. It works only because every use sits inside a function called later.",
+      "severity": "warn",
+      "path": "src/shell/render.js"
+    },
+    {
+      "title": "View state is created lazily per key",
+      "body": "viewOf(key) seeds S.views[key] with filters, sort, group, hidden columns and width, then persists it. Keys are 'tasks', 'mytasks', 'p:<project>' and 'sv:<savedView>'.",
+      "severity": "info",
+      "path": "src/shell/view-engine.js"
+    }
+  ]
+}
