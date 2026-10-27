@@ -1,0 +1,595 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "geckobox",
+    "slug": "migasrias2__geckobox",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "geckobox (openspaces)",
+    "entryLayout": "src/cli.ts",
+    "root": ".",
+    "summary": "CLI + local web UI to run coding agents on any computer, with no relay.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 30,
+    "edges": 34,
+    "components": 14,
+    "stateFiles": 3,
+    "commands": 5,
+    "ipcCalls": 5,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Cli",
+      "kind": "layout",
+      "group": "layout",
+      "label": "cli.ts",
+      "path": "src/cli.ts",
+      "loc": 162
+    },
+    {
+      "id": "cmp:UiEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "ui/src/main.tsx",
+      "path": "ui/src/main.tsx"
+    },
+    {
+      "id": "cmp:AppTSX",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.tsx",
+      "path": "ui/src/App.tsx",
+      "summary": "Hash-token auth, polled threads/computers/agents, view switch, 'n' keybinding."
+    },
+    {
+      "id": "ipc:ServerModule",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "server/server.ts",
+      "path": "src/server/server.ts",
+      "loc": 96
+    },
+    {
+      "id": "cmp:Routes",
+      "kind": "component",
+      "group": "components",
+      "label": "server/routes.ts",
+      "path": "src/server/routes.ts",
+      "loc": 243,
+      "summary": " validated /api routes: computers, threads, fanout, view, screen."
+    },
+    {
+      "id": "cmp:ThreadModule",
+      "kind": "component",
+      "group": "components",
+      "label": "thread.ts",
+      "path": "src/thread.ts",
+      "loc": 234,
+      "summary": "Thread lifecycle: queue turns, update from events, interrupt, close."
+    },
+    {
+      "id": "cmp:TurnModule",
+      "kind": "component",
+      "group": "components",
+      "label": "turn.ts",
+      "path": "src/turn.ts",
+      "loc": 131,
+      "summary": "Pure turn script builder + event folding; pid-file lifecycle per turn."
+    },
+    {
+      "id": "cmp:AgentAdapters",
+      "kind": "component",
+      "group": "components",
+      "label": "agents/",
+      "path": "src/agents",
+      "summary": "Adapters: argv + JSONL event parsing per agent."
+    },
+    {
+      "id": "cmp:CliCommands",
+      "kind": "component",
+      "group": "components",
+      "label": "cli/commands.ts",
+      "path": "src/cli/commands.ts",
+      "loc": 171
+    },
+    {
+      "id": "cmp:SandboxModule",
+      "kind": "component",
+      "group": "components",
+      "label": "sandbox.ts",
+      "path": "src/sandbox.ts",
+      "loc": 156,
+      "summary": "Create/manage Apple-container, Docker or Podman Linux sandboxes."
+    },
+    {
+      "id": "cmp:FanoutModule",
+      "kind": "component",
+      "group": "components",
+      "label": "fanout.ts",
+      "path": "src/fanout.ts",
+      "loc": 34
+    },
+    {
+      "id": "cmp:ViewModule",
+      "kind": "component",
+      "group": "components",
+      "label": "view.ts",
+      "path": "src/view.ts",
+      "loc": 112,
+      "summary": "Desktop takeover plan: SSH tunnel to VNC 5900, local port, Cua viewer."
+    },
+    {
+      "id": "cmp:ScreenCapture",
+      "kind": "component",
+      "group": "components",
+      "label": "screen.ts",
+      "path": "src/screen.ts",
+      "loc": 141
+    },
+    {
+      "id": "cmp:UiComponents",
+      "kind": "component",
+      "group": "components",
+      "label": "ui components",
+      "path": "ui/src/components"
+    },
+    {
+      "id": "cmp:TranscribeMod",
+      "kind": "component",
+      "group": "components",
+      "label": "server/transcribe.ts",
+      "path": "src/server/transcribe.ts",
+      "loc": 72
+    },
+    {
+      "id": "state:Store",
+      "kind": "state",
+      "group": "state",
+      "label": "store.ts",
+      "path": "src/store.ts",
+      "loc": 96,
+      "summary": "Thread state + append-only event log on disk."
+    },
+    {
+      "id": "state:ScreenHub",
+      "kind": "state",
+      "group": "state",
+      "label": "screenHub.ts",
+      "path": "src/screenHub.ts",
+      "loc": 163,
+      "summary": "Per-computer throttled screen-frame hub with idle stop and retry."
+    },
+    {
+      "id": "state:Keychain",
+      "kind": "state",
+      "group": "state",
+      "label": "secrets.ts",
+      "path": "src/secrets.ts",
+      "loc": 35
+    },
+    {
+      "id": "cmd:StartCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "openspaces start",
+      "path": "src/cli.ts",
+      "summary": "Start a thread in background.",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:RunCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "openspaces run",
+      "path": "src/cli/commands.ts",
+      "summary": "Same job on several computers at once (--on a,b,c).",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:SandboxCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "openspaces sandbox",
+      "path": "src/cli/sandbox.ts",
+      "summary": "create/ls/rm/stop/start isolated local sandbox.",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:ViewCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "openspaces view",
+      "path": "src/view.ts",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:UiCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "openspaces ui",
+      "path": "src/cli/ui.ts",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "ipc:Transport",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "transport.ts",
+      "path": "src/transport.ts",
+      "loc": 84,
+      "summary": " sh -s runners over local/ssh/container/cua; secrets via stdin."
+    },
+    {
+      "id": "ipc:RestApi",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "lib/api.ts",
+      "path": "ui/src/lib/api.ts",
+      "summary": "UI fetch client to /api with token from the hash link."
+    },
+    {
+      "id": "ipc:RaylibScreen",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "/api/screen",
+      "path": "src/server/routes.ts"
+    },
+    {
+      "id": "ipc:VncTunnel",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "ssh VNC tunnel",
+      "path": "src/view.ts"
+    },
+    {
+      "id": "shared:ShellHelpers",
+      "kind": "shared",
+      "group": "shared",
+      "label": "shell.ts",
+      "path": "src/shell.ts",
+      "loc": 28
+    },
+    {
+      "id": "ext:ClaudeCLI",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "src/agents/index.ts"
+    },
+    {
+      "id": "ext:Containers",
+      "kind": "external",
+      "group": "external",
+      "label": "container + ssh runtimes",
+      "path": "src/computers.ts",
+      "loc": 149
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Cli",
+      "to": "cmd:StartCmd",
+      "kind": "dispatches"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "cmp:CliCommands",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "cmd:SandboxCmd",
+      "kind": "dispatches"
+    },
+    {
+      "from": "cmd:ViewCmd",
+      "to": "cmp:ViewModule",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:UiCmd",
+      "to": "ipc:ServerModule",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:RunCmd",
+      "to": "cmp:FanoutModule",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:FanoutModule",
+      "to": "cmp:ThreadModule",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ThreadModule",
+      "to": "state:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ThreadModule",
+      "to": "cmp:TurnModule",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ThreadModule",
+      "to": "cmp:AgentAdapters",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:TurnModule",
+      "to": "ipc:Transport",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:Transport",
+      "to": "ext:Containers",
+      "kind": "calls",
+      "label": "sh runner"
+    },
+    {
+      "from": "ipc:Transport",
+      "to": "ext:ClaudeCLI",
+      "kind": "calls",
+      "label": "in script stdin"
+    },
+    {
+      "from": "cmp:TurnModule",
+      "to": "shared:ShellHelpers",
+      "kind": "imports"
+    },
+    {
+      "from": "ipc:Transport",
+      "to": "shared:ShellHelpers",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:SandboxModule",
+      "to": "ext:Containers",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ViewModule",
+      "to": "ipc:VncTunnel",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Routes",
+      "to": "cmp:ThreadModule",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Routes",
+      "to": "state:ScreenHub",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Routes",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Routes",
+      "to": "cmp:SandboxModule",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:ServerModule",
+      "to": "cmp:Routes",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:UiEntry",
+      "to": "cmp:AppTSX",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppTSX",
+      "to": "cmp:UiComponents",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppTSX",
+      "to": "ipc:RestApi",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:RestApi",
+      "to": "cmp:Routes",
+      "kind": "ipc",
+      "label": "fetch /api"
+    },
+    {
+      "from": "cmp:UiComponents",
+      "to": "ipc:RaylibScreen",
+      "kind": "ipc",
+      "label": "LiveScreen polls frames"
+    },
+    {
+      "from": "ipc:RaylibScreen",
+      "to": "state:ScreenHub",
+      "kind": "reads"
+    },
+    {
+      "from": "state:ScreenHub",
+      "to": "cmp:ScreenCapture",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:TranscribeMod",
+      "to": "ext:Containers",
+      "kind": "ipc",
+      "label": "vendor STT query (transcribe)"
+    },
+    {
+      "from": "cmp:ThreadModule",
+      "to": "state:Keychain",
+      "kind": "reads",
+      "label": "resolve agent token"
+    },
+    {
+      "from": "cmp:Routes",
+      "to": "cmp:TranscribeMod",
+      "kind": "calls",
+      "label": "transcribe"
+    },
+    {
+      "from": "cmd:StartCmd",
+      "to": "cmp:ThreadModule",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SandboxCmd",
+      "to": "cmp:FanoutModule",
+      "kind": "navigates"
+    }
+  ],
+  "flows": [
+    {
+      "id": "start-agent-job",
+      "name": "Start an agent job",
+      "trigger": "openspaces start \"prompt\"",
+      "steps": [
+        "cmd:StartCmd",
+        "cmp:ThreadModule",
+        "ipc:Transport",
+        "ext:ClaudeCLI",
+        "state:Store"
+      ],
+      "summary": "Turn script runs on the chosen computer in a detached worker."
+    },
+    {
+      "id": "monitor-jobs",
+      "name": "Watch jobs in the dashboard",
+      "trigger": "dashboard polls every 1.5s",
+      "steps": [
+        "cmp:AppTSX",
+        "ipc:RestApi",
+        "cmp:Routes",
+        "state:Store",
+        "cmp:ThreadModule"
+      ],
+      "summary": "Incremental /api/threads/:id?after= event feed."
+    },
+    {
+      "id": "live-screen",
+      "name": "Watch a live screen",
+      "trigger": "pin a computer's live pane in the UI",
+      "steps": [
+        "cmp:AppTSX",
+        "cmp:UiComponents",
+        "ipc:RaylibScreen",
+        "state:ScreenHub",
+        "cmp:ScreenCapture"
+      ],
+      "summary": "Long-poll frames throttled per computer with idle stop."
+    },
+    {
+      "id": "fan-out",
+      "name": "Fan out one job",
+      "trigger": "openspaces run --on a,b,c",
+      "steps": [
+        "cmd:RunCmd",
+        "cmd:StartCmd",
+        "cmp:ThreadModule",
+        "ipc:Transport"
+      ],
+      "summary": "Run a job on every named computer in parallel."
+    },
+    {
+      "id": "sandbox-workspace",
+      "name": "Create a sandbox",
+      "trigger": "openspaces sandbox create <name>",
+      "steps": [
+        "cmd:SandboxCmd",
+        "cmp:SandboxModule",
+        "ext:Containers"
+      ],
+      "summary": "Apple container/Docker/Podman Linux box with agents installed."
+    },
+    {
+      "id": "desktop-takeover",
+      "name": "Take over a desktop",
+      "trigger": "openspaces view <computer>",
+      "steps": [
+        "cmd:ViewCmd",
+        "cmp:ViewModule",
+        "ipc:VncTunnel"
+      ],
+      "summary": "SSH tunnel to VNC 5900, then open the viewer \u2014 no relay."
+    }
+  ],
+  "notes": [
+    {
+      "title": "tiny, disciplined core",
+      "body": "58 TS files, ~6k LOC total (src 1,693 + server/cli/agents modules + UI; 12 test files); only runtime dep is zod.",
+      "severity": "info",
+      "path": "package.json"
+    },
+    {
+      "title": "secrets stay out of argv",
+      "body": "transport.ts feeds the turn script on stdin for local/ssh/container; only the Cua path must join args (documented trade-off, README Safety).",
+      "severity": "info",
+      "path": "src/transport.ts"
+    },
+    {
+      "title": "detached worker model",
+      "body": "spawnWorker detaches to dist/cli.js __worker with its own worker.log; the Never-generated 60s stuck-turn guard lives in thread.ts.",
+      "severity": "info",
+      "path": "src/worker.ts"
+    },
+    {
+      "title": "no main.tsx polling",
+      "body": "UI state is plain small custom hooks (useThread/usePoll, 900ms incremental events); no state library used.",
+      "severity": "info",
+      "path": "ui/src/lib/useThread.ts"
+    }
+  ]
+}

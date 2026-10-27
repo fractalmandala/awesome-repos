@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 5,
+  "count": 6,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -120,6 +120,32 @@
         "scan-fig-viewer.html",
         "scan-fanta-render.json",
         "scan-fanta-render.html"
+      ]
+    },
+    {
+      "slug": "migasrias2__geckobox",
+      "name": "geckobox",
+      "github": "https://github.com/migasrias2/geckobox",
+      "license": "MIT",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "CLI + local web UI to run coding agents on any computer, with no relay.",
+      "stack": [
+        "typescript",
+        "node",
+        "react",
+        "vite",
+        "zod",
+        "vitest",
+        "ssh",
+        "docker",
+        "vnc"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
       ]
     },
     {
