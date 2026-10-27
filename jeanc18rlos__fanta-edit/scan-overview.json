@@ -1,0 +1,576 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "fanta-edit",
+    "slug": "jeanc18rlos__fanta-edit",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "fanta-edit",
+    "entryLayout": "crates/fanta/src/main.rs",
+    "root": ".",
+    "summary": "Native macOS design editor on a Zed fork: .fig import, FNX-save canvas, agents.",
+    "externalModules": [
+      "fig-viewer",
+      "fanta-render"
+    ]
+  },
+  "stats": {
+    "nodes": 28,
+    "edges": 33,
+    "components": 12,
+    "stateFiles": 4,
+    "commands": 3,
+    "ipcCalls": 5,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared/UI"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:FantaEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "fanta main.rs",
+      "path": "crates/fanta/src/main.rs",
+      "loc": 870,
+      "summary": "App entry: crash handler, workspace bootstrap, cli/onboarding paths."
+    },
+    {
+      "id": "cmp:Workspace",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace",
+      "path": "crates/workspace/src/workspace.rs",
+      "loc": 51036,
+      "summary": "Zed workspace shell: panes, docks, persistence, registered items."
+    },
+    {
+      "id": "cmp:Editor",
+      "kind": "component",
+      "group": "components",
+      "label": "editor",
+      "path": "crates/editor/src/editor.rs",
+      "loc": 154832,
+      "summary": "Inherited Zed text editor; also drives Fanta's code workspace and edit buffers."
+    },
+    {
+      "id": "cmp:Project",
+      "kind": "component",
+      "group": "components",
+      "label": "project",
+      "path": "crates/project/src/project.rs",
+      "loc": 97541,
+      "summary": "Project/worktree store: files, LSP, git store, toolchain, debugger."
+    },
+    {
+      "id": "cmp:AgentUI",
+      "kind": "component",
+      "group": "components",
+      "label": "agent_ui",
+      "path": "crates/agent_ui/src/agent_ui.rs",
+      "loc": 84327,
+      "summary": "Agent panel + ACP threads + context servers, inherited and extended."
+    },
+    {
+      "id": "cmp:FigViewer",
+      "kind": "component",
+      "group": "components",
+      "label": "fig_viewer",
+      "path": "crates/fig_viewer/src/fig_viewer.rs",
+      "loc": 185127,
+      "summary": "THE Fanta canvas: design/properties/motion/prototype panels, generation, export."
+    },
+    {
+      "id": "cmp:EngineDoc",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-doc",
+      "path": "crates/fanta-doc/src",
+      "loc": 35387,
+      "summary": "Scene model for the design engine: FigDocument, pages, items, viewport."
+    },
+    {
+      "id": "cmp:RenderEngine",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-render",
+      "path": "crates/fanta-render/src/lib.rs",
+      "loc": 47455,
+      "summary": "Skia raster backend: one scene walk, headless PNG or Metal live present."
+    },
+    {
+      "id": "cmp:FigInterop",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-fig-interop",
+      "path": "crates/fanta-fig-interop/src/lib.rs",
+      "loc": 29527,
+      "summary": ".fig file import: kiwi decode, fig \u2192 Fanta scene mapping."
+    },
+    {
+      "id": "cmp:Format",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-format",
+      "path": "crates/fanta-format/src",
+      "loc": 34396
+    },
+    {
+      "id": "cmp:Tools",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-tools",
+      "path": "crates/fanta-tools/src",
+      "loc": 23198
+    },
+    {
+      "id": "cmp:Present",
+      "kind": "component",
+      "group": "components",
+      "label": "fanta-present",
+      "path": "crates/fanta-present/src",
+      "loc": 14134
+    },
+    {
+      "id": "shared:DesignSurface",
+      "kind": "shared",
+      "group": "shared",
+      "label": "design_surface",
+      "path": "crates/design_surface/src",
+      "summary": "One provider of design ops shared by built-in agent tools and external MCP."
+    },
+    {
+      "id": "shared:UiKit",
+      "kind": "shared",
+      "group": "shared",
+      "label": "ui",
+      "path": "crates/fanta_ui"
+    },
+    {
+      "id": "state:Doc",
+      "kind": "state",
+      "group": "state",
+      "label": "FigDocument",
+      "path": "crates/fig_viewer/src/document.rs",
+      "loc": 12226,
+      "summary": "Live document model per open project; edits, reveals, dirty FNX tracking."
+    },
+    {
+      "id": "state:FigView",
+      "kind": "state",
+      "group": "state",
+      "label": "FigView",
+      "path": "crates/fig_viewer/src/view.rs",
+      "loc": 23229,
+      "summary": "Canvas view entity: camera, selection, gestures, tool state, overlays."
+    },
+    {
+      "id": "state:Settings",
+      "kind": "state",
+      "group": "state",
+      "label": "SettingsStore",
+      "path": "crates/settings/src/settings_store.rs",
+      "summary": "Global settings tree every panel reads."
+    },
+    {
+      "id": "state:KvDb",
+      "kind": "state",
+      "group": "state",
+      "label": "sqlite persistence",
+      "path": "crates/workspace/src/persistence.rs"
+    },
+    {
+      "id": "cmd:PaletteCmds",
+      "kind": "command",
+      "group": "commands",
+      "label": "command palette",
+      "path": "crates/command_palette/src",
+      "tags": [
+        "cmd+shift+p"
+      ]
+    },
+    {
+      "id": "cmd:ZoomFit",
+      "kind": "command",
+      "group": "commands",
+      "label": "zoom / fit / tools",
+      "path": "crates/fig_viewer/src/view.rs",
+      "tags": [
+        "wheel",
+        "cmd+plus"
+      ]
+    },
+    {
+      "id": "cmd:PlayPrototype",
+      "kind": "command",
+      "group": "commands",
+      "label": "play prototype",
+      "path": "crates/fig_viewer/src/view.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "ipc:LiveMcp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "live MCP server",
+      "path": "crates/fig_viewer/src/live_mcp.rs",
+      "loc": 1506,
+      "summary": "Unix-socket MCP server over design_surface; socket path in fanta_live_mcp.json."
+    },
+    {
+      "id": "ipc:BuiltinAgents",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent surface tools",
+      "path": "crates/fig_viewer/src/agent_surface.rs",
+      "loc": 7640,
+      "summary": "The same design_surface provider consumed by the built-in agent tools."
+    },
+    {
+      "id": "ipc:LspStore",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "LSP/git/processes",
+      "path": "crates/project/src/lsp_store.rs"
+    },
+    {
+      "id": "ipc:RemoteSsh",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "remote/ssh",
+      "path": "crates/remote/src/remote_client.rs"
+    },
+    {
+      "id": "ipc:FnxIO",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "FNX file IO",
+      "path": "crates/fanta-format/src"
+    },
+    {
+      "id": "ext:GPUI",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui",
+      "path": "crates/VENDORED.md"
+    },
+    {
+      "id": "ext:Skia",
+      "kind": "external",
+      "group": "external",
+      "label": "vendored Skia",
+      "path": "vendor"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:FantaEntry",
+      "to": "cmp:Workspace",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:FantaEntry",
+      "to": "state:Settings",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:Editor",
+      "kind": "renders",
+      "label": "pane items"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:FigViewer",
+      "kind": "renders",
+      "label": "fanta.json opens the canvas"
+    },
+    {
+      "from": "cmp:FigViewer",
+      "to": "state:FigView",
+      "kind": "renders",
+      "label": "canvas tab"
+    },
+    {
+      "from": "cmp:FigViewer",
+      "to": "shared:DesignSurface",
+      "kind": "renders",
+      "label": "panels"
+    },
+    {
+      "from": "state:FigView",
+      "to": "state:Doc",
+      "kind": "reads"
+    },
+    {
+      "from": "state:FigView",
+      "to": "state:Doc",
+      "kind": "writes"
+    },
+    {
+      "from": "state:FigView",
+      "to": "cmp:RenderEngine",
+      "kind": "calls",
+      "label": "paint scene"
+    },
+    {
+      "from": "cmp:RenderEngine",
+      "to": "cmp:EngineDoc",
+      "kind": "reads",
+      "label": "Scene+Viewport"
+    },
+    {
+      "from": "cmp:RenderEngine",
+      "to": "ext:Skia",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:EngineDoc",
+      "to": "shared:DesignSurface",
+      "kind": "reads",
+      "label": "DesignOp"
+    },
+    {
+      "from": "cmp:FigInterop",
+      "to": "cmp:EngineDoc",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Format",
+      "to": "cmp:EngineDoc",
+      "kind": "imports",
+      "label": "scene \u2194 FNX"
+    },
+    {
+      "from": "state:Doc",
+      "to": "cmp:Format",
+      "kind": "writes",
+      "label": "debounced FNX saves"
+    },
+    {
+      "from": "ipc:FnxIO",
+      "to": "cmp:Format",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:DesignSurface",
+      "to": "ipc:LiveMcp",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:LiveMcp",
+      "to": "state:Doc",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:BuiltinAgents",
+      "to": "state:Doc",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AgentUI",
+      "to": "ipc:BuiltinAgents",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Project",
+      "to": "ipc:LspStore",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Project",
+      "to": "cmp:FigViewer",
+      "kind": "reads",
+      "label": "project tree"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "ipc:RemoteSsh",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "state:KvDb",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "state:Settings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Project",
+      "to": "state:Settings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Workspace",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:FigViewer",
+      "to": "shared:UiKit",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:FigViewer",
+      "to": "ext:GPUI",
+      "kind": "imports"
+    },
+    {
+      "from": "state:FigView",
+      "to": "state:Settings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:ZoomFit",
+      "to": "state:FigView",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:PlayPrototype",
+      "to": "cmp:FigViewer",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:PaletteCmds",
+      "to": "cmp:Workspace",
+      "kind": "dispatches"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-project",
+      "name": "Open a Fanta project",
+      "trigger": "open folder / fanta.json on the command line",
+      "steps": [
+        "cmp:FantaEntry",
+        "cmp:Workspace",
+        "cmp:FigViewer",
+        "state:Doc",
+        "cmp:RenderEngine"
+      ],
+      "summary": "workspace_hooks observes the worktree and opens the canvas tab; Metal renders."
+    },
+    {
+      "id": "import-fig",
+      "name": "Import a .fig file",
+      "trigger": "open a .fig initially or import into a project",
+      "steps": [
+        "cmp:FigInterop",
+        "cmp:EngineDoc",
+        "cmp:FigViewer",
+        "state:Doc"
+      ],
+      "summary": "Kiwi-decoded fig tree maps into the Fanta scene, then renders editable."
+    },
+    {
+      "id": "canvas-edit",
+      "name": "Edit on canvas",
+      "trigger": "select + keybind or keydown gesture",
+      "steps": [
+        "state:FigView",
+        "state:Doc",
+        "ipc:FnxIO",
+        "cmp:Format"
+      ],
+      "summary": "Canvas ops mutate the doc; debounced FNX saves are diffable."
+    },
+    {
+      "id": "external-agent",
+      "name": "Agent edits the design",
+      "trigger": "client connects to the live MCP socket",
+      "steps": [
+        "ipc:LiveMcp",
+        "shared:DesignSurface",
+        "state:Doc",
+        "state:FigView"
+      ],
+      "summary": "External agents share built-in design_surface ops; canvas live."
+    },
+    {
+      "id": "agent-tools",
+      "name": "Built-in agent designs",
+      "trigger": "task prompts the design tools in the agent panel",
+      "steps": [
+        "cmp:AgentUI",
+        "ipc:BuiltinAgents",
+        "state:Doc",
+        "ipc:FnxIO"
+      ],
+      "summary": "Provider-backed design ops apply and persist identical to human edits."
+    },
+    {
+      "id": "zoom-fit-tools",
+      "name": "Zoom / tools on canvas",
+      "trigger": "cmd+plus / wheel or palette entry",
+      "steps": [
+        "cmd:ZoomFit",
+        "state:FigView",
+        "cmp:RenderEngine"
+      ],
+      "summary": "Camera changes re-render the scene without touching the document."
+    }
+  ],
+  "notes": [
+    {
+      "title": "everything is Zed",
+      "body": "149 crates incl. the full Zed editor stack (gpui, editor 154k, project 97k, agent_ui 84k, vim 47k) kept intact; the 47 crates of Fanta design work sit beside it.",
+      "severity": "info",
+      "path": "crates"
+    },
+    {
+      "title": "canvas state fresnel coal",
+      "body": "crates/fig_viewer/src/view.rs is 23,229 LOC and document.rs 12,226 LOC: camera, tools, gestures, selection and overlays live in one entity; this is the fork's main complexity surface.",
+      "severity": "alert",
+      "path": "crates/fig_viewer/src/view.rs"
+    },
+    {
+      "title": "one design-op funnel",
+      "body": "crates/design_surface: both live_mcp (external agents) and agent_surface (built-in tools) drive the same DesignOp provider; identical semantic edits.",
+      "severity": "info",
+      "path": "crates/design_surface/src"
+    },
+    {
+      "title": "GPL-3.0 fork of Zed",
+      "body": "LICENSE-GPL + Cargo workspace license GPL-3.0 carry Zed's copyleft; LICENSE-APACHE retains Zed's per-file headers. GitHub from README: jeanc18rlos/fanta-edit (9), fanta-ui (3).",
+      "severity": "info",
+      "path": "LICENSE-GPL"
+    }
+  ]
+}

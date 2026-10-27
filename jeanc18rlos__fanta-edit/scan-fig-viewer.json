@@ -1,0 +1,707 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "fanta-edit",
+    "slug": "jeanc18rlos__fanta-edit",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "fig-viewer",
+    "name": "fig_viewer canvas",
+    "entryLayout": "crates/fig_viewer/src/fig_viewer.rs",
+    "root": "crates/fig_viewer",
+    "summary": "The Fanta design canvas: workspace item, panels, agents, generation, export.",
+    "externalModules": [
+      "fanta-render",
+      "fanta-doc",
+      "fanta-fig-interop",
+      "fanta-format",
+      "agent_ui",
+      "editor",
+      "workspace"
+    ]
+  },
+  "stats": {
+    "nodes": 37,
+    "edges": 44,
+    "components": 19,
+    "stateFiles": 4,
+    "commands": 6,
+    "ipcCalls": 4,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:CrateRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "fig_viewer.rs",
+      "path": "crates/fig_viewer/src/fig_viewer.rs",
+      "loc": 204,
+      "summary": "Module layout: init + public entities re-exported to workspace shells."
+    },
+    {
+      "id": "cmp:WorkspaceHooks",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace_hooks.rs",
+      "path": "crates/fig_viewer/src/workspace_hooks.rs",
+      "summary": "Watches project worktrees; opens fanta.json on the canvas for Fanta folders."
+    },
+    {
+      "id": "state:FigViewEntity",
+      "kind": "state",
+      "group": "state",
+      "label": "view.rs (FigView)",
+      "path": "crates/fig_viewer/src/view.rs",
+      "loc": 23229,
+      "summary": "Canvas entity with camera, tools, gestures and 40+ gpui actions."
+    },
+    {
+      "id": "state:DocEntity",
+      "kind": "state",
+      "group": "state",
+      "label": "document.rs (FigDocument)",
+      "path": "crates/fig_viewer/src/document.rs",
+      "loc": 12226,
+      "summary": "Per-project doc model: items, pages, instances, dirty FNX scopes, reveals."
+    },
+    {
+      "id": "state:EditorSession",
+      "kind": "state",
+      "group": "state",
+      "label": "editor_session.rs",
+      "path": "crates/fig_viewer/src/editor_session.rs",
+      "loc": 332
+    },
+    {
+      "id": "cmp:DesignPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "design_panel.rs",
+      "path": "crates/fig_viewer/src/design_panel.rs",
+      "loc": 3874,
+      "summary": "Layers dock: tree, reordering drops, page management, ToggleFocus action."
+    },
+    {
+      "id": "cmp:PropertiesPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "properties_panel.rs",
+      "path": "crates/fig_viewer/src/properties_panel.rs",
+      "loc": 6863,
+      "summary": "Property inspector for the selection; own action set + snapshot/ops modules."
+    },
+    {
+      "id": "cmp:CodeWorkspace",
+      "kind": "component",
+      "group": "components",
+      "label": "code_workspace.rs",
+      "path": "crates/fig_viewer/src/code_workspace.rs",
+      "loc": 4775,
+      "summary": "Code view of the design: editable FNX text surface with live preview."
+    },
+    {
+      "id": "cmp:DrawWand",
+      "kind": "component",
+      "group": "components",
+      "label": "draw_wand.rs",
+      "path": "crates/fig_viewer/src/draw_wand.rs"
+    },
+    {
+      "id": "cmp:GenerationWorkspace",
+      "kind": "component",
+      "group": "components",
+      "label": "generation_workspace.rs",
+      "path": "crates/fig_viewer/src/generation_workspace.rs"
+    },
+    {
+      "id": "cmp:AgentSurface",
+      "kind": "component",
+      "group": "components",
+      "label": "agent_surface.rs",
+      "path": "crates/fig_viewer/src/agent_surface.rs",
+      "loc": 7640,
+      "summary": "design_surface::DesignSurface impl; also exposes it to built-in agent tools."
+    },
+    {
+      "id": "ipc:LiveMcpMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "live_mcp.rs",
+      "path": "crates/fig_viewer/src/live_mcp.rs",
+      "loc": 1506,
+      "summary": "Unix-socket MCP server for external agents over the same design ops."
+    },
+    {
+      "id": "cmp:PrototypePlayer",
+      "kind": "component",
+      "group": "components",
+      "label": "prototype_player.rs",
+      "path": "crates/fig_viewer/src/prototype_player.rs",
+      "loc": 352,
+      "summary": "Runs the authored prototype from its starting frame."
+    },
+    {
+      "id": "cmp:MotionStage",
+      "kind": "component",
+      "group": "components",
+      "label": "motion_stage.rs",
+      "path": "crates/fig_viewer/src/motion_stage.rs",
+      "loc": 1370
+    },
+    {
+      "id": "cmp:CommentsPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "comments_panel.rs",
+      "path": "crates/fig_viewer/src/comments_panel.rs"
+    },
+    {
+      "id": "cmp:VariablesWorkspace",
+      "kind": "component",
+      "group": "components",
+      "label": "variables_workspace.rs",
+      "path": "crates/fig_viewer/src/variables_workspace.rs"
+    },
+    {
+      "id": "cmp:Timeline",
+      "kind": "component",
+      "group": "components",
+      "label": "timeline.rs",
+      "path": "crates/fig_viewer/src/timeline.rs"
+    },
+    {
+      "id": "cmp:ExportMod",
+      "kind": "component",
+      "group": "components",
+      "label": "export.rs",
+      "path": "crates/fig_viewer/src/export.rs"
+    },
+    {
+      "id": "cmp:ClipboardMod",
+      "kind": "component",
+      "group": "components",
+      "label": "clipboard.rs",
+      "path": "crates/fig_viewer/src/clipboard.rs"
+    },
+    {
+      "id": "cmp:AnnotationsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "annotations.rs",
+      "path": "crates/fig_viewer/src/annotations.rs"
+    },
+    {
+      "id": "cmp:DevHistory",
+      "kind": "component",
+      "group": "components",
+      "label": "dev_history.rs",
+      "path": "crates/fig_viewer/src/dev_history.rs"
+    },
+    {
+      "id": "cmp:ToolsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "tools.rs",
+      "path": "crates/fig_viewer/src/tools.rs"
+    },
+    {
+      "id": "cmp:GpuiAdapters",
+      "kind": "component",
+      "group": "components",
+      "label": "gpui_adapters/",
+      "path": "crates/fig_viewer/src/gpui_adapters"
+    },
+    {
+      "id": "state:Registration",
+      "kind": "state",
+      "group": "state",
+      "label": "design_surface registry",
+      "path": "crates/fig_viewer/src/agent_surface.rs"
+    },
+    {
+      "id": "cmd:NewDesign",
+      "kind": "command",
+      "group": "commands",
+      "label": "New Design",
+      "path": "crates/fig_viewer/src/new_design.rs",
+      "summary": "workspace action creating a fresh project folder and canvas.",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "cmd:ZoomShapes",
+      "kind": "command",
+      "group": "commands",
+      "label": "ZoomIn/ZoomOut/FitToView",
+      "path": "crates/fig_viewer/src/view.rs",
+      "tags": [
+        "wheel"
+      ]
+    },
+    {
+      "id": "cmd:SelectionOps",
+      "kind": "command",
+      "group": "commands",
+      "label": "selection keys",
+      "path": "crates/fig_viewer/src/view.rs",
+      "summary": "Undo/Redo/Delete/Group/Ungroup/FrameSelection/Copy/Paste actions.",
+      "tags": [
+        "cmd+d",
+        "cmd+z"
+      ]
+    },
+    {
+      "id": "cmd:PlayPrototype",
+      "kind": "command",
+      "group": "commands",
+      "label": "PlayPrototype",
+      "path": "crates/fig_viewer/src/view.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "cmd:ToggleLayers",
+      "kind": "command",
+      "group": "commands",
+      "label": "ToggleLayersSidebar",
+      "path": "crates/fig_viewer/src/view.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "cmd:DesignPanelFocus",
+      "kind": "command",
+      "group": "commands",
+      "label": "ToggleFocus (design panel)",
+      "path": "crates/fig_viewer/src/design_panel.rs",
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "ipc:LiveMcpSock",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "MCP socket endpoint",
+      "path": "crates/fig_viewer/src/live_mcp.rs",
+      "summary": "context_server::listener::McpServer session thread per tool call."
+    },
+    {
+      "id": "ipc:FnxWrites",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "FNX write path",
+      "path": "crates/fig_viewer/src/document.rs",
+      "summary": "Debounced page.fnx/master.fnx/variables.json persists; stale-buffer reload."
+    },
+    {
+      "id": "ipc:ScreensMedia",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "render + media",
+      "path": "crates/fig_viewer/src/generation_media.rs"
+    },
+    {
+      "id": "ext:Render",
+      "kind": "external",
+      "group": "external",
+      "label": "fanta-render",
+      "path": "crates/fanta-render/src/lib.rs"
+    },
+    {
+      "id": "ext:FigInterop",
+      "kind": "external",
+      "group": "external",
+      "label": "fanta-fig-interop",
+      "path": "crates/fanta-fig-interop/src/lib.rs"
+    },
+    {
+      "id": "ext:Format",
+      "kind": "external",
+      "group": "external",
+      "label": "fanta-format",
+      "path": "crates/fanta-format/src"
+    },
+    {
+      "id": "ext:AgentUI",
+      "kind": "external",
+      "group": "external",
+      "label": "agent_ui",
+      "path": "crates/agent_ui/src"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:CrateRoot",
+      "to": "cmp:WorkspaceHooks",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:WorkspaceHooks",
+      "to": "state:FigViewEntity",
+      "kind": "renders",
+      "label": "opens canvas tab"
+    },
+    {
+      "from": "state:FigViewEntity",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "state:FigViewEntity",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "state:FigViewEntity",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DesignPanel",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DesignPanel",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:PropertiesPanel",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:PropertiesPanel",
+      "to": "state:FigViewEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:CodeWorkspace",
+      "to": "state:DocEntity",
+      "kind": "writes",
+      "label": "code edits"
+    },
+    {
+      "from": "cmp:CodeWorkspace",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DrawWand",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:GenerationWorkspace",
+      "to": "cmp:AgentSurface",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AgentSurface",
+      "to": "state:Registration",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:LiveMcpMod",
+      "to": "state:Registration",
+      "kind": "reads",
+      "label": "shares provider"
+    },
+    {
+      "from": "ipc:LiveMcpMod",
+      "to": "ipc:LiveMcpSock",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:GenerationWorkspace",
+      "to": "ipc:ScreensMedia",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:LiveMcpMod",
+      "to": "ipc:ScreensMedia",
+      "kind": "ipc",
+      "label": "screenshot tool"
+    },
+    {
+      "from": "cmp:PrototypePlayer",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MotionStage",
+      "to": "cmp:Timeline",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:MotionStage",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:CommentsPanel",
+      "to": "cmp:AnnotationsMod",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:VariablesWorkspace",
+      "to": "ipc:FnxWrites",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ExportMod",
+      "to": "ext:Render",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ClipboardMod",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:DevHistory",
+      "to": "state:DocEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "state:DocEntity",
+      "to": "ipc:FnxWrites",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:FnxWrites",
+      "to": "ext:Format",
+      "kind": "ipc"
+    },
+    {
+      "from": "state:DocEntity",
+      "to": "ext:FigInterop",
+      "kind": "imports",
+      "label": "fig_to_doc"
+    },
+    {
+      "from": "state:FigViewEntity",
+      "to": "cmp:ToolsMod",
+      "kind": "reads",
+      "label": "tool state"
+    },
+    {
+      "from": "state:FigViewEntity",
+      "to": "cmp:GpuiAdapters",
+      "kind": "renders"
+    },
+    {
+      "from": "state:EditorSession",
+      "to": "state:FigViewEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "ext:AgentUI",
+      "to": "state:Registration",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:NewDesign",
+      "to": "cmp:WorkspaceHooks",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ZoomShapes",
+      "to": "state:FigViewEntity",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SelectionOps",
+      "to": "state:FigViewEntity",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SelectionOps",
+      "to": "cmp:ClipboardMod",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:PlayPrototype",
+      "to": "cmp:PrototypePlayer",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ToggleLayers",
+      "to": "cmp:DesignPanel",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ToggleLayers",
+      "to": "state:FigViewEntity",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmd:DesignPanelFocus",
+      "to": "cmp:DesignPanel",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:LiveMcpSock",
+      "to": "state:Registration",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:LiveMcpSock",
+      "to": "state:DocEntity",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:LiveMcpSock",
+      "to": "state:FigViewEntity",
+      "kind": "listens"
+    }
+  ],
+  "flows": [
+    {
+      "id": "new-design",
+      "name": "Create a design",
+      "trigger": "New Design action",
+      "steps": [
+        "cmd:NewDesign",
+        "cmp:WorkspaceHooks",
+        "state:FigViewEntity",
+        "state:DocEntity",
+        "ipc:FnxWrites"
+      ],
+      "summary": "Creates a project folder, opens the canvas, saves FNX."
+    },
+    {
+      "id": "open-fig",
+      "name": "Import a .fig",
+      "trigger": "open a .fig file in the workspace",
+      "steps": [
+        "ext:FigInterop",
+        "state:DocEntity",
+        "state:FigViewEntity",
+        "ext:Render"
+      ],
+      "summary": "fig tree maps to the scene then paints on the canvas."
+    },
+    {
+      "id": "canvas-gesture",
+      "name": "Select / move layers",
+      "trigger": "click or drag on the canvas",
+      "steps": [
+        "state:FigViewEntity",
+        "cmd:SelectionOps",
+        "state:DocEntity",
+        "ipc:FnxWrites"
+      ],
+      "summary": "Gestures publish doc ops; undo map persists; FNX writes."
+    },
+    {
+      "id": "layers-panel",
+      "name": "Reorder in Layers panel",
+      "trigger": "drag a row in the design panel",
+      "steps": [
+        "cmp:DesignPanel",
+        "state:DocEntity",
+        "state:FigViewEntity"
+      ],
+      "summary": "Drop placement rules re-parent items with cycle guards."
+    },
+    {
+      "id": "prototype-run",
+      "name": "Play the prototype",
+      "trigger": "PlayPrototype action",
+      "steps": [
+        "cmd:PlayPrototype",
+        "cmp:PrototypePlayer",
+        "cmp:MotionStage",
+        "cmp:Timeline"
+      ],
+      "summary": "Presents from start frame; motion stage and timeline animate."
+    },
+    {
+      "id": "external-agent-edits",
+      "name": "External agent edits canvas",
+      "trigger": "client connects to MCP socket",
+      "steps": [
+        "ipc:LiveMcpSock",
+        "state:Registration",
+        "state:DocEntity",
+        "state:FigViewEntity",
+        "ipc:ScreensMedia"
+      ],
+      "summary": "Codex/Claude Code apply ops and screenshot via the same surface."
+    },
+    {
+      "id": "code-edit",
+      "name": "Edit design as code",
+      "trigger": "edit FNX text in the code view",
+      "steps": [
+        "cmp:CodeWorkspace",
+        "state:DocEntity",
+        "state:FigViewEntity",
+        "ext:Format"
+      ],
+      "summary": "Text edits morph the live canvas and write back to files."
+    }
+  ],
+  "notes": [
+    {
+      "title": "view.rs is 23k LOC",
+      "body": "crates/fig_viewer/src/view.rs declares 40+ actions, tool state, gestures and overlays in one entity \u2014 the module's concentration point.",
+      "severity": "alert",
+      "path": "crates/fig_viewer/src/view.rs"
+    },
+    {
+      "title": "two agent surfaces, one provider",
+      "body": "agent_surface.rs registers the DesignSurface; live_mcp.rs exposes it on a Unix socket \u2014 both span identical tool semantics.",
+      "severity": "info",
+      "path": "crates/fig_viewer/src/agent_surface.rs"
+    },
+    {
+      "title": "doc \u2194 code duality",
+      "body": "code_workspace.rs (4,775 LOC) edits FNX text that round-trips through document.rs into live canvas state.",
+      "severity": "info",
+      "path": "crates/fig_viewer/src/code_workspace.rs"
+    },
+    {
+      "title": "methods spread across modules",
+      "body": "properties panel split into properties_ops/properties_snapshot/properties_render beside a 6,863 LOC properties_panel.rs.",
+      "severity": "warn",
+      "path": "crates/fig_viewer/src/properties_panel.rs"
+    }
+  ]
+}

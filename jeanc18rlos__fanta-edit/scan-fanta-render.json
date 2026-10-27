@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "fanta-edit",
+    "slug": "jeanc18rlos__fanta-edit",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "fanta-render",
+    "name": "fanta-render",
+    "entryLayout": "crates/fanta-render/src/lib.rs",
+    "root": "crates/fanta-render",
+    "summary": "Skia raster backend: one scene walk, headless PNG render or GPU present.",
+    "externalModules": [
+      "fanta-doc",
+      "fig-viewer"
+    ]
+  },
+  "stats": {
+    "nodes": 12,
+    "edges": 11,
+    "components": 3,
+    "stateFiles": 1,
+    "commands": 0,
+    "ipcCalls": 1,
+    "flows": 2
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:LibRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "lib.rs",
+      "path": "crates/fanta-render/src/lib.rs",
+      "summary": "Public lib: asset, color, image, paint, path, sampling, transform, raster."
+    },
+    {
+      "id": "fn:Transform",
+      "kind": "function",
+      "group": "components",
+      "label": "transform.rs",
+      "path": "crates/fanta-render/src/transform.rs",
+      "summary": "Fanta f64 transforms narrowed to f32 at render time only."
+    },
+    {
+      "id": "fn:PathMod",
+      "kind": "function",
+      "group": "components",
+      "label": "path.rs",
+      "path": "crates/fanta-render/src/path.rs",
+      "summary": "Scene path geometry helpers shared with the raster backend."
+    },
+    {
+      "id": "fn:PaintMod",
+      "kind": "function",
+      "group": "components",
+      "label": "paint.rs",
+      "path": "crates/fanta-render/src/paint.rs",
+      "summary": "Fill/stroke and paint definitions."
+    },
+    {
+      "id": "fn:BoundsMod",
+      "kind": "function",
+      "group": "components",
+      "label": "bounds.rs",
+      "path": "crates/fanta-render/src/bounds.rs",
+      "summary": "Bounds/culling math used by the scene walk."
+    },
+    {
+      "id": "cmp:RasterRenderer",
+      "kind": "component",
+      "group": "components",
+      "label": "raster/renderer.rs",
+      "path": "crates/fanta-render/src/raster/renderer.rs",
+      "loc": 2972,
+      "summary": "RasterRenderer: copy_rgba headless or render_to_canvas on a GPU surface."
+    },
+    {
+      "id": "fn:SceneWalk",
+      "kind": "function",
+      "group": "components",
+      "label": "raster/walk.rs",
+      "path": "crates/fanta-render/src/raster/walk.rs",
+      "summary": "The one scene\u2192canvas walk both render paths share."
+    },
+    {
+      "id": "cmp:RasterSplit",
+      "kind": "component",
+      "group": "components",
+      "label": "raster/split.rs",
+      "path": "crates/fanta-render/src/raster/split.rs",
+      "summary": "Raster splitting/tiling support for large layers."
+    },
+    {
+      "id": "state:CameraCache",
+      "kind": "state",
+      "group": "state",
+      "label": "camera_cache.rs",
+      "path": "crates/fanta-render/src/raster/camera_cache.rs",
+      "summary": "Per-camera cache of rasterized resources."
+    },
+    {
+      "id": "ipc:SkiaApi",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "skia-safe calls",
+      "path": "crates/fanta-render/src/raster/renderer.rs",
+      "summary": "The vendored skia-bindings boundary (raster: CPU, Ganesh: GPU)."
+    },
+    {
+      "id": "ext:FantaDoc",
+      "kind": "external",
+      "group": "external",
+      "label": "fanta-doc",
+      "path": "crates/fanta-doc/src",
+      "summary": "Scene+Viewport the renderer consumes."
+    },
+    {
+      "id": "ext:SkiaVec",
+      "kind": "external",
+      "group": "external",
+      "label": "vendor/skia-bindings",
+      "path": "vendor",
+      "summary": "skia-bindings 0.153 vendored."
+    }
+  ],
+  "edges": [
+    {
+      "from": "ext:FantaDoc",
+      "to": "fn:Transform",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RasterRenderer",
+      "to": "fn:SceneWalk",
+      "kind": "calls"
+    },
+    {
+      "from": "fn:SceneWalk",
+      "to": "fn:BoundsMod",
+      "kind": "calls",
+      "label": "cull"
+    },
+    {
+      "from": "fn:SceneWalk",
+      "to": "fn:PaintMod",
+      "kind": "reads"
+    },
+    {
+      "from": "fn:SceneWalk",
+      "to": "fn:PathMod",
+      "kind": "reads"
+    },
+    {
+      "from": "fn:SceneWalk",
+      "to": "fn:Transform",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:RasterRenderer",
+      "to": "state:CameraCache",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RasterRenderer",
+      "to": "cmp:RasterSplit",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:RasterRenderer",
+      "to": "ipc:SkiaApi",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:SkiaApi",
+      "to": "ext:SkiaVec",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RasterRenderer",
+      "to": "ext:FantaDoc",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "headless-render",
+      "name": "Headless render",
+      "trigger": "export/test call to copy_rgba",
+      "steps": [
+        "cmp:RasterRenderer",
+        "fn:SceneWalk",
+        "ipc:SkiaApi"
+      ],
+      "summary": "CPU Skia surface read back as RGBA or encoded to PNG."
+    },
+    {
+      "id": "live-present",
+      "name": "Live canvas present",
+      "trigger": "canvas paints each frame",
+      "steps": [
+        "cmp:RasterRenderer",
+        "fn:SceneWalk",
+        "ipc:SkiaApi",
+        "ext:SkiaVec"
+      ],
+      "summary": "Same walk onto the host's Metal-backed Skia canvas."
+    }
+  ],
+  "notes": [
+    {
+      "title": "clean layering",
+      "body": "Scene-model (fanta-doc) and f32 Skia conversion are separate crates; precision narrows only at the leaf (transform.rs, ARCHITECTURE.md \u00a713).",
+      "severity": "info",
+      "path": "crates/fanta-render/src/transform.rs"
+    },
+    {
+      "title": "renderer kernel 3k LOC",
+      "body": "raster/renderer.rs is 2,972 LOC; walk/split/cull caching sit beside it in raster/.",
+      "severity": "info",
+      "path": "crates/fanta-render/src/raster/renderer.rs"
+    }
+  ]
+}

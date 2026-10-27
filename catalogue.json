@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 3,
+  "count": 4,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -58,6 +58,35 @@
         "scan-canvas-web.html",
         "scan-server.json",
         "scan-server.html"
+      ]
+    },
+    {
+      "slug": "jeanc18rlos__fanta-edit",
+      "name": "fanta-edit",
+      "github": "unknown",
+      "license": "GPL-3.0-or-later",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Native macOS design editor on a Zed fork: .fig import, FNX-save canvas, agent hooks.",
+      "stack": [
+        "rust",
+        "gpui",
+        "skia",
+        "metal",
+        "kiwi",
+        "mcp",
+        "sqlite",
+        "zed-fork"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-fig-viewer.json",
+        "scan-fig-viewer.html",
+        "scan-fanta-render.json",
+        "scan-fanta-render.html"
       ]
     },
     {
