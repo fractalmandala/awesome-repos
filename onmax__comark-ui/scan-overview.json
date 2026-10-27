@@ -1,0 +1,1046 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "Comark UI",
+    "slug": "onmax__comark-ui",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "Comark UI",
+    "entryLayout": "package.json",
+    "root": ".",
+    "summary": "45-package pnpm workspace: parse plugins + HTML/Vue/React/Svelte renderers",
+    "externalModules": [
+      "ui",
+      "lint",
+      "annotate",
+      "charts"
+    ]
+  },
+  "stats": {
+    "nodes": 56,
+    "edges": 65,
+    "components": 29,
+    "stateFiles": 3,
+    "commands": 8,
+    "ipcCalls": 5,
+    "flows": 8
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Workspace",
+      "label": "package.json",
+      "kind": "layout",
+      "group": "layout",
+      "path": "package.json",
+      "tags": [
+        "entry"
+      ],
+      "loc": 49,
+      "summary": "pnpm workspace: 45 packages, one catalog, one version."
+    },
+    {
+      "id": "cmp:Preset",
+      "label": "preset()",
+      "kind": "layout",
+      "group": "layout",
+      "path": "packages/ui/src/index.ts",
+      "tags": [
+        "comark-ui"
+      ],
+      "summary": "Registers 40 plugins in render order from one options object.",
+      "loc": 256
+    },
+    {
+      "id": "cmp:RendererEntries",
+      "label": "renderer entries",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/html.ts",
+      "summary": "html/vue/react/svelte entry files: one import per package, passed to preset().",
+      "loc": 103
+    },
+    {
+      "id": "cmp:Editor",
+      "label": "comark-ui/editor",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/editor.ts",
+      "loc": 26
+    },
+    {
+      "id": "cmp:Typeset",
+      "label": "typeset",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/typeset.ts",
+      "loc": 14
+    },
+    {
+      "id": "cmp:NuxtTheme",
+      "label": "nuxt-ui theme",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/nuxt-ui.ts",
+      "loc": 169
+    },
+    {
+      "id": "cmp:Annotate",
+      "label": "annotate",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/read.ts",
+      "summary": "One reader for ::screenshot/::compare/::annotation used by plugin and renderer.",
+      "loc": 672
+    },
+    {
+      "id": "cmp:Charts",
+      "label": "charts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/read.ts",
+      "summary": "Table or Vega-Lite into a chart; drawn at parse time, marks via annotate.",
+      "loc": 1065
+    },
+    {
+      "id": "cmp:ChartDraw",
+      "label": "charts draw",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/draw.ts",
+      "loc": 1369
+    },
+    {
+      "id": "cmp:Diagrams",
+      "label": "diagrams",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/diagrams/src/index.ts",
+      "summary": "plantuml/graphviz/d2/dbml/goat/svgbob fences to a Kroki server, sanitized.",
+      "loc": 178
+    },
+    {
+      "id": "cmp:Chat",
+      "label": "chat",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/chat/src/index.ts",
+      "loc": 237
+    },
+    {
+      "id": "cmp:Quiz",
+      "label": "quiz",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/quiz/src/read.ts",
+      "summary": "Questions, polls, recall cards; HTML-only with an inlined script.",
+      "loc": 449
+    },
+    {
+      "id": "cmp:Badge",
+      "label": "badge svg",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/badge/src/svg.ts",
+      "loc": 315
+    },
+    {
+      "id": "cmp:BadgeServer",
+      "label": "badge server",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/badge/src/server.ts",
+      "summary": "GET/HEAD handler with a bounded cache, serving /badge.svg from the docs worker.",
+      "loc": 75
+    },
+    {
+      "id": "cmp:Icon",
+      "label": "icon resolver",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/icon/src/resolve.ts",
+      "summary": "set:name from collections or Iconify, into a data URI; used by 6 packages.",
+      "loc": 216
+    },
+    {
+      "id": "cmp:FileBlocks",
+      "label": "file-reading blocks",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/include/src/index.ts",
+      "loc": 407,
+      "summary": "include, cast, table, tests: lazy node:fs import when no `read`."
+    },
+    {
+      "id": "cmp:Tabs",
+      "label": "tabs",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/tabs/src/index.ts",
+      "loc": 341
+    },
+    {
+      "id": "cmp:Table",
+      "label": "table",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/table/src/index.ts",
+      "loc": 514
+    },
+    {
+      "id": "cmp:ChartScript",
+      "label": "charts/vue.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/vue.ts",
+      "loc": 26
+    },
+    {
+      "id": "cmp:CodeActions",
+      "label": "code buttons",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/code/src/client.ts",
+      "summary": "One bar string inlined by every renderer; emits `comark-code-action`.",
+      "loc": 344
+    },
+    {
+      "id": "cmp:Zoom",
+      "label": "zoom runtime",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/zoom/src/script.ts",
+      "summary": "Self-contained browser script the HTML renderer inlines; reused as a gallery.",
+      "loc": 677
+    },
+    {
+      "id": "cmp:Linter",
+      "label": "comark-linter",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/index.ts",
+      "summary": "lint()/lintFiles(): parses once, reports rule + line + fix.",
+      "loc": 939
+    },
+    {
+      "id": "cmp:LintRules",
+      "label": "rule catalog",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/rules/index.ts",
+      "loc": 77
+    },
+    {
+      "id": "cmp:LintConfig",
+      "label": "lint config",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/config.ts",
+      "loc": 212
+    },
+    {
+      "id": "cmp:LintDoctor",
+      "label": "vite-doctor ext",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/doctor.ts",
+      "loc": 123
+    },
+    {
+      "id": "cmp:LintLinks",
+      "label": "link rules",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/links.ts",
+      "summary": "href/src checks through read/exists/list, then dead URLs.",
+      "loc": 362
+    },
+    {
+      "id": "cmp:LintEslint",
+      "label": "eslint plugin",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/eslint.ts",
+      "loc": 160
+    },
+    {
+      "id": "cmp:DocsBuild",
+      "label": "docs/build.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "docs/build.ts",
+      "summary": "1978 lines: every docs page, sidebar, search, llms.txt, skill.",
+      "loc": 1978
+    },
+    {
+      "id": "cmp:DocsWorker",
+      "label": "docs/worker.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "docs/worker.ts",
+      "loc": 55
+    },
+    {
+      "id": "state:PresetOptions",
+      "label": "PresetOptions",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/ui/src/index.ts",
+      "loc": 256
+    },
+    {
+      "id": "state:DocMeta",
+      "label": "meta.issues",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/annotate/src/index.ts",
+      "summary": "Each plugin appends issues and issueRules to the parsed document's meta.",
+      "loc": 36
+    },
+    {
+      "id": "state:ProcessCaches",
+      "label": "download caches",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/icon/src/resolve.ts",
+      "loc": 216
+    },
+    {
+      "id": "cmd:Build",
+      "label": "pnpm build",
+      "kind": "command",
+      "group": "commands",
+      "path": "package.json",
+      "tags": [
+        "pnpm build"
+      ],
+      "loc": 49
+    },
+    {
+      "id": "cmd:LintCli",
+      "label": "lint-comark",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/lint/src/cli.ts",
+      "tags": [
+        "--format",
+        "--check-urls"
+      ],
+      "loc": 79
+    },
+    {
+      "id": "cmd:Doctor",
+      "label": "pnpm run doctor",
+      "kind": "command",
+      "group": "commands",
+      "path": "doctor.config.ts",
+      "tags": [
+        "vite-doctor"
+      ],
+      "loc": 45
+    },
+    {
+      "id": "cmd:CopyCode",
+      "label": "Copy / Wrap",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/code/src/client.ts",
+      "tags": [
+        "code bar"
+      ],
+      "loc": 344
+    },
+    {
+      "id": "cmd:ZoomOpen",
+      "label": "Open a zoomed item",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/zoom/src/script.ts",
+      "tags": [
+        "keyboard",
+        "click"
+      ],
+      "loc": 677
+    },
+    {
+      "id": "cmd:QuizAnswer",
+      "label": "Answer a quiz",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/quiz/src/script.ts",
+      "tags": [
+        "comark-quiz:answer"
+      ],
+      "loc": 702
+    },
+    {
+      "id": "ipc:Fs",
+      "label": "node:fs/promises",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/include/src/index.ts",
+      "summary": "Lazy file reads for include, cast, table, tests and the annotate CLI.",
+      "loc": 407
+    },
+    {
+      "id": "ipc:Http",
+      "label": "global fetch",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/chips/src/images.ts",
+      "loc": 147
+    },
+    {
+      "id": "ipc:Kroki",
+      "label": "Kroki server",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/diagrams/src/index.ts",
+      "loc": 178
+    },
+    {
+      "id": "ipc:Iconify",
+      "label": "Iconify API",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/icon/src/resolve.ts",
+      "loc": 216
+    },
+    {
+      "id": "ipc:Worker",
+      "label": "worker_threads",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/lint/src/eslint.ts",
+      "loc": 160
+    },
+    {
+      "id": "shared:Tokens",
+      "label": "comark-zoom/theme",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/zoom/src/theme.ts",
+      "loc": 31
+    },
+    {
+      "id": "shared:MarkdownIt",
+      "label": "shared/markdown-it.ts",
+      "kind": "shared",
+      "group": "shared",
+      "path": "shared/markdown-it.ts",
+      "loc": 73
+    },
+    {
+      "id": "shared:Skill",
+      "label": "skills/comark-ui",
+      "kind": "shared",
+      "group": "shared",
+      "path": "skills/comark-ui/SKILL.md",
+      "loc": 137
+    },
+    {
+      "id": "ext:Comark",
+      "label": "comark 0.8.1",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 49
+    },
+    {
+      "id": "ext:ComarkRenderers",
+      "label": "@comark/html|vue|react|svelte",
+      "kind": "external",
+      "group": "external",
+      "path": "package.json",
+      "loc": 49
+    },
+    {
+      "id": "ext:VegaFlint",
+      "label": "flint-chart + vega",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/index.ts",
+      "loc": 125
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap/*",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/editor.ts",
+      "loc": 26
+    },
+    {
+      "id": "ext:VitePlus",
+      "label": "vite-plus + tsdown",
+      "kind": "external",
+      "group": "external",
+      "path": "tsdown.shared.ts",
+      "loc": 22
+    },
+    {
+      "id": "ext:Shiki",
+      "label": "shiki",
+      "kind": "external",
+      "group": "external",
+      "path": "docs/build.ts",
+      "loc": 1978
+    },
+    {
+      "id": "ext:Pele",
+      "label": "comark-pele",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/index.ts",
+      "loc": 256
+    },
+    {
+      "id": "ext:AnnotationKit",
+      "label": "AnnotationKit (marks)",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/annotate/src/marks.ts",
+      "loc": 189
+    },
+    {
+      "id": "cmd:TabsSwitch",
+      "label": "Switch a tab",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/tabs/src/index.ts",
+      "loc": 341
+    },
+    {
+      "id": "cmd:TableSort",
+      "label": "Sort a table",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/table/src/client.ts",
+      "loc": 132
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:Preset",
+      "kind": "imports",
+      "label": "packages/ui is the umbrella"
+    },
+    {
+      "from": "cmp:Workspace",
+      "to": "cmp:DocsBuild",
+      "kind": "calls",
+      "label": "docs:build"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:RendererEntries",
+      "kind": "calls",
+      "label": "preset(renderer, options)"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "state:PresetOptions",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Typeset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Icon",
+      "kind": "calls",
+      "label": "createIcons once"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Annotate",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Charts",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Zoom",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:CodeActions",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Quiz",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Diagrams",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Chat",
+      "kind": "imports",
+      "label": "not in the preset"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Comark",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Pele",
+      "kind": "imports",
+      "label": "mermaid"
+    },
+    {
+      "from": "cmp:RendererEntries",
+      "to": "ext:ComarkRenderers",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:RendererEntries",
+      "to": "cmp:Preset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:RendererEntries",
+      "to": "cmp:Zoom",
+      "kind": "reads",
+      "label": "RUNTIME_TAG"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Editor",
+      "to": "cmp:Preset",
+      "kind": "reads",
+      "label": "the same plugins"
+    },
+    {
+      "from": "cmp:Typeset",
+      "to": "cmp:RendererEntries",
+      "kind": "dispatches",
+      "label": "typeset-styles node"
+    },
+    {
+      "from": "cmp:NuxtTheme",
+      "to": "shared:Tokens",
+      "kind": "writes",
+      "label": "--ui-* to --comark-*"
+    },
+    {
+      "from": "cmp:Annotate",
+      "to": "state:DocMeta",
+      "kind": "writes",
+      "label": "issues, issueRules"
+    },
+    {
+      "from": "cmp:Annotate",
+      "to": "ext:AnnotationKit",
+      "kind": "imports",
+      "label": "marks copied"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "cmp:ChartDraw",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "cmp:Annotate",
+      "kind": "imports",
+      "label": "readMark for chart marks"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "ext:VegaFlint",
+      "kind": "calls",
+      "label": "vega-lite specs only"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "state:DocMeta",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Diagrams",
+      "to": "ipc:Kroki",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Diagrams",
+      "to": "state:ProcessCaches",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Icon",
+      "to": "ipc:Iconify",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Icon",
+      "to": "state:ProcessCaches",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:FileBlocks",
+      "to": "ipc:Fs",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Badge",
+      "to": "cmp:BadgeServer",
+      "kind": "calls",
+      "label": "shared svg + live data"
+    },
+    {
+      "from": "cmp:BadgeServer",
+      "to": "ipc:Http",
+      "kind": "ipc",
+      "label": "npm and GitHub APIs"
+    },
+    {
+      "from": "cmp:BadgeServer",
+      "to": "cmp:DocsWorker",
+      "kind": "calls",
+      "label": "/badge.svg"
+    },
+    {
+      "from": "cmp:CodeActions",
+      "to": "cmp:RendererEntries",
+      "kind": "dispatches",
+      "label": "comark-code-action"
+    },
+    {
+      "from": "cmp:Zoom",
+      "to": "shared:Tokens",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Quiz",
+      "to": "cmp:RendererEntries",
+      "kind": "dispatches",
+      "label": "HTML-only"
+    },
+    {
+      "from": "cmp:Linter",
+      "to": "cmp:LintRules",
+      "kind": "reads",
+      "label": "catalog"
+    },
+    {
+      "from": "cmp:Linter",
+      "to": "cmp:LintLinks",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Linter",
+      "to": "ext:Comark",
+      "kind": "calls",
+      "label": "parseMarkdown"
+    },
+    {
+      "from": "cmp:Linter",
+      "to": "state:DocMeta",
+      "kind": "reads",
+      "label": "meta.issues"
+    },
+    {
+      "from": "cmp:Linter",
+      "to": "cmp:LintConfig",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:LintLinks",
+      "to": "ipc:Fs",
+      "kind": "ipc",
+      "label": "read/exists/list"
+    },
+    {
+      "from": "cmp:LintLinks",
+      "to": "ipc:Http",
+      "kind": "ipc",
+      "label": "--check-urls"
+    },
+    {
+      "from": "cmp:LintConfig",
+      "to": "cmp:Preset",
+      "kind": "imports",
+      "label": "comark-ui/html"
+    },
+    {
+      "from": "cmp:LintDoctor",
+      "to": "cmp:Linter",
+      "kind": "calls",
+      "label": "lintFiles"
+    },
+    {
+      "from": "cmp:LintDoctor",
+      "to": "cmp:LintRules",
+      "kind": "reads",
+      "label": "codes to docs"
+    },
+    {
+      "from": "cmp:LintEslint",
+      "to": "ipc:Worker",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:LintEslint",
+      "to": "cmp:Linter",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocsBuild",
+      "to": "cmp:Preset",
+      "kind": "imports",
+      "label": "docs/plugins.ts"
+    },
+    {
+      "from": "cmp:DocsBuild",
+      "to": "ext:Shiki",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DocsBuild",
+      "to": "shared:Skill",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DocsWorker",
+      "to": "cmp:BadgeServer",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:Build",
+      "to": "ext:VitePlus",
+      "kind": "commands",
+      "label": "tsdown"
+    },
+    {
+      "from": "cmd:Build",
+      "to": "cmp:DocsBuild",
+      "kind": "commands",
+      "label": "docs:build first"
+    },
+    {
+      "from": "cmd:LintCli",
+      "to": "cmp:Linter",
+      "kind": "commands",
+      "label": "lintFiles"
+    },
+    {
+      "from": "cmd:LintCli",
+      "to": "ipc:Fs",
+      "kind": "ipc",
+      "label": "glob"
+    },
+    {
+      "from": "cmd:Doctor",
+      "to": "cmp:LintDoctor",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:CopyCode",
+      "to": "cmp:CodeActions",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ZoomOpen",
+      "to": "cmp:Zoom",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:QuizAnswer",
+      "to": "cmp:Quiz",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:TabsSwitch",
+      "to": "cmp:Tabs",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:TableSort",
+      "to": "cmp:Table",
+      "kind": "commands"
+    }
+  ],
+  "flows": [
+    {
+      "id": "render",
+      "name": "Render a document",
+      "trigger": "comarkUi() in an app",
+      "steps": [
+        "cmp:Preset",
+        "cmp:RendererEntries",
+        "ext:Comark",
+        "ext:ComarkRenderers"
+      ],
+      "summary": "preset() builds plugins and components; the host renderer walks the tree."
+    },
+    {
+      "id": "lint",
+      "name": "Lint documents",
+      "trigger": "lint-comark 'docs/**/*.md'",
+      "steps": [
+        "cmd:LintCli",
+        "cmp:Linter",
+        "cmp:LintRules",
+        "cmp:LintLinks",
+        "ipc:Fs"
+      ],
+      "summary": "Parse once, then core and per-package rules; links resolved through disk."
+    },
+    {
+      "id": "annotate",
+      "name": "Annotated screenshot",
+      "trigger": "::screenshot with ::annotation children",
+      "steps": [
+        "cmp:Annotate",
+        "state:DocMeta",
+        "cmp:RendererEntries"
+      ],
+      "summary": "The reader validates and reports, the renderer draws the same model; no script."
+    },
+    {
+      "id": "chart",
+      "name": "Chart with marks",
+      "trigger": "::chart over a Markdown table",
+      "steps": [
+        "cmp:Charts",
+        "cmp:ChartDraw",
+        "cmp:Annotate",
+        "ext:VegaFlint"
+      ],
+      "summary": "Read the table, draw SVG while parsing, place annotation marks on it."
+    },
+    {
+      "id": "icon",
+      "name": "Resolve an icon",
+      "trigger": ":icon{name=\"lucide:apple\"}",
+      "steps": [
+        "cmp:Icon",
+        "ipc:Iconify",
+        "state:ProcessCaches",
+        "cmp:RendererEntries"
+      ],
+      "summary": "One batched API call, cached per process, written as a data URI on the node."
+    },
+    {
+      "id": "diagram",
+      "name": "Draw a diagram",
+      "trigger": "A plantuml fence",
+      "steps": [
+        "cmp:Diagrams",
+        "ipc:Kroki",
+        "state:ProcessCaches"
+      ],
+      "summary": "Source is POSTed to Kroki, the SVG sanitized and kept as a diagram node."
+    },
+    {
+      "id": "docs",
+      "name": "Build the docs site",
+      "trigger": "pnpm docs:build",
+      "steps": [
+        "cmd:Build",
+        "cmp:DocsBuild",
+        "cmp:DocsWorker"
+      ],
+      "summary": "Packages build first, then every docs page, llms.txt and the skill."
+    },
+    {
+      "id": "quiz",
+      "name": "Answer a quiz",
+      "trigger": "A reader clicks an option",
+      "steps": [
+        "cmd:QuizAnswer",
+        "cmp:Quiz"
+      ],
+      "summary": "Inlined script reveals rationales; hosts can post state back."
+    }
+  ],
+  "notes": [
+    {
+      "title": "One package shape, repeated 45 times",
+      "body": "Each package is src/index.ts (parse plugin) plus html/vue/react/svelte entries and optional client.ts, script.ts, styles.ts; `defineComponentsPackage` (tsdown.shared.ts) fixes that layout.",
+      "severity": "info",
+      "path": "tsdown.shared.ts"
+    },
+    {
+      "title": "Registration is checked by a test",
+      "body": "test/workspace.test.ts asserts every manifest shares version, license, author, links and build script, and that each package has a skill reference linked from SKILL.md and a docs page.",
+      "severity": "info",
+      "path": "test/workspace.test.ts"
+    },
+    {
+      "title": "Work happens at parse time, not render time",
+      "body": "Charts (Vega/Flint), math (Temml), diagrams (Kroki), qr, icons and colors all write their result onto the node while parsing, so renderers only print markup and no client ships Vega, Temml or Shiki.",
+      "severity": "info",
+      "path": "packages/charts/src/index.ts"
+    },
+    {
+      "title": "Renderer entries are hand-maintained",
+      "body": "packages/ui/src/html.ts and index.ts each list ~40 package imports by hand; adding a plugin means editing the entries, the option type, the preset order, the linter catalog and the skill, five places.",
+      "severity": "warn",
+      "path": "packages/ui/src/index.ts"
+    },
+    {
+      "title": "Two files carry most of the complexity",
+      "body": "packages/charts/src/draw.ts (1369) plus read.ts (1065) are half the charts package; packages/lint/src/index.ts is 939 lines. Everything else in the workspace is under 700.",
+      "severity": "warn",
+      "path": "packages/charts/src/draw.ts"
+    },
+    {
+      "title": "No TODO and almost no type escapes",
+      "body": "Zero TODO/FIXME/HACK in packages, shared and docs; 4 `oxlint-disable-next-line no-explicit-any`, each with a written reason, and no `as any` in shipped code.",
+      "severity": "info",
+      "path": "packages/ui/src/index.ts"
+    }
+  ]
+}

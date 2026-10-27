@@ -1,0 +1,624 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Comark UI",
+    "slug": "onmax__comark-ui",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "lint",
+    "name": "Linter (comark-linter)",
+    "entryLayout": "packages/lint/src/index.ts",
+    "root": "packages/lint",
+    "summary": "A library, CLI, ESLint plugin and Doctor extension over one 285-code catalog",
+    "externalModules": [
+      "ui",
+      "annotate",
+      "charts",
+      "vite-doctor",
+      "eslint"
+    ]
+  },
+  "stats": {
+    "nodes": 29,
+    "edges": 33,
+    "components": 15,
+    "stateFiles": 1,
+    "commands": 3,
+    "ipcCalls": 3,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Lint",
+      "label": "lint()",
+      "kind": "layout",
+      "group": "layout",
+      "path": "packages/lint/src/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "939 lines: parse once, run core checks then plugin issues, sort by position.",
+      "loc": 939
+    },
+    {
+      "id": "cmp:Source",
+      "label": "source.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/source.ts",
+      "summary": "Lines plus `prose` with code, frontmatter and inline code blanked, columns kept.",
+      "loc": 117
+    },
+    {
+      "id": "cmp:Words",
+      "label": "words.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/words.ts",
+      "summary": "Levenshtein nearest-name, for \"did you mean\" on components and files.",
+      "loc": 43
+    },
+    {
+      "id": "cmp:Links",
+      "label": "links.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/links.ts",
+      "summary": "Every href/src: files and anchors through read/exists/list, then block lists.",
+      "loc": 362
+    },
+    {
+      "id": "cmp:Urls",
+      "label": "urls.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/urls.ts",
+      "summary": "Requests external URLs, 8 at a time, 2 per host, with a disk cache.",
+      "loc": 174
+    },
+    {
+      "id": "cmp:Rules",
+      "label": "rules/index.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/rules/index.ts",
+      "summary": "285 rules from 36 files; each package takes its own COMARKxx hundred.",
+      "loc": 77
+    },
+    {
+      "id": "cmp:RulesCore",
+      "label": "rules/core.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/rules/core.ts",
+      "summary": "Unclosed blocks, unknown components, duplicate ids, missing alt, unsafe URLs.",
+      "loc": 34
+    },
+    {
+      "id": "cmp:RulesCharts",
+      "label": "rules/charts.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/rules/charts.ts",
+      "summary": "The largest per-package rule file, 145 lines.",
+      "loc": 145
+    },
+    {
+      "id": "cmp:RulesAnnotate",
+      "label": "rules/annotate.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/rules/annotate.ts",
+      "loc": 103
+    },
+    {
+      "id": "cmp:Config",
+      "label": "config.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/config.ts",
+      "summary": "Loads installed comark-* packages through optional dynamic imports.",
+      "loc": 212
+    },
+    {
+      "id": "cmp:Cli",
+      "label": "cli.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/cli.ts",
+      "summary": "`lint-comark <glob>... [--format] [--config] [--check-urls]`, exits 1.",
+      "loc": 79
+    },
+    {
+      "id": "cmp:Doctor",
+      "label": "doctor.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/doctor.ts",
+      "summary": "Vite Doctor manifest rules glob Markdown in onProjectEnd; codes link to docs.",
+      "loc": 123
+    },
+    {
+      "id": "cmp:Eslint",
+      "label": "eslint.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/eslint.ts",
+      "summary": "@eslint/markdown with the same catalog, delegating to a worker.",
+      "loc": 160
+    },
+    {
+      "id": "cmp:EslintWorker",
+      "label": "eslint-worker.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/eslint-worker.ts",
+      "summary": "52 lines: receive a request, lint, post diagnostics back.",
+      "loc": 52
+    },
+    {
+      "id": "cmp:HtmlTags",
+      "label": "html-tags.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/lint/src/html-tags.ts",
+      "summary": "The standard element list, so ::div is never an unknown component.",
+      "loc": 6
+    },
+    {
+      "id": "state:HeadingIndex",
+      "label": "shared heading index",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/lint/src/index.ts",
+      "loc": 939
+    },
+    {
+      "id": "cmd:LintCli",
+      "label": "lint-comark",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/lint/src/cli.ts",
+      "tags": [
+        "lint-comark"
+      ],
+      "loc": 79
+    },
+    {
+      "id": "cmd:Doctor",
+      "label": "vite-doctor",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/lint/src/doctor.ts",
+      "tags": [
+        "pnpm run doctor"
+      ],
+      "loc": 123
+    },
+    {
+      "id": "cmd:Eslint",
+      "label": "eslint --plugin comark",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/lint/src/eslint.ts",
+      "loc": 160
+    },
+    {
+      "id": "ipc:Fs",
+      "label": "node:fs/promises",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/lint/src/index.ts",
+      "summary": "Default read/exists/list; `import(\"node:fs/promises\")` only when needed.",
+      "loc": 939
+    },
+    {
+      "id": "ipc:Http",
+      "label": "fetch",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/lint/src/urls.ts",
+      "loc": 174
+    },
+    {
+      "id": "ipc:Worker",
+      "label": "worker_threads",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/lint/src/eslint.ts",
+      "loc": 160
+    },
+    {
+      "id": "shared:DocMeta",
+      "label": "meta.issues",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/annotate/src/index.ts",
+      "loc": 36
+    },
+    {
+      "id": "ext:Comark",
+      "label": "comark",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/index.ts",
+      "loc": 939
+    },
+    {
+      "id": "ext:ViteDoctor",
+      "label": "vite-doctor",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/doctor.ts",
+      "loc": 123
+    },
+    {
+      "id": "ext:Eslint",
+      "label": "eslint + @eslint/markdown",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/eslint.ts",
+      "loc": 160
+    },
+    {
+      "id": "ext:Packages",
+      "label": "comark-* packages",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/config.ts",
+      "loc": 212
+    },
+    {
+      "id": "ext:Preset",
+      "label": "comark-ui/html",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/index.ts",
+      "loc": 256
+    },
+    {
+      "id": "ext:DoctorDocs",
+      "label": "docs/pages/doctor",
+      "kind": "external",
+      "group": "external",
+      "path": "docs/pages/doctor",
+      "loc": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Lint",
+      "to": "cmp:Source",
+      "kind": "calls",
+      "label": "read(markdown)"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "cmp:Rules",
+      "kind": "reads",
+      "label": "catalog"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "cmp:Links",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "cmp:Words",
+      "kind": "calls",
+      "label": "closest"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "cmp:HtmlTags",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "ipc:Fs",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "ext:Comark",
+      "kind": "calls",
+      "label": "parseMarkdown"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "state:HeadingIndex",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Lint",
+      "to": "shared:DocMeta",
+      "kind": "reads",
+      "label": "plugin issues"
+    },
+    {
+      "from": "cmp:Links",
+      "to": "cmp:Urls",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Links",
+      "to": "ipc:Fs",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Urls",
+      "to": "ipc:Http",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Urls",
+      "to": "ipc:Fs",
+      "kind": "ipc",
+      "label": "urls.json cache"
+    },
+    {
+      "from": "cmp:Rules",
+      "to": "cmp:RulesCore",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Rules",
+      "to": "cmp:RulesCharts",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Rules",
+      "to": "cmp:RulesAnnotate",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:RulesCharts",
+      "to": "cmp:RulesCore",
+      "kind": "imports",
+      "label": "shared helpers"
+    },
+    {
+      "from": "cmp:Config",
+      "to": "ext:Packages",
+      "kind": "imports",
+      "label": "dynamic, optional"
+    },
+    {
+      "from": "cmp:Config",
+      "to": "ext:Preset",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Config",
+      "to": "cmp:Lint",
+      "kind": "reads",
+      "label": "plugins and components"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "cmp:Lint",
+      "kind": "calls",
+      "label": "lintFiles"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "cmp:Config",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Doctor",
+      "to": "cmp:Lint",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Doctor",
+      "to": "cmp:Rules",
+      "kind": "reads",
+      "label": "codes and titles"
+    },
+    {
+      "from": "cmp:Doctor",
+      "to": "ext:ViteDoctor",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Doctor",
+      "to": "ext:DoctorDocs",
+      "kind": "reads",
+      "label": "docsBase"
+    },
+    {
+      "from": "cmp:Eslint",
+      "to": "ext:Eslint",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Eslint",
+      "to": "ipc:Worker",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Eslint",
+      "to": "cmp:EslintWorker",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EslintWorker",
+      "to": "cmp:Lint",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:LintCli",
+      "to": "cmp:Cli",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Doctor",
+      "to": "cmp:Doctor",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Eslint",
+      "to": "cmp:Eslint",
+      "kind": "commands"
+    }
+  ],
+  "flows": [
+    {
+      "id": "one",
+      "name": "Lint one document",
+      "trigger": "lint(markdown, options)",
+      "steps": [
+        "cmp:Lint",
+        "cmp:Source",
+        "cmp:Rules",
+        "cmp:Words"
+      ],
+      "summary": "One parse, core checks then plugin issues; everything sorted by line and column."
+    },
+    {
+      "id": "files",
+      "name": "Lint a project",
+      "trigger": "lint-comark 'docs/**/*.md'",
+      "steps": [
+        "cmd:LintCli",
+        "cmp:Cli",
+        "cmp:Lint",
+        "state:HeadingIndex",
+        "ipc:Fs"
+      ],
+      "summary": "Each file parsed once; links between files share one heading index."
+    },
+    {
+      "id": "urls",
+      "name": "Check external links",
+      "trigger": "lint-comark --check-urls",
+      "steps": [
+        "cmp:Urls",
+        "ipc:Http",
+        "ipc:Fs"
+      ],
+      "summary": "8 requests at a time, 2 per host, answers cached in node_modules/.cache."
+    },
+    {
+      "id": "doctor",
+      "name": "Run Vite Doctor",
+      "trigger": "pnpm run doctor",
+      "steps": [
+        "cmd:Doctor",
+        "cmp:Doctor",
+        "cmp:Lint",
+        "ext:DoctorDocs"
+      ],
+      "summary": "Manifest rules glob Markdown, lint it, and link each code to its docs page."
+    },
+    {
+      "id": "eslint",
+      "name": "Lint from ESLint",
+      "trigger": "eslint with the comark plugin",
+      "steps": [
+        "cmd:Eslint",
+        "cmp:Eslint",
+        "ipc:Worker",
+        "cmp:EslintWorker",
+        "cmp:Lint"
+      ],
+      "summary": "ESLint's Markdown processor yields text; a worker runs the same rules."
+    },
+    {
+      "id": "plugins",
+      "name": "Plugin issues",
+      "trigger": "A comark-* plugin reports an issue while parsing",
+      "steps": [
+        "cmp:Config",
+        "ext:Packages",
+        "cmp:Lint",
+        "shared:DocMeta"
+      ],
+      "summary": "Configured plugins parse the document; their meta.issues become diagnostics."
+    },
+    {
+      "id": "typo",
+      "name": "Catch a typo",
+      "trigger": "::carosel instead of ::carousel",
+      "steps": [
+        "cmp:Lint",
+        "cmp:RulesCore",
+        "cmp:Words"
+      ],
+      "summary": "Unknown block, with the nearest known name from Levenshtein distance."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Positions are reconstructed, not read",
+      "body": "Comark nodes have no positions: block components take a line from markdown-exit tokens, everything else is found by searching `prose` (source.ts:1) with code blanked, so columns still match.",
+      "severity": "warn",
+      "path": "packages/lint/src/source.ts"
+    },
+    {
+      "title": "One catalog, 285 codes, four front ends",
+      "body": "packages/lint/src/rules has 36 files and 285 `COMARKxx` entries; index.ts, cli.ts, doctor.ts and eslint.ts all read the same catalog, so a rule works everywhere at once.",
+      "severity": "info",
+      "path": "packages/lint/src/rules/index.ts"
+    },
+    {
+      "title": "Packages are optional at runtime",
+      "body": "config.ts imports each `comark-*/html` in a try/catch-esque promise chain and only uses what is installed; they are peer dependencies, so the linter installs no renderer itself.",
+      "severity": "info",
+      "path": "packages/lint/src/config.ts"
+    },
+    {
+      "title": "index.ts carries the whole core",
+      "body": "939 lines hold ~20 checks (unclosed blocks, unknown components, anchors, unsafe URLs, duplicate ids, alts, plugin issues) plus the locator mapping a node back to a line.",
+      "severity": "warn",
+      "path": "packages/lint/src/index.ts"
+    },
+    {
+      "title": "Network checks never run in tests",
+      "body": "packages/lint/test/links.test.ts:268 stubs globalThis.fetch for every URL test, so the suite is offline; --check-urls is the only path that really requests a host.",
+      "severity": "info",
+      "path": "packages/lint/test/links.test.ts"
+    },
+    {
+      "title": "Every rule has a docs page with an example",
+      "body": "docs/pages/doctor (48 pages) pairs ::incorrect and ::correct around one fence; test/doctor.test.ts fails when a rule lacks a page or when the wrong example reports more than its own code.",
+      "severity": "info",
+      "path": "test/doctor.test.ts"
+    }
+  ]
+}

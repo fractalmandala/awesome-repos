@@ -1,0 +1,503 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Comark UI",
+    "slug": "onmax__comark-ui",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "charts",
+    "name": "Charts",
+    "entryLayout": "packages/charts/src/index.ts",
+    "root": "packages/charts",
+    "summary": "Tables or Vega-Lite drawn to SVG while parsing; renderers only place the result",
+    "externalModules": [
+      "annotate",
+      "ui",
+      "lint"
+    ]
+  },
+  "stats": {
+    "nodes": 21,
+    "edges": 25,
+    "components": 10,
+    "stateFiles": 1,
+    "commands": 1,
+    "ipcCalls": 1,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Charts",
+      "label": "index.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "packages/charts/src/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Walks each ::chart, validates, draws, rewrites the node to SVG + table.",
+      "loc": 125
+    },
+    {
+      "id": "cmp:Read",
+      "label": "read.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/read.ts",
+      "loc": 1065,
+      "summary": "Ten chart types, x kind, series, gantt, sankey and Vega-Lite specs, with issues."
+    },
+    {
+      "id": "cmp:Draw",
+      "label": "draw.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/draw.ts",
+      "loc": 1369,
+      "summary": "Vega/Flint assembly, labels, legends, then SVG with boxes for annotation marks."
+    },
+    {
+      "id": "cmp:Sankey",
+      "label": "sankey.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/sankey.ts",
+      "summary": "d3-sankey layout, drawn as its own SVG.",
+      "loc": 165
+    },
+    {
+      "id": "cmp:Colors",
+      "label": "colors.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/colors.ts",
+      "summary": "Ink and 8 Tailwind-500 series colours, swapped for CSS variables by the styles.",
+      "loc": 28
+    },
+    {
+      "id": "cmp:Html",
+      "label": "html.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/html.ts",
+      "summary": "The only renderer that draws marks; places the SVG, caption and data table.",
+      "loc": 44
+    },
+    {
+      "id": "cmp:Vue",
+      "label": "vue.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/vue.ts",
+      "summary": "Chart component, innerHTML of the SVG on mount; no marks.",
+      "loc": 26
+    },
+    {
+      "id": "cmp:React",
+      "label": "react.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/react.ts",
+      "loc": 31
+    },
+    {
+      "id": "cmp:Client",
+      "label": "client.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/client.ts",
+      "summary": "addStyles(): one <style data-comark-charts> per page.",
+      "loc": 12
+    },
+    {
+      "id": "cmp:Styles",
+      "label": "styles.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/charts/src/styles.ts",
+      "summary": "Swaps each hard-coded ink for a --comark-* variable, so dark mode works.",
+      "loc": 51
+    },
+    {
+      "id": "state:Chart",
+      "label": "Chart model",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/charts/src/read.ts",
+      "summary": "The validated chart passed from read to draw: type, x, series, rows, marks.",
+      "loc": 1065
+    },
+    {
+      "id": "cmd:ChartDraw",
+      "label": "pnpm build",
+      "kind": "command",
+      "group": "commands",
+      "path": "package.json",
+      "tags": [
+        "tsdown"
+      ],
+      "loc": 49
+    },
+    {
+      "id": "ipc:Vega",
+      "label": "vega View",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/charts/src/draw.ts",
+      "summary": "A headless vega View parses the spec and runs the scene walk.",
+      "loc": 1369
+    },
+    {
+      "id": "shared:Annotate",
+      "label": "comark-annotate",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/charts/src/read.ts",
+      "summary": "readMark/Annotation: chart marks are screenshot marks placed on an SVG.",
+      "loc": 1065
+    },
+    {
+      "id": "shared:Tokens",
+      "label": "comark-zoom/theme",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/zoom/src/theme.ts",
+      "loc": 31
+    },
+    {
+      "id": "ext:Flint",
+      "label": "flint-chart",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/draw.ts",
+      "summary": "Builds the Vega-Lite spec for the non-spec chart types.",
+      "loc": 1369
+    },
+    {
+      "id": "ext:Vega",
+      "label": "vega",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/draw.ts",
+      "loc": 1369
+    },
+    {
+      "id": "ext:VegaLite",
+      "label": "vega-lite",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/draw.ts",
+      "loc": 1369
+    },
+    {
+      "id": "ext:Sankey",
+      "label": "d3-sankey",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/sankey.ts",
+      "loc": 165
+    },
+    {
+      "id": "ext:Comark",
+      "label": "comark",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/index.ts",
+      "loc": 125
+    },
+    {
+      "id": "ext:Linter",
+      "label": "comark-linter",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/rules/charts.ts",
+      "loc": 145
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Charts",
+      "to": "cmp:Read",
+      "kind": "calls",
+      "label": "readChart(node, n, issues)"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "cmp:Draw",
+      "kind": "calls",
+      "label": "dynamic import(\"./draw.ts\")"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "cmp:Sankey",
+      "kind": "calls",
+      "label": "dynamic import"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "state:Chart",
+      "kind": "writes",
+      "label": "attrs + table"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "ext:Comark",
+      "kind": "calls",
+      "label": "defineComarkPlugin"
+    },
+    {
+      "from": "cmp:Charts",
+      "to": "shared:Annotate",
+      "kind": "imports",
+      "label": "Annotation type"
+    },
+    {
+      "from": "cmp:Read",
+      "to": "state:Chart",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Read",
+      "to": "shared:Annotate",
+      "kind": "calls",
+      "label": "readMark"
+    },
+    {
+      "from": "cmp:Draw",
+      "to": "ext:Flint",
+      "kind": "calls",
+      "label": "chart spec"
+    },
+    {
+      "from": "cmp:Draw",
+      "to": "ext:Vega",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Draw",
+      "to": "ext:VegaLite",
+      "kind": "calls",
+      "label": "spec charts"
+    },
+    {
+      "from": "cmp:Draw",
+      "to": "ipc:Vega",
+      "kind": "ipc",
+      "label": "parse + scene walk"
+    },
+    {
+      "from": "cmp:Draw",
+      "to": "cmp:Colors",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Sankey",
+      "to": "ext:Sankey",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "state:Chart",
+      "kind": "reads",
+      "label": "DrawnChart attrs"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Styles",
+      "kind": "reads",
+      "label": "inlined once"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "shared:Annotate",
+      "kind": "calls",
+      "label": "annotateHtml(svg, marks)"
+    },
+    {
+      "from": "cmp:Vue",
+      "to": "state:Chart",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Vue",
+      "to": "cmp:Client",
+      "kind": "calls",
+      "label": "addStyles on mount"
+    },
+    {
+      "from": "cmp:Vue",
+      "to": "cmp:Styles",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:React",
+      "to": "cmp:Client",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Styles",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Styles",
+      "to": "shared:Tokens",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:ChartDraw",
+      "to": "cmp:Charts",
+      "kind": "commands",
+      "label": "builds the package"
+    },
+    {
+      "from": "ext:Linter",
+      "to": "cmp:Read",
+      "kind": "imports",
+      "label": "draw: false reuses the reader"
+    }
+  ],
+  "flows": [
+    {
+      "id": "table",
+      "name": "Chart from a table",
+      "trigger": "::chart{type=\"bar\"} over a Markdown table",
+      "steps": [
+        "cmp:Charts",
+        "cmp:Read",
+        "state:Chart",
+        "cmp:Draw",
+        "ipc:Vega"
+      ],
+      "summary": "Table to validated chart to a Vega scene to one SVG string on the node."
+    },
+    {
+      "id": "marks",
+      "name": "Place annotation marks",
+      "trigger": "::annotation marks inside the chart table",
+      "steps": [
+        "cmp:Read",
+        "cmp:Draw",
+        "cmp:Charts",
+        "cmp:Html"
+      ],
+      "summary": "The scene walk returns a box per mark; only the HTML renderer draws them."
+    },
+    {
+      "id": "bad",
+      "name": "A chart that can't be drawn",
+      "trigger": "A malformed table or spec",
+      "steps": [
+        "cmp:Read",
+        "cmp:Charts",
+        "cmp:Html"
+      ],
+      "summary": "The issue is recorded, the node is reset, and the table renders alone."
+    },
+    {
+      "id": "render",
+      "name": "Place a drawn chart",
+      "trigger": "Vue or React renders the node",
+      "steps": [
+        "cmp:Vue",
+        "cmp:Client",
+        "cmp:Styles"
+      ],
+      "summary": "innerHTML of the SVG plus caption and a details Data block; styles on mount."
+    },
+    {
+      "id": "sankey",
+      "name": "Sankey from two columns",
+      "trigger": "::chart{type=\"sankey\"}",
+      "steps": [
+        "cmp:Read",
+        "cmp:Sankey",
+        "ext:Sankey",
+        "cmp:Html"
+      ],
+      "summary": "d3-sankey lays it out; the result is still just an SVG attribute."
+    },
+    {
+      "id": "lint",
+      "name": "Lint without drawing",
+      "trigger": "comark-linter with charts installed",
+      "steps": [
+        "ext:Linter",
+        "cmp:Read",
+        "cmp:Charts"
+      ],
+      "summary": "`draw: false` reuses the reader, so linting loads neither Vega nor Flint."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Drawing is a parse-time side effect",
+      "body": "index.ts draws in `post()` and replaces the node's attributes, so no renderer imports Vega. The dependencies are dynamic imports inside the branch, so a document with no chart never loads them.",
+      "severity": "info",
+      "path": "packages/charts/src/index.ts"
+    },
+    {
+      "title": "Half the package is one drawing file",
+      "body": "draw.ts is 1369 lines (layout, legends, labels, gantt, waterfall) and read.ts 1065; together they are 2.4k of the package's 2.9k lines, the densest code in the repo.",
+      "severity": "warn",
+      "path": "packages/charts/src/draw.ts"
+    },
+    {
+      "title": "The reader is reused for linting",
+      "body": "`draw: false` skips only the drawing call: readChart still runs, so comark-linter gets identical diagnostics without the Vega load. That is why the reader is a separate file.",
+      "severity": "info",
+      "path": "packages/charts/src/index.ts"
+    },
+    {
+      "title": "Colors are literals, then variables",
+      "body": "colors.ts writes light-theme hex values into the SVG so it stands alone; styles.ts then swaps each for the matching --comark-* variable, which is how dark mode works without redrawing.",
+      "severity": "info",
+      "path": "packages/charts/src/colors.ts"
+    },
+    {
+      "title": "Marks need the scene, not the image",
+      "body": "Chart marks reuse annotate's Annotation type and are placed from `boxes` the Vega scene walk returns per mark; marks with no box are dropped rather than drawn in a corner.",
+      "severity": "info",
+      "path": "packages/charts/src/draw.ts"
+    },
+    {
+      "title": "Only HTML gets marks",
+      "body": "Vue and React render `Chart` with `innerHTML` and no marks, and the type says so; a mark placed on a chart is silently absent there, which is easy to miss when adding a chart to a non-HTML page.",
+      "severity": "warn",
+      "path": "packages/charts/src/vue.ts"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "onmax__comark-ui",
+  "name": "Comark UI",
+  "github": "https://github.com/onmax/comark-ui",
+  "license": "MIT",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "45-package pnpm workspace: Markdown components as parse plugins plus HTML, Vue, React and Svelte renderers.",
+  "stack": ["typescript", "pnpm", "comark", "markdown", "html", "vue", "react", "svelte"],
+  "reports": [
+    "report.md",
+    "scan-overview.json",
+    "scan-overview.html",
+    "scan-ui.json",
+    "scan-ui.html",
+    "scan-lint.json",
+    "scan-lint.html",
+    "scan-annotate.json",
+    "scan-annotate.html",
+    "scan-charts.json",
+    "scan-charts.html"
+  ]
+}

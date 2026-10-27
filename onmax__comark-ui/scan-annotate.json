@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Comark UI",
+    "slug": "onmax__comark-ui",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "annotate",
+    "name": "Annotate",
+    "entryLayout": "packages/annotate/src/index.ts",
+    "root": "packages/annotate",
+    "summary": "Screenshots, compares and marks; one reader for plugin and HTML renderer",
+    "externalModules": [
+      "zoom",
+      "carousel",
+      "lint",
+      "charts"
+    ]
+  },
+  "stats": {
+    "nodes": 21,
+    "edges": 27,
+    "components": 9,
+    "stateFiles": 1,
+    "commands": 2,
+    "ipcCalls": 2,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Annotate",
+      "label": "index.ts",
+      "kind": "layout",
+      "group": "layout",
+      "path": "packages/annotate/src/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "parse plugin: runs check() in post and appends issues + issueRules to meta.",
+      "loc": 36
+    },
+    {
+      "id": "cmp:Read",
+      "label": "read.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/read.ts",
+      "loc": 672,
+      "summary": "The one reader: ::screenshot, ::compare, ::annotation to models or issues."
+    },
+    {
+      "id": "cmp:Place",
+      "label": "place.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/place.ts",
+      "summary": "Stamps and side notes sized for one width, placed to avoid overlaps.",
+      "loc": 140
+    },
+    {
+      "id": "cmp:Marks",
+      "label": "marks.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/marks.ts",
+      "summary": "Hand-drawn SVG paths after AnnotationKit, seeded per mark so renders repeat.",
+      "loc": 189
+    },
+    {
+      "id": "cmp:Html",
+      "label": "html.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/html.ts",
+      "loc": 360,
+      "summary": "The only renderer: figure, marks, arrows, notes, zoomable wrapper."
+    },
+    {
+      "id": "cmp:Script",
+      "label": "script.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/script.ts",
+      "loc": 697,
+      "summary": "Browser script inlined once: slider compare, mark focus, zoom binding."
+    },
+    {
+      "id": "cmp:Styles",
+      "label": "styles.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/styles.ts",
+      "summary": "CSS with :has() linking a mark and its note; 40 mark pairs pre-generated.",
+      "loc": 148
+    },
+    {
+      "id": "cmp:Font",
+      "label": "font.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/font.ts",
+      "summary": "Caveat 400 latin, base64 inlined at ~32 KB (OFL).",
+      "loc": 3
+    },
+    {
+      "id": "cmp:Cli",
+      "label": "cli.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/annotate/src/cli.ts",
+      "summary": "`comark-annotate check|render`, same plugins as the docs, writes a preview page.",
+      "loc": 71
+    },
+    {
+      "id": "state:Model",
+      "label": "Annotation model",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/annotate/src/read.ts",
+      "summary": "Annotation, Screenshot, Compare, Placement: what both plugin and renderer read.",
+      "loc": 672
+    },
+    {
+      "id": "cmd:Check",
+      "label": "comark-annotate check",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/annotate/src/cli.ts",
+      "tags": [
+        "check"
+      ],
+      "loc": 71
+    },
+    {
+      "id": "cmd:Render",
+      "label": "comark-annotate render",
+      "kind": "command",
+      "group": "commands",
+      "path": "packages/annotate/src/cli.ts",
+      "tags": [
+        "render"
+      ],
+      "loc": 71
+    },
+    {
+      "id": "ipc:Fs",
+      "label": "node:fs/promises",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/annotate/src/cli.ts",
+      "summary": "readFile each input, writeFile the preview page.",
+      "loc": 71
+    },
+    {
+      "id": "ipc:Html",
+      "label": "@comark/html",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/annotate/src/cli.ts",
+      "summary": "renderHtmlFromDocument, the boundary the CLI renders through.",
+      "loc": 71
+    },
+    {
+      "id": "shared:Tokens",
+      "label": "comark-zoom/theme",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/zoom/src/theme.ts",
+      "summary": "Styles resolve --comark-* through it, and --ca-* derive from those.",
+      "loc": 31
+    },
+    {
+      "id": "ext:Zoom",
+      "label": "comark-zoom",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/zoom/src/index.ts",
+      "summary": "Marks become zoomable items; annotate borrows its runtime.",
+      "loc": 55
+    },
+    {
+      "id": "ext:Carousel",
+      "label": "comark-carousel",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/carousel/src/index.ts",
+      "summary": "::compare is a two-column carousel; the CLI registers it too.",
+      "loc": 195
+    },
+    {
+      "id": "ext:AnnotationKit",
+      "label": "AnnotationKit",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/annotate/src/marks.ts",
+      "summary": "The marks are copied from it, credited in the file header.",
+      "loc": 189
+    },
+    {
+      "id": "ext:Comark",
+      "label": "comark",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/annotate/src/index.ts",
+      "loc": 36
+    },
+    {
+      "id": "ext:HtmlRenderer",
+      "label": "@comark/html",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/annotate/src/html.ts",
+      "loc": 360
+    },
+    {
+      "id": "ext:Linter",
+      "label": "comark-linter",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/lint/src/rules/annotate.ts",
+      "summary": "Reads the same issueRules the plugin writes.",
+      "loc": 103
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Annotate",
+      "to": "cmp:Read",
+      "kind": "calls",
+      "label": "check(tree.nodes)"
+    },
+    {
+      "from": "cmp:Annotate",
+      "to": "ext:Comark",
+      "kind": "calls",
+      "label": "defineComarkPlugin"
+    },
+    {
+      "from": "cmp:Annotate",
+      "to": "state:Model",
+      "kind": "writes",
+      "label": "meta.issues, issueRules"
+    },
+    {
+      "from": "cmp:Read",
+      "to": "cmp:Place",
+      "kind": "calls",
+      "label": "validate the geometry"
+    },
+    {
+      "from": "cmp:Read",
+      "to": "cmp:Marks",
+      "kind": "reads",
+      "label": "known mark names"
+    },
+    {
+      "from": "cmp:Read",
+      "to": "state:Model",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Read",
+      "kind": "calls",
+      "label": "same models, no re-parse"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Place",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Marks",
+      "kind": "calls",
+      "label": "draw()"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Styles",
+      "kind": "reads",
+      "label": "inlined once"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "cmp:Script",
+      "kind": "reads",
+      "label": "runtime(state)"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "ext:HtmlRenderer",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "ext:Zoom",
+      "kind": "imports",
+      "label": "zoomable items"
+    },
+    {
+      "from": "cmp:Html",
+      "to": "ext:Carousel",
+      "kind": "imports",
+      "label": "::compare"
+    },
+    {
+      "from": "cmp:Styles",
+      "to": "shared:Tokens",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Styles",
+      "to": "cmp:Font",
+      "kind": "reads",
+      "label": "handwriting"
+    },
+    {
+      "from": "cmp:Script",
+      "to": "ext:Zoom",
+      "kind": "calls",
+      "label": "start()"
+    },
+    {
+      "from": "cmp:Marks",
+      "to": "ext:AnnotationKit",
+      "kind": "imports",
+      "label": "paths copied"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "cmp:Annotate",
+      "kind": "calls",
+      "label": "parseMarkdown with the plugin"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "ext:HtmlRenderer",
+      "kind": "calls",
+      "label": "renderHtmlFromDocument"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "ext:Carousel",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "ext:Zoom",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "ipc:Fs",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Cli",
+      "to": "ipc:Html",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmd:Check",
+      "to": "cmp:Cli",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Render",
+      "to": "cmp:Cli",
+      "kind": "commands"
+    },
+    {
+      "from": "ext:Linter",
+      "to": "state:Model",
+      "kind": "reads",
+      "label": "issueRules"
+    }
+  ],
+  "flows": [
+    {
+      "id": "parse",
+      "name": "Check a screenshot block",
+      "trigger": "::screenshot with ::annotation children",
+      "steps": [
+        "cmp:Annotate",
+        "cmp:Read",
+        "cmp:Place",
+        "state:Model"
+      ],
+      "summary": "Every mark and note is validated; problems become meta.issues with rule codes."
+    },
+    {
+      "id": "render",
+      "name": "Draw the screenshot",
+      "trigger": "The HTML renderer reaches the node",
+      "steps": [
+        "cmp:Html",
+        "cmp:Read",
+        "cmp:Marks",
+        "cmp:Place",
+        "cmp:Styles"
+      ],
+      "summary": "The same model is painted: figure, hand-drawn marks, arrows, numbered notes."
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom a screenshot",
+      "trigger": "Click anywhere on the screenshot",
+      "steps": [
+        "cmp:Script",
+        "ext:Zoom",
+        "cmp:Styles"
+      ],
+      "summary": "The script binds the figure to the zoom runtime; marks are not links."
+    },
+    {
+      "id": "compare",
+      "name": "Compare before and after",
+      "trigger": "::compare with two images",
+      "steps": [
+        "cmp:Read",
+        "cmp:Html",
+        "ext:Carousel",
+        "cmp:Script"
+      ],
+      "summary": "A two-column carousel plus a slider script, same models on both sides."
+    },
+    {
+      "id": "cli-check",
+      "name": "Check from the CLI",
+      "trigger": "comark-annotate check note.md",
+      "steps": [
+        "cmd:Check",
+        "cmp:Cli",
+        "ipc:Fs",
+        "cmp:Annotate"
+      ],
+      "summary": "Same plugins as the docs; exits 1 with every issue printed."
+    },
+    {
+      "id": "cli-render",
+      "name": "Preview from the CLI",
+      "trigger": "comark-annotate render note.md -o page.html",
+      "steps": [
+        "cmd:Render",
+        "cmp:Cli",
+        "ipc:Html",
+        "ipc:Fs"
+      ],
+      "summary": "Renders a standalone page with the plugins' styles inlined."
+    }
+  ],
+  "notes": [
+    {
+      "title": "One reader, two consumers",
+      "body": "src/read.ts (672 lines) produces Annotation/Screenshot/Compare models; index.ts validates with it and html.ts draws from it, so the plugin and the renderer cannot disagree about a block.",
+      "severity": "info",
+      "path": "packages/annotate/src/read.ts"
+    },
+    {
+      "title": "HTML only, on purpose",
+      "body": "There is no vue.ts, react.ts or svelte entry: AGENTS.md says a per-framework copy would clone the whole figure template. The cost is that annotate is the one package the JSX renderers can't use.",
+      "severity": "warn",
+      "path": "packages/annotate/src/html.ts"
+    },
+    {
+      "title": "Geometry is resolved at one size",
+      "body": "place.ts fixes stamps at 15px and notes at a 420px width, then avoids overlaps (CLEAR, CORNER), so a mark's position is computed per rendered column rather than measured later.",
+      "severity": "info",
+      "path": "packages/annotate/src/place.ts"
+    },
+    {
+      "title": "Styles do the linking, not the script",
+      "body": "styles.ts uses :has() with --ca-on so hovering or focusing a mark lights its note (and the zoomed copies) with no JS; the 40-pair cap is generated at module load.",
+      "severity": "info",
+      "path": "packages/annotate/src/styles.ts"
+    },
+    {
+      "title": "A 32 KB font is inlined",
+      "body": "font.ts embeds Caveat 400 latin as base64 in the source, so the handwriting travels in the stylesheet with no extra request; the OFL licence is in the font's name table.",
+      "severity": "info",
+      "path": "packages/annotate/src/font.ts"
+    },
+    {
+      "title": "The CLI is a second, thinner surface",
+      "body": "cli.ts registers annotate + carousel + zoom and renders a plain page; it duplicates the docs' plugin set by hand, so a new annotate dependency has to be added there too.",
+      "severity": "warn",
+      "path": "packages/annotate/src/cli.ts"
+    }
+  ]
+}

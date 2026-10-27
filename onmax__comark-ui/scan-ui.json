@@ -1,0 +1,589 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "Comark UI",
+    "slug": "onmax__comark-ui",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "ui",
+    "name": "Preset (comark-ui)",
+    "entryLayout": "packages/ui/src/index.ts",
+    "root": "packages/ui",
+    "summary": "The preset: registers every package in order, plus per-framework entries",
+    "externalModules": [
+      "annotate",
+      "charts",
+      "zoom",
+      "code",
+      "icon",
+      "pele"
+    ]
+  },
+  "stats": {
+    "nodes": 28,
+    "edges": 32,
+    "components": 13,
+    "stateFiles": 1,
+    "commands": 0,
+    "ipcCalls": 2,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Preset",
+      "label": "preset()",
+      "kind": "layout",
+      "group": "layout",
+      "path": "packages/ui/src/index.ts",
+      "tags": [
+        "entry"
+      ],
+      "summary": "37 add/parse calls in a fixed order; one createIcons() shared by six packages.",
+      "loc": 256
+    },
+    {
+      "id": "cmp:HtmlEntry",
+      "label": "html.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/html.ts",
+      "summary": "Passes 34 /html entries plus pele and typeset to preset().",
+      "loc": 103
+    },
+    {
+      "id": "cmp:VueEntry",
+      "label": "vue.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/vue.ts",
+      "loc": 90
+    },
+    {
+      "id": "cmp:ReactEntry",
+      "label": "react.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/react.ts",
+      "loc": 94
+    },
+    {
+      "id": "cmp:SvelteEntry",
+      "label": "svelte/index.js",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/svelte/index.js",
+      "summary": "Svelte 5 components; leaves out annotate and diff.",
+      "loc": 82
+    },
+    {
+      "id": "cmp:EditorEntry",
+      "label": "editor.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/editor.ts",
+      "summary": "Re-exports the TipTap kit, Markdown check, codec and uploads.",
+      "loc": 26
+    },
+    {
+      "id": "cmp:EditorKit",
+      "label": "editor/markdown.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/editor/markdown.ts",
+      "summary": "Markdown <-> TipTap JSON through comark's parser; the editor's bridge.",
+      "loc": 567
+    },
+    {
+      "id": "cmp:EditorVue",
+      "label": "editor-vue.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/editor-vue.ts",
+      "summary": "useComarkEditor: @tiptap/vue-3 plus Yjs collaboration.",
+      "loc": 114
+    },
+    {
+      "id": "cmp:Typeset",
+      "label": "typeset.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/typeset.ts",
+      "summary": "Appends one typeset-styles node per document.",
+      "loc": 14
+    },
+    {
+      "id": "cmp:TypesetCss",
+      "label": "typeset-css.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/typeset-css.ts",
+      "summary": "shadcn/typeset text rules on --comark-* tokens, scoped and layered.",
+      "loc": 215
+    },
+    {
+      "id": "cmp:Client",
+      "label": "client.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/client.ts",
+      "summary": "mermaidCss maps --pele-* to the comark tokens; addMermaidStyles() once.",
+      "loc": 39
+    },
+    {
+      "id": "cmp:NuxtTheme",
+      "label": "nuxt-ui.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/nuxt-ui.ts",
+      "summary": "nuxtUiTheme(): rebuilds --ui-* from a Nuxt UI app's colours and CSS.",
+      "loc": 169
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "palette.ts",
+      "kind": "component",
+      "group": "components",
+      "path": "packages/ui/src/palette.ts",
+      "summary": "Tailwind's palette as data, for resolving Nuxt UI colours.",
+      "loc": 341
+    },
+    {
+      "id": "state:PresetOptions",
+      "label": "PresetOptions",
+      "kind": "state",
+      "group": "state",
+      "path": "packages/ui/src/index.ts",
+      "summary": "40 optional keys, each `boolean | options`; include off, rest on.",
+      "loc": 256
+    },
+    {
+      "id": "ipc:Dom",
+      "label": "document",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/ui/src/client.ts",
+      "summary": "addMermaidStyles appends a <style> to document.head.",
+      "loc": 39
+    },
+    {
+      "id": "ipc:Clipboard",
+      "label": "navigator.clipboard",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "packages/ui/src/editor/upload.ts",
+      "summary": "Pasted images become uploads before they reach the editor.",
+      "loc": 249
+    },
+    {
+      "id": "shared:Tokens",
+      "label": "comark-zoom/theme",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/zoom/src/theme.ts",
+      "summary": "The --comark-* token resolver both typeset and mermaid build on.",
+      "loc": 31
+    },
+    {
+      "id": "shared:Peers",
+      "label": "peer entries",
+      "kind": "shared",
+      "group": "shared",
+      "path": "packages/ui/src/html.ts",
+      "summary": "34 `/html` (and /vue, /react, /svelte) entries: default + components.",
+      "loc": 103
+    },
+    {
+      "id": "ext:Annotate",
+      "label": "comark-annotate",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/annotate/src/index.ts",
+      "loc": 36
+    },
+    {
+      "id": "ext:Charts",
+      "label": "comark-charts",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/charts/src/index.ts",
+      "loc": 125
+    },
+    {
+      "id": "ext:Zoom",
+      "label": "comark-zoom",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/zoom/src/index.ts",
+      "loc": 55
+    },
+    {
+      "id": "ext:Code",
+      "label": "comark-code",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/code/src/index.ts",
+      "loc": 155
+    },
+    {
+      "id": "ext:Icon",
+      "label": "comark-icon",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/icon/src/resolve.ts",
+      "loc": 216
+    },
+    {
+      "id": "ext:Critic",
+      "label": "comark-critic",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/critic/src/index.ts",
+      "loc": 257
+    },
+    {
+      "id": "ext:Pele",
+      "label": "comark-pele",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/index.ts",
+      "loc": 256
+    },
+    {
+      "id": "ext:ComarkHtml",
+      "label": "@comark/html",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/html.ts",
+      "loc": 103
+    },
+    {
+      "id": "ext:TipTap",
+      "label": "@tiptap/*",
+      "kind": "external",
+      "group": "external",
+      "path": "packages/ui/src/editor/kit.ts",
+      "loc": 141
+    },
+    {
+      "id": "ext:Docs",
+      "label": "docs site",
+      "kind": "external",
+      "group": "external",
+      "path": "docs/plugins.ts",
+      "loc": 34
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:HtmlEntry",
+      "to": "cmp:Preset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:VueEntry",
+      "to": "cmp:Preset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ReactEntry",
+      "to": "cmp:Preset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SvelteEntry",
+      "to": "cmp:Preset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SvelteEntry",
+      "to": "cmp:Client",
+      "kind": "calls",
+      "label": "addMermaidStyles"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "state:PresetOptions",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "cmp:Typeset",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Icon",
+      "kind": "calls",
+      "label": "createIcons once"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "shared:Peers",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Annotate",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Charts",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Zoom",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Code",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Critic",
+      "kind": "imports",
+      "label": "re-exports css"
+    },
+    {
+      "from": "cmp:Preset",
+      "to": "ext:Pele",
+      "kind": "imports",
+      "label": "mermaid slot"
+    },
+    {
+      "from": "cmp:HtmlEntry",
+      "to": "ext:ComarkHtml",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:HtmlEntry",
+      "to": "cmp:Client",
+      "kind": "reads",
+      "label": "mermaidCss"
+    },
+    {
+      "from": "cmp:HtmlEntry",
+      "to": "cmp:TypesetCss",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Typeset",
+      "to": "cmp:TypesetCss",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:TypesetCss",
+      "to": "shared:Tokens",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "shared:Tokens",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ipc:Dom",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:NuxtTheme",
+      "to": "cmp:Palette",
+      "kind": "calls",
+      "label": "resolve colours"
+    },
+    {
+      "from": "cmp:NuxtTheme",
+      "to": "shared:Tokens",
+      "kind": "writes",
+      "label": "--ui-* to --comark-*"
+    },
+    {
+      "from": "cmp:EditorEntry",
+      "to": "cmp:EditorKit",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EditorKit",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:EditorKit",
+      "to": "cmp:Preset",
+      "kind": "reads",
+      "label": "the caller's plugins"
+    },
+    {
+      "from": "cmp:EditorVue",
+      "to": "cmp:EditorEntry",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EditorVue",
+      "to": "ext:TipTap",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:EditorKit",
+      "to": "ipc:Clipboard",
+      "kind": "ipc"
+    },
+    {
+      "from": "ext:Docs",
+      "to": "cmp:Preset",
+      "kind": "imports",
+      "label": "docs/plugins.ts"
+    },
+    {
+      "from": "ext:Docs",
+      "to": "cmp:HtmlEntry",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "render",
+      "name": "Render with the preset",
+      "trigger": "comarkUi() from comark-ui/html",
+      "steps": [
+        "cmp:HtmlEntry",
+        "cmp:Preset",
+        "state:PresetOptions",
+        "ext:ComarkHtml"
+      ],
+      "summary": "Entry imports every package, preset() orders them, the host walks the tree."
+    },
+    {
+      "id": "disable",
+      "name": "Turn a plugin off",
+      "trigger": "comarkUi({ zoom: false })",
+      "steps": [
+        "state:PresetOptions",
+        "cmp:Preset",
+        "ext:Zoom"
+      ],
+      "summary": "`false` skips add(); an object passes options through optionsOf()."
+    },
+    {
+      "id": "editor",
+      "name": "Mount the editor",
+      "trigger": "comark-ui/editor/vue",
+      "steps": [
+        "cmp:EditorVue",
+        "cmp:EditorEntry",
+        "cmp:EditorKit",
+        "ext:TipTap"
+      ],
+      "summary": "TipTap with the same plugins the renderer uses; Markdown in and out."
+    },
+    {
+      "id": "theme",
+      "name": "Adopt Nuxt UI colours",
+      "trigger": "nuxtUiTheme(uiColors, css)",
+      "steps": [
+        "cmp:NuxtTheme",
+        "cmp:Palette",
+        "shared:Tokens"
+      ],
+      "summary": "Resolves each colour from Tailwind's palette into --ui-* then --comark-*."
+    },
+    {
+      "id": "typeset",
+      "name": "Style the prose",
+      "trigger": "Any page rendered with comark-ui",
+      "steps": [
+        "cmp:Preset",
+        "cmp:Typeset",
+        "cmp:TypesetCss",
+        "cmp:HtmlEntry"
+      ],
+      "summary": "One style node per document, in the serving render, so no shift on hydration."
+    },
+    {
+      "id": "mermaid",
+      "name": "Theme a Mermaid diagram",
+      "trigger": "Pea draws a diagram in Vue",
+      "steps": [
+        "cmp:Client",
+        "shared:Tokens",
+        "ipc:Dom"
+      ],
+      "summary": "--pele-* variables mapped to comark tokens, style added once."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Order is the contract",
+      "body": "preset() (index.ts:177) adds include first and code last, and the comment says why; code-notes depends on running after Shiki, media before zoom. That order lives only here.",
+      "severity": "warn",
+      "path": "packages/ui/src/index.ts"
+    },
+    {
+      "title": "Four renderer entries repeat the same list",
+      "body": "html.ts, vue.ts, react.ts and svelte/index.js each import the same ~35 packages by hand and differ only in annotate/diff; a new package means editing all four plus the Renderer type.",
+      "severity": "warn",
+      "path": "packages/ui/src/vue.ts"
+    },
+    {
+      "title": "No script for the preset itself",
+      "body": "The preset only adds plugins and components; client.ts is 39 lines and does one thing (append the Mermaid style once). All behaviour lives in each package's own script.",
+      "severity": "info",
+      "path": "packages/ui/src/client.ts"
+    },
+    {
+      "title": "The editor is a second surface",
+      "body": "src/editor/ (1000 lines) keeps a TipTap schema in step with the Markdown parser, and editor-vue.ts adds Yjs. It is exported as comark-ui/editor, outside the preset.",
+      "severity": "info",
+      "path": "packages/ui/src/editor/markdown.ts"
+    },
+    {
+      "title": "typeset is scoped, not global",
+      "body": "typeset-css.ts wraps its rules in `@scope` with no selector and `@layer comark`, so the styles apply to the page they are emitted into and sit below every block's own rules.",
+      "severity": "info",
+      "path": "packages/ui/src/typeset-css.ts"
+    },
+    {
+      "title": "One icon resolver, six consumers",
+      "body": "preset() calls createIcons() once and hands the same `Icons` to icon, cards, details, file trees, tabs and code, so options and cache are shared instead of per package.",
+      "severity": "info",
+      "path": "packages/ui/src/index.ts"
+    }
+  ]
+}

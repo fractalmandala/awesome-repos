@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module Flow Scan</title>
+<!-- Self-contained: no CDN, no external fonts. Inter is used if installed, else the system UI font. -->
+<style>
+  :root {
+    --background: #0a0a0a; --foreground: #fafafa; --card: #161616; --muted: #1f1f1f;
+    --muted-foreground: #a3a3a3; --border: #262626;
+    --card-shadow: 0px 0px 0px 1px #ffffff14, 0px 1px 2px -1px #00000080, 0px 4px 12px 0px #00000040;
+    --accent: #f97316; --rail: 296px; --flows: 320px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { font-family: "Inter", system-ui, -apple-system, sans-serif; background: var(--background); color: var(--foreground); overflow: hidden; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+  #grid-bg { position: fixed; inset: 0; pointer-events: none;
+    background-image: linear-gradient(color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%); }
+  #glow { position: fixed; pointer-events: none; inset: 0;
+    background: radial-gradient(600px 300px at 15% -5%, #f9731612, transparent 70%), radial-gradient(700px 340px at 85% -8%, #3b82f614, transparent 70%), radial-gradient(500px 300px at 55% 110%, #ec489910, transparent 70%); }
+
+  /* header */
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 28px 0 28px; }
+  .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .brand-icon { width: 44px; height: 44px; border-radius: 14px; background: var(--card); box-shadow: var(--card-shadow); display: flex; align-items: center; justify-content: center; flex: none; color: var(--accent); }
+  .brand-icon svg { width: 22px; height: 22px; }
+  .brand h1 { font-size: 19px; font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand p { font-size: 12.5px; color: var(--muted-foreground); margin-top: 2px; }
+  .brand .date { display: inline-block; margin-left: 10px; font-size: 11px; color: var(--muted-foreground); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; vertical-align: 1px; background: #111; }
+  .stats { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .stat { background: #111; border: 1px solid var(--border); border-radius: 12px; padding: 7px 13px; text-align: center; min-width: 64px; }
+  .stat b { display: block; font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted-foreground); }
+
+  /* layout */
+  #wrap { position: fixed; inset: 96px 0 0 0; display: flex; gap: 14px; padding: 0 28px 20px 28px; z-index: 10; }
+  #rail, #flows { flex: none; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; scrollbar-width: thin; padding-bottom: 8px; }
+  #rail { width: var(--rail); }
+  #flows { width: var(--flows); }
+  #main { flex: 1; position: relative; min-width: 0; border-radius: 18px; border: 1px solid var(--border); background: #0c0c0cb0; overflow: hidden; }
+  .card { background: #111111d9; border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; backdrop-filter: blur(8px); flex: none; }
+  .card h3 { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted-foreground); margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .card h3 .count { margin-left: auto; letter-spacing: 0; color: #737373; }
+  .module-meta { font-size: 11.5px; color: var(--muted-foreground); line-height: 1.55; }
+  .module-meta .mono { font-size: 10px; color: #d4d4d4b0; word-break: break-all; display: block; margin-top: 3px; }
+  .ext-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; background: #0c0c0c; border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 500; color: #d4d4d4; }
+  .chip i { width: 7px; height: 7px; border-radius: 99px; display: block; }
+
+  /* hotspots */
+  .hot-row { display: flex; align-items: center; gap: 9px; padding: 6px 4px; border-radius: 9px; cursor: pointer; transition: background .15s; }
+  .hot-row:hover { background: #ffffff0a; }
+  .hot-rank { width: 16px; font-size: 10.5px; color: var(--muted-foreground); text-align: right; flex: none; font-variant-numeric: tabular-nums; }
+  .hot-body { flex: 1; min-width: 0; }
+  .hot-name { display: block; font-size: 12px; font-weight: 550; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hot-bar { display: block; height: 3px; border-radius: 999px; background: #ffffff12; margin-top: 5px; overflow: hidden; }
+  .hot-bar i { display: block; height: 100%; border-radius: 999px; }
+  .hot-val { font-size: 11px; font-weight: 650; width: 26px; text-align: right; flex: none; font-variant-numeric: tabular-nums; }
+
+  /* notes */
+  .note { border-left: 2px solid; padding: 8px 0 8px 11px; margin-bottom: 10px; }
+  .note:last-child { margin-bottom: 0; }
+  .note .n-title { font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+  .note .n-body { font-size: 11.5px; color: var(--muted-foreground); line-height: 1.55; margin-top: 3px; }
+  .note .n-path { font-size: 9.5px; color: #d4d4d490; margin-top: 5px; word-break: break-all; }
+
+  /* flows panel */
+  .flow { border: 1px solid var(--border); border-radius: 13px; padding: 11px 12px; margin-bottom: 8px; cursor: pointer; background: #0c0c0c; transition: border-color .15s, background .15s; }
+  .flow:last-child { margin-bottom: 0; }
+  .flow:hover { border-color: #3a3a3a; background: #141414; }
+  .flow.active { border-color: #f9731680; background: #f973160d; }
+  .flow .f-name { font-size: 12.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .flow .f-name .f-n { font-size: 10px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; margin-left: auto; font-weight: 500; }
+  .flow .f-trigger { font-size: 11px; color: #fdba74; margin-top: 4px; }
+  .flow .f-sum { font-size: 11.5px; color: var(--muted-foreground); margin-top: 4px; line-height: 1.5; }
+  .flow ol { display: none; list-style: none; margin-top: 10px; border-top: 1px solid var(--muted); padding-top: 8px; }
+  .flow.active ol { display: block; }
+  .flow li { display: flex; align-items: center; gap: 8px; font-size: 11.5px; padding: 3px 0; color: #d4d4d4; cursor: pointer; }
+  .flow li:hover { color: #fff; }
+  .flow li .badge { position: static; }
+  .flow li .li-kind { margin-left: auto; font-size: 10px; color: #737373; }
+  .hint { font-size: 11px; color: #737373; line-height: 1.5; }
+
+  /* stage */
+  #viewport { position: absolute; inset: 0; cursor: grab; touch-action: none; }
+  #viewport.dragging { cursor: grabbing; }
+  #stage { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+  #edges { position: absolute; top: 0; left: 0; overflow: visible; }
+  #nodes { position: absolute; top: 0; left: 0; }
+  .group-box { position: absolute; border-radius: 28px; border: 1px dashed #ffffff1c; background: #ffffff05; opacity: 0; animation: fade-in .6s ease .15s forwards; }
+  .group-label { position: absolute; top: 15px; left: 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #d4d4d488; display: flex; align-items: center; gap: 7px; }
+  .group-label::before { content: ""; width: 14px; height: 1.5px; background: #d4d4d455; border-radius: 1px; }
+  .group-label em { font-style: normal; color: #737373; letter-spacing: 0; }
+  @keyframes fade-in { to { opacity: 1; } }
+
+  .node { position: absolute; border-radius: 20px; background: var(--card); box-shadow: var(--card-shadow); cursor: pointer; user-select: none;
+    opacity: 0; transform: scale(.85); filter: blur(6px); animation: node-in .55s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; transition: opacity .3s; }
+  @keyframes node-in { to { opacity: 1; transform: scale(1); filter: blur(0); } }
+  .node.dim { opacity: .18 !important; }
+  .node.selected { outline: 1.5px solid #ffffff40; }
+  .node.on { outline: 1.5px solid #f97316aa; box-shadow: 0 0 0 4px #f9731618, var(--card-shadow); }
+  .node-head { display: flex; align-items: center; gap: 10px; height: 100%; padding: 0 14px; }
+  .node-ic { width: 28px; height: 28px; border-radius: 14px; flex: none; display: flex; align-items: center; justify-content: center; }
+  .node-ic svg { width: 15px; height: 15px; }
+  .node-txt { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .node-label { font-size: 13.5px; font-weight: 550; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .node-sub { font-size: 11.5px; color: var(--muted-foreground); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .node-deg { font-size: 10px; font-weight: 650; font-variant-numeric: tabular-nums; border-radius: 999px; padding: 1px 7px; background: #ffffff0d; color: #d4d4d4; flex: none; }
+  .badge { position: absolute; top: -9px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: #0a0a0a;
+    font-size: 10.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 3px var(--background); }
+
+  .edge-path { fill: none; stroke-width: 1.5; stroke-linecap: round; opacity: .5; transition: opacity .3s, stroke-width .3s; }
+  .edge-path.dim { opacity: .06; }
+  .edge-path.hot { opacity: 1; stroke-width: 2.4; }
+  .edge-flow { fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 3 9; opacity: 0; animation: flow 1.1s linear infinite; pointer-events: none; transition: opacity .3s; }
+  .edge-flow.hot { opacity: 1; stroke-width: 2.4; }
+  .edge-hit { fill: none; stroke: transparent; stroke-width: 10; cursor: help; }
+  .flow-link { fill: none; stroke: #f97316; stroke-width: 2; stroke-dasharray: 6 6; opacity: .85; animation: flow 1.1s linear infinite; pointer-events: none; }
+  @keyframes flow { to { stroke-dashoffset: -12; } }
+
+  /* legend & controls */
+  #legend { position: absolute; left: 14px; bottom: 14px; z-index: 20; display: flex; gap: 4px; padding: 6px; border-radius: 16px; background: #111111d9; border: 1px solid var(--border); backdrop-filter: blur(8px); flex-wrap: wrap; max-width: calc(100% - 200px); }
+  .legend-item { display: flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: 11px; font-size: 11.5px; font-weight: 500; color: var(--muted-foreground); cursor: default; transition: background .15s, color .15s; }
+  .legend-item:hover { background: #ffffff0c; color: var(--foreground); }
+  .legend-item i { width: 14px; height: 2px; border-radius: 2px; display: block; }
+  #controls { position: absolute; right: 14px; bottom: 14px; z-index: 20; display: flex; gap: 6px; padding: 6px; border-radius: 16px; background: #111111d9; border: 1px solid var(--border); backdrop-filter: blur(8px); }
+  #controls button { width: 32px; height: 32px; border: none; border-radius: 10px; cursor: pointer; background: transparent; color: var(--muted-foreground); font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  #controls button:hover { background: #ffffff0c; color: var(--foreground); }
+  #controls .zoom-val { display: flex; align-items: center; font-size: 11.5px; color: var(--muted-foreground); padding: 0 6px; min-width: 44px; justify-content: center; font-variant-numeric: tabular-nums; }
+
+  /* tooltip & popover */
+  #tooltip { position: fixed; z-index: 70; pointer-events: none; background: #1a1a1a; border: 1px solid #ffffff1e; border-radius: 11px; padding: 9px 12px; font-size: 11.5px; line-height: 1.5; box-shadow: 0 8px 24px #00000090; opacity: 0; transition: opacity .12s; max-width: 320px; }
+  #tooltip .t-kind { display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--muted-foreground); letter-spacing: .04em; }
+  #tooltip .t-kind i { width: 8px; height: 8px; border-radius: 99px; display: block; }
+  #tooltip .t-name { font-weight: 650; font-size: 12.5px; margin: 2px 0; }
+  #tooltip .t-path { font-size: 9.5px; color: var(--muted-foreground); word-break: break-all; margin-bottom: 5px; }
+  #tooltip .t-sum { color: #d4d4d4; margin-bottom: 5px; }
+  #tooltip .t-row { display: flex; gap: 12px; color: #d4d4d4; }
+  #tooltip .t-row b { font-variant-numeric: tabular-nums; }
+  #tooltip .t-dim { color: var(--muted-foreground); }
+  #tooltip .t-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+  #tooltip .t-tags span { font-size: 10px; border: 1px solid var(--border); border-radius: 999px; padding: 0 7px; color: #d4d4d4; }
+  #popover { position: fixed; z-index: 60; width: 284px; border-radius: 14px; background: var(--card); box-shadow: var(--card-shadow); padding: 15px 16px; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .2s, transform .2s; max-height: 60vh; overflow: auto; }
+  #popover.show { opacity: 1; transform: none; pointer-events: auto; }
+  #popover .p-kind { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 550; letter-spacing: .04em; color: var(--muted-foreground); }
+  #popover .p-kind i { width: 8px; height: 8px; border-radius: 99px; display: block; }
+  #popover .p-label { margin-top: 5px; font-size: 14px; font-weight: 650; word-break: break-word; }
+  #popover .p-summary { margin-top: 5px; font-size: 12px; line-height: 1.55; color: var(--muted-foreground); }
+  #popover .p-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 11px; }
+  #popover .p-metric b { display: block; font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  #popover .p-metric span { font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted-foreground); }
+  #popover .p-sec { margin-top: 11px; font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted-foreground); }
+  #popover .p-edge { font-size: 11px; color: #d4d4d4; padding: 2px 0; display: flex; gap: 6px; align-items: center; }
+  #popover .p-edge i { width: 10px; height: 2px; border-radius: 2px; display: block; flex: none; }
+  #popover .p-path { margin-top: 10px; font-size: 10px; color: #a3a3a3cc; word-break: break-all; }
+
+  @media (max-width: 1280px) { :root { --rail: 250px; --flows: 280px; } }
+  @media (max-width: 1040px) {
+    body { overflow: auto; }
+    header { position: static; flex-wrap: wrap; padding-bottom: 14px; }
+    #wrap { position: static; flex-direction: column; padding: 0 16px 20px; }
+    #main { height: 70vh; order: 1; } #flows { order: 2; width: 100%; } #rail { order: 3; width: 100%; }
+    #legend { max-width: calc(100% - 28px); bottom: 64px; }
+  }
+</style>
+</head>
+<body>
+<div id="grid-bg"></div><div id="glow"></div>
+<header>
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></svg></div>
+    <div><h1 id="p-name"></h1><p><span id="p-tagline"></span><span class="date" id="p-date"></span></p></div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+<div id="wrap">
+  <aside id="rail">
+    <div class="card"><h3 id="scope-h">Module</h3><div class="module-meta" id="module-meta"></div></div>
+    <div class="card"><h3>Most connected <span class="count">degree</span></h3><div id="hotspots"></div></div>
+    <div class="card"><h3>Findings <span class="count" id="notes-count"></span></h3><div id="notes"></div></div>
+  </aside>
+  <section id="main">
+    <div id="viewport"><div id="stage"><svg id="edges"></svg><div id="nodes"></div></div></div>
+    <div id="legend"></div>
+    <div id="controls"><button id="zoom-out" title="Zoom out">−</button><span class="zoom-val" id="zoom-val">100%</span><button id="zoom-in" title="Zoom in">+</button><button id="zoom-fit" title="Fit to view">⤢</button></div>
+  </section>
+  <aside id="flows">
+    <div class="card"><h3>Flows <span class="count" id="flows-count"></span></h3><div id="flow-list"></div><p class="hint" style="margin-top:10px">Click a flow to trace it in step order. Click again, press Esc, or click empty canvas to clear. Hover a node for details; click it for its connections.</p></div>
+  </aside>
+</div>
+<div id="tooltip"></div><div id="popover"></div>
+<script id="scan-data" type="application/json">{"version":1,"scan":"module-flow","scope":"module","project":{"name":"Comark UI","slug":"onmax__comark-ui","date":"2026-10-27"},"module":{"id":"lint","name":"Linter (comark-linter)","entryLayout":"packages/lint/src/index.ts","root":"packages/lint","summary":"A library, CLI, ESLint plugin and Doctor extension over one 285-code catalog","externalModules":["ui","annotate","charts","vite-doctor","eslint"]},"stats":{"nodes":29,"edges":33,"components":15,"stateFiles":1,"commands":3,"ipcCalls":3,"flows":7},"groups":[{"id":"layout","label":"Layout"},{"id":"components","label":"Components"},{"id":"state","label":"State"},{"id":"commands","label":"Commands & Palette"},{"id":"ipc","label":"IPC / Backend"},{"id":"shared","label":"Shared Components"},{"id":"external","label":"Other Modules"}],"nodes":[{"id":"cmp:Lint","label":"lint()","kind":"layout","group":"layout","path":"packages/lint/src/index.ts","tags":["entry"],"summary":"939 lines: parse once, run core checks then plugin issues, sort by position.","loc":939},{"id":"cmp:Source","label":"source.ts","kind":"component","group":"components","path":"packages/lint/src/source.ts","summary":"Lines plus `prose` with code, frontmatter and inline code blanked, columns kept.","loc":117},{"id":"cmp:Words","label":"words.ts","kind":"component","group":"components","path":"packages/lint/src/words.ts","summary":"Levenshtein nearest-name, for \"did you mean\" on components and files.","loc":43},{"id":"cmp:Links","label":"links.ts","kind":"component","group":"components","path":"packages/lint/src/links.ts","summary":"Every href/src: files and anchors through read/exists/list, then block lists.","loc":362},{"id":"cmp:Urls","label":"urls.ts","kind":"component","group":"components","path":"packages/lint/src/urls.ts","summary":"Requests external URLs, 8 at a time, 2 per host, with a disk cache.","loc":174},{"id":"cmp:Rules","label":"rules/index.ts","kind":"component","group":"components","path":"packages/lint/src/rules/index.ts","summary":"285 rules from 36 files; each package takes its own COMARKxx hundred.","loc":77},{"id":"cmp:RulesCore","label":"rules/core.ts","kind":"component","group":"components","path":"packages/lint/src/rules/core.ts","summary":"Unclosed blocks, unknown components, duplicate ids, missing alt, unsafe URLs.","loc":34},{"id":"cmp:RulesCharts","label":"rules/charts.ts","kind":"component","group":"components","path":"packages/lint/src/rules/charts.ts","summary":"The largest per-package rule file, 145 lines.","loc":145},{"id":"cmp:RulesAnnotate","label":"rules/annotate.ts","kind":"component","group":"components","path":"packages/lint/src/rules/annotate.ts","loc":103},{"id":"cmp:Config","label":"config.ts","kind":"component","group":"components","path":"packages/lint/src/config.ts","summary":"Loads installed comark-* packages through optional dynamic imports.","loc":212},{"id":"cmp:Cli","label":"cli.ts","kind":"component","group":"components","path":"packages/lint/src/cli.ts","summary":"`lint-comark \u003cglob>... [--format] [--config] [--check-urls]`, exits 1.","loc":79},{"id":"cmp:Doctor","label":"doctor.ts","kind":"component","group":"components","path":"packages/lint/src/doctor.ts","summary":"Vite Doctor manifest rules glob Markdown in onProjectEnd; codes link to docs.","loc":123},{"id":"cmp:Eslint","label":"eslint.ts","kind":"component","group":"components","path":"packages/lint/src/eslint.ts","summary":"@eslint/markdown with the same catalog, delegating to a worker.","loc":160},{"id":"cmp:EslintWorker","label":"eslint-worker.ts","kind":"component","group":"components","path":"packages/lint/src/eslint-worker.ts","summary":"52 lines: receive a request, lint, post diagnostics back.","loc":52},{"id":"cmp:HtmlTags","label":"html-tags.ts","kind":"component","group":"components","path":"packages/lint/src/html-tags.ts","summary":"The standard element list, so ::div is never an unknown component.","loc":6},{"id":"state:HeadingIndex","label":"shared heading index","kind":"state","group":"state","path":"packages/lint/src/index.ts","loc":939},{"id":"cmd:LintCli","label":"lint-comark","kind":"command","group":"commands","path":"packages/lint/src/cli.ts","tags":["lint-comark"],"loc":79},{"id":"cmd:Doctor","label":"vite-doctor","kind":"command","group":"commands","path":"packages/lint/src/doctor.ts","tags":["pnpm run doctor"],"loc":123},{"id":"cmd:Eslint","label":"eslint --plugin comark","kind":"command","group":"commands","path":"packages/lint/src/eslint.ts","loc":160},{"id":"ipc:Fs","label":"node:fs/promises","kind":"ipc","group":"ipc","path":"packages/lint/src/index.ts","summary":"Default read/exists/list; `import(\"node:fs/promises\")` only when needed.","loc":939},{"id":"ipc:Http","label":"fetch","kind":"ipc","group":"ipc","path":"packages/lint/src/urls.ts","loc":174},{"id":"ipc:Worker","label":"worker_threads","kind":"ipc","group":"ipc","path":"packages/lint/src/eslint.ts","loc":160},{"id":"shared:DocMeta","label":"meta.issues","kind":"shared","group":"shared","path":"packages/annotate/src/index.ts","loc":36},{"id":"ext:Comark","label":"comark","kind":"external","group":"external","path":"packages/lint/src/index.ts","loc":939},{"id":"ext:ViteDoctor","label":"vite-doctor","kind":"external","group":"external","path":"packages/lint/src/doctor.ts","loc":123},{"id":"ext:Eslint","label":"eslint + @eslint/markdown","kind":"external","group":"external","path":"packages/lint/src/eslint.ts","loc":160},{"id":"ext:Packages","label":"comark-* packages","kind":"external","group":"external","path":"packages/lint/src/config.ts","loc":212},{"id":"ext:Preset","label":"comark-ui/html","kind":"external","group":"external","path":"packages/ui/src/index.ts","loc":256},{"id":"ext:DoctorDocs","label":"docs/pages/doctor","kind":"external","group":"external","path":"docs/pages/doctor","loc":0}],"edges":[{"from":"cmp:Lint","to":"cmp:Source","kind":"calls","label":"read(markdown)"},{"from":"cmp:Lint","to":"cmp:Rules","kind":"reads","label":"catalog"},{"from":"cmp:Lint","to":"cmp:Links","kind":"calls"},{"from":"cmp:Lint","to":"cmp:Words","kind":"calls","label":"closest"},{"from":"cmp:Lint","to":"cmp:HtmlTags","kind":"reads"},{"from":"cmp:Lint","to":"ipc:Fs","kind":"ipc"},{"from":"cmp:Lint","to":"ext:Comark","kind":"calls","label":"parseMarkdown"},{"from":"cmp:Lint","to":"state:HeadingIndex","kind":"writes"},{"from":"cmp:Lint","to":"shared:DocMeta","kind":"reads","label":"plugin issues"},{"from":"cmp:Links","to":"cmp:Urls","kind":"calls"},{"from":"cmp:Links","to":"ipc:Fs","kind":"ipc"},{"from":"cmp:Urls","to":"ipc:Http","kind":"ipc"},{"from":"cmp:Urls","to":"ipc:Fs","kind":"ipc","label":"urls.json cache"},{"from":"cmp:Rules","to":"cmp:RulesCore","kind":"imports"},{"from":"cmp:Rules","to":"cmp:RulesCharts","kind":"imports"},{"from":"cmp:Rules","to":"cmp:RulesAnnotate","kind":"imports"},{"from":"cmp:RulesCharts","to":"cmp:RulesCore","kind":"imports","label":"shared helpers"},{"from":"cmp:Config","to":"ext:Packages","kind":"imports","label":"dynamic, optional"},{"from":"cmp:Config","to":"ext:Preset","kind":"imports"},{"from":"cmp:Config","to":"cmp:Lint","kind":"reads","label":"plugins and components"},{"from":"cmp:Cli","to":"cmp:Lint","kind":"calls","label":"lintFiles"},{"from":"cmp:Cli","to":"cmp:Config","kind":"calls"},{"from":"cmp:Doctor","to":"cmp:Lint","kind":"calls"},{"from":"cmp:Doctor","to":"cmp:Rules","kind":"reads","label":"codes and titles"},{"from":"cmp:Doctor","to":"ext:ViteDoctor","kind":"imports"},{"from":"cmp:Doctor","to":"ext:DoctorDocs","kind":"reads","label":"docsBase"},{"from":"cmp:Eslint","to":"ext:Eslint","kind":"imports"},{"from":"cmp:Eslint","to":"ipc:Worker","kind":"ipc"},{"from":"cmp:Eslint","to":"cmp:EslintWorker","kind":"calls"},{"from":"cmp:EslintWorker","to":"cmp:Lint","kind":"calls"},{"from":"cmd:LintCli","to":"cmp:Cli","kind":"commands"},{"from":"cmd:Doctor","to":"cmp:Doctor","kind":"commands"},{"from":"cmd:Eslint","to":"cmp:Eslint","kind":"commands"}],"flows":[{"id":"one","name":"Lint one document","trigger":"lint(markdown, options)","steps":["cmp:Lint","cmp:Source","cmp:Rules","cmp:Words"],"summary":"One parse, core checks then plugin issues; everything sorted by line and column."},{"id":"files","name":"Lint a project","trigger":"lint-comark 'docs/**/*.md'","steps":["cmd:LintCli","cmp:Cli","cmp:Lint","state:HeadingIndex","ipc:Fs"],"summary":"Each file parsed once; links between files share one heading index."},{"id":"urls","name":"Check external links","trigger":"lint-comark --check-urls","steps":["cmp:Urls","ipc:Http","ipc:Fs"],"summary":"8 requests at a time, 2 per host, answers cached in node_modules/.cache."},{"id":"doctor","name":"Run Vite Doctor","trigger":"pnpm run doctor","steps":["cmd:Doctor","cmp:Doctor","cmp:Lint","ext:DoctorDocs"],"summary":"Manifest rules glob Markdown, lint it, and link each code to its docs page."},{"id":"eslint","name":"Lint from ESLint","trigger":"eslint with the comark plugin","steps":["cmd:Eslint","cmp:Eslint","ipc:Worker","cmp:EslintWorker","cmp:Lint"],"summary":"ESLint's Markdown processor yields text; a worker runs the same rules."},{"id":"plugins","name":"Plugin issues","trigger":"A comark-* plugin reports an issue while parsing","steps":["cmp:Config","ext:Packages","cmp:Lint","shared:DocMeta"],"summary":"Configured plugins parse the document; their meta.issues become diagnostics."},{"id":"typo","name":"Catch a typo","trigger":"::carosel instead of ::carousel","steps":["cmp:Lint","cmp:RulesCore","cmp:Words"],"summary":"Unknown block, with the nearest known name from Levenshtein distance."}],"notes":[{"title":"Positions are reconstructed, not read","body":"Comark nodes have no positions: block components take a line from markdown-exit tokens, everything else is found by searching `prose` (source.ts:1) with code blanked, so columns still match.","severity":"warn","path":"packages/lint/src/source.ts"},{"title":"One catalog, 285 codes, four front ends","body":"packages/lint/src/rules has 36 files and 285 `COMARKxx` entries; index.ts, cli.ts, doctor.ts and eslint.ts all read the same catalog, so a rule works everywhere at once.","severity":"info","path":"packages/lint/src/rules/index.ts"},{"title":"Packages are optional at runtime","body":"config.ts imports each `comark-*/html` in a try/catch-esque promise chain and only uses what is installed; they are peer dependencies, so the linter installs no renderer itself.","severity":"info","path":"packages/lint/src/config.ts"},{"title":"index.ts carries the whole core","body":"939 lines hold ~20 checks (unclosed blocks, unknown components, anchors, unsafe URLs, duplicate ids, alts, plugin issues) plus the locator mapping a node back to a line.","severity":"warn","path":"packages/lint/src/index.ts"},{"title":"Network checks never run in tests","body":"packages/lint/test/links.test.ts:268 stubs globalThis.fetch for every URL test, so the suite is offline; --check-urls is the only path that really requests a host.","severity":"info","path":"packages/lint/test/links.test.ts"},{"title":"Every rule has a docs page with an example","body":"docs/pages/doctor (48 pages) pairs ::incorrect and ::correct around one fence; test/doctor.test.ts fails when a rule lacks a page or when the wrong example reports more than its own code.","severity":"info","path":"test/doctor.test.ts"}]}</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("scan-data").textContent);
+
+const KIND = {
+  layout:    { label: "Layout",    hex: "#64748b" },
+  component: { label: "Component", hex: "#3b82f6" },
+  state:     { label: "State",     hex: "#10b981" },
+  command:   { label: "Command",   hex: "#f59e0b" },
+  ipc:       { label: "IPC",       hex: "#ec4899" },
+  function:  { label: "Function",  hex: "#8b5cf6" },
+  shared:    { label: "Shared",    hex: "#a3a3a3" },
+  external:  { label: "External",  hex: "#0ea5e9" },
+};
+const EDGE = {
+  renders: "#64748b", imports: "#737373", reads: "#10b981", writes: "#f43f5e", calls: "#8b5cf6",
+  commands: "#f59e0b", dispatches: "#fb923c", listens: "#22d3ee", ipc: "#ec4899", navigates: "#e5e5e5",
+};
+const SEV = { info: "#3b82f6", warn: "#f59e0b", alert: "#f43f5e" };
+const P = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const GLYPH = {
+  layout: P('<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/>'),
+  component: P('<path d="M12 2l9 5v10l-9 5-9-5V7z"/>'),
+  state: P('<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>'),
+  command: P('<path d="M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3z"/>'),
+  ipc: P('<path d="M7 7h11l-3-3M17 17H6l3 3"/>'),
+  function: P('<path d="M10 20c2 0 2-2 2-4V8c0-2 0-4 2-4M8 12h8"/>'),
+  shared: P('<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'),
+  external: P('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
+};
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ---------- degree (computed here; the JSON carries no scores) ---------- */
+const byId = new Map(DATA.nodes.map((n) => [n.id, n]));
+const deg = new Map(DATA.nodes.map((n) => [n.id, 0]));
+DATA.edges.forEach((e) => { deg.set(e.from, deg.get(e.from) + 1); deg.set(e.to, deg.get(e.to) + 1); });
+const maxDeg = Math.max(1, ...deg.values());
+
+/* ---------- layout: one lane per group, nodes sorted by degree ---------- */
+const NW = 232, NH = 58, VGAP = 14, LANE_PAD = 16, LANE_TOP = 46, LANE_GAP = 70;
+const ORDER = ["external", "layout", "components", "state", "commands", "ipc", "shared"];
+const groups = [...DATA.groups].sort((a, b) => (ORDER.indexOf(a.id) + 99) % 99 - (ORDER.indexOf(b.id) + 99) % 99)
+  .filter((g) => DATA.nodes.some((n) => n.group === g.id));
+const pos = new Map(), boxes = [];
+let maxH = 0;
+groups.forEach((g, i) => {
+  const members = DATA.nodes.filter((n) => n.group === g.id).sort((a, b) => deg.get(b.id) - deg.get(a.id) || a.label.localeCompare(b.label));
+  const x = i * (NW + LANE_PAD * 2 + LANE_GAP);
+  members.forEach((n, j) => pos.set(n.id, { x: x + LANE_PAD, y: LANE_TOP + j * (NH + VGAP), w: NW, h: NH }));
+  const h = LANE_TOP + members.length * (NH + VGAP) - VGAP + LANE_PAD;
+  boxes.push({ g, x, y: 0, w: NW + LANE_PAD * 2, h, count: members.length });
+  maxH = Math.max(maxH, h);
+});
+// vertically centre shorter lanes
+boxes.forEach((b) => { const dy = (maxH - b.h) / 2; b.y = dy; DATA.nodes.filter((n) => n.group === b.g.id).forEach((n) => (pos.get(n.id).y += dy)); });
+const W = boxes.length ? boxes[boxes.length - 1].x + boxes[boxes.length - 1].w : 0, H = maxH;
+
+/* ---------- edge geometry ---------- */
+function edgeD(a, b, bend = 0) {
+  if (Math.abs(a.x - b.x) < 2) { // same lane: arc out the right side
+    const x = a.x + a.w, y1 = a.y + a.h / 2, y2 = b.y + b.h / 2, o = 36 + Math.min(80, Math.abs(y2 - y1) * 0.18) + bend;
+    return { d: `M ${x} ${y1} C ${x + o} ${y1}, ${x + o} ${y2}, ${x} ${y2}`, end: { x, y: y2 }, dir: Math.PI };
+  }
+  const ltr = a.x < b.x;
+  const x1 = ltr ? a.x + a.w : a.x, x2 = ltr ? b.x : b.x + b.w;
+  const y1 = a.y + a.h / 2 + bend, y2 = b.y + b.h / 2 + bend * 0.5, m = (x2 - x1) * 0.5;
+  return { d: `M ${x1} ${y1} C ${x1 + m} ${y1}, ${x2 - m} ${y2}, ${x2} ${y2}`, end: { x: x2, y: y2 }, dir: ltr ? 0 : Math.PI };
+}
+function arrowD(end, dir, s = 7) {
+  const a1 = dir - 0.46, a2 = dir + 0.46;
+  return `M ${end.x - s * Math.cos(a1)} ${end.y - s * Math.sin(a1)} L ${end.x} ${end.y} L ${end.x - s * Math.cos(a2)} ${end.y - s * Math.sin(a2)}`;
+}
+
+/* ---------- render ---------- */
+const SVGNS = "http://www.w3.org/2000/svg";
+const edgesEl = document.getElementById("edges"), nodesEl = document.getElementById("nodes");
+const mkSvg = (tag, attrs, parent = edgesEl) => { const el = document.createElementNS(SVGNS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+edgesEl.setAttribute("width", W + 200); edgesEl.setAttribute("height", H + 40);
+
+boxes.forEach((b) => {
+  const div = document.createElement("div");
+  div.className = "group-box";
+  div.style.cssText = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px`;
+  div.innerHTML = `<span class="group-label">${esc(b.g.label)} <em>${b.count}</em></span>`;
+  nodesEl.appendChild(div);
+});
+
+const pairSeen = new Map();
+const edgeEls = DATA.edges.map((e, i) => {
+  const a = pos.get(e.from), b = pos.get(e.to);
+  const key = [e.from, e.to].sort().join("|"), k = pairSeen.get(key) ?? 0; pairSeen.set(key, k + 1);
+  const g = edgeD(a, b, k * 8), color = EDGE[e.kind] || "#737373";
+  const path = mkSvg("path", { d: g.d, class: "edge-path", stroke: color });
+  const arrow = mkSvg("path", { d: arrowD(g.end, g.dir), class: "edge-path", stroke: color });
+  const flow = mkSvg("path", { d: g.d, class: "edge-flow", stroke: color });
+  flow.style.animationDelay = `${(i * 0.17) % 1.1}s`;
+  const hit = mkSvg("path", { d: g.d, class: "edge-hit" });
+  hit.addEventListener("pointerenter", (ev) => showEdgeTip(e, ev));
+  hit.addEventListener("pointermove", moveTip); hit.addEventListener("pointerleave", hideTip);
+  return { e, path, arrow, flow };
+});
+const linkLayer = mkSvg("g", {});
+
+const nodeEls = new Map();
+DATA.nodes.forEach((n) => {
+  const p = pos.get(n.id), st = KIND[n.kind] || KIND.component, d = deg.get(n.id), t = d / maxDeg;
+  const div = document.createElement("div");
+  div.className = "node";
+  div.style.cssText = `left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px;animation-delay:${(p.x / Math.max(W, 1)) * 0.6}s;` +
+    (t >= 0.5 ? `box-shadow:0 0 0 1px ${st.hex}${Math.round(40 + t * 60).toString(16)}, var(--card-shadow)` : "");
+  const sub = [st.label, n.loc ? `${n.loc} loc` : null, n.tags?.[0]].filter(Boolean).join(" · ");
+  div.innerHTML = `<div class="node-head">
+      <span class="node-ic" style="background:${st.hex}1f;color:${st.hex}">${GLYPH[n.kind] || GLYPH.component}</span>
+      <span class="node-txt"><span class="node-label" style="font-weight:${t >= 0.5 ? 650 : 550}">${esc(n.label)}</span><span class="node-sub">${esc(sub)}</span></span>
+      <span class="node-deg" title="degree" style="${t >= 0.5 ? `color:${st.hex};background:${st.hex}1f` : ""}">${d}</span></div>`;
+  div.addEventListener("pointerenter", (ev) => { showNodeTip(n, ev); if (!activeFlow && !selected) traceNode(n.id); });
+  div.addEventListener("pointermove", moveTip);
+  div.addEventListener("pointerleave", () => { hideTip(); if (!activeFlow && !selected) clearTrace(); });
+  div.addEventListener("pointerdown", (ev) => ev.stopPropagation());
+  div.addEventListener("click", (ev) => { ev.stopPropagation(); selectNode(n.id); });
+  nodesEl.appendChild(div);
+  nodeEls.set(n.id, div);
+});
+
+/* ---------- highlighting ---------- */
+function setDim(nodeSet, edgeSet) {
+  nodeEls.forEach((el, id) => el.classList.toggle("dim", !nodeSet.has(id)));
+  edgeEls.forEach((x, i) => {
+    const hot = edgeSet.has(i);
+    x.path.classList.toggle("dim", !hot); x.arrow.classList.toggle("dim", !hot);
+    x.path.classList.toggle("hot", hot); x.arrow.classList.toggle("hot", hot); x.flow.classList.toggle("hot", hot);
+  });
+}
+function clearTrace() {
+  nodeEls.forEach((el) => { el.classList.remove("dim", "on"); el.querySelector(".badge")?.remove(); });
+  edgeEls.forEach((x) => { x.path.classList.remove("dim", "hot"); x.arrow.classList.remove("dim", "hot"); x.flow.classList.remove("hot"); });
+  linkLayer.innerHTML = "";
+}
+function traceNode(id) {
+  const ns = new Set([id]), es = new Set();
+  DATA.edges.forEach((e, i) => { if (e.from === id || e.to === id) { es.add(i); ns.add(e.from); ns.add(e.to); } });
+  setDim(ns, es);
+}
+let activeFlow = null, selected = null;
+function traceFlow(f) {
+  clearTrace();
+  const ns = new Set(f.steps), es = new Set(), order = new Map();
+  f.steps.forEach((s, i) => { if (!order.has(s)) order.set(s, []); order.get(s).push(i + 1); });
+  for (let i = 0; i < f.steps.length - 1; i++) {
+    const a = f.steps[i], b = f.steps[i + 1];
+    let found = false;
+    DATA.edges.forEach((e, k) => { if ((e.from === a && e.to === b) || (e.from === b && e.to === a)) { es.add(k); found = true; } });
+    if (!found && a !== b) { // step pair without a direct edge: draw the journey link
+      const g = edgeD(pos.get(a), pos.get(b), 0);
+      mkSvg("path", { d: g.d, class: "flow-link" }, linkLayer);
+      mkSvg("path", { d: arrowD(g.end, g.dir, 8), class: "flow-link", style: "stroke-dasharray:none" }, linkLayer);
+    }
+  }
+  setDim(ns, es);
+  order.forEach((nums, id) => {
+    const el = nodeEls.get(id); el.classList.add("on");
+    const b = document.createElement("span"); b.className = "badge"; b.textContent = nums.join("·"); el.appendChild(b);
+  });
+  focusNodes([...ns]);
+}
+
+/* ---------- flows panel ---------- */
+const flowList = document.getElementById("flow-list");
+document.getElementById("flows-count").textContent = DATA.flows.length;
+const flowEls = DATA.flows.map((f) => {
+  const div = document.createElement("div");
+  div.className = "flow";
+  div.innerHTML = `<div class="f-name">${esc(f.name)}<span class="f-n">${f.steps.length} steps</span></div>
+    <div class="f-trigger">▸ ${esc(f.trigger)}</div><div class="f-sum">${esc(f.summary)}</div>
+    <ol>${f.steps.map((s, i) => { const n = byId.get(s); return `<li data-id="${esc(s)}"><span class="badge">${i + 1}</span>${esc(n.label)}<span class="li-kind">${esc(KIND[n.kind]?.label)}</span></li>`; }).join("")}</ol>`;
+  div.addEventListener("click", () => toggleFlow(f));
+  div.querySelectorAll("li").forEach((li) => li.addEventListener("click", (ev) => { ev.stopPropagation(); focusNodes([li.dataset.id], 1.1); flash(li.dataset.id); }));
+  flowList.appendChild(div);
+  return { f, div };
+});
+function toggleFlow(f) {
+  hidePopover(); selected = null; document.querySelectorAll(".node.selected").forEach((x) => x.classList.remove("selected"));
+  activeFlow = activeFlow === f ? null : f;
+  flowEls.forEach((x) => x.div.classList.toggle("active", x.f === activeFlow));
+  if (activeFlow) traceFlow(activeFlow); else { clearTrace(); fitView(); }
+}
+function flash(id) { const el = nodeEls.get(id); el.animate([{ outlineColor: "#fff" }, { outlineColor: "#f97316aa" }], { duration: 700 }); }
+
+/* ---------- tooltip ---------- */
+var tip = document.getElementById("tooltip");
+function showNodeTip(n, ev) {
+  const st = KIND[n.kind] || KIND.component;
+  tip.innerHTML = `<div class="t-kind"><i style="background:${st.hex}"></i>${esc(st.label)} · ${esc(n.id)}</div>
+    <div class="t-name">${esc(n.label)}</div>${n.path ? `<div class="t-path mono">${esc(n.path)}</div>` : ""}
+    ${n.summary ? `<div class="t-sum">${esc(n.summary)}</div>` : ""}
+    <div class="t-row"><span><b>${deg.get(n.id)}</b> <span class="t-dim">degree</span></span>${n.loc ? `<span><b>${n.loc}</b> <span class="t-dim">loc</span></span>` : ""}<span class="t-dim">${esc(DATA.groups.find((g) => g.id === n.group)?.label)}</span></div>
+    ${n.tags?.length ? `<div class="t-tags">${n.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}`;
+  tip.style.opacity = "1"; moveTip(ev);
+}
+function showEdgeTip(e, ev) {
+  tip.innerHTML = `<div class="t-kind"><i style="background:${EDGE[e.kind]}"></i>${esc(e.kind)}</div>
+    <div class="t-name">${esc(byId.get(e.from).label)} → ${esc(byId.get(e.to).label)}</div>${e.label ? `<div class="t-sum">${esc(e.label)}</div>` : ""}`;
+  tip.style.opacity = "1"; moveTip(ev);
+}
+function moveTip(e) {
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + r.width > innerWidth - 10) x = e.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 10) y = e.clientY - r.height - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip() { tip.style.opacity = "0"; }
+
+/* ---------- popover (click a node) ---------- */
+var popover = document.getElementById("popover");
+function selectNode(id) {
+  if (selected === id) { selected = null; hidePopover(); nodeEls.get(id).classList.remove("selected"); if (activeFlow) traceFlow(activeFlow); else clearTrace(); return; }
+  selected = id;
+  document.querySelectorAll(".node.selected").forEach((x) => x.classList.remove("selected"));
+  nodeEls.get(id).classList.add("selected");
+  if (!activeFlow) traceNode(id);
+  const n = byId.get(id), st = KIND[n.kind] || KIND.component;
+  const out = DATA.edges.filter((e) => e.from === id), inn = DATA.edges.filter((e) => e.to === id);
+  const row = (e, other) => `<div class="p-edge"><i style="background:${EDGE[e.kind]}"></i>${esc(e.kind)} <b>${esc(byId.get(other).label)}</b>${e.label ? ` <span style="color:#737373">${esc(e.label)}</span>` : ""}</div>`;
+  const inFlows = DATA.flows.filter((f) => f.steps.includes(id)).map((f) => f.name);
+  popover.innerHTML = `<div class="p-kind"><i style="background:${st.hex}"></i>${esc(st.label)}${n.tags?.length ? " · " + n.tags.map(esc).join(", ") : ""}</div>
+    <div class="p-label">${esc(n.label)}</div>${n.summary ? `<p class="p-summary">${esc(n.summary)}</p>` : ""}
+    <div class="p-grid"><div class="p-metric"><b>${deg.get(id)}</b><span>degree</span></div><div class="p-metric"><b>${inn.length}</b><span>incoming</span></div><div class="p-metric"><b>${out.length}</b><span>outgoing</span></div></div>
+    ${out.length ? `<div class="p-sec">Outgoing</div>${out.map((e) => row(e, e.to)).join("")}` : ""}
+    ${inn.length ? `<div class="p-sec">Incoming</div>${inn.map((e) => row(e, e.from)).join("")}` : ""}
+    ${inFlows.length ? `<div class="p-sec">In flows</div><div class="p-edge">${inFlows.map(esc).join(" · ")}</div>` : ""}
+    ${n.path ? `<p class="p-path mono">${esc(n.path)}${n.loc ? ` · ${n.loc} loc` : ""}</p>` : ""}`;
+  const r0 = nodeEls.get(id).getBoundingClientRect();
+  popover.classList.add("show");
+  const r = popover.getBoundingClientRect();
+  popover.style.left = Math.min(Math.max(12, r0.left), innerWidth - r.width - 12) + "px";
+  popover.style.top = Math.min(Math.max(12, r0.bottom + 10), innerHeight - r.height - 12) + "px";
+}
+function hidePopover() { popover.classList.remove("show"); }
+
+/* ---------- pan & zoom ---------- */
+const viewport = document.getElementById("viewport"), stage = document.getElementById("stage");
+const view = { x: 0, y: 0, k: 1 };
+function applyView() { stage.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.k})`; document.getElementById("zoom-val").textContent = Math.round(view.k * 100) + "%"; }
+function fitBox(x0, y0, x1, y1, maxK = 1.4) {
+  const r = viewport.getBoundingClientRect(), pad = 40, bottom = 64;
+  const k = Math.min(Math.max(Math.min((r.width - pad * 2) / (x1 - x0), (r.height - pad - bottom) / (y1 - y0)), 0.15), maxK);
+  view.k = k; view.x = (r.width - (x1 - x0) * k) / 2 - x0 * k; view.y = pad / 2 + (r.height - pad - bottom - (y1 - y0) * k) / 2 - y0 * k;
+  stage.style.transition = "transform .45s cubic-bezier(.3,1,.4,1)"; applyView(); setTimeout(() => (stage.style.transition = ""), 460);
+}
+const fitView = () => fitBox(-10, -10, W + 90, H + 10, 1.2);
+function focusNodes(ids, maxK = 1.1) {
+  const ps = ids.map((id) => pos.get(id));
+  fitBox(Math.min(...ps.map((p) => p.x)) - 40, Math.min(...ps.map((p) => p.y)) - 40, Math.max(...ps.map((p) => p.x + p.w)) + 90, Math.max(...ps.map((p) => p.y + p.h)) + 40, maxK);
+}
+function zoomAt(cx, cy, f) {
+  const r = viewport.getBoundingClientRect(); cx -= r.left; cy -= r.top;
+  const k2 = Math.min(Math.max(view.k * f, 0.1), 2.5);
+  view.x = cx - ((cx - view.x) / view.k) * k2; view.y = cy - ((cy - view.y) / view.k) * k2; view.k = k2; applyView();
+}
+document.getElementById("zoom-fit").onclick = fitView;
+document.getElementById("zoom-in").onclick = () => { const r = viewport.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.25); };
+document.getElementById("zoom-out").onclick = () => { const r = viewport.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 0.8); };
+viewport.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.1 : 1 / 1.1); }, { passive: false });
+let drag = null;
+viewport.addEventListener("pointerdown", (e) => { drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, moved: false }; viewport.classList.add("dragging"); });
+addEventListener("pointermove", (e) => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true; view.x = drag.vx + dx; view.y = drag.vy + dy; applyView(); });
+addEventListener("pointerup", () => { if (drag && !drag.moved) { hidePopover(); selected = null; document.querySelectorAll(".node.selected").forEach((x) => x.classList.remove("selected")); if (activeFlow) toggleFlow(activeFlow); else clearTrace(); } drag = null; viewport.classList.remove("dragging"); });
+addEventListener("keydown", (e) => { if (e.key === "Escape") { hidePopover(); selected = null; if (activeFlow) toggleFlow(activeFlow); else clearTrace(); } });
+addEventListener("resize", () => (activeFlow ? focusNodes(activeFlow.steps) : fitView()));
+
+/* ---------- header, rail, legend ---------- */
+(function chrome() {
+  const p = DATA.project, m = DATA.module;
+  const scope = DATA.scope === "repo" ? "repo overview" : `${m.name || m.id || m.root.split("/").pop()} module flow`;
+  document.getElementById("p-name").textContent = `${p.name} — ${scope}`;
+  document.getElementById("p-tagline").textContent = m.summary;
+  document.getElementById("p-date").textContent = p.date ?? "";
+  if (DATA.scope === "repo") document.getElementById("scope-h").textContent = "Repository";
+  document.title = `${p.name} — Module Flow Scan`;
+  const S = DATA.stats, defs = [["nodes", "Nodes"], ["edges", "Edges"], ["components", "Components", KIND.component.hex], ["stateFiles", "State", KIND.state.hex], ["commands", "Commands", KIND.command.hex], ["ipcCalls", "IPC", KIND.ipc.hex], ["flows", "Flows", "#f97316"]];
+  const stats = document.getElementById("stats");
+  defs.forEach(([k, label, c]) => { if (S[k] == null) return; const d = document.createElement("div"); d.className = "stat"; d.innerHTML = `<b style="color:${c || "#fafafa"}">${S[k]}</b><span>${label}</span>`; stats.appendChild(d); });
+  document.getElementById("module-meta").innerHTML = `Entry layout<span class="mono">${esc(m.entryLayout)}</span><div style="margin-top:8px">Root<span class="mono">${esc(m.root)}</span></div>` +
+    (m.externalModules?.length ? `<div style="margin-top:8px">Touches</div><div class="ext-chips">${m.externalModules.map((x) => `<span class="chip"><i style="background:${KIND.external.hex}"></i>${esc(x)}</span>`).join("")}</div>` : "");
+  const hot = [...DATA.nodes].sort((a, b) => deg.get(b.id) - deg.get(a.id)).slice(0, 8), hs = document.getElementById("hotspots");
+  hot.forEach((n, i) => {
+    const c = (KIND[n.kind] || KIND.component).hex, d = deg.get(n.id), row = document.createElement("div");
+    row.className = "hot-row"; row.title = n.path || n.id;
+    row.innerHTML = `<span class="hot-rank">${i + 1}</span><span class="hot-body"><span class="hot-name">${esc(n.label)}</span><span class="hot-bar"><i style="width:${(d / maxDeg) * 100}%;background:${c}"></i></span></span><span class="hot-val" style="color:${c}">${d}</span>`;
+    row.addEventListener("click", () => { focusNodes([n.id], 1.1); setTimeout(() => selectNode(n.id), 470); });
+    hs.appendChild(row);
+  });
+  const notes = document.getElementById("notes"); document.getElementById("notes-count").textContent = DATA.notes.length;
+  DATA.notes.forEach((n) => { const c = SEV[n.severity] || SEV.info, d = document.createElement("div"); d.className = "note"; d.style.borderColor = c;
+    d.innerHTML = `<div class="n-title" style="color:${c}">${esc(n.title)}</div><div class="n-body">${esc(n.body)}</div>${n.path ? `<div class="n-path mono">${esc(n.path)}</div>` : ""}`; notes.appendChild(d); });
+  const lg = document.getElementById("legend"), present = new Set(DATA.edges.map((e) => e.kind));
+  Object.entries(EDGE).filter(([k]) => present.has(k)).forEach(([k, c]) => {
+    const it = document.createElement("div"); it.className = "legend-item"; it.innerHTML = `<i style="background:${c}"></i>${k}`;
+    it.addEventListener("pointerenter", () => { if (activeFlow) return; const es = new Set(), ns = new Set(); DATA.edges.forEach((e, i) => { if (e.kind === k) { es.add(i); ns.add(e.from); ns.add(e.to); } }); setDim(ns, es); });
+    it.addEventListener("pointerleave", () => { if (activeFlow) return; selected ? traceNode(selected) : clearTrace(); });
+    lg.appendChild(it);
+  });
+})();
+fitView();
+</script>
+</body>
+</html>
