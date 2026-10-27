@@ -1,0 +1,598 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "doop",
+    "slug": "kgoedecke__doop",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "doop",
+    "entryLayout": "src/main.tsx",
+    "root": ".",
+    "summary": "Multiplayer design canvas where humans and AI agents co-design over HTML frames.",
+    "externalModules": [
+      "canvas-web",
+      "server",
+      "desktop"
+    ]
+  },
+  "stats": {
+    "nodes": 29,
+    "edges": 33,
+    "components": 8,
+    "stateFiles": 5,
+    "commands": 3,
+    "ipcCalls": 6,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Modules"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Logic"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:ServerEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "server/index.ts",
+      "path": "server/index.ts",
+      "loc": 1991,
+      "summary": "Bun/Express entry: REST, auth, MCP endpoint and the /ws multiplayer room."
+    },
+    {
+      "id": "cmp:WebEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.tsx",
+      "path": "src/main.tsx",
+      "loc": 14
+    },
+    {
+      "id": "cmp:App",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.tsx",
+      "path": "src/App.tsx",
+      "loc": 230,
+      "summary": "Hand-rolled popState router mapping /c/:id, /w/:id, /admin, /automations."
+    },
+    {
+      "id": "cmp:DesktopEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "desktop main.rs",
+      "path": "desktop/src-tauri/src/main.rs",
+      "loc": 370,
+      "summary": "Tauri shell: single webview over the hosted app plus doop:// deep links."
+    },
+    {
+      "id": "cmp:CanvasWeb",
+      "kind": "component",
+      "group": "components",
+      "label": "canvas-web (src/)",
+      "path": "src/pages/CanvasPage.tsx",
+      "loc": 25115
+    },
+    {
+      "id": "cmp:ServerModules",
+      "kind": "component",
+      "group": "components",
+      "label": "server modules",
+      "path": "server",
+      "loc": 25742
+    },
+    {
+      "id": "cmp:McpServer",
+      "kind": "component",
+      "group": "components",
+      "label": "MCP server",
+      "path": "server/mcp.ts",
+      "loc": 1757,
+      "summary": "MCP tool surface agents drive over HTTP; local-agent and Gemini variants."
+    },
+    {
+      "id": "cmp:ResidentAgent",
+      "kind": "component",
+      "group": "components",
+      "label": "resident team",
+      "path": "server/resident.ts",
+      "loc": 1574,
+      "summary": "Server-side Claude tool loop per role; cards move down pipelines."
+    },
+    {
+      "id": "shared:SharedTypes",
+      "kind": "shared",
+      "group": "shared",
+      "label": "shared/",
+      "path": "shared/types.ts",
+      "loc": 1641,
+      "summary": "Types and helpers shared by client and server (agents, pages, models)."
+    },
+    {
+      "id": "shared:DesktopTabs",
+      "kind": "shared",
+      "group": "shared",
+      "label": "desktop tabs",
+      "path": "src/components/DesktopTabs.tsx",
+      "loc": 180
+    },
+    {
+      "id": "shared:IosApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "ios app",
+      "path": "ios/README.md",
+      "tags": [
+        "swift"
+      ]
+    },
+    {
+      "id": "state:ServerStore",
+      "kind": "state",
+      "group": "state",
+      "label": "server store",
+      "path": "server/store.ts",
+      "loc": 180,
+      "summary": "In-memory canvas/frame hot path; hydrated from Postgres at boot."
+    },
+    {
+      "id": "state:Persist",
+      "kind": "state",
+      "group": "state",
+      "label": "db persist",
+      "path": "server/db/persist.ts",
+      "loc": 874
+    },
+    {
+      "id": "state:Schema",
+      "kind": "state",
+      "group": "state",
+      "label": "db schema",
+      "path": "server/db/schema.ts",
+      "loc": 783
+    },
+    {
+      "id": "state:CanvasStore",
+      "kind": "state",
+      "group": "state",
+      "label": "canvas store",
+      "path": "src/lib/store.ts",
+      "loc": 470,
+      "summary": "Single zustand store: canvas, presence, cursors, tasks, chat, comments, memory."
+    },
+    {
+      "id": "state:LocalAgentStore",
+      "kind": "state",
+      "group": "state",
+      "label": "local-agent store",
+      "path": "src/lib/localAgent.ts",
+      "loc": 130
+    },
+    {
+      "id": "cmd:QueueCard",
+      "kind": "command",
+      "group": "commands",
+      "label": "queue a card / @mention",
+      "path": "src/components/PromptBar.tsx",
+      "tags": [
+        "prompt bar"
+      ]
+    },
+    {
+      "id": "cmd:UndoRedo",
+      "kind": "command",
+      "group": "commands",
+      "label": "undo / redo",
+      "path": "src/pages/CanvasPage.tsx",
+      "tags": [
+        "cmd+z",
+        "cmd+y"
+      ]
+    },
+    {
+      "id": "cmd:CopyShareLink",
+      "kind": "command",
+      "group": "commands",
+      "label": "copy share link",
+      "path": "src/components/ShareModal.tsx",
+      "tags": [
+        "button"
+      ]
+    },
+    {
+      "id": "fn:Actions",
+      "kind": "function",
+      "group": "components",
+      "label": "actions.ts",
+      "path": "server/actions.ts",
+      "loc": 1678,
+      "summary": "Mutations shared by REST and MCP; broadcast + persist for each."
+    },
+    {
+      "id": "ipc:WebSocket",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "/ws room",
+      "path": "server/index.ts",
+      "summary": "wss on /ws: join/presence, frame edits, chat, reveals broadcast per canvas."
+    },
+    {
+      "id": "ipc:RestRoutes",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "express /api",
+      "path": "server/index.ts",
+      "summary": "~60 REST endpoints plus 9 routers (admin, billing, automations...)."
+    },
+    {
+      "id": "ipc:McpTools",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "MCP /mcp",
+      "path": "server/mcp.ts",
+      "summary": "StreamableHTTP MCP transport; agents auth via OAuth or agent keys."
+    },
+    {
+      "id": "ipc:ClientApi",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "client fetch api",
+      "path": "src/lib/api.ts",
+      "loc": 549
+    },
+    {
+      "id": "ipc:TauriBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "Tauri invoke",
+      "path": "src/lib/localAgent.ts"
+    },
+    {
+      "id": "ipc:Ingest",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "/ingest + preview capture",
+      "path": "server/ingest.ts"
+    },
+    {
+      "id": "ext:Postgres",
+      "kind": "external",
+      "group": "external",
+      "label": "PostgreSQL (drizzle)",
+      "path": "server/db/index.ts"
+    },
+    {
+      "id": "ext:Anthropic",
+      "kind": "external",
+      "group": "external",
+      "label": "Anthropic / OpenAI",
+      "path": "server/agentModel.ts"
+    },
+    {
+      "id": "ext:BetterAuth",
+      "kind": "external",
+      "group": "external",
+      "label": "better-auth",
+      "path": "server/auth.ts"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:WebEntry",
+      "to": "cmp:App",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:CanvasWeb",
+      "kind": "renders",
+      "label": "route /c/:id"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:App",
+      "kind": "navigates",
+      "label": "navigate()"
+    },
+    {
+      "from": "cmp:DesktopEntry",
+      "to": "cmp:App",
+      "kind": "renders",
+      "label": "webview over hosted app"
+    },
+    {
+      "from": "cmp:CanvasWeb",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:CanvasWeb",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:CanvasWeb",
+      "to": "ipc:ClientApi",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CanvasWeb",
+      "to": "ipc:WebSocket",
+      "kind": "ipc",
+      "label": "join, edits, presence"
+    },
+    {
+      "from": "cmp:ServerEntry",
+      "to": "cmp:ServerModules",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ServerEntry",
+      "to": "ipc:RestRoutes",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ServerEntry",
+      "to": "ipc:WebSocket",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ServerEntry",
+      "to": "state:ServerStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "fn:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:McpTools",
+      "to": "cmp:McpServer",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:ResidentAgent",
+      "to": "fn:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ResidentAgent",
+      "to": "ext:Anthropic",
+      "kind": "ipc"
+    },
+    {
+      "from": "fn:Actions",
+      "to": "state:ServerStore",
+      "kind": "writes"
+    },
+    {
+      "from": "fn:Actions",
+      "to": "state:Persist",
+      "kind": "writes"
+    },
+    {
+      "from": "state:ServerStore",
+      "to": "state:Persist",
+      "kind": "writes",
+      "label": "write-through"
+    },
+    {
+      "from": "state:Persist",
+      "to": "state:Schema",
+      "kind": "imports"
+    },
+    {
+      "from": "state:Persist",
+      "to": "ext:Postgres",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:RestRoutes",
+      "to": "state:Persist",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:RestRoutes",
+      "to": "ext:BetterAuth",
+      "kind": "imports"
+    },
+    {
+      "from": "ipc:WebSocket",
+      "to": "cmp:CanvasWeb",
+      "kind": "dispatches",
+      "label": "ServerMessage"
+    },
+    {
+      "from": "ipc:Ingest",
+      "to": "state:ServerStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ServerEntry",
+      "to": "ipc:Ingest",
+      "kind": "renders"
+    },
+    {
+      "from": "state:CanvasStore",
+      "to": "ipc:ClientApi",
+      "kind": "reads",
+      "label": "me + preference"
+    },
+    {
+      "from": "state:LocalAgentStore",
+      "to": "ipc:TauriBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmd:QueueCard",
+      "to": "cmp:CanvasWeb",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:UndoRedo",
+      "to": "cmp:CanvasWeb",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:CopyShareLink",
+      "to": "cmp:CanvasWeb",
+      "kind": "commands"
+    },
+    {
+      "from": "shared:SharedTypes",
+      "to": "cmp:CanvasWeb",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:SharedTypes",
+      "to": "cmp:ServerModules",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-canvas",
+      "name": "Open a canvas",
+      "trigger": "click a canvas on Home",
+      "steps": [
+        "cmp:App",
+        "cmp:CanvasWeb",
+        "state:CanvasStore",
+        "ipc:WebSocket",
+        "cmp:ServerEntry"
+      ],
+      "summary": "Route /c/:id hydrates via ws join and /api/canvases, then Stage renders frames."
+    },
+    {
+      "id": "agent-mcp-design",
+      "name": "External agent designs",
+      "trigger": "Claude Code MCP session",
+      "steps": [
+        "ipc:McpTools",
+        "cmp:McpServer",
+        "fn:Actions",
+        "state:ServerStore",
+        "ipc:WebSocket"
+      ],
+      "summary": "create_frame + streamed HTML chunks broadcast into every viewer's Stage."
+    },
+    {
+      "id": "resident-task",
+      "name": "Resident agent task",
+      "trigger": "queue a card / @mention a role",
+      "steps": [
+        "cmp:CanvasWeb",
+        "ipc:RestRoutes",
+        "cmp:ResidentAgent",
+        "ext:Anthropic",
+        "fn:Actions",
+        "ipc:WebSocket"
+      ],
+      "summary": "Card enqueues; server Claude loop edits through the same actions."
+    },
+    {
+      "id": "import-webpage",
+      "name": "Import a webpage",
+      "trigger": "Import modal URL entry",
+      "steps": [
+        "cmp:CanvasWeb",
+        "ipc:ClientApi",
+        "ipc:Ingest",
+        "state:Persist"
+      ],
+      "summary": "Server captures the page to an editable HTML frame on the canvas."
+    },
+    {
+      "id": "local-claude",
+      "name": "Desktop local Claude",
+      "trigger": "Connect Local Claude button",
+      "steps": [
+        "cmp:CanvasWeb",
+        "state:LocalAgentStore",
+        "ipc:TauriBridge",
+        "ipc:RestRoutes"
+      ],
+      "summary": "Tauri bridge talks to the installed claude CLI; server routes it."
+    },
+    {
+      "id": "undo-redo",
+      "name": "Undo / redo edits",
+      "trigger": "cmd+z / cmd+y",
+      "steps": [
+        "cmp:CanvasWeb",
+        "ipc:WebSocket",
+        "state:ServerStore",
+        "state:Persist"
+      ],
+      "summary": "Canvas-wide keydown dispatches undo/redo through the ws protocol."
+    }
+  ],
+  "notes": [
+    {
+      "title": "two ~2k-code monolith files",
+      "body": "server/index.ts (1991 LOC) holds REST routes + ws room; src/pages/CanvasPage.tsx (1672 LOC) holds the whole workspace composition, import modals and shortcuts.",
+      "severity": "warn",
+      "path": "server/index.ts"
+    },
+    {
+      "title": "write-through memory+DB dual state",
+      "body": "server/store.ts keeps canvases in a Map while db/persist.ts mirrors every mutation to Postgres; boot hydrates once from DB.",
+      "severity": "info",
+      "path": "server/db/persist.ts"
+    },
+    {
+      "title": "one mutation funnel",
+      "body": "server/actions.ts (1678 LOC) is the single mutation surface shared by REST, MCP tools and the resident agent \u2014 clean fan-out of who can edit.",
+      "severity": "info",
+      "path": "server/actions.ts"
+    },
+    {
+      "title": "116 test files, no src seeing them",
+      "body": "tests/ has 116 vitest files but server routes are only wired in index.ts; a changed route surface can drift until tests or /healthz catch it.",
+      "severity": "info",
+      "path": "tests"
+    },
+    {
+      "title": "hand-rolled router",
+      "body": "src/App.tsx dispatches 10 route patterns with regex matching in the component body; no router library.",
+      "severity": "info",
+      "path": "src/App.tsx"
+    },
+    {
+      "title": "web + 3 native shells",
+      "body": "Same hosted web app is wrapped by a Tauri desktop shell (desktop/, 413 Rust LOC), an iOS app (ios/, Swift) and a chatgpt-plugin/ folder \u2014 no shared native code.",
+      "severity": "info",
+      "path": "desktop/src-tauri/src/main.rs"
+    }
+  ]
+}

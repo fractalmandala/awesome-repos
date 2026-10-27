@@ -1,0 +1,823 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "doop",
+    "slug": "kgoedecke__doop",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "canvas-web",
+    "name": "canvas web client",
+    "entryLayout": "src/main.tsx",
+    "root": "src",
+    "summary": "React client: canvas workspace, pages, automations, settings, integrations.",
+    "externalModules": [
+      "server",
+      "shared"
+    ]
+  },
+  "stats": {
+    "nodes": 44,
+    "edges": 55,
+    "components": 31,
+    "stateFiles": 2,
+    "commands": 3,
+    "ipcCalls": 3,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Main",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.tsx",
+      "path": "src/main.tsx",
+      "loc": 14
+    },
+    {
+      "id": "cmp:App",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.tsx",
+      "path": "src/App.tsx",
+      "loc": 230,
+      "summary": "Hand-rolled popState router; session boundary and page dispatch."
+    },
+    {
+      "id": "cmp:Home",
+      "kind": "component",
+      "group": "components",
+      "label": "Home",
+      "path": "src/pages/Home.tsx",
+      "loc": 899,
+      "summary": "Dashboard: canvas list, activity feed, new-canvas flow."
+    },
+    {
+      "id": "cmp:CanvasPage",
+      "kind": "component",
+      "group": "components",
+      "label": "CanvasPage",
+      "path": "src/pages/CanvasPage.tsx",
+      "loc": 1672,
+      "summary": "Workspace root: renders Stage, rails, panels, modals, shortcuts, import flows."
+    },
+    {
+      "id": "cmp:Automations",
+      "kind": "component",
+      "group": "components",
+      "label": "Automations",
+      "path": "src/pages/Automations.tsx"
+    },
+    {
+      "id": "cmp:AutomationEditor",
+      "kind": "component",
+      "group": "components",
+      "label": "AutomationEditor",
+      "path": "src/pages/AutomationEditor.tsx",
+      "loc": 1037
+    },
+    {
+      "id": "cmp:Settings",
+      "kind": "component",
+      "group": "components",
+      "label": "Settings",
+      "path": "src/pages/Settings.tsx"
+    },
+    {
+      "id": "cmp:Integrations",
+      "kind": "component",
+      "group": "components",
+      "label": "Integrations",
+      "path": "src/pages/Integrations.tsx"
+    },
+    {
+      "id": "cmp:Admin",
+      "kind": "component",
+      "group": "components",
+      "label": "Admin",
+      "path": "src/pages/Admin.tsx"
+    },
+    {
+      "id": "cmp:Stage",
+      "kind": "component",
+      "group": "components",
+      "label": "Stage",
+      "path": "src/components/Stage.tsx",
+      "loc": 684,
+      "summary": "Infinite canvas: camera, gestures, selection, context menu, drags."
+    },
+    {
+      "id": "cmp:FrameView",
+      "kind": "component",
+      "group": "components",
+      "label": "FrameView",
+      "path": "src/components/FrameView.tsx",
+      "loc": 1122,
+      "summary": "Live HTML document frame with edit indicators and replays."
+    },
+    {
+      "id": "cmp:Cursors",
+      "kind": "component",
+      "group": "components",
+      "label": "Cursors",
+      "path": "src/components/Cursors.tsx"
+    },
+    {
+      "id": "cmp:GhostFrames",
+      "kind": "component",
+      "group": "components",
+      "label": "GhostFrames",
+      "path": "src/components/GhostFrames.tsx"
+    },
+    {
+      "id": "cmp:FlowOverlay",
+      "kind": "component",
+      "group": "components",
+      "label": "FlowOverlay",
+      "path": "src/components/FlowOverlay.tsx"
+    },
+    {
+      "id": "cmp:SnapGuides",
+      "kind": "component",
+      "group": "components",
+      "label": "SnapGuides",
+      "path": "src/components/SnapGuides.tsx"
+    },
+    {
+      "id": "cmp:FollowFrame",
+      "kind": "component",
+      "group": "components",
+      "label": "FollowFrame",
+      "path": "src/components/FollowFrame.tsx"
+    },
+    {
+      "id": "cmp:Board",
+      "kind": "component",
+      "group": "components",
+      "label": "Board",
+      "path": "src/components/Board.tsx",
+      "loc": 481,
+      "summary": "Card board feeding the resident design team."
+    },
+    {
+      "id": "cmp:Inspector",
+      "kind": "component",
+      "group": "components",
+      "label": "Inspector",
+      "path": "src/components/Inspector.tsx",
+      "loc": 261
+    },
+    {
+      "id": "cmp:ElementPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "ElementPanel",
+      "path": "src/components/ElementPanel.tsx"
+    },
+    {
+      "id": "cmp:LayersPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "LayersPanel",
+      "path": "src/components/LayersPanel.tsx",
+      "loc": 715,
+      "summary": "Layer tree + pages management (add, rename, delete pages)."
+    },
+    {
+      "id": "cmp:PagesPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "PagesPanel",
+      "path": "src/components/PagesPanel.tsx"
+    },
+    {
+      "id": "cmp:SideRail",
+      "kind": "component",
+      "group": "components",
+      "label": "SideRail",
+      "path": "src/components/SideRail.tsx",
+      "loc": 83
+    },
+    {
+      "id": "cmp:PromptBar",
+      "kind": "component",
+      "group": "components",
+      "label": "PromptBar",
+      "path": "src/components/PromptBar.tsx",
+      "loc": 348,
+      "summary": "Queue a card or @mention a role for agent work."
+    },
+    {
+      "id": "cmp:WorkingNow",
+      "kind": "component",
+      "group": "components",
+      "label": "WorkingNow",
+      "path": "src/components/WorkingNow.tsx"
+    },
+    {
+      "id": "cmp:ActivityPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "ActivityPanel",
+      "path": "src/components/ActivityPanel.tsx",
+      "loc": 390
+    },
+    {
+      "id": "cmp:ChatPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "ChatPanel",
+      "path": "src/components/ChatPanel.tsx",
+      "loc": 386,
+      "summary": "Canvas chat with humans and agents."
+    },
+    {
+      "id": "cmp:ConnectModal",
+      "kind": "component",
+      "group": "components",
+      "label": "ConnectModal",
+      "path": "src/components/ConnectModal.tsx"
+    },
+    {
+      "id": "cmp:ShareModal",
+      "kind": "component",
+      "group": "components",
+      "label": "ShareModal",
+      "path": "src/components/ShareModal.tsx"
+    },
+    {
+      "id": "cmp:PresentMode",
+      "kind": "component",
+      "group": "components",
+      "label": "PresentMode",
+      "path": "src/components/PresentMode.tsx"
+    },
+    {
+      "id": "cmp:ImportSources",
+      "kind": "component",
+      "group": "components",
+      "label": "ImportSources",
+      "path": "src/components/ImportSources.tsx"
+    },
+    {
+      "id": "shared:DesktopTabs",
+      "kind": "shared",
+      "group": "shared",
+      "label": "DesktopTabs",
+      "path": "src/components/DesktopTabs.tsx",
+      "summary": "Desktop shell tab strip, per-account state."
+    },
+    {
+      "id": "shared:UIKit",
+      "kind": "shared",
+      "group": "shared",
+      "label": "components/ui",
+      "path": "src/components/ui",
+      "summary": "shadcn-style primitive kit used by every screen."
+    },
+    {
+      "id": "state:CanvasStore",
+      "kind": "state",
+      "group": "state",
+      "label": "canvas store",
+      "path": "src/lib/store.ts",
+      "loc": 470,
+      "summary": "Single zustand store: canvas, presence, cursors, tasks, chat, memory."
+    },
+    {
+      "id": "state:LocalAgent",
+      "kind": "state",
+      "group": "state",
+      "label": "local-agent store",
+      "path": "src/lib/localAgent.ts",
+      "loc": 130,
+      "summary": "Zustand store for desktop Claude CLI preference/status."
+    },
+    {
+      "id": "cmd:PromptSubmit",
+      "kind": "command",
+      "group": "commands",
+      "label": "queue card / @mention",
+      "path": "src/components/PromptBar.tsx",
+      "tags": [
+        "prompt bar"
+      ]
+    },
+    {
+      "id": "cmd:UndoRedo",
+      "kind": "command",
+      "group": "commands",
+      "label": "undo / redo",
+      "path": "src/pages/CanvasPage.tsx",
+      "tags": [
+        "cmd+z",
+        "cmd+y"
+      ]
+    },
+    {
+      "id": "cmd:CopyShareLink",
+      "kind": "command",
+      "group": "commands",
+      "label": "copy share link",
+      "path": "src/components/ShareModal.tsx",
+      "tags": [
+        "button"
+      ]
+    },
+    {
+      "id": "ipc:Ws",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "ws.ts",
+      "path": "src/lib/ws.ts",
+      "loc": 170,
+      "summary": "WebSocket client: join, reconnect with close-code routing (4401/4403/4404)."
+    },
+    {
+      "id": "ipc:Api",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "api.ts",
+      "path": "src/lib/api.ts",
+      "loc": 549,
+      "summary": "Typed fetch wrapper over /api for every page."
+    },
+    {
+      "id": "ipc:Tauri",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "Tauri bridge",
+      "path": "src/lib/localAgent.ts",
+      "summary": "invoke claude_status/claude_connect in the desktop webview."
+    },
+    {
+      "id": "fn:History",
+      "kind": "function",
+      "group": "components",
+      "label": "history.ts",
+      "path": "src/lib/history.ts",
+      "summary": "Undo/redo stacks for canvas edits."
+    },
+    {
+      "id": "fn:FrameClip",
+      "kind": "function",
+      "group": "components",
+      "label": "frameClipboard.ts",
+      "path": "src/lib/frameClipboard.ts"
+    },
+    {
+      "id": "ext:Server",
+      "kind": "external",
+      "group": "external",
+      "label": "doop server",
+      "path": "server/index.ts"
+    },
+    {
+      "id": "cmp:Onboarding",
+      "kind": "component",
+      "group": "components",
+      "label": "Onboarding",
+      "path": "src/components/Onboarding.tsx"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Main",
+      "to": "cmp:App",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Home",
+      "kind": "renders",
+      "label": "default route"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:CanvasPage",
+      "kind": "renders",
+      "label": "/c/:id"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Automations",
+      "kind": "renders",
+      "label": "/automations"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:AutomationEditor",
+      "kind": "renders",
+      "label": "/automations/:id"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Settings",
+      "kind": "renders",
+      "label": "/settings"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Integrations",
+      "kind": "renders",
+      "label": "/integrations"
+    },
+    {
+      "from": "cmp:App",
+      "to": "cmp:Admin",
+      "kind": "renders",
+      "label": "/admin"
+    },
+    {
+      "from": "cmp:App",
+      "to": "shared:DesktopTabs",
+      "kind": "renders",
+      "label": "desktop shell"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:Stage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:Board",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:Inspector",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ElementPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:LayersPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:PagesPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:SideRail",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:PromptBar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:WorkingNow",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ActivityPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ChatPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ConnectModal",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ShareModal",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:PresentMode",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:ImportSources",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:Onboarding",
+      "kind": "renders",
+      "label": "Onboarding"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:FrameView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:Cursors",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:GhostFrames",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:FlowOverlay",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:SnapGuides",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "cmp:FollowFrame",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "shared:UIKit",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:FrameView",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Cursors",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:PromptBar",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ChatPanel",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ActivityPanel",
+      "to": "state:CanvasStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "ipc:Ws",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "ipc:Ws",
+      "kind": "ipc",
+      "label": "presence, edits"
+    },
+    {
+      "from": "cmp:PromptBar",
+      "to": "ipc:Api",
+      "kind": "ipc"
+    },
+    {
+      "from": "state:LocalAgent",
+      "to": "ipc:Tauri",
+      "kind": "ipc"
+    },
+    {
+      "from": "state:CanvasStore",
+      "to": "state:LocalAgent",
+      "kind": "reads",
+      "label": "preference"
+    },
+    {
+      "from": "cmd:PromptSubmit",
+      "to": "cmp:PromptBar",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:UndoRedo",
+      "to": "fn:History",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:CopyShareLink",
+      "to": "cmp:ShareModal",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:App",
+      "to": "ipc:Api",
+      "kind": "ipc",
+      "label": "me"
+    },
+    {
+      "from": "cmp:Home",
+      "to": "ipc:Api",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "ipc:Api",
+      "kind": "ipc"
+    },
+    {
+      "from": "fn:FrameClip",
+      "to": "state:CanvasStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Stage",
+      "to": "fn:FrameClip",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CanvasPage",
+      "to": "cmp:Onboarding",
+      "kind": "renders",
+      "label": "first visit"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-canvas",
+      "name": "Open a canvas",
+      "trigger": "click a canvas card on Home",
+      "steps": [
+        "cmp:Home",
+        "cmp:App",
+        "cmp:CanvasPage",
+        "state:CanvasStore",
+        "ipc:Ws"
+      ],
+      "summary": "Route /c/:id joins the ws room and hydrates the store."
+    },
+    {
+      "id": "drag-frame",
+      "name": "Move a frame",
+      "trigger": "drag a frame on the canvas",
+      "steps": [
+        "cmp:Stage",
+        "cmp:FrameView",
+        "state:CanvasStore",
+        "ipc:Ws"
+      ],
+      "summary": "Stage drag writes to the store and streams position over ws."
+    },
+    {
+      "id": "queue-agent-work",
+      "name": "Queue agent work",
+      "trigger": "submit in the prompt bar",
+      "steps": [
+        "cmd:PromptSubmit",
+        "cmp:PromptBar",
+        "ipc:Api",
+        "state:CanvasStore"
+      ],
+      "summary": "Prompt bars a card / @mention; server resident team picks it up."
+    },
+    {
+      "id": "agent-stream",
+      "name": "Watch an agent design",
+      "trigger": "agent streams HTML chunks over ws",
+      "steps": [
+        "ipc:Ws",
+        "state:CanvasStore",
+        "cmp:GhostFrames",
+        "cmp:FrameView"
+      ],
+      "summary": "Reveal playback shows the frame building live."
+    },
+    {
+      "id": "undo-edits",
+      "name": "Undo / redo",
+      "trigger": "cmd+z / cmd+y",
+      "steps": [
+        "cmd:UndoRedo",
+        "fn:History",
+        "cmp:CanvasPage"
+      ],
+      "summary": "Canvas keydown rewinds the local edit stacks."
+    },
+    {
+      "id": "share-canvas",
+      "name": "Share a canvas",
+      "trigger": "Share button",
+      "steps": [
+        "cmp:CanvasPage",
+        "cmp:ShareModal",
+        "cmd:CopyShareLink",
+        "ipc:Api"
+      ],
+      "summary": "Modal copies the canvas URL and sets invite/link access."
+    },
+    {
+      "id": "local-claude",
+      "name": "Enable local Claude",
+      "trigger": "Connect Local Claude",
+      "steps": [
+        "cmp:CanvasPage",
+        "state:LocalAgent",
+        "ipc:Tauri",
+        "ipc:Api"
+      ],
+      "summary": "Desktop webview invokes the CLI; server stores the preference."
+    }
+  ],
+  "notes": [
+    {
+      "title": "CanvasPage is a god-layout",
+      "body": "src/pages/CanvasPage.tsx (1672 LOC) renders ~15 components directly and owns import modals, shortcuts, share, present and onboarding wiring.",
+      "severity": "alert",
+      "path": "src/pages/CanvasPage.tsx"
+    },
+    {
+      "title": "one store, high fan-in",
+      "body": "Every panel and Stage child reads src/lib/store.ts; writes come from Stage, FrameView, PromptBar, FrameClip and ws message handling.",
+      "severity": "warn",
+      "path": "src/lib/store.ts"
+    },
+    {
+      "title": "no router library",
+      "body": "Routing is regex matches on location.pathname inside src/App.tsx with navigate() via history.pushState + manual popstate.",
+      "severity": "info",
+      "path": "src/App.tsx"
+    },
+    {
+      "title": "desktop shell hooks are optional bridge",
+      "body": "src/lib/localAgent.ts reads window.__TAURI__ / __DOOP_CLAUDE_CLI__ and degrades to a plain browser when absent.",
+      "severity": "info",
+      "path": "src/lib/localAgent.ts"
+    },
+    {
+      "title": "close-code routing is careful",
+      "body": "ws.ts maps 4401\u2192reload to sign-in, 4403\u2192home, 4404\u2192not-found; superseded sockets are guarded to avoid double reconnects.",
+      "severity": "info",
+      "path": "src/lib/ws.ts"
+    }
+  ]
+}

@@ -1,7 +1,38 @@
 {
   "version": 1,
-  "count": 1,
+  "count": 2,
   "entries": [
+    {
+      "slug": "kgoedecke__doop",
+      "name": "doop",
+      "github": "https://github.com/kgoedecke/doop",
+      "license": "AGPL-3.0-only",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Multiplayer design canvas where humans and AI agents co-design over live HTML frames.",
+      "stack": [
+        "typescript",
+        "react",
+        "express",
+        "ws",
+        "drizzle",
+        "postgresql",
+        "better-auth",
+        "mcp",
+        "tauri",
+        "swift"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-canvas-web.json",
+        "scan-canvas-web.html",
+        "scan-server.json",
+        "scan-server.html"
+      ]
+    },
     {
       "slug": "local__gr8r-studio",
       "name": "Gr8r Studio",

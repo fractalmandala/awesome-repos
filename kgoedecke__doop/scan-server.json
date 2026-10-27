@@ -1,0 +1,636 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "doop",
+    "slug": "kgoedecke__doop",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "server",
+    "name": "doop server",
+    "entryLayout": "server/index.ts",
+    "root": "server",
+    "summary": "Express + ws + MCP server owning every mutation, agent runs and persistence.",
+    "externalModules": [
+      "canvas-web",
+      "shared",
+      "desktop"
+    ]
+  },
+  "stats": {
+    "nodes": 36,
+    "edges": 36,
+    "components": 22,
+    "stateFiles": 3,
+    "commands": 1,
+    "ipcCalls": 9,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:IndexEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "index.ts",
+      "path": "server/index.ts",
+      "loc": 1991,
+      "summary": "Boots db, auth, routers, static web, ws room, mcp endpoint and agent touches."
+    },
+    {
+      "id": "cmp:Actions",
+      "kind": "component",
+      "group": "components",
+      "label": "actions.ts",
+      "path": "server/actions.ts",
+      "loc": 1678,
+      "summary": "Mutations shared by REST, MCP and resident loop; broadcast + persist."
+    },
+    {
+      "id": "cmp:McpServer",
+      "kind": "component",
+      "group": "components",
+      "label": "mcp.ts",
+      "path": "server/mcp.ts",
+      "loc": 1757,
+      "summary": "MCP tool registration and long INSTRUCTIONS prompt for agent clients."
+    },
+    {
+      "id": "cmp:ResidentAgent",
+      "kind": "component",
+      "group": "components",
+      "label": "resident.ts",
+      "path": "server/resident.ts",
+      "loc": 1574,
+      "summary": "Claude tool loop per role; cards move down pipelines."
+    },
+    {
+      "id": "cmp:AuthModule",
+      "kind": "component",
+      "group": "components",
+      "label": "auth.ts",
+      "path": "server/auth.ts"
+    },
+    {
+      "id": "cmp:Access",
+      "kind": "component",
+      "group": "components",
+      "label": "access.ts",
+      "path": "server/access.ts"
+    },
+    {
+      "id": "cmp:AdminRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "admin.ts",
+      "path": "server/admin.ts"
+    },
+    {
+      "id": "cmp:BillingRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "billing.ts",
+      "path": "server/billing.ts"
+    },
+    {
+      "id": "cmp:AutomationsRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "automations.ts",
+      "path": "server/automations.ts",
+      "summary": "Scheduled workflow rows, runner and scheduler tick."
+    },
+    {
+      "id": "cmp:Workspaces",
+      "kind": "component",
+      "group": "components",
+      "label": "workspaces.ts",
+      "path": "server/workspaces.ts"
+    },
+    {
+      "id": "cmp:CommunityRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "community.ts",
+      "path": "server/community.ts"
+    },
+    {
+      "id": "cmp:IntegrationsRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "integrations.ts",
+      "path": "server/integrations.ts"
+    },
+    {
+      "id": "cmp:NotificationsRouter",
+      "kind": "component",
+      "group": "components",
+      "label": "notifications.ts",
+      "path": "server/notifications.ts"
+    },
+    {
+      "id": "cmp:Webhooks",
+      "kind": "component",
+      "group": "components",
+      "label": "webhooks.ts",
+      "path": "server/webhooks.ts"
+    },
+    {
+      "id": "cmp:AgentKeys",
+      "kind": "component",
+      "group": "components",
+      "label": "agentKeys.ts",
+      "path": "server/agentKeys.ts"
+    },
+    {
+      "id": "cmp:ModelAccounts",
+      "kind": "component",
+      "group": "components",
+      "label": "modelAccounts.ts",
+      "path": "server/modelAccounts.ts",
+      "loc": 801
+    },
+    {
+      "id": "cmp:Screenshot",
+      "kind": "component",
+      "group": "components",
+      "label": "screenshot.ts",
+      "path": "server/screenshot.ts"
+    },
+    {
+      "id": "cmp:Assets",
+      "kind": "component",
+      "group": "components",
+      "label": "assets.ts",
+      "path": "server/assets.ts"
+    },
+    {
+      "id": "cmp:IngestModule",
+      "kind": "component",
+      "group": "components",
+      "label": "ingest.ts",
+      "path": "server/ingest.ts"
+    },
+    {
+      "id": "cmp:GithubRecon",
+      "kind": "component",
+      "group": "components",
+      "label": "githubRecon.ts",
+      "path": "server/githubRecon.ts"
+    },
+    {
+      "id": "cmp:LinearExt",
+      "kind": "component",
+      "group": "components",
+      "label": "linear/",
+      "path": "server/linear"
+    },
+    {
+      "id": "cmp:SlackExt",
+      "kind": "component",
+      "group": "components",
+      "label": "slack/",
+      "path": "server/slack"
+    },
+    {
+      "id": "state:Store",
+      "kind": "state",
+      "group": "state",
+      "label": "store.ts",
+      "path": "server/store.ts",
+      "loc": 180,
+      "summary": "In-memory canvas/frame maps hydrated at boot; read hot path."
+    },
+    {
+      "id": "state:Persist",
+      "kind": "state",
+      "group": "state",
+      "label": "db/persist.ts",
+      "path": "server/db/persist.ts",
+      "loc": 874,
+      "summary": "Write-through helpers mirroring every mutation into drizzle tables."
+    },
+    {
+      "id": "state:Schema",
+      "kind": "state",
+      "group": "state",
+      "label": "db/schema.ts",
+      "path": "server/db/schema.ts",
+      "loc": 783
+    },
+    {
+      "id": "cmd:SchedulerTick",
+      "kind": "command",
+      "group": "commands",
+      "label": "scheduler tick",
+      "path": "server/automations.ts",
+      "tags": [
+        "interval"
+      ]
+    },
+    {
+      "id": "ipc:Rest",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "express routes",
+      "path": "server/index.ts",
+      "summary": "~60 inline /api endpoints plus 9 routers mounted on index.ts."
+    },
+    {
+      "id": "ipc:Wss",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "ws: /ws",
+      "path": "server/index.ts",
+      "loc": 150,
+      "summary": "WebSocketServer: presence, frame edits, reveals, status chat per canvas room."
+    },
+    {
+      "id": "ipc:McpHttp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "/mcp transport",
+      "path": "server/mcp.ts",
+      "summary": "StreamableHTTP transport; OAuth sessions or agent keys; Gemini-cloud variant."
+    },
+    {
+      "id": "ipc:Postgres",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "db/index.ts",
+      "path": "server/db/index.ts",
+      "summary": "drizzle pool; PGLite fallback enables zero-config local dev."
+    },
+    {
+      "id": "ipc:Anthropic",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agentModel.ts",
+      "path": "server/agentModel.ts",
+      "summary": "Picks provider tier: server Anthropic/OpenAI, then user model accounts."
+    },
+    {
+      "id": "ipc:Puppeteer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "capture browser",
+      "path": "server/previews.ts",
+      "summary": "puppeteer-core page rendering for screenshots and previews."
+    },
+    {
+      "id": "ipc:Stripe",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "stripe sdk",
+      "path": "server/billing.ts"
+    },
+    {
+      "id": "ipc:Apns",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "apns.ts",
+      "path": "server/apns.ts"
+    },
+    {
+      "id": "ipc:Mailer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mailer.ts",
+      "path": "server/mailer.ts"
+    },
+    {
+      "id": "ext:Client",
+      "kind": "external",
+      "group": "external",
+      "label": "canvas web client",
+      "path": "src/App.tsx"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ipc:Rest",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:Rest",
+      "to": "cmp:AuthModule",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:McpHttp",
+      "to": "cmp:McpServer",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ResidentAgent",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ResidentAgent",
+      "to": "ipc:Anthropic",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AutomationsRouter",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AutomationsRouter",
+      "to": "cmd:SchedulerTick",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "state:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "state:Persist",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Actions",
+      "to": "ipc:Wss",
+      "kind": "calls",
+      "label": "broadcast via wire()"
+    },
+    {
+      "from": "state:Persist",
+      "to": "state:Schema",
+      "kind": "imports"
+    },
+    {
+      "from": "state:Persist",
+      "to": "ipc:Postgres",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:IndexEntry",
+      "to": "ipc:Rest",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:IndexEntry",
+      "to": "ipc:Wss",
+      "kind": "calls",
+      "label": "wss on connection"
+    },
+    {
+      "from": "ipc:Wss",
+      "to": "cmp:Actions",
+      "kind": "calls",
+      "label": "client messages"
+    },
+    {
+      "from": "cmp:AdminRouter",
+      "to": "state:Persist",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:BillingRouter",
+      "to": "ipc:Stripe",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CommunityRouter",
+      "to": "state:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Workspaces",
+      "to": "state:Persist",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ModelAccounts",
+      "to": "ipc:Anthropic",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Screenshot",
+      "to": "ipc:Puppeteer",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "cmp:Screenshot",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:McpServer",
+      "to": "cmp:LinearExt",
+      "kind": "calls",
+      "label": "extension tools"
+    },
+    {
+      "from": "cmp:LinearExt",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:SlackExt",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:GithubRecon",
+      "to": "cmp:Actions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:IngestModule",
+      "to": "state:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:IngestModule",
+      "to": "ipc:Puppeteer",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Assets",
+      "to": "state:Persist",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Webhooks",
+      "to": "ipc:Mailer",
+      "kind": "ipc",
+      "label": "comment mail"
+    },
+    {
+      "from": "cmp:NotificationsRouter",
+      "to": "ipc:Apns",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentKeys",
+      "to": "ipc:McpHttp",
+      "kind": "calls",
+      "label": "verify"
+    },
+    {
+      "from": "cmp:IndexEntry",
+      "to": "state:Store",
+      "kind": "reads",
+      "label": "hydrate"
+    },
+    {
+      "from": "cmp:IndexEntry",
+      "to": "ext:Client",
+      "kind": "renders",
+      "label": "serves dist/"
+    },
+    {
+      "from": "cmp:ResidentAgent",
+      "to": "cmp:Screenshot",
+      "kind": "calls",
+      "label": "inspect frame renders"
+    }
+  ],
+  "flows": [
+    {
+      "id": "mcp-tool-call",
+      "name": "Agent calls an MCP tool",
+      "trigger": "claude code tool call over /mcp",
+      "steps": [
+        "cmp:AgentKeys",
+        "ipc:McpHttp",
+        "cmp:McpServer",
+        "cmp:Actions",
+        "state:Store",
+        "ipc:Wss"
+      ],
+      "summary": "Tools mutate through actions and broadcast live to everyone."
+    },
+    {
+      "id": "resident-run",
+      "name": "Resident agent runs a card",
+      "trigger": "card queued via /api",
+      "steps": [
+        "ipc:Rest",
+        "cmp:Actions",
+        "cmp:ResidentAgent",
+        "ipc:Anthropic",
+        "cmp:Screenshot"
+      ],
+      "summary": "Claude loop designs, screenshots itself, fixes what looks wrong."
+    },
+    {
+      "id": "ws-frame-edit",
+      "name": "Browser edits a frame",
+      "trigger": "ws frame edit message",
+      "steps": [
+        "ipc:Wss",
+        "cmp:Access",
+        "cmp:Actions",
+        "state:Persist",
+        "ipc:Postgres"
+      ],
+      "summary": "Access-checked mutation persists and rebroadcasts to the room."
+    },
+    {
+      "id": "automation-fire",
+      "name": "Automation fires",
+      "trigger": "scheduler tick",
+      "steps": [
+        "cmd:SchedulerTick",
+        "cmp:AutomationsRouter",
+        "cmp:Actions",
+        "ipc:Anthropic"
+      ],
+      "summary": "Due automations run pull steps and agent-task steps."
+    },
+    {
+      "id": "capture-webpage",
+      "name": "Import / capture a page",
+      "trigger": "import modal URL",
+      "steps": [
+        "ipc:Rest",
+        "cmp:IngestModule",
+        "ipc:Puppeteer",
+        "state:Persist"
+      ],
+      "summary": "Server captures the page into an editable HTML frame asset."
+    },
+    {
+      "id": "stripe-webhook",
+      "name": "Billing webhook",
+      "trigger": "Stripe posts event",
+      "steps": [
+        "ipc:Stripe",
+        "cmp:BillingRouter",
+        "state:Persist"
+      ],
+      "summary": "Raw-body signed webhook updates team plan rows."
+    }
+  ],
+  "notes": [
+    {
+      "title": "index.ts is a monolith",
+      "body": "server/index.ts (1991 LOC) inlines ~60 REST routes, the ws room and boot logic instead of splitting routers.",
+      "severity": "warn",
+      "path": "server/index.ts"
+    },
+    {
+      "title": "actions.ts is the authority",
+      "body": "Every producer (REST, ws, MCP, resident loop, linear/slack/github extensions) funnels through server/actions.ts \u2014 clean single mutation surface.",
+      "severity": "info",
+      "path": "server/actions.ts"
+    },
+    {
+      "title": "memory + Postgres dual sources",
+      "body": "state lives in server/store.ts Maps; db/persist.ts write-through mirrors each change. Crash-window gaps are patched at hydrate (orphaned frames rejoin page 1).",
+      "severity": "info",
+      "path": "server/db/persist.ts"
+    },
+    {
+      "title": "resident loop is prompt-heavy",
+      "body": "server/mcp.ts embeds a ~1k-word instruction prompt per tool call; workflow rules live with the model, not with the client.",
+      "severity": "info",
+      "path": "server/mcp.ts"
+    },
+    {
+      "title": "model-tier fallback chain",
+      "body": "server/resident.ts retries of the server tier then falls onto the requesting human's connected plan (chatgpt oauth, openai/openrouter/gemini/claude keys).",
+      "severity": "info",
+      "path": "server/resident.ts"
+    }
+  ]
+}
