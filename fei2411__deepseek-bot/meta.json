@@ -1,0 +1,22 @@
+{
+  "slug": "fei2411__deepseek-bot",
+  "name": "DS Bot",
+  "github": "https://github.com/Fei2411/DeepSeek-Bot",
+  "license": "Apache-2.0",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "A DSH plugin that turns DeepSeek Harness into a team of long-lived Bots, plus a desktop app.",
+  "stack": ["javascript", "node", "electron", "react", "deepseek-harness", "playwright", "docker"],
+  "reports": [
+    "report.md",
+    "scan-overview.json",
+    "scan-overview.html",
+    "scan-host.json",
+    "scan-host.html",
+    "scan-client.json",
+    "scan-client.html",
+    "scan-app.json",
+    "scan-app.html"
+  ]
+}

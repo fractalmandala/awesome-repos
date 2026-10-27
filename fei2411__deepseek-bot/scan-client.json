@@ -1,0 +1,947 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "DS Bot",
+    "slug": "fei2411__deepseek-bot",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "client",
+    "name": "DS Bot client",
+    "entryLayout": "ds-bot/src/client/index.js",
+    "root": "ds-bot/src/client",
+    "summary": "React views injected into DSH slots: sidebar, chat cells, panels, dialogs",
+    "externalModules": [
+      "host",
+      "app",
+      "shared"
+    ]
+  },
+  "stats": {
+    "nodes": 52,
+    "edges": 62,
+    "components": 31,
+    "stateFiles": 4,
+    "commands": 7,
+    "ipcCalls": 5,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Client",
+      "label": "client/index.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "ds-bot/src/client/index.js",
+      "tags": [
+        "entry"
+      ],
+      "summary": "Injects 30+ DSH slots, switches Bot/Agent surface, mounts panels and dialogs.",
+      "loc": 922
+    },
+    {
+      "id": "cmp:Surface",
+      "label": "surface.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/surface.js",
+      "loc": 74
+    },
+    {
+      "id": "cmp:Cells",
+      "label": "cells.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/cells.js",
+      "summary": "1,024 lines of turn, tool, reasoning, reply, relay and separator cells.",
+      "loc": 1024
+    },
+    {
+      "id": "cmp:Sidebar",
+      "label": "sidebar.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/sidebar.js",
+      "summary": "Team sidebar, bot tiles, account, brand; replaces DSH's workspace list.",
+      "loc": 741
+    },
+    {
+      "id": "cmp:Composer",
+      "label": "composer.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/composer.js",
+      "summary": "Composer inputs and docks: plus menu, voice, model, members, questions.",
+      "loc": 166
+    },
+    {
+      "id": "cmp:Header",
+      "label": "header.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/header.js",
+      "loc": 217
+    },
+    {
+      "id": "cmp:Panel",
+      "label": "browser-pane.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/browser-pane.js",
+      "summary": "Right column: details, browser or side chat, with the tab strip that flips them.",
+      "loc": 909
+    },
+    {
+      "id": "cmp:BotBrowsers",
+      "label": "bot-browsers.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/bot-browsers.js",
+      "summary": "Per-Bot webview tabs, leases, placement and page reading.",
+      "loc": 642
+    },
+    {
+      "id": "cmp:ReadPage",
+      "label": "read-page.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/read-page.js",
+      "loc": 335
+    },
+    {
+      "id": "cmp:Details",
+      "label": "details-drawer.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/details-drawer.js",
+      "loc": 290
+    },
+    {
+      "id": "cmp:Settings",
+      "label": "settings.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/settings.js",
+      "summary": "Settings router: general, appearance, bots, groups, models, secrets, memory.",
+      "loc": 296
+    },
+    {
+      "id": "cmp:Providers",
+      "label": "providers-page.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/providers-page.js",
+      "loc": 195
+    },
+    {
+      "id": "cmp:CreateBot",
+      "label": "create-bot.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/create-bot.js",
+      "loc": 100
+    },
+    {
+      "id": "cmp:GroupSettings",
+      "label": "group-settings.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/group-settings.js",
+      "loc": 208
+    },
+    {
+      "id": "cmp:BotSettings",
+      "label": "bot-settings.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/bot-settings.js",
+      "loc": 293
+    },
+    {
+      "id": "cmp:MemoryPanel",
+      "label": "memory-panel.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/memory-panel.js",
+      "loc": 303
+    },
+    {
+      "id": "cmp:Questions",
+      "label": "questions.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/questions.js",
+      "loc": 230
+    },
+    {
+      "id": "cmp:Widgets",
+      "label": "widget-cell.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/widget-cell.js",
+      "summary": "Renders view blueprints and their charts; sandboxed html for the rest.",
+      "loc": 591
+    },
+    {
+      "id": "cmp:SideChat",
+      "label": "side-chat.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/side-chat.js",
+      "loc": 147
+    },
+    {
+      "id": "cmp:Btw",
+      "label": "btw.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/btw.js",
+      "loc": 86
+    },
+    {
+      "id": "cmp:Palette",
+      "label": "palette.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/palette.js",
+      "loc": 141
+    },
+    {
+      "id": "cmp:Overlays",
+      "label": "overlays.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/overlays.js",
+      "loc": 58
+    },
+    {
+      "id": "cmp:I18n",
+      "label": "i18n.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/i18n.js",
+      "loc": 1160
+    },
+    {
+      "id": "cmp:Themes",
+      "label": "themes.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/themes.js",
+      "loc": 128
+    },
+    {
+      "id": "cmp:Characters",
+      "label": "characters.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/characters.js",
+      "loc": 137
+    },
+    {
+      "id": "cmp:Marks",
+      "label": "mark.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/mark.js",
+      "loc": 170
+    },
+    {
+      "id": "cmp:ModelMenu",
+      "label": "model-menu.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/model-menu.js",
+      "loc": 358
+    },
+    {
+      "id": "cmp:UsagePage",
+      "label": "usage-page.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/usage-page.js",
+      "loc": 758
+    },
+    {
+      "id": "cmp:SchedulesUI",
+      "label": "schedules.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/schedules.js",
+      "loc": 276
+    },
+    {
+      "id": "cmp:DiagnosticsUI",
+      "label": "diagnostics.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/diagnostics.js",
+      "loc": 86
+    },
+    {
+      "id": "cmp:Feedback",
+      "label": "feedback.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/client/feedback.js",
+      "loc": 182
+    },
+    {
+      "id": "state:Roster",
+      "label": "roster source",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/client/sources.js",
+      "summary": "Create-source store from the state view, indexed by Bot, room and Session.",
+      "loc": 64
+    },
+    {
+      "id": "state:Ui",
+      "label": "ui source",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/client/index.js",
+      "loc": 922
+    },
+    {
+      "id": "state:Storage",
+      "label": "localStorage",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/client/storage.js",
+      "loc": 71
+    },
+    {
+      "id": "state:Live",
+      "label": "live source",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/client/sources.js",
+      "loc": 64
+    },
+    {
+      "id": "cmd:Send",
+      "label": "Send",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/composer.js",
+      "tags": [
+        "composer"
+      ],
+      "loc": 166
+    },
+    {
+      "id": "cmd:NewBot",
+      "label": "Create a Bot",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/create-bot.js",
+      "tags": [
+        "dialog"
+      ],
+      "loc": 100
+    },
+    {
+      "id": "cmd:NewGroup",
+      "label": "Create a group",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/group-settings.js",
+      "loc": 208
+    },
+    {
+      "id": "cmd:OpenPalette",
+      "label": "Command palette",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/palette.js",
+      "loc": 141
+    },
+    {
+      "id": "cmd:OpenPanel",
+      "label": "Open details / browser",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/browser-pane.js",
+      "loc": 909
+    },
+    {
+      "id": "cmd:Settings",
+      "label": "Open settings",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/settings.js",
+      "loc": 296
+    },
+    {
+      "id": "cmd:AnswerQuestion",
+      "label": "Answer a question card",
+      "kind": "command",
+      "group": "commands",
+      "path": "ds-bot/src/client/questions.js",
+      "loc": 230
+    },
+    {
+      "id": "ipc:ApiBot",
+      "label": "POST /api/bot",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/client/api.js",
+      "summary": "One wrapper for every request; refusals shown where the user acted.",
+      "loc": 42
+    },
+    {
+      "id": "ipc:Feed",
+      "label": "SSE /api/bot/feed",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/client/sources.js",
+      "loc": 64
+    },
+    {
+      "id": "ipc:Slots",
+      "label": "ctx.slots",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/client/index.js",
+      "loc": 922
+    },
+    {
+      "id": "ipc:DshUi",
+      "label": "uiWorkspace / uiConversation",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/client/index.js",
+      "loc": 922
+    },
+    {
+      "id": "ipc:AppBridge",
+      "label": "window.dsBotApp",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/client/bot-browsers.js",
+      "loc": 642
+    },
+    {
+      "id": "shared:Views",
+      "label": "shared/views.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "ds-bot/src/shared/views.js",
+      "loc": 685
+    },
+    {
+      "id": "shared:Mentions",
+      "label": "shared/mentions.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "ds-bot/src/shared/mentions.js",
+      "loc": 72
+    },
+    {
+      "id": "ext:React",
+      "label": "react 19",
+      "kind": "external",
+      "group": "external",
+      "path": "app/package.json",
+      "loc": 77
+    },
+    {
+      "id": "ext:DSH",
+      "label": "DSH web UI",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/package.json",
+      "loc": 66
+    },
+    {
+      "id": "ext:Electron",
+      "label": "webview / BrowserWindow",
+      "kind": "external",
+      "group": "external",
+      "path": "app/src/bot-browser.mjs",
+      "loc": 192
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Client",
+      "to": "ipc:Slots",
+      "kind": "ipc",
+      "label": "shadow() per slot"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ipc:DshUi",
+      "kind": "ipc",
+      "label": "open sessions"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Surface",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Cells",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Sidebar",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Composer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Panel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Overlays",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Palette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "state:Ui",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "state:Roster",
+      "kind": "writes",
+      "label": "state pull"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "state, hello"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ipc:Feed",
+      "kind": "ipc",
+      "label": "subscribe"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "state:Roster",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "cmp:Widgets",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "cmp:Questions",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "cmp:Btw",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "chat, earlier"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "state:Roster",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "state:Live",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "state:Storage",
+      "kind": "writes",
+      "label": "unread"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "cmd:NewBot",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Composer",
+      "to": "cmd:Send",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Composer",
+      "to": "cmd:AnswerQuestion",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Panel",
+      "to": "cmp:Details",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Panel",
+      "to": "cmp:BotBrowsers",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Panel",
+      "to": "cmp:SideChat",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:BotBrowsers",
+      "to": "cmp:ReadPage",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:BotBrowsers",
+      "to": "ipc:AppBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:BotBrowsers",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "browser-wait / result"
+    },
+    {
+      "from": "cmp:ReadPage",
+      "to": "ext:Electron",
+      "kind": "calls",
+      "label": "webview page"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:Providers",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:BotSettings",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:GroupSettings",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:MemoryPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:UsagePage",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:SchedulesUI",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "cmp:Feedback",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Settings",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "set-prefs, providers"
+    },
+    {
+      "from": "cmp:GroupSettings",
+      "to": "cmd:NewGroup",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:CreateBot",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "create-bot"
+    },
+    {
+      "from": "cmp:MemoryPanel",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "memory"
+    },
+    {
+      "from": "cmp:ModelMenu",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "models, efforts"
+    },
+    {
+      "from": "cmp:UsagePage",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "usage, run-stats"
+    },
+    {
+      "from": "cmp:SchedulesUI",
+      "to": "ipc:ApiBot",
+      "kind": "ipc",
+      "label": "schedules"
+    },
+    {
+      "from": "cmp:Feedback",
+      "to": "cmp:DiagnosticsUI",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Marks",
+      "to": "cmp:Characters",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Sidebar",
+      "to": "cmp:Marks",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "cmp:I18n",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Cells",
+      "to": "cmp:Marks",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "cmp:Themes",
+      "kind": "calls",
+      "label": "themeCss per surface"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ext:DSH",
+      "kind": "imports",
+      "label": "dsh-primitives"
+    },
+    {
+      "from": "cmp:Client",
+      "to": "ext:React",
+      "kind": "imports"
+    },
+    {
+      "from": "cmd:Send",
+      "to": "ipc:ApiBot",
+      "kind": "commands",
+      "label": "send"
+    },
+    {
+      "from": "cmd:NewBot",
+      "to": "ipc:ApiBot",
+      "kind": "commands",
+      "label": "create-bot"
+    },
+    {
+      "from": "cmd:NewGroup",
+      "to": "ipc:ApiBot",
+      "kind": "commands",
+      "label": "create-room"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "cmp:Palette",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:OpenPanel",
+      "to": "cmp:Panel",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Settings",
+      "to": "cmp:Settings",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:AnswerQuestion",
+      "to": "ipc:ApiBot",
+      "kind": "commands",
+      "label": "question-reply"
+    },
+    {
+      "from": "cmp:Widgets",
+      "to": "shared:Views",
+      "kind": "reads",
+      "label": "blueprint check"
+    },
+    {
+      "from": "cmp:Composer",
+      "to": "shared:Mentions",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "mount",
+      "name": "Client mounts",
+      "trigger": "DSH loads the ds-bot client bundle",
+      "steps": [
+        "cmp:Client",
+        "ipc:Slots",
+        "cmp:Surface",
+        "state:Roster",
+        "ipc:ApiBot"
+      ],
+      "summary": "Slots are shadowed, the surface enters Bot mode, and state fills the roster."
+    },
+    {
+      "id": "send",
+      "name": "Send a message",
+      "trigger": "Enter in the composer",
+      "steps": [
+        "cmd:Send",
+        "ipc:ApiBot",
+        "ipc:Feed",
+        "cmp:Cells"
+      ],
+      "summary": "The POST starts the turn; stream events append cells as the reply arrives."
+    },
+    {
+      "id": "create",
+      "name": "Create a Bot",
+      "trigger": "New Bot in the sidebar",
+      "steps": [
+        "cmd:NewBot",
+        "cmp:CreateBot",
+        "ipc:ApiBot",
+        "state:Roster",
+        "cmp:Sidebar"
+      ],
+      "summary": "The dialog posts create-bot; the returned state redraws the team."
+    },
+    {
+      "id": "panel",
+      "name": "Open a Bot's browser",
+      "trigger": "Click the Bot tile's browser tab",
+      "steps": [
+        "cmd:OpenPanel",
+        "cmp:Panel",
+        "cmp:BotBrowsers",
+        "ipc:AppBridge",
+        "cmp:ReadPage"
+      ],
+      "summary": "The panel leases a webview, places it, and can read the page for the host."
+    },
+    {
+      "id": "question",
+      "name": "Answer a question card",
+      "trigger": "Choose an option on a question card",
+      "steps": [
+        "cmd:AnswerQuestion",
+        "cmp:Questions",
+        "ipc:ApiBot",
+        "cmp:Cells"
+      ],
+      "summary": "The reply endpoint resumes the waiting turn; the card settles in place."
+    },
+    {
+      "id": "settings",
+      "name": "Open settings",
+      "trigger": "Settings in the account menu",
+      "steps": [
+        "cmd:Settings",
+        "cmp:Settings",
+        "cmp:Providers",
+        "ipc:ApiBot"
+      ],
+      "summary": "One router over general, appearance, bots, groups, models, secrets and updates."
+    }
+  ],
+  "notes": [
+    {
+      "title": "The client is a slot tenant",
+      "body": "client/index.js:793-851 shadows 30+ DSH slots (sidebar, chat nodes, composer docks, overlays) and withdraws them all in Agent mode through surface.js, so it lives inside DSH's UI, not beside it.",
+      "severity": "info",
+      "path": "ds-bot/src/client/index.js"
+    },
+    {
+      "title": "State is hand-rolled",
+      "body": "sources.js stores plus useSyncExternalStore replace any state library; localStorage keeps unread, reactions and prefs. Every view reads the same roster snapshot, so a state pull redraws everything.",
+      "severity": "info",
+      "path": "ds-bot/src/client/sources.js"
+    },
+    {
+      "title": "Four files are half the client",
+      "body": "styles.js 1,217, i18n.js 1,160, cells.js 1,024 and index.js 922 are 4.3k of 17.4k client lines; cells.js mixes rendering with relay/turn heuristics from text.js.",
+      "severity": "warn",
+      "path": "ds-bot/src/client/styles.js"
+    },
+    {
+      "title": "Browser reading runs in the page",
+      "body": "read-page.js is serialized with Function.prototype.toString into the Bot's webview, so it must not reference module names; that constraint is easy to break when editing the extraction.",
+      "severity": "warn",
+      "path": "ds-bot/src/client/read-page.js"
+    },
+    {
+      "title": "Two shells, one client",
+      "body": "The same modules serve DSH's UI and the parked app window; the window swaps dsh-primitives.js for its own module (app/vite.config.js) because it does not load DSH's interface.",
+      "severity": "info",
+      "path": "app/vite.config.js"
+    },
+    {
+      "title": "Copy is looked up at render time",
+      "body": "i18n.js keys on the English text and re-renders slot outlets on language change, so a missing key shows English rather than breaking the surface; Chinese copy is in the same file.",
+      "severity": "info",
+      "path": "ds-bot/src/client/i18n.js"
+    }
+  ]
+}

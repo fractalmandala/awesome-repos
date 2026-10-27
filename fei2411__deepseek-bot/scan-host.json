@@ -1,0 +1,1012 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "DS Bot",
+    "slug": "fei2411__deepseek-bot",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "host",
+    "name": "DS Bot host",
+    "entryLayout": "ds-bot/index.js",
+    "root": "ds-bot/src/host",
+    "summary": "Plugin server side: roster and store, turns, groups, memory, tools, channel",
+    "externalModules": [
+      "client",
+      "app",
+      "shared"
+    ]
+  },
+  "stats": {
+    "nodes": 54,
+    "edges": 70,
+    "components": 38,
+    "stateFiles": 4,
+    "commands": 0,
+    "ipcCalls": 6,
+    "flows": 7
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:Plugin",
+      "label": "ds-bot/index.js",
+      "kind": "layout",
+      "group": "layout",
+      "path": "ds-bot/index.js",
+      "tags": [
+        "entry"
+      ],
+      "summary": "createRuntime plus the 35-module list and the DSH services it injects.",
+      "loc": 71
+    },
+    {
+      "id": "cmp:Store",
+      "label": "store.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/store.js",
+      "summary": "state.json, migrations, atomic writes, untrusted-id reads, Session indexes.",
+      "loc": 431
+    },
+    {
+      "id": "cmp:HomeLock",
+      "label": "home-lock.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/home-lock.js",
+      "loc": 98
+    },
+    {
+      "id": "cmp:Roster",
+      "label": "roster.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/roster.js",
+      "summary": "Create/change/delete Bots and rooms, Main Bot role, first Main Bot.",
+      "loc": 654
+    },
+    {
+      "id": "cmp:Models",
+      "label": "models.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/models.js",
+      "loc": 208
+    },
+    {
+      "id": "cmp:Providers",
+      "label": "providers.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/providers.js",
+      "loc": 226
+    },
+    {
+      "id": "cmp:Permissions",
+      "label": "permissions.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/permissions.js",
+      "loc": 80
+    },
+    {
+      "id": "cmp:Turns",
+      "label": "turns.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/turns.js",
+      "summary": "Turn tracking per Session, bot-triggered turns, waiters, reply routing.",
+      "loc": 654
+    },
+    {
+      "id": "cmp:Delivery",
+      "label": "delivery.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/delivery.js",
+      "summary": "The one path a message takes into any Bot Session.",
+      "loc": 162
+    },
+    {
+      "id": "cmp:Groups",
+      "label": "groups.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/groups.js",
+      "summary": "1,000 lines: room log, ordered rounds, @mentions, relay limit, group tools.",
+      "loc": 1000
+    },
+    {
+      "id": "cmp:Tools",
+      "label": "tools.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/tools.js",
+      "summary": "18 tools registered with defineTool, plus a guard on blocking questions.",
+      "loc": 874
+    },
+    {
+      "id": "cmp:Memory",
+      "label": "memory.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/memory.js",
+      "summary": "1,748 lines: MEMORY.md and topics per Bot/group/team, journal, tools.",
+      "loc": 1748
+    },
+    {
+      "id": "cmp:MemoryPending",
+      "label": "memory-pending.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/memory-pending.js",
+      "loc": 95
+    },
+    {
+      "id": "cmp:Parts",
+      "label": "parts.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/parts.js",
+      "summary": "1,325 lines: checkpoint or move to a fresh Session, handoff package, paging.",
+      "loc": 1325
+    },
+    {
+      "id": "cmp:Steward",
+      "label": "steward.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/steward.js",
+      "loc": 165
+    },
+    {
+      "id": "cmp:ChatIndex",
+      "label": "chat-index.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/chat-index.js",
+      "loc": 293
+    },
+    {
+      "id": "cmp:Resume",
+      "label": "resume.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/resume.js",
+      "loc": 397
+    },
+    {
+      "id": "cmp:Handoffs",
+      "label": "handoffs.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/handoffs.js",
+      "loc": 266
+    },
+    {
+      "id": "cmp:Approvals",
+      "label": "approvals.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/approvals.js",
+      "loc": 69
+    },
+    {
+      "id": "cmp:Folders",
+      "label": "folders.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/folders.js",
+      "loc": 210
+    },
+    {
+      "id": "cmp:Prompt",
+      "label": "prompt.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/prompt.js",
+      "loc": 73
+    },
+    {
+      "id": "cmp:Agents",
+      "label": "agents.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/agents.js",
+      "loc": 186
+    },
+    {
+      "id": "cmp:Caps",
+      "label": "capabilities.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/capabilities.js",
+      "loc": 527
+    },
+    {
+      "id": "cmp:Schedules",
+      "label": "schedules.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/schedules.js",
+      "loc": 151
+    },
+    {
+      "id": "cmp:Secrets",
+      "label": "secrets.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/secrets.js",
+      "loc": 591
+    },
+    {
+      "id": "cmp:Connectors",
+      "label": "connectors.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/connectors.js",
+      "loc": 169
+    },
+    {
+      "id": "cmp:Browser",
+      "label": "browser.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/browser.js",
+      "summary": "read_browser over a client long poll and a webview lease.",
+      "loc": 287
+    },
+    {
+      "id": "cmp:BrowserPlugins",
+      "label": "browser-plugins.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/browser-plugins.js",
+      "loc": 166
+    },
+    {
+      "id": "cmp:Images",
+      "label": "images.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/images.js",
+      "loc": 212
+    },
+    {
+      "id": "cmp:Usage",
+      "label": "usage.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/usage.js",
+      "loc": 602
+    },
+    {
+      "id": "cmp:Update",
+      "label": "update.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/update.js",
+      "loc": 315
+    },
+    {
+      "id": "cmp:DshUpdate",
+      "label": "dsh-update.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/dsh-update.js",
+      "loc": 172
+    },
+    {
+      "id": "cmp:Diagnostics",
+      "label": "diagnostics.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/diagnostics.js",
+      "loc": 257
+    },
+    {
+      "id": "cmp:Feed",
+      "label": "feed.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/feed.js",
+      "summary": "SSE stream with revision, live, message and stream events.",
+      "loc": 115
+    },
+    {
+      "id": "cmp:Side",
+      "label": "side.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/side.js",
+      "summary": "Side chats answered from a snapshot, tools off, out of history.",
+      "loc": 406
+    },
+    {
+      "id": "cmp:Btw",
+      "label": "btw.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/btw.js",
+      "loc": 343
+    },
+    {
+      "id": "cmp:Thinking",
+      "label": "thinking.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/thinking.js",
+      "loc": 55
+    },
+    {
+      "id": "cmp:Channel",
+      "label": "channel.js",
+      "kind": "component",
+      "group": "components",
+      "path": "ds-bot/src/host/channel.js",
+      "summary": "The state view and the ~40 POST /api/bot endpoints.",
+      "loc": 538
+    },
+    {
+      "id": "state:TeamState",
+      "label": "state.json",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/host/store.js",
+      "loc": 431
+    },
+    {
+      "id": "state:MemoryFiles",
+      "label": "memory/",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/host/memory.js",
+      "loc": 1748
+    },
+    {
+      "id": "state:SecretsFile",
+      "label": "secrets.json",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/host/secrets.js",
+      "loc": 591
+    },
+    {
+      "id": "state:ChatIndexDb",
+      "label": "chat index",
+      "kind": "state",
+      "group": "state",
+      "path": "ds-bot/src/host/chat-index.js",
+      "loc": 293
+    },
+    {
+      "id": "ipc:ApiBot",
+      "label": "POST /api/bot",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/channel.js",
+      "loc": 538
+    },
+    {
+      "id": "ipc:Feed",
+      "label": "GET /api/bot/feed",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/feed.js",
+      "loc": 115
+    },
+    {
+      "id": "ipc:DshTools",
+      "label": "ctx.tools",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/tools.js",
+      "loc": 874
+    },
+    {
+      "id": "ipc:DshSessions",
+      "label": "ctx.sessions",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/delivery.js",
+      "summary": "sessionController.resolveAgent and prompt into a Session.",
+      "loc": 162
+    },
+    {
+      "id": "ipc:Llm",
+      "label": "ctx.llm",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/models.js",
+      "loc": 208
+    },
+    {
+      "id": "ipc:MCP",
+      "label": "DSH MCP client",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "ds-bot/src/host/connectors.js",
+      "loc": 169
+    },
+    {
+      "id": "shared:Views",
+      "label": "shared/views.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "ds-bot/src/shared/views.js",
+      "loc": 685
+    },
+    {
+      "id": "shared:Mentions",
+      "label": "shared/mentions.js",
+      "kind": "shared",
+      "group": "shared",
+      "path": "ds-bot/src/shared/mentions.js",
+      "loc": 72
+    },
+    {
+      "id": "ext:DSH",
+      "label": "DeepSeek Harness",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/package.json",
+      "loc": 66
+    },
+    {
+      "id": "ext:LlmProviders",
+      "label": "model providers",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/src/host/providers.js",
+      "loc": 226
+    },
+    {
+      "id": "ext:MemRepo",
+      "label": "Agent Memory Repo",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/src/host/memory.js",
+      "loc": 1748
+    },
+    {
+      "id": "ext:Client",
+      "label": "client",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/src/client/index.js",
+      "loc": 922
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Store",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Turns",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Tools",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Groups",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Parts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Channel",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Feed",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Usage",
+      "kind": "calls",
+      "label": "last in MODULES"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "cmp:Diagnostics",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Store",
+      "to": "cmp:HomeLock",
+      "kind": "calls",
+      "label": "writer or reader"
+    },
+    {
+      "from": "cmp:Store",
+      "to": "state:TeamState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Store",
+      "to": "state:ChatIndexDb",
+      "kind": "reads",
+      "label": "Session map"
+    },
+    {
+      "from": "cmp:Roster",
+      "to": "cmp:Store",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Roster",
+      "to": "cmp:Permissions",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Models",
+      "to": "cmp:Providers",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Turns",
+      "to": "cmp:Delivery",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Turns",
+      "to": "cmp:Groups",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Turns",
+      "to": "cmp:Parts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Turns",
+      "to": "cmp:Handoffs",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Delivery",
+      "to": "ipc:DshSessions",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Groups",
+      "to": "cmp:Delivery",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Groups",
+      "to": "cmp:Approvals",
+      "kind": "calls",
+      "label": "hidden member Sessions"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "ipc:DshTools",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "cmp:Roster",
+      "kind": "calls",
+      "label": "create_bot, update_bot"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "cmp:Groups",
+      "kind": "calls",
+      "label": "create_group, post_to_group"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "cmp:Memory",
+      "kind": "calls",
+      "label": "remember, forget, recall"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "cmp:Browser",
+      "kind": "calls",
+      "label": "read_browser"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "cmp:Caps",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "shared:Views",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Memory",
+      "to": "state:MemoryFiles",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Memory",
+      "to": "cmp:MemoryPending",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Memory",
+      "to": "ext:MemRepo",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Parts",
+      "to": "cmp:Steward",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Parts",
+      "to": "state:TeamState",
+      "kind": "writes",
+      "label": "segments"
+    },
+    {
+      "from": "cmp:Parts",
+      "to": "cmp:Memory",
+      "kind": "reads",
+      "label": "handoff note"
+    },
+    {
+      "from": "cmp:Steward",
+      "to": "ipc:Llm",
+      "kind": "ipc",
+      "label": "one small call"
+    },
+    {
+      "from": "cmp:ChatIndex",
+      "to": "state:ChatIndexDb",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ChatIndex",
+      "to": "ipc:DshSessions",
+      "kind": "ipc",
+      "label": "history pages"
+    },
+    {
+      "from": "cmp:Resume",
+      "to": "cmp:Turns",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Handoffs",
+      "to": "cmp:Delivery",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Approvals",
+      "to": "cmp:Turns",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Folders",
+      "to": "cmp:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Prompt",
+      "to": "cmp:Store",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Prompt",
+      "to": "cmp:Memory",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Agents",
+      "to": "ipc:DshTools",
+      "kind": "ipc",
+      "label": "restrict"
+    },
+    {
+      "from": "cmp:Schedules",
+      "to": "ipc:DshSessions",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Secrets",
+      "to": "state:SecretsFile",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Connectors",
+      "to": "ipc:MCP",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Connectors",
+      "to": "cmp:Secrets",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Browser",
+      "to": "cmp:BrowserPlugins",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Browser",
+      "to": "ext:Client",
+      "kind": "listens",
+      "label": "browser-wait long poll"
+    },
+    {
+      "from": "cmp:Images",
+      "to": "ipc:Llm",
+      "kind": "ipc",
+      "label": "OCR model"
+    },
+    {
+      "from": "cmp:Usage",
+      "to": "ipc:Llm",
+      "kind": "listens",
+      "label": "meters requests"
+    },
+    {
+      "from": "cmp:Update",
+      "to": "cmp:Diagnostics",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DshUpdate",
+      "to": "cmp:Update",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Store",
+      "kind": "reads",
+      "label": "state view"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Tools",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Roster",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Memory",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Parts",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "cmp:Side",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Channel",
+      "to": "ipc:ApiBot",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Feed",
+      "to": "ipc:Feed",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Feed",
+      "to": "cmp:Turns",
+      "kind": "listens",
+      "label": "stream events"
+    },
+    {
+      "from": "cmp:Side",
+      "to": "ipc:Llm",
+      "kind": "ipc",
+      "label": "snapshot request"
+    },
+    {
+      "from": "cmp:Btw",
+      "to": "cmp:Side",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Thinking",
+      "to": "ipc:Llm",
+      "kind": "reads",
+      "label": "timed stream"
+    },
+    {
+      "from": "cmp:Plugin",
+      "to": "ext:DSH",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Tools",
+      "to": "ext:DSH",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Models",
+      "to": "ext:LlmProviders",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "install",
+      "name": "Install the plugin",
+      "trigger": "DSH starts with ds-bot enabled",
+      "steps": [
+        "cmp:Plugin",
+        "ext:DSH",
+        "cmp:Store",
+        "cmp:HomeLock",
+        "cmp:Tools",
+        "cmp:Channel"
+      ],
+      "summary": "Runtime builds, state loads with the home lock, tools and /api/bot mount."
+    },
+    {
+      "id": "turn",
+      "name": "One Bot turn",
+      "trigger": "A message reaches a Bot Session",
+      "steps": [
+        "cmp:Channel",
+        "cmp:Delivery",
+        "ipc:DshSessions",
+        "cmp:Turns",
+        "cmp:Parts",
+        "cmp:Feed"
+      ],
+      "summary": "The prompt runs in the Session; the turn is tracked and its reply routed."
+    },
+    {
+      "id": "handoff",
+      "name": "Message another Bot",
+      "trigger": "message_bot from a Bot turn",
+      "steps": [
+        "cmp:Tools",
+        "cmp:Handoffs",
+        "cmp:Delivery",
+        "cmp:Turns"
+      ],
+      "summary": "The target gets the message; its answer is delivered back to the waiting turn."
+    },
+    {
+      "id": "group",
+      "name": "Group round",
+      "trigger": "A message in a group chat",
+      "steps": [
+        "cmp:Groups",
+        "cmp:Delivery",
+        "cmp:Turns",
+        "cmp:Approvals"
+      ],
+      "summary": "Members speak one at a time; hidden Sessions' approvals are answered here."
+    },
+    {
+      "id": "compact",
+      "name": "Make room in context",
+      "trigger": "A turn ends past the check line",
+      "steps": [
+        "cmp:Parts",
+        "cmp:Steward",
+        "ipc:Llm",
+        "cmp:Memory"
+      ],
+      "summary": "The steward chooses a checkpoint or a fresh part; the handoff note is written."
+    },
+    {
+      "id": "memory",
+      "name": "Remember something",
+      "trigger": "remember in a Bot turn",
+      "steps": [
+        "cmp:Tools",
+        "cmp:Memory",
+        "state:MemoryFiles",
+        "cmp:MemoryPending"
+      ],
+      "summary": "Markdown entry plus journal line; the panel and prompts read the same files."
+    },
+    {
+      "id": "browser",
+      "name": "Read a page",
+      "trigger": "read_browser in a turn",
+      "steps": [
+        "cmp:Tools",
+        "cmp:Browser",
+        "ext:Client",
+        "cmp:BrowserPlugins"
+      ],
+      "summary": "The host long-polls the window and returns the webview's text."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Registration order is load-bearing",
+      "body": "index.js:77 lists every module; listeners and tools run in that order, so usage sits last to meter every request that an earlier listener rewrote. A new module must be placed, not appended.",
+      "severity": "info",
+      "path": "ds-bot/index.js"
+    },
+    {
+      "title": "The team lives in one JSON file",
+      "body": "store.js keeps bots, rooms, agents, capabilities, exchanges and prefs in state.json, writes it atomically, and takes state.lock so a second host cannot write. Everything else indexes into it.",
+      "severity": "info",
+      "path": "ds-bot/src/host/store.js"
+    },
+    {
+      "title": "Three long modules hold most of the logic",
+      "body": "memory.js 1,748, parts.js 1,325 and groups.js 1,000 are 4.1k of the host's 16k lines. Each mixes state, tools and I/O, so a change crosses file boundaries by convention only.",
+      "severity": "warn",
+      "path": "ds-bot/src/host/memory.js"
+    },
+    {
+      "title": "DSH is a dependency, never patched",
+      "body": "Capabilities go through ctx.tools, ctx.sessions, ctx.llm or ctx.webServer; AGENTS.md rule 1 forbids patching DSH, and docs/plans/2026-10-13-dsh-concessions.md records the compromises that forced.",
+      "severity": "info",
+      "path": "ds-bot/index.js"
+    },
+    {
+      "title": "The client is reached two ways",
+      "body": "channel.js answers POST /api/bot and feed.js pushes SSE; browser.js adds a third long-poll path, so the host has three client-facing protocols, each with its own timeout and staleness rules.",
+      "severity": "info",
+      "path": "ds-bot/src/host/feed.js"
+    },
+    {
+      "title": "Approvals are answered, not surfaced",
+      "body": "A member's group Session is hidden, so DSH's approval card cannot show; approvals.js answers those requests itself, which is why a group turn cannot block on a prompt no one sees.",
+      "severity": "info",
+      "path": "ds-bot/src/host/approvals.js"
+    }
+  ]
+}

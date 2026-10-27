@@ -1,0 +1,744 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "DS Bot",
+    "slug": "fei2411__deepseek-bot",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "app",
+    "name": "Desktop app",
+    "entryLayout": "app/src/main.mjs",
+    "root": "app",
+    "summary": "Electron shell: pinned DSH profile, its Web UI, Bot webviews and updates",
+    "externalModules": [
+      "host",
+      "client",
+      "ds-bot"
+    ]
+  },
+  "stats": {
+    "nodes": 40,
+    "edges": 42,
+    "components": 24,
+    "stateFiles": 3,
+    "commands": 4,
+    "ipcCalls": 4,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands & Palette"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared Components"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AppMain",
+      "label": "main.mjs",
+      "kind": "layout",
+      "group": "layout",
+      "path": "app/src/main.mjs",
+      "tags": [
+        "entry"
+      ],
+      "summary": "613 lines: one window on the Host URL, IPC table, views, updates, data move.",
+      "loc": 613
+    },
+    {
+      "id": "cmp:HostProcess",
+      "label": "host-process.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/host-process.mjs",
+      "summary": "Spawns host.mjs under Electron's Node mode; reads the launch URL, stops it.",
+      "loc": 91
+    },
+    {
+      "id": "cmp:HostBoot",
+      "label": "host.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/host.mjs",
+      "summary": "Boots the app profile with profile-boot on a loopback port and reports the URL.",
+      "loc": 66
+    },
+    {
+      "id": "cmp:Profile",
+      "label": "profile.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/profile.mjs",
+      "summary": "Profile ds-bot: dsh-base, dsh-web-app, ds-bot; retires the old engine bundle.",
+      "loc": 54
+    },
+    {
+      "id": "cmp:SearchPatch",
+      "label": "search-patch.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/search-patch.mjs",
+      "loc": 51
+    },
+    {
+      "id": "cmp:SessionCheck",
+      "label": "session-check.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/session-check.mjs",
+      "loc": 26
+    },
+    {
+      "id": "cmp:FirstRun",
+      "label": "first-run.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/first-run.mjs",
+      "summary": "Chooses data locations; offers to copy the team from ~/.dsh.",
+      "loc": 191
+    },
+    {
+      "id": "cmp:ImportCopy",
+      "label": "import.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/import.mjs",
+      "summary": "Finds and copies a team out of the user's DSH home; read-only there.",
+      "loc": 217
+    },
+    {
+      "id": "cmp:MoveData",
+      "label": "move-data.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/move-data.mjs",
+      "summary": "Copies data aside, renames only when whole, keeps the old folder.",
+      "loc": 70
+    },
+    {
+      "id": "cmp:Updates",
+      "label": "updates.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/updates.mjs",
+      "summary": "latest.yml polling, sha512 check, electron-updater; macOS/deb open the release.",
+      "loc": 234
+    },
+    {
+      "id": "cmp:BotBrowser",
+      "label": "bot-browser.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/bot-browser.mjs",
+      "summary": "WebContentsView per Bot with its own partition; leases and navigation rules.",
+      "loc": 192
+    },
+    {
+      "id": "cmp:BotViews",
+      "label": "bot-views.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/bot-views.mjs",
+      "summary": "594 lines: Playwright artifacts over a loopback HTTP server and WebSocket.",
+      "loc": 594
+    },
+    {
+      "id": "cmp:BrowserSources",
+      "label": "browser-sources.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/browser-sources.mjs",
+      "summary": "Copies a browser profile aside and lets that browser decrypt its cookies.",
+      "loc": 502
+    },
+    {
+      "id": "cmp:CookieImport",
+      "label": "cookie-import.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/cookie-import.mjs",
+      "summary": "Pending cookie sets by id; the page only ever sees a value-free preview.",
+      "loc": 130
+    },
+    {
+      "id": "cmp:CookieParse",
+      "label": "cookie-parse.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/cookie-parse.mjs",
+      "loc": 515
+    },
+    {
+      "id": "cmp:Downloads",
+      "label": "downloads.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/downloads.mjs",
+      "loc": 13
+    },
+    {
+      "id": "cmp:WindowFrame",
+      "label": "window-frame.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/window-frame.mjs",
+      "loc": 17
+    },
+    {
+      "id": "cmp:CanonicalPath",
+      "label": "canonical-path.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/canonical-path.mjs",
+      "loc": 15
+    },
+    {
+      "id": "cmp:HostPort",
+      "label": "host-port.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/host-port.mjs",
+      "loc": 39
+    },
+    {
+      "id": "cmp:Preload",
+      "label": "preload.cjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/src/preload.cjs",
+      "loc": 203
+    },
+    {
+      "id": "cmp:ParkedWindow",
+      "label": "ui/src/main.js",
+      "kind": "component",
+      "group": "components",
+      "path": "app/ui/src/main.js",
+      "loc": 40
+    },
+    {
+      "id": "cmp:ParkedEngine",
+      "label": "engine/index.js",
+      "kind": "component",
+      "group": "components",
+      "path": "app/engine/index.js",
+      "loc": 19
+    },
+    {
+      "id": "cmp:BeforePack",
+      "label": "scripts/before-pack.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/scripts/before-pack.mjs",
+      "loc": 26
+    },
+    {
+      "id": "cmp:CheckPacked",
+      "label": "scripts/check-packed.mjs",
+      "kind": "component",
+      "group": "components",
+      "path": "app/scripts/check-packed.mjs",
+      "loc": 264
+    },
+    {
+      "id": "state:Locations",
+      "label": "locations.json",
+      "kind": "state",
+      "group": "state",
+      "path": "app/src/first-run.mjs",
+      "loc": 191
+    },
+    {
+      "id": "state:Origin",
+      "label": "Host origin",
+      "kind": "state",
+      "group": "state",
+      "path": "app/src/main.mjs",
+      "summary": "The loopback URL every IPC sender and navigation check compares against.",
+      "loc": 613
+    },
+    {
+      "id": "state:PendingCookies",
+      "label": "pending cookie sets",
+      "kind": "state",
+      "group": "state",
+      "path": "app/src/cookie-import.mjs",
+      "loc": 130
+    },
+    {
+      "id": "cmd:ChooseLocations",
+      "label": "Choose data locations",
+      "kind": "command",
+      "group": "commands",
+      "path": "app/src/first-run.mjs",
+      "tags": [
+        "first run"
+      ],
+      "loc": 191
+    },
+    {
+      "id": "cmd:MoveData",
+      "label": "Move the data folder",
+      "kind": "command",
+      "group": "commands",
+      "path": "app/src/main.mjs",
+      "tags": [
+        "settings"
+      ],
+      "loc": 613
+    },
+    {
+      "id": "cmd:CheckUpdate",
+      "label": "Check for updates",
+      "kind": "command",
+      "group": "commands",
+      "path": "app/src/updates.mjs",
+      "tags": [
+        "About"
+      ],
+      "loc": 234
+    },
+    {
+      "id": "cmd:ImportTeam",
+      "label": "Import the team",
+      "kind": "command",
+      "group": "commands",
+      "path": "app/src/import.mjs",
+      "tags": [
+        "first run"
+      ],
+      "loc": 217
+    },
+    {
+      "id": "ipc:AppBridge",
+      "label": "dsBotApp",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "app/src/preload.cjs",
+      "loc": 203
+    },
+    {
+      "id": "ipc:HostLaunch",
+      "label": "host launch URL",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "app/src/host-process.mjs",
+      "loc": 91
+    },
+    {
+      "id": "ipc:ElectronIpc",
+      "label": "ipcMain table",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "app/src/main.mjs",
+      "summary": "29 ds-bot: channels for browser views, imports, updates and data.",
+      "loc": 613
+    },
+    {
+      "id": "ipc:ViewsHttp",
+      "label": "loopback + WebSocket",
+      "kind": "ipc",
+      "group": "ipc",
+      "path": "app/src/bot-views.mjs",
+      "loc": 594
+    },
+    {
+      "id": "ext:Electron",
+      "label": "electron 41 + builder",
+      "kind": "external",
+      "group": "external",
+      "path": "app/package.json",
+      "loc": 77
+    },
+    {
+      "id": "ext:DshAppBoot",
+      "label": "@deepseek-ai/dsh-app-boot",
+      "kind": "external",
+      "group": "external",
+      "path": "app/src/profile.mjs",
+      "loc": 54
+    },
+    {
+      "id": "ext:Updater",
+      "label": "electron-updater",
+      "kind": "external",
+      "group": "external",
+      "path": "app/src/updates.mjs",
+      "loc": 234
+    },
+    {
+      "id": "ext:Playwright",
+      "label": "playwright",
+      "kind": "external",
+      "group": "external",
+      "path": "app/package.json",
+      "loc": 77
+    },
+    {
+      "id": "ext:Plugin",
+      "label": "ds-bot bundle",
+      "kind": "external",
+      "group": "external",
+      "path": "ds-bot/index.js",
+      "loc": 71
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:HostProcess",
+      "kind": "calls",
+      "label": "start / stop"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:FirstRun",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:ImportCopy",
+      "kind": "calls",
+      "label": "copyTeam"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:MoveData",
+      "kind": "calls",
+      "label": "move-data IPC"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:Updates",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:BotBrowser",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:BotViews",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:BrowserSources",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:CookieImport",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:Downloads",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:WindowFrame",
+      "kind": "calls",
+      "label": "Windows caption"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:CanonicalPath",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:HostPort",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "state:Origin",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "ipc:ElectronIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "ext:Electron",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmd:MoveData",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:HostProcess",
+      "to": "cmp:HostBoot",
+      "kind": "calls",
+      "label": "child process"
+    },
+    {
+      "from": "cmp:HostProcess",
+      "to": "ipc:HostLaunch",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:HostBoot",
+      "to": "cmp:Profile",
+      "kind": "calls",
+      "label": "loadAppProfile"
+    },
+    {
+      "from": "cmp:HostBoot",
+      "to": "cmp:SearchPatch",
+      "kind": "calls",
+      "label": "patchFiles"
+    },
+    {
+      "from": "cmp:Profile",
+      "to": "ext:DshAppBoot",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Profile",
+      "to": "ext:Plugin",
+      "kind": "imports",
+      "label": "bundle list"
+    },
+    {
+      "from": "cmp:FirstRun",
+      "to": "state:Locations",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:FirstRun",
+      "to": "cmd:ChooseLocations",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ImportCopy",
+      "to": "cmp:SessionCheck",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ImportCopy",
+      "to": "cmd:ImportTeam",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:MoveData",
+      "to": "state:Locations",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Updates",
+      "to": "ext:Updater",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:Updates",
+      "to": "cmd:CheckUpdate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:BotBrowser",
+      "to": "ipc:AppBridge",
+      "kind": "ipc",
+      "label": "leases"
+    },
+    {
+      "from": "cmp:BotBrowser",
+      "to": "ext:Electron",
+      "kind": "imports",
+      "label": "WebContentsView"
+    },
+    {
+      "from": "cmp:BotViews",
+      "to": "ipc:ViewsHttp",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:BotViews",
+      "to": "cmp:BotBrowser",
+      "kind": "reads",
+      "label": "navigation rules"
+    },
+    {
+      "from": "cmp:BrowserSources",
+      "to": "ext:Playwright",
+      "kind": "imports",
+      "label": "launch the source browser"
+    },
+    {
+      "from": "cmp:BrowserSources",
+      "to": "cmp:CookieParse",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CookieImport",
+      "to": "cmp:CookieParse",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CookieImport",
+      "to": "state:PendingCookies",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Preload",
+      "to": "ipc:ElectronIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Preload",
+      "to": "state:Origin",
+      "kind": "reads",
+      "label": "origin check"
+    },
+    {
+      "from": "cmp:ParkedWindow",
+      "to": "cmp:ParkedEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:BeforePack",
+      "to": "cmp:CheckPacked",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "start",
+      "name": "Start the app",
+      "trigger": "Open DeepSeek Bot",
+      "steps": [
+        "cmp:AppMain",
+        "cmp:FirstRun",
+        "cmp:HostProcess",
+        "cmp:HostBoot",
+        "cmp:Profile",
+        "ext:Plugin"
+      ],
+      "summary": "Locations resolve, the Host boots the pinned profile, the window loads its URL."
+    },
+    {
+      "id": "import",
+      "name": "Import a team",
+      "trigger": "First-run offer to copy the team",
+      "steps": [
+        "cmp:FirstRun",
+        "cmp:ImportCopy",
+        "cmp:SessionCheck",
+        "cmp:HostProcess"
+      ],
+      "summary": "Every chat is read with a Bot-free profile first; only readable ones are copied."
+    },
+    {
+      "id": "update",
+      "name": "Install an update",
+      "trigger": "A new release is published",
+      "steps": [
+        "cmp:Updates",
+        "cmp:AppMain",
+        "cmp:HostProcess"
+      ],
+      "summary": "Poll latest.yml, verify sha512, ask, stop the Host, run the installer."
+    },
+    {
+      "id": "browser",
+      "name": "Bot browser in the app",
+      "trigger": "A Bot opens its browser panel",
+      "steps": [
+        "cmp:BotBrowser",
+        "ipc:AppBridge",
+        "cmp:AppMain",
+        "cmp:BotViews"
+      ],
+      "summary": "A webview lease creates a partitioned view; the client places and reads it."
+    },
+    {
+      "id": "cookies",
+      "name": "Import cookies",
+      "trigger": "Import cookies from a browser",
+      "steps": [
+        "cmp:BrowserSources",
+        "cmp:CookieParse",
+        "cmp:CookieImport",
+        "cmp:BotBrowser"
+      ],
+      "summary": "A copy of the profile decrypts its own cookies; only a preview reaches the page."
+    },
+    {
+      "id": "move",
+      "name": "Move the data folder",
+      "trigger": "Change location in settings",
+      "steps": [
+        "cmd:MoveData",
+        "cmp:MoveData",
+        "state:Locations",
+        "cmp:HostProcess"
+      ],
+      "summary": "Copied beside the new folder, renamed when whole, then the Host restarts."
+    }
+  ],
+  "notes": [
+    {
+      "title": "The shell follows DSH's desktop host",
+      "body": "host-process.mjs, host.mjs, bot-browser.mjs and window-frame.mjs say they follow DeepSeek Harness apps/desktop (MIT) and NOTICE lists it, so upstream changes have a defined comparison point.",
+      "severity": "info",
+      "path": "NOTICE"
+    },
+    {
+      "title": "Origin checks gate every IPC",
+      "body": "main.mjs compares the Host's loopback origin on navigation and on every ds-bot: IPC sender; preload checks location.origin before exposing dsBotApp. No general ipcRenderer, fs or shell bridge.",
+      "severity": "info",
+      "path": "app/src/main.mjs"
+    },
+    {
+      "title": "Secrets never reach the page",
+      "body": "cookie-import.mjs keeps parsed cookies in main under a pending id and shows the renderer a value-free preview; applying writes them into the Bot partition, so values never reach the page.",
+      "severity": "info",
+      "path": "app/src/cookie-import.mjs"
+    },
+    {
+      "title": "Two bundles are parked",
+      "body": "engine/ and ui/ are the app's own window; README says both are on hold, not built or packaged, and profile.mjs retires deepseek-bot-engine from older profiles. ~1k lines ship nothing today.",
+      "severity": "warn",
+      "path": "app/README.md"
+    },
+    {
+      "title": "main.mjs is the whole shell",
+      "body": "613 lines hold startup, the 29-channel IPC table, window creation, Bot views, updates, data move, first run and failure pages; only the side concerns are split into modules.",
+      "severity": "warn",
+      "path": "app/src/main.mjs"
+    }
+  ]
+}
