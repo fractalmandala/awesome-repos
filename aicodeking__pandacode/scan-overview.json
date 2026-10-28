@@ -1,0 +1,487 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "pandacode",
+    "slug": "aicodeking__pandacode",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "pandacode",
+    "entryLayout": "src/main.ts",
+    "root": ".",
+    "summary": "Tauri 2 agent workspace: plain TS UI, rust core, bots, VMs, GitHub view.",
+    "externalModules": [
+      "ui",
+      "core"
+    ]
+  },
+  "stats": {
+    "nodes": 25,
+    "edges": 24,
+    "components": 10,
+    "stateFiles": 3,
+    "commands": 4,
+    "ipcCalls": 5,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Modules"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:MainTs",
+      "kind": "layout",
+      "group": "layout",
+      "label": "src/main.ts",
+      "path": "src/main.ts",
+      "loc": 3522,
+      "summary": "Webview entry: wires every UI module to the Tauri bridge by hand."
+    },
+    {
+      "id": "cmp:TsUi",
+      "kind": "component",
+      "group": "components",
+      "label": "src/ (125 ts+css)",
+      "path": "src",
+      "loc": 22241,
+      "summary": "Plain-TS modules per surface: chats, board, bots, architect, github..."
+    },
+    {
+      "id": "cmp:SidebarMod",
+      "kind": "component",
+      "group": "components",
+      "label": "sidebar + board",
+      "path": "src"
+    },
+    {
+      "id": "cmp:BotsUi",
+      "kind": "component",
+      "group": "components",
+      "label": "bots UI",
+      "path": "src/bots.ts"
+    },
+    {
+      "id": "cmp:ArchitectUi",
+      "kind": "component",
+      "group": "components",
+      "label": "architect/teams UI",
+      "path": "src/architect.ts"
+    },
+    {
+      "id": "ipc:TauriLib",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "src-tauri lib.rs",
+      "path": "src-tauri/src/lib.rs",
+      "loc": 3216,
+      "summary": "Command registry: 60+ rust modules behind invoke()."
+    },
+    {
+      "id": "cmp:RustCore",
+      "kind": "component",
+      "group": "components",
+      "label": "src-tauri (142 rs)",
+      "path": "src-tauri/src",
+      "loc": 76415,
+      "summary": "Sessions, providers, VMs/simulators, github hub, goal workflows."
+    },
+    {
+      "id": "cmp:ProvidersMod",
+      "kind": "component",
+      "group": "components",
+      "label": "providers/",
+      "path": "src-tauri/src/providers",
+      "summary": "Per-CLI providers incl. ACP for Antigravity/Grok Build."
+    },
+    {
+      "id": "cmp:VmSim",
+      "kind": "component",
+      "group": "components",
+      "label": "vm/ + simulator/",
+      "path": "src-tauri/src/vm.rs",
+      "summary": "Tart VMs, Daytona/Cloudflare/AWS sandboxes, iOS/Android simulators."
+    },
+    {
+      "id": "cmp:GithubHub",
+      "kind": "component",
+      "group": "components",
+      "label": "github.rs/github_hub.rs",
+      "path": "src-tauri/src/github.rs",
+      "summary": "Repos, PRs, issues review/fix/merge threads."
+    },
+    {
+      "id": "cmp:TerminalMod",
+      "kind": "component",
+      "group": "components",
+      "label": "terminal.rs",
+      "path": "src-tauri/src/terminal.rs"
+    },
+    {
+      "id": "shared:WebsiteApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "website/",
+      "path": "website",
+      "summary": "Docs/marketing site with its own playwright tests."
+    },
+    {
+      "id": "state:StorageMod",
+      "kind": "state",
+      "group": "state",
+      "label": "storage.rs",
+      "path": "src-tauri/src/storage.rs",
+      "summary": "SQLite-backed local persistence."
+    },
+    {
+      "id": "state:GoalState",
+      "kind": "state",
+      "group": "state",
+      "label": "goal_state.rs",
+      "path": "src-tauri/src/goal_state.rs",
+      "summary": "Goal/workflow state machines for command workflows."
+    },
+    {
+      "id": "state:UsageLedger",
+      "kind": "state",
+      "group": "state",
+      "label": "usage_ledger/",
+      "path": "src-tauri/src/usage_ledger.rs"
+    },
+    {
+      "id": "cmd:BoardMove",
+      "kind": "command",
+      "group": "commands",
+      "label": "task board actions",
+      "path": "src",
+      "summary": "Pending\u2192In progress\u2192Review\u2192Completed moves + queue/steer.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:SlashCommands",
+      "kind": "command",
+      "group": "commands",
+      "label": "slash_commands.rs",
+      "path": "src-tauri/src/slash_commands.rs",
+      "tags": [
+        "/"
+      ]
+    },
+    {
+      "id": "cmd:DeployCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "deploy task",
+      "path": "src-tauri/src",
+      "tags": [
+        "header"
+      ]
+    },
+    {
+      "id": "cmd:GithubActions",
+      "kind": "command",
+      "group": "commands",
+      "label": "review/fix/merge",
+      "path": "src-tauri/src/github_pull.rs",
+      "summary": "One-click PR review, check fix, merge, issue solve.",
+      "tags": [
+        "buttons"
+      ]
+    },
+    {
+      "id": "ipc:TauriBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "src/bridge.ts",
+      "path": "src/bridge.ts",
+      "loc": 58
+    },
+    {
+      "id": "ipc:CliSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "harness CLI spawn",
+      "path": "src-tauri/src/providers",
+      "summary": "claude/codex/kimi/opencode/mimo + ACP subprocesses."
+    },
+    {
+      "id": "ipc:BotAdapters",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "bots/",
+      "path": "src-tauri/src/bots.rs",
+      "summary": "Telegram/Slack/Discord/WhatsApp/webchat adapters."
+    },
+    {
+      "id": "ipc:SandboxApis",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "cloud.rs",
+      "path": "src-tauri/src/cloud.rs"
+    },
+    {
+      "id": "ext:AgentClis",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "docs/providers.md",
+      "summary": "Claude Code, Codex, Kimi, OpenCode, GLM, MiMo, Antigravity, Grok Build."
+    },
+    {
+      "id": "ext:Sqlite",
+      "kind": "external",
+      "group": "external",
+      "label": "SQLite",
+      "path": "src-tauri/src/storage.rs"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:MainTs",
+      "to": "cmp:TsUi",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:MainTs",
+      "to": "ipc:TauriBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:TsUi",
+      "to": "cmp:SidebarMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TsUi",
+      "to": "cmp:BotsUi",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TsUi",
+      "to": "cmp:ArchitectUi",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:TauriLib",
+      "to": "cmp:RustCore",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "cmp:ProvidersMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ProvidersMod",
+      "to": "ipc:CliSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:CliSpawn",
+      "to": "ext:AgentClis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "cmp:VmSim",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "ipc:SandboxApis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "cmp:GithubHub",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:GithubHub",
+      "to": "cmd:GithubActions",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:TauriLib",
+      "to": "state:StorageMod",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "state:GoalState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "state:UsageLedger",
+      "kind": "writes"
+    },
+    {
+      "from": "state:UsageLedger",
+      "to": "ext:Sqlite",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmd:BoardMove",
+      "to": "ipc:TauriBridge",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SlashCommands",
+      "to": "ipc:CliSpawn",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:DeployCmd",
+      "to": "ipc:TauriBridge",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:BotsUi",
+      "to": "ipc:BotAdapters",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:TerminalMod",
+      "to": "ipc:TauriBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:TsUi",
+      "to": "ipc:TauriBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RustCore",
+      "to": "cmp:TerminalMod",
+      "kind": "renders"
+    }
+  ],
+  "flows": [
+    {
+      "id": "run-task",
+      "name": "Run a task",
+      "trigger": "composer send",
+      "steps": [
+        "cmd:SlashCommands",
+        "ipc:TauriBridge",
+        "cmp:ProvidersMod",
+        "ipc:CliSpawn",
+        "ext:AgentClis"
+      ],
+      "summary": "Harness+model+effort picked per task; transcript streams in."
+    },
+    {
+      "id": "board-queue",
+      "name": "Queue and steer",
+      "trigger": "board moves / queued messages",
+      "steps": [
+        "cmd:BoardMove",
+        "cmp:SidebarMod",
+        "state:GoalState"
+      ],
+      "summary": "Parallel tasks across projects; steering while an agent runs."
+    },
+    {
+      "id": "team-run",
+      "name": "Architect + workers",
+      "trigger": "agent team composition",
+      "steps": [
+        "cmp:ArchitectUi",
+        "cmp:ProvidersMod",
+        "ipc:CliSpawn"
+      ],
+      "summary": "Up to three workers mixing harnesses; each worker opens as a thread."
+    },
+    {
+      "id": "bot-chat",
+      "name": "Chat via a bot",
+      "trigger": "message on Telegram/Slack/Discord",
+      "steps": [
+        "ipc:BotAdapters",
+        "cmp:BotsUi",
+        "ipc:CliSpawn"
+      ],
+      "summary": "Each bot conversation is an ordinary task."
+    },
+    {
+      "id": "pr-review",
+      "name": "Review a PR",
+      "trigger": "review button in the GitHub view",
+      "steps": [
+        "cmd:GithubActions",
+        "cmp:GithubHub",
+        "ipc:CliSpawn"
+      ],
+      "summary": "Opens a linked thread beside the GitHub view."
+    },
+    {
+      "id": "vm-run",
+      "name": "Run in a VM/sandbox",
+      "trigger": "assign a VM or sandbox",
+      "steps": [
+        "cmp:VmSim",
+        "ipc:SandboxApis",
+        "ipc:CliSpawn"
+      ],
+      "summary": "Tart VMs or Daytona/Cloudflare/AWS sandboxes drive agents."
+    }
+  ],
+  "notes": [
+    {
+      "title": "no framework, deliberate",
+      "body": "Plain TS + OS webview; no React/bundled Chromium/Node server (README). src/main.ts (3,522) hand-wires modules.",
+      "severity": "info",
+      "path": "src/main.ts"
+    },
+    {
+      "title": "rust core is the weight",
+      "body": "142 rust files, 76k LOC vs 22k TS; ~865 #[test] fns in 104 files.",
+      "severity": "info",
+      "path": "src-tauri/src"
+    },
+    {
+      "title": "custom license",
+      "body": "PandaCode License: MIT + attribution clause for public/commercial forks (LICENSE, package.json 'SEE LICENSE IN LICENSE').",
+      "severity": "info",
+      "path": "LICENSE"
+    },
+    {
+      "title": "bots are adapters",
+      "body": "Five chat platforms as ordinary tasks behind bots/ adapters.",
+      "severity": "info",
+      "path": "src-tauri/src/bots.rs"
+    }
+  ]
+}

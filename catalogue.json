@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 14,
+  "count": 15,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -310,6 +310,29 @@
         "typescript",
         "react",
         "vite"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
+      ]
+    },
+    {
+      "slug": "aicodeking__pandacode",
+      "name": "pandacode",
+      "github": "https://github.com/aicodeking/pandacode",
+      "license": "MIT (PandaCode attribution addition)",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Tauri 2 agent workspace: plain TS UI, rust core, bots, VMs, GitHub view.",
+      "stack": [
+        "typescript",
+        "tauri",
+        "rust",
+        "sqlite",
+        "xterm",
+        "playwright"
       ],
       "reports": [
         "report.md",
