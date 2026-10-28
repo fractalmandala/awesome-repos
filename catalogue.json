@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 22,
+  "count": 23,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -302,6 +302,29 @@
         "c",
         "cpp",
         "objective-c"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
+      ]
+    },
+    {
+      "slug": "local__lite-explorer",
+      "name": "lite-explorer",
+      "github": "unknown",
+      "license": "MIT",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Calm Tauri/SvelteKit file explorer: palette, transfer clipboard, S3/SMB.",
+      "stack": [
+        "typescript",
+        "svelte",
+        "sveltekit",
+        "tauri",
+        "rust",
+        "sqlite"
       ],
       "reports": [
         "report.md",

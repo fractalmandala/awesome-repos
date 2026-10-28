@@ -1,0 +1,489 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "lite-explorer",
+    "slug": "local__lite-explorer",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "lite-explorer",
+    "entryLayout": "apps/desktop/src/routes/+layout.svelte",
+    "root": ".",
+    "summary": "Calm Tauri/SvelteKit file explorer: palette, transfer clipboard, S3/SMB.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 24,
+    "edges": 27,
+    "components": 10,
+    "stateFiles": 3,
+    "commands": 4,
+    "ipcCalls": 4,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Modules"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:LayoutRoute",
+      "kind": "layout",
+      "group": "layout",
+      "label": "+layout.svelte",
+      "path": "apps/desktop/src/routes/+layout.svelte",
+      "summary": "SvelteKit shell for the desktop webview."
+    },
+    {
+      "id": "cmp:LibDir",
+      "kind": "component",
+      "group": "components",
+      "label": "lib/ (21 dirs)",
+      "path": "apps/desktop/src/lib",
+      "loc": 49905,
+      "summary": "file-pane, panes, tabs, transfers, remote, quick-look, keyboard, virtual list."
+    },
+    {
+      "id": "cmp:FilePane",
+      "kind": "component",
+      "group": "components",
+      "label": "file-pane",
+      "path": "apps/desktop/src/lib/file-pane",
+      "summary": "File list controller + views (its own controller test file)."
+    },
+    {
+      "id": "shared:TransfersMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "transfers + transfer-clipboard",
+      "path": "apps/desktop/src/lib/transfers",
+      "summary": "Copy/cut clipboard drawer with progress indicators."
+    },
+    {
+      "id": "cmp:RemoteLib",
+      "kind": "component",
+      "group": "components",
+      "label": "remote locations",
+      "path": "apps/desktop/src/lib/remote",
+      "summary": "S3/SMB locations, network scan/status, saved connections."
+    },
+    {
+      "id": "cmp:TabsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "tabs/",
+      "path": "apps/desktop/src/lib/tabs"
+    },
+    {
+      "id": "cmp:QuickLook",
+      "kind": "component",
+      "group": "components",
+      "label": "quick-look",
+      "path": "apps/desktop/src/lib/quick-look"
+    },
+    {
+      "id": "state:PaletteState",
+      "kind": "state",
+      "group": "state",
+      "label": "command-palette.svelte.ts",
+      "path": "apps/desktop/src/lib/state/command-palette.svelte.ts",
+      "summary": "\u2318\u21e7P palette state: commands, folders, favorites, recents."
+    },
+    {
+      "id": "state:TabsState",
+      "kind": "state",
+      "group": "state",
+      "label": "tabs.svelte.ts",
+      "path": "apps/desktop/src/lib/tabs/tabs.svelte.ts",
+      "summary": "Rune-based tab store."
+    },
+    {
+      "id": "state:NetworkStatus",
+      "kind": "state",
+      "group": "state",
+      "label": "network-status.svelte.ts",
+      "path": "apps/desktop/src/lib/remote/network-status.svelte.ts"
+    },
+    {
+      "id": "shared:DevTools",
+      "kind": "shared",
+      "group": "shared",
+      "label": "devTools store",
+      "path": "apps/desktop/src/lib/stores/devTools.ts"
+    },
+    {
+      "id": "cmp:TauriSrc",
+      "kind": "component",
+      "group": "components",
+      "label": "src-tauri (8 modules)",
+      "path": "apps/desktop/src-tauri/src",
+      "loc": 41640,
+      "summary": "explorer 16.6k, preview 8.7k, network 5.9k, app, remote, search, system, media."
+    },
+    {
+      "id": "cmp:ExplorerMod",
+      "kind": "component",
+      "group": "components",
+      "label": "explorer/",
+      "path": "apps/desktop/src-tauri/src/explorer",
+      "loc": 16638,
+      "summary": "entries, file_ops, archive, exif, favorites, watch, rename, transcode, sizes."
+    },
+    {
+      "id": "cmp:PreviewMod",
+      "kind": "component",
+      "group": "components",
+      "label": "preview/",
+      "path": "apps/desktop/src-tauri/src/preview",
+      "loc": 8666,
+      "summary": "Thumbnail/preview generation."
+    },
+    {
+      "id": "ipc:NetworkMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "network/",
+      "path": "apps/desktop/src-tauri/src/network",
+      "loc": 5902,
+      "summary": "S3 buckets + SMB via remote/transfer/write modules."
+    },
+    {
+      "id": "cmp:AppMod",
+      "kind": "component",
+      "group": "components",
+      "label": "app/",
+      "path": "apps/desktop/src-tauri/src/app",
+      "loc": 3440
+    },
+    {
+      "id": "cmd:PaletteOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "command palette",
+      "path": "apps/desktop/src/lib/state/command-palette.svelte.ts",
+      "summary": "One box: commands, paths, places, favorites, recents.",
+      "tags": [
+        "\u2318\u21e7P"
+      ]
+    },
+    {
+      "id": "cmd:TransferClipboard",
+      "kind": "command",
+      "group": "commands",
+      "label": "copy/cut/paste",
+      "path": "apps/desktop/src/lib/transfer-clipboard",
+      "summary": "\u2318C/\u2318X into clipboard, \u2318V paste anywhere.",
+      "tags": [
+        "\u2318C",
+        "\u2318X",
+        "\u2318V"
+      ]
+    },
+    {
+      "id": "cmd:ActivityDrawer",
+      "kind": "command",
+      "group": "commands",
+      "label": "activity drawer",
+      "path": "apps/desktop/src/lib",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:TerminalOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "open terminal",
+      "path": "apps/desktop/src/lib/terminal/open-terminal.ts",
+      "tags": [
+        "button"
+      ]
+    },
+    {
+      "id": "ipc:TauriInvoke",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "tauri invoke (154 cmds)",
+      "path": "apps/desktop/src-tauri/src/lib.rs",
+      "summary": "154 #[tauri::command] fns over the 8 modules."
+    },
+    {
+      "id": "ipc:S3Smb",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "S3 + SMB clients",
+      "path": "apps/desktop/src-tauri/src/network",
+      "summary": "Saved/reusable connections incl. transfer.rs and write.rs."
+    },
+    {
+      "id": "ipc:Watchers",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "fs watchers",
+      "path": "apps/desktop/src-tauri/src/explorer/watch.rs"
+    },
+    {
+      "id": "ext:SvelteKit",
+      "kind": "external",
+      "group": "external",
+      "label": "SvelteKit/Vite",
+      "path": "apps/desktop/vite.config.js"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:LayoutRoute",
+      "to": "cmp:LibDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "cmp:FilePane",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "shared:TransfersMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "cmp:RemoteLib",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "cmp:TabsMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "state:PaletteState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "state:TabsState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:FilePane",
+      "to": "ipc:TauriInvoke",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:FilePane",
+      "to": "ipc:Watchers",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:TransfersMod",
+      "to": "cmd:TransferClipboard",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:TransferClipboard",
+      "to": "ipc:TauriInvoke",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ActivityDrawer",
+      "to": "shared:TransfersMod",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmp:RemoteLib",
+      "to": "ipc:S3Smb",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RemoteLib",
+      "to": "state:NetworkStatus",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:QuickLook",
+      "to": "ipc:TauriInvoke",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmd:PaletteOpen",
+      "to": "cmp:LibDir",
+      "kind": "navigates"
+    },
+    {
+      "from": "cmd:TerminalOpen",
+      "to": "ipc:TauriInvoke",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:TauriSrc",
+      "to": "cmp:ExplorerMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriSrc",
+      "to": "cmp:PreviewMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriSrc",
+      "to": "ipc:NetworkMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriSrc",
+      "to": "cmp:AppMod",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:TauriInvoke",
+      "to": "cmp:ExplorerMod",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:TauriInvoke",
+      "to": "cmp:PreviewMod",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:S3Smb",
+      "to": "ipc:NetworkMod",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMod",
+      "to": "cmp:QuickLook",
+      "kind": "calls",
+      "label": "quicklook"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "cmd:ActivityDrawer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "cmd:TerminalOpen",
+      "kind": "renders"
+    }
+  ],
+  "flows": [
+    {
+      "id": "palette-everything",
+      "name": "Palette to anywhere",
+      "trigger": "\u2318\u21e7P + type",
+      "steps": [
+        "cmd:PaletteOpen",
+        "state:PaletteState",
+        "cmp:FilePane",
+        "ipc:TauriInvoke",
+        "cmp:ExplorerMod"
+      ],
+      "summary": "One box finds commands, paths, favorites, recents."
+    },
+    {
+      "id": "copy-move",
+      "name": "Copy then paste",
+      "trigger": "\u2318C \u2192 navigate \u2192 \u2318V",
+      "steps": [
+        "cmd:TransferClipboard",
+        "shared:TransfersMod",
+        "cmd:ActivityDrawer",
+        "ipc:TauriInvoke",
+        "cmp:ExplorerMod"
+      ],
+      "summary": "Transfer clipboard plus non-blocking Activity drawer jobs."
+    },
+    {
+      "id": "connect-s3",
+      "name": "Connect S3/SMB",
+      "trigger": "add a network location",
+      "steps": [
+        "cmp:RemoteLib",
+        "ipc:S3Smb",
+        "ipc:NetworkMod",
+        "cmp:FilePane"
+      ],
+      "summary": "Saved connections persist between launches (the founding motivation)."
+    },
+    {
+      "id": "preview-file",
+      "name": "Quick Look a file",
+      "trigger": "space on a selection",
+      "steps": [
+        "cmp:QuickLook",
+        "ipc:TauriInvoke",
+        "cmp:PreviewMod",
+        "cmp:AppMod"
+      ],
+      "summary": "Rust-side preview generation surfaced in the pane."
+    },
+    {
+      "id": "open-terminal",
+      "name": "Terminal here",
+      "trigger": "open terminal button",
+      "steps": [
+        "cmd:TerminalOpen",
+        "ipc:TauriInvoke",
+        "cmp:AppMod"
+      ],
+      "summary": "Spawns a shell at the current path."
+    }
+  ],
+  "notes": [
+    {
+      "title": "rune stores by default",
+      "body": "State uses Svelte 5 runes (.svelte.ts) \u2014 command-palette, tabs, network-status; only devTools keeps a legacy writable.",
+      "severity": "info",
+      "path": "apps/desktop/src/lib/state"
+    },
+    {
+      "title": "154 tauri commands, 8 modules",
+      "body": "src-tauri is partitioned app/explorer/media/network/preview/remote/search/system with a 16.6k-LOC explorer core.",
+      "severity": "info",
+      "path": "apps/desktop/src-tauri/src"
+    },
+    {
+      "title": "saved connections are the origin story",
+      "body": "README credits Nicebucket's non-persistent S3/SMB connections as the motivation for this app.",
+      "severity": "info",
+      "path": "README.md"
+    },
+    {
+      "title": "inspired by Spacedrive",
+      "body": "ROADMAP/README reference spacedriveapp/spacedrive as prior art.",
+      "severity": "info",
+      "path": "README.md"
+    }
+  ]
+}
