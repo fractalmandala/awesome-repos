@@ -1,0 +1,338 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "noodle",
+    "slug": "pdparchitect__noodle",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "noodle-app",
+    "name": "noodle app",
+    "entryLayout": "Sources/Noodle/NoodleApp.swift",
+    "root": "Sources",
+    "summary": "Main app: NoodleStore, agent sessions, harness core, agent host bridge.",
+    "externalModules": [
+      "computer",
+      "browser",
+      "applet",
+      "hub"
+    ]
+  },
+  "stats": {
+    "nodes": 15,
+    "edges": 18,
+    "components": 5,
+    "stateFiles": 3,
+    "commands": 2,
+    "ipcCalls": 3,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:NoodleEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "NoodleApp.swift",
+      "path": "Sources/Noodle/NoodleApp.swift",
+      "summary": "@main: AppInstance.claim(), SwiftUI app, store + error alert state."
+    },
+    {
+      "id": "cmp:StoreMods",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleStore views",
+      "path": "Sources/Noodle",
+      "loc": 40000,
+      "summary": "92 view/store files: pickers, sheets, annotations, chat, settings."
+    },
+    {
+      "id": "cmp:ChatSurf",
+      "kind": "component",
+      "group": "components",
+      "label": "chat surface",
+      "path": "Sources/Noodle",
+      "summary": "Conversation view per bot incl. turns, recovery, wakes."
+    },
+    {
+      "id": "cmp:CoreDomain",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleCore domain",
+      "path": "Sources/NoodleCore",
+      "loc": 45000,
+      "summary": "150+ files: per-harness protocols, storage layout, tips, trust."
+    },
+    {
+      "id": "cmp:AgentHostMod",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleAgentHost",
+      "path": "Sources/NoodleAgentHost",
+      "summary": "Sandboxed host process running agent CLIs."
+    },
+    {
+      "id": "state:NoodleStore",
+      "kind": "state",
+      "group": "state",
+      "label": "NoodleStore",
+      "path": "Sources/Noodle",
+      "summary": "Central store owned by NoodleApp; views observe it."
+    },
+    {
+      "id": "state:WorkspaceRepo",
+      "kind": "state",
+      "group": "state",
+      "label": "WorkspaceRepository",
+      "path": "Sources/NoodleCore/WorkspaceRepository.swift",
+      "summary": "Agent folders/workspaces on disk."
+    },
+    {
+      "id": "state:AgentStorage",
+      "kind": "state",
+      "group": "state",
+      "label": "AgentStorageLayout",
+      "path": "Sources/NoodleCore/AgentStorageLayout.swift",
+      "summary": "Where sessions/journals/assets live per agent."
+    },
+    {
+      "id": "cmd:ProfileSheet",
+      "kind": "command",
+      "group": "commands",
+      "label": "agent profile sheet",
+      "path": "Sources/Noodle/AgentProfileSheet.swift",
+      "summary": "Create/edit a bot: harness, workspace, backstory.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:ShortcutsMod",
+      "kind": "command",
+      "group": "commands",
+      "label": "keyboard shortcuts",
+      "path": "Sources/NoodleCore/KeyboardShortcuts.swift",
+      "summary": "Global + in-app shortcuts registered in core.",
+      "tags": [
+        "keys"
+      ]
+    },
+    {
+      "id": "ipc:Bridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent bridge",
+      "path": "Sources/NoodleAgentBridge",
+      "summary": "App \u2194 agent host transport; turn events stream back."
+    },
+    {
+      "id": "ipc:LaunchChecks",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "executable trust + launch",
+      "path": "Sources/NoodleCore",
+      "summary": "Per-harness signature verification then spawn."
+    },
+    {
+      "id": "ipc:Mcp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "NoodleMCP",
+      "path": "Sources/NoodleMCP",
+      "summary": "Tool servers attached to sessions."
+    },
+    {
+      "id": "ext:Computer",
+      "kind": "external",
+      "group": "external",
+      "label": "Computer app",
+      "path": "Computer",
+      "summary": "Remote/local computers agents can run on."
+    },
+    {
+      "id": "ext:Harnesses",
+      "kind": "external",
+      "group": "external",
+      "label": "harness CLIs",
+      "path": "Sources/NoodleCore/ClaudeLaunch.swift",
+      "summary": "claude/codex/fx/grok/opencode/antigravity binaries."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:NoodleEntry",
+      "to": "cmp:StoreMods",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:NoodleEntry",
+      "to": "state:NoodleStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:StoreMods",
+      "to": "cmp:ChatSurf",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:StoreMods",
+      "to": "cmp:CoreDomain",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:StoreMods",
+      "to": "state:WorkspaceRepo",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:StoreMods",
+      "to": "state:AgentStorage",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ChatSurf",
+      "to": "ipc:Bridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentHostMod",
+      "to": "ipc:LaunchChecks",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentHostMod",
+      "to": "ipc:Bridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentHostMod",
+      "to": "ext:Harnesses",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CoreDomain",
+      "to": "ipc:LaunchChecks",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ChatSurf",
+      "to": "ipc:Mcp",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CoreDomain",
+      "to": "ext:Computer",
+      "kind": "calls",
+      "label": "ComputerAccess"
+    },
+    {
+      "from": "cmd:ProfileSheet",
+      "to": "state:WorkspaceRepo",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:ShortcutsMod",
+      "to": "cmp:StoreMods",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:CoreDomain",
+      "to": "state:AgentStorage",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ChatSurf",
+      "to": "ext:Computer",
+      "kind": "calls",
+      "label": "remote runs"
+    },
+    {
+      "from": "state:WorkspaceRepo",
+      "to": "state:AgentStorage",
+      "kind": "writes"
+    }
+  ],
+  "flows": [
+    {
+      "id": "make-bot",
+      "name": "Make a bot",
+      "trigger": "agent profile sheet",
+      "steps": [
+        "cmd:ProfileSheet",
+        "state:WorkspaceRepo",
+        "state:AgentStorage"
+      ],
+      "summary": "Workspace + storage layout created before first turn."
+    },
+    {
+      "id": "send-turn",
+      "name": "Send a turn",
+      "trigger": "chat submit",
+      "steps": [
+        "cmp:ChatSurf",
+        "ipc:Bridge",
+        "cmp:AgentHostMod",
+        "ext:Harnesses"
+      ],
+      "summary": "Turn runs in the host; stream events update the store."
+    },
+    {
+      "id": "recover-turn",
+      "name": "Recover a turn",
+      "trigger": "agent dies mid-turn",
+      "steps": [
+        "cmp:CoreDomain",
+        "ipc:Bridge",
+        "cmp:ChatSurf"
+      ],
+      "summary": "AgentTurnRecovery replays or resumes safely."
+    }
+  ],
+  "notes": [
+    {
+      "title": "provider triple pattern",
+      "body": "Every harness has Distribution/ExecutableTrust/Inspection/Launch/SessionState files \u2014 8 providers \u00d7 5 concerns, easy to add #9.",
+      "severity": "info",
+      "path": "Sources/NoodleCore"
+    },
+    {
+      "title": "host isolation",
+      "body": "Agent CLIs run in a separate NoodleAgentHost process behind a bridge; trust checks precede every spawn.",
+      "severity": "info",
+      "path": "Sources/NoodleAgentHost"
+    },
+    {
+      "title": "NoodleStore fan-in",
+      "body": "92 view files observe one store; manageable at this size but watch growth.",
+      "severity": "warn",
+      "path": "Sources/Noodle"
+    }
+  ]
+}

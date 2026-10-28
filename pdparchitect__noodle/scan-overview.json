@@ -1,0 +1,489 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "noodle",
+    "slug": "pdparchitect__noodle",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "noodle",
+    "entryLayout": "Sources/Noodle/NoodleApp.swift",
+    "root": ".",
+    "summary": "Swift/Tuist suite: Noodle agent teams + Computer, Browser, Applet, Hub, Mobile.",
+    "externalModules": [
+      "noodle-app",
+      "computer"
+    ]
+  },
+  "stats": {
+    "nodes": 26,
+    "edges": 25,
+    "components": 10,
+    "stateFiles": 4,
+    "commands": 3,
+    "ipcCalls": 4,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Apps/Packages"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:NoodleApp",
+      "kind": "layout",
+      "group": "layout",
+      "label": "NoodleApp.swift",
+      "path": "Sources/Noodle/NoodleApp.swift",
+      "summary": "@main entry: single-instance claim, SwiftUI app, dev hooks, store."
+    },
+    {
+      "id": "cmp:MainApp",
+      "kind": "component",
+      "group": "components",
+      "label": "Sources/Noodle (92 files)",
+      "path": "Sources/Noodle",
+      "loc": 40000,
+      "summary": "Main macOS app UI: agent pickers/sheets, annotations, chat, browser tabs."
+    },
+    {
+      "id": "cmp:NoodleCore",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleCore",
+      "path": "Sources/NoodleCore",
+      "loc": 45000,
+      "summary": "Domain core: per-harness protocols, launches, storage, usage ledger."
+    },
+    {
+      "id": "cmp:AgentHost",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleAgentHost/Bridge",
+      "path": "Sources/NoodleAgentHost",
+      "summary": "Out-of-process agent host + bridge targets."
+    },
+    {
+      "id": "cmp:AppleRuntime",
+      "kind": "component",
+      "group": "components",
+      "label": "Apple agent runtime",
+      "path": "Sources/NoodleAppleRuntime"
+    },
+    {
+      "id": "cmp:McpCore",
+      "kind": "component",
+      "group": "components",
+      "label": "NoodleMCP",
+      "path": "Sources/NoodleMCP"
+    },
+    {
+      "id": "cmp:ComputerApp",
+      "kind": "component",
+      "group": "components",
+      "label": "Noodle Computer",
+      "path": "Computer",
+      "loc": 25543,
+      "summary": "Linux/macOS computers app: Kernel (Metal), Bridge, LocalMac, guests."
+    },
+    {
+      "id": "cmp:BrowserApp",
+      "kind": "component",
+      "group": "components",
+      "label": "Noodle Browser",
+      "path": "Browser",
+      "loc": 6934,
+      "summary": "WKWebView browser with persistent profiles, protocol pkg."
+    },
+    {
+      "id": "cmp:AppletApp",
+      "kind": "component",
+      "group": "components",
+      "label": "Noodle Applet",
+      "path": "Applet",
+      "loc": 13020
+    },
+    {
+      "id": "cmp:HubApp",
+      "kind": "component",
+      "group": "components",
+      "label": "Noodle Hub",
+      "path": "Hub",
+      "loc": 1871,
+      "summary": "Always-on Mac sharing harnesses to family devices."
+    },
+    {
+      "id": "shared:MobileApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "Noodle Mobile",
+      "path": "Mobile",
+      "loc": 13415,
+      "summary": "iPhone/iPad client for the Hub (TestFlight beta)."
+    },
+    {
+      "id": "shared:SharedPkg",
+      "kind": "shared",
+      "group": "shared",
+      "label": "Shared package",
+      "path": "Shared",
+      "loc": 18686
+    },
+    {
+      "id": "shared:WebsiteApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "website",
+      "path": "website"
+    },
+    {
+      "id": "state:NoodleStore",
+      "kind": "state",
+      "group": "state",
+      "label": "NoodleStore",
+      "path": "Sources/Noodle",
+      "summary": "Main app state store (@State in NoodleApp, error alerts)."
+    },
+    {
+      "id": "state:WorkspaceRepo",
+      "kind": "state",
+      "group": "state",
+      "label": "WorkspaceRepository.swift",
+      "path": "Sources/NoodleCore/WorkspaceRepository.swift"
+    },
+    {
+      "id": "state:UsageLedger",
+      "kind": "state",
+      "group": "state",
+      "label": "UsageLedger.swift",
+      "path": "Sources/NoodleCore/UsageLedger.swift"
+    },
+    {
+      "id": "state:DeletionJournal",
+      "kind": "state",
+      "group": "state",
+      "label": "DeletionJournal.swift",
+      "path": "Sources/NoodleCore/DeletionJournal.swift"
+    },
+    {
+      "id": "cmd:NewBot",
+      "kind": "command",
+      "group": "commands",
+      "label": "create a bot",
+      "path": "Sources/Noodle/AgentProfileSheet.swift",
+      "summary": "Agent profile sheet: harness, workspace, backstory.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:GroupTask",
+      "kind": "command",
+      "group": "commands",
+      "label": "group task",
+      "path": "Sources/Noodle",
+      "summary": "Bring several agents into a group toward a shared goal.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:HubShare",
+      "kind": "command",
+      "group": "commands",
+      "label": "share harness via Hub",
+      "path": "Hub",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "ipc:AgentBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent host bridge",
+      "path": "Sources/NoodleAgentBridge",
+      "summary": "XPC/bridge to the sandboxed agent host process."
+    },
+    {
+      "id": "ipc:HarnessSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "harness CLI spawn",
+      "path": "Sources/NoodleCore",
+      "summary": "Claude/Codex/FX/Grok/OpenCode/Antigravity launches w/ executable trust."
+    },
+    {
+      "id": "ipc:ComputerBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "Computer bridge",
+      "path": "Computer/Bridge",
+      "summary": "Signed connection between Noodle and remote/local computers."
+    },
+    {
+      "id": "ipc:McpConn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "MCP connections",
+      "path": "Sources/NoodleMCP"
+    },
+    {
+      "id": "ext:AgentClis",
+      "kind": "external",
+      "group": "external",
+      "label": "agent harnesses",
+      "path": "docs/harness-setup.md",
+      "summary": "Codex, Claude Code, FX, Grok, Muse, OpenCode, Antigravity, Apple Intelligence."
+    },
+    {
+      "id": "ext:Metal",
+      "kind": "external",
+      "group": "external",
+      "label": "Metal (Computer Kernel)",
+      "path": "Computer/Kernel"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:NoodleApp",
+      "to": "cmp:MainApp",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:NoodleApp",
+      "to": "state:NoodleStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "cmp:NoodleCore",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "state:WorkspaceRepo",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "state:UsageLedger",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "ipc:AgentBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "ipc:McpConn",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "cmp:BrowserApp",
+      "kind": "calls",
+      "label": "agent browsers"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "cmp:AppletApp",
+      "kind": "calls",
+      "label": "run built apps"
+    },
+    {
+      "from": "cmd:NewBot",
+      "to": "cmp:MainApp",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:GroupTask",
+      "to": "cmp:MainApp",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:HubShare",
+      "to": "cmp:HubApp",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:AgentHost",
+      "to": "ipc:HarnessSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentHost",
+      "to": "ipc:AgentBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AppleRuntime",
+      "to": "ipc:HarnessSpawn",
+      "kind": "ipc",
+      "label": "on-device models"
+    },
+    {
+      "from": "cmp:HubApp",
+      "to": "ipc:ComputerBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:MobileApp",
+      "to": "cmp:HubApp",
+      "kind": "ipc",
+      "label": "chat with hub bots"
+    },
+    {
+      "from": "cmp:ComputerApp",
+      "to": "ipc:ComputerBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ComputerApp",
+      "to": "ext:Metal",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:NoodleCore",
+      "to": "ipc:HarnessSpawn",
+      "kind": "calls"
+    },
+    {
+      "from": "state:DeletionJournal",
+      "to": "state:WorkspaceRepo",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:BrowserApp",
+      "to": "ipc:AgentBridge",
+      "kind": "ipc",
+      "label": "browser protocol"
+    },
+    {
+      "from": "cmp:NoodleCore",
+      "to": "ext:AgentClis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:MainApp",
+      "to": "shared:SharedPkg",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:HubApp",
+      "to": "shared:SharedPkg",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "create-bot",
+      "name": "Create a bot",
+      "trigger": "agent profile sheet",
+      "steps": [
+        "cmd:NewBot",
+        "cmp:MainApp",
+        "state:WorkspaceRepo",
+        "cmp:NoodleCore"
+      ],
+      "summary": "Harness + workspace + backstory recorded; agent folder created."
+    },
+    {
+      "id": "run-task",
+      "name": "Run an agent task",
+      "trigger": "send a task to a bot",
+      "steps": [
+        "cmp:MainApp",
+        "ipc:AgentBridge",
+        "cmp:AgentHost",
+        "ipc:HarnessSpawn",
+        "ext:AgentClis"
+      ],
+      "summary": "Task runs in the agent host with the chosen harness CLI."
+    },
+    {
+      "id": "group-goals",
+      "name": "Group of agents",
+      "trigger": "bring agents into a group",
+      "steps": [
+        "cmd:GroupTask",
+        "cmp:MainApp",
+        "ipc:AgentBridge"
+      ],
+      "summary": "Several agents share a goal with separate workspaces/backstories."
+    },
+    {
+      "id": "hub-share",
+      "name": "Share via Hub",
+      "trigger": "share a harness in Noodle Hub",
+      "steps": [
+        "cmd:HubShare",
+        "cmp:HubApp",
+        "shared:MobileApp"
+      ],
+      "summary": "Family devices chat with bots running on the Hub Mac."
+    },
+    {
+      "id": "computer-run",
+      "name": "Run on a Noodle Computer",
+      "trigger": "assign an agent to a computer",
+      "steps": [
+        "cmp:MainApp",
+        "ipc:ComputerBridge",
+        "cmp:ComputerApp",
+        "ext:Metal"
+      ],
+      "summary": "Linux/macOS guest computers with agents and file transfer."
+    }
+  ],
+  "notes": [
+    {
+      "title": "suite with one core",
+      "body": "Six app targets (Noodle, Computer, Browser, Applet, Hub, Mobile) share the Shared package and NoodleCore domain; each ships/releases independently (12 release workflows).",
+      "severity": "info",
+      "path": "Package.swift"
+    },
+    {
+      "title": "harness per-provider protocols",
+      "body": "NoodleCore keeps a per-provider triple (Distribution/ExecutableTrust/Launch/SessionState) for 8 harnesses \u2014 deliberate isolation of CLI quirks.",
+      "severity": "info",
+      "path": "Sources/NoodleCore"
+    },
+    {
+      "title": "test mass",
+      "body": "453 test swift files (~71k LOC, ~2,087 test funcs) vs 123k app LOC \u2014 close to 1:2 test ratio; 12 CI workflows.",
+      "severity": "info",
+      "path": "Tests"
+    }
+  ]
+}
