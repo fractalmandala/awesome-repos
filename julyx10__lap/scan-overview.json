@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "lap",
+    "slug": "julyx10__lap",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "lap",
+    "entryLayout": "src-vite/src/App.vue",
+    "root": ".",
+    "summary": "Tauri local-first photo manager: folder-first library, local AI search.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 22,
+    "edges": 23,
+    "components": 6,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 4,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AppVue",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.vue",
+      "path": "src-vite/src/App.vue",
+      "loc": 226,
+      "summary": "Vue root: library shell over Tauri stores."
+    },
+    {
+      "id": "cmp:ViewsDir",
+      "kind": "component",
+      "group": "components",
+      "label": "views/",
+      "path": "src-vite/src/views",
+      "summary": "Library, map, calendar, people, albums views."
+    },
+    {
+      "id": "cmp:ComponentsDir",
+      "kind": "component",
+      "group": "components",
+      "label": "components/ (40+)",
+      "path": "src-vite/src/components",
+      "summary": "GridView, albums, dedup pane, dialogs, histogram, camera, context menu."
+    },
+    {
+      "id": "state:StoresDir",
+      "kind": "state",
+      "group": "state",
+      "label": "stores/",
+      "path": "src-vite/src/stores"
+    },
+    {
+      "id": "cmp:TauriMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "src-tauri main.rs",
+      "path": "src-tauri/src/main.rs",
+      "summary": "Registers 40 t_* modules; aptabase telemetry plugin."
+    },
+    {
+      "id": "ipc:SqliteMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "t_sqlite.rs (10.9k)",
+      "path": "src-tauri/src/t_sqlite.rs",
+      "loc": 10938,
+      "summary": "Library database: photos, tags, faces, albums, collections."
+    },
+    {
+      "id": "ipc:CcmdsMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "t_cmds.rs",
+      "path": "src-tauri/src/t_cmds.rs",
+      "loc": 3813,
+      "summary": "General Tauri command bundle."
+    },
+    {
+      "id": "cmp:ImageMods",
+      "kind": "component",
+      "group": "components",
+      "label": "image codecs",
+      "path": "src-tauri/src/t_image.rs"
+    },
+    {
+      "id": "cmp:AiMods",
+      "kind": "component",
+      "group": "components",
+      "label": "local AI",
+      "path": "src-tauri/src/t_ai.rs",
+      "summary": "t_ai, t_ai_png, t_face, t_cluster, t_similar, t_lens (local models)."
+    },
+    {
+      "id": "shared:MediaMods",
+      "kind": "shared",
+      "group": "shared",
+      "label": "video/motion/montage",
+      "path": "src-tauri/src/t_video.rs",
+      "summary": "Video, motion photos, montages, apple sidecar metadata."
+    },
+    {
+      "id": "shared:FsMods",
+      "kind": "shared",
+      "group": "shared",
+      "label": "storage/migration/rename",
+      "path": "src-tauri/src/t_storage.rs",
+      "summary": "Folder-first storage, migration, batch rename, dedup."
+    },
+    {
+      "id": "ipc:ProtocolMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "t_protocol.rs",
+      "path": "src-tauri/src/t_protocol.rs",
+      "summary": "Custom asset protocol for thumbnails."
+    },
+    {
+      "id": "shared:PasteboardMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "pasteboard/drag",
+      "path": "src-tauri/src/t_pasteboard.rs"
+    },
+    {
+      "id": "shared:MenuMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "menu + config + startup",
+      "path": "src-tauri/src/t_menu.rs"
+    },
+    {
+      "id": "state:LibraryStore",
+      "kind": "state",
+      "group": "state",
+      "label": "libraryStore.js",
+      "path": "src-vite/src/stores/libraryStore.js",
+      "summary": "Photo/collection state in the renderer."
+    },
+    {
+      "id": "cmd:SearchCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "search / smart tags",
+      "path": "src-tauri/src/t_ai.rs",
+      "summary": "Local semantic search + auto tags.",
+      "tags": [
+        "search"
+      ]
+    },
+    {
+      "id": "cmd:DedupCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "dedup pass",
+      "path": "src-tauri/src/t_dedup.rs",
+      "summary": "Duplicate detection with a review pane.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:MontageCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "montage builder",
+      "path": "src-tauri/src/t_montage.rs",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:BackupCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "backup dialog",
+      "path": "src-vite/src/components/BackupDialog.vue",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "ipc:Aptabase",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "aptabase events",
+      "path": "src-tauri/src/main.rs"
+    },
+    {
+      "id": "ext:LocalModels",
+      "kind": "external",
+      "group": "external",
+      "label": "local AI models",
+      "path": "src-tauri/src/t_ai.rs",
+      "summary": "On-device embedding/face/similarity models; no upload."
+    },
+    {
+      "id": "ext:Libraw",
+      "kind": "external",
+      "group": "external",
+      "label": "libraw/heif/jxl shims",
+      "path": "src-tauri/src/libraw_shim.cpp",
+      "summary": "C/C++ shims for RAW/HEIF/JXL decode."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AppVue",
+      "to": "cmp:ViewsDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppVue",
+      "to": "state:LibraryStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ViewsDir",
+      "to": "cmp:ComponentsDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "state:LibraryStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "ipc:CcmdsMod",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "ipc:ProtocolMod",
+      "kind": "ipc",
+      "label": "thumbnails"
+    },
+    {
+      "from": "cmp:TauriMain",
+      "to": "ipc:SqliteMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriMain",
+      "to": "ipc:CcmdsMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriMain",
+      "to": "cmp:ImageMods",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:TauriMain",
+      "to": "cmp:AiMods",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:SqliteMod",
+      "to": "shared:FsMods",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AiMods",
+      "to": "ext:LocalModels",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AiMods",
+      "to": "ipc:SqliteMod",
+      "kind": "writes"
+    },
+    {
+      "from": "cmd:SearchCmd",
+      "to": "cmp:AiMods",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:DedupCmd",
+      "to": "cmp:AiMods",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:MontageCmd",
+      "to": "shared:MediaMods",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:BackupCmd",
+      "to": "shared:FsMods",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ImageMods",
+      "to": "ext:Libraw",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:TauriMain",
+      "to": "ipc:Aptabase",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:MediaMods",
+      "to": "cmp:ImageMods",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmd:DedupCmd",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmd:BackupCmd",
+      "kind": "commands"
+    },
+    {
+      "from": "shared:PasteboardMod",
+      "to": "shared:FsMods",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "browse-library",
+      "name": "Browse the library",
+      "trigger": "open the app on a folder",
+      "steps": [
+        "cmp:AppVue",
+        "cmp:ViewsDir",
+        "state:LibraryStore",
+        "ipc:ProtocolMod",
+        "ipc:SqliteMod"
+      ],
+      "summary": "Folder-first browsing backed by the sqlite index."
+    },
+    {
+      "id": "semantic-search",
+      "name": "Search by meaning",
+      "trigger": "search box query",
+      "steps": [
+        "cmd:SearchCmd",
+        "cmp:AiMods",
+        "ext:LocalModels",
+        "ipc:SqliteMod"
+      ],
+      "summary": "Local embeddings rank photos; nothing leaves the machine."
+    },
+    {
+      "id": "dedup-review",
+      "name": "Find duplicates",
+      "trigger": "dedup pane",
+      "steps": [
+        "cmd:DedupCmd",
+        "cmp:AiMods",
+        "cmp:ComponentsDir"
+      ],
+      "summary": "Clusters similar photos for review."
+    },
+    {
+      "id": "montage-make",
+      "name": "Make a montage",
+      "trigger": "montage action",
+      "steps": [
+        "cmd:MontageCmd",
+        "shared:MediaMods",
+        "cmp:ComponentsDir"
+      ],
+      "summary": "Collage rendered from selected photos."
+    },
+    {
+      "id": "map-photos",
+      "name": "Map and calendar",
+      "trigger": "switch to map/calendar view",
+      "steps": [
+        "cmp:ViewsDir",
+        "state:LibraryStore",
+        "ipc:SqliteMod"
+      ],
+      "summary": "EXIF-based placement over time and location."
+    }
+  ],
+  "notes": [
+    {
+      "title": "t_ prefix module convention",
+      "body": "40 t_*.rs files = one Tauri command domain each; t_sqlite.rs (10.9k) is the database monolith.",
+      "severity": "warn",
+      "path": "src-tauri/src"
+    },
+    {
+      "title": "shims for codecs",
+      "body": "C/C++ shims (clipboard_linux.c, jpeg_shim.cpp, libraw_shim.cpp, pasteboard.mm) bridge native codecs.",
+      "severity": "info",
+      "path": "src-tauri/src"
+    },
+    {
+      "title": "13 README languages",
+      "body": "i18n/ carries 13 translated READMEs \u2014 unusual docs effort for an indie app.",
+      "severity": "info",
+      "path": "i18n"
+    },
+    {
+      "title": "folder-first, no lock-in",
+      "body": "Works on existing folders rather than importing into a closed DB (README + t_storage.rs).",
+      "severity": "info",
+      "path": "src-tauri/src/t_storage.rs"
+    }
+  ]
+}

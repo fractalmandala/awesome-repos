@@ -1,0 +1,12 @@
+{
+  "slug": "julyx10__lap",
+  "name": "lap",
+  "github": "https://github.com/julyx10/lap",
+  "license": "GPL-3.0-or-later",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Tauri local-first photo manager: folder-first library, local AI search.",
+  "stack": ["rust", "tauri", "vue", "sqlite", "c", "cpp", "objective-c"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html"]
+}
