@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "padu",
+    "slug": "wisnuwiry__padu",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "padu",
+    "entryLayout": "apps/desktop/src/main.rs",
+    "root": ".",
+    "summary": "Native Rust/GPUI desktop for local coding agents with a driver core.",
+    "externalModules": [
+      "desktop",
+      "core"
+    ]
+  },
+  "stats": {
+    "nodes": 21,
+    "edges": 22,
+    "components": 6,
+    "stateFiles": 3,
+    "commands": 3,
+    "ipcCalls": 3,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:DesktopMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "desktop main.rs",
+      "path": "apps/desktop/src/main.rs",
+      "loc": 11,
+      "summary": "Calls padu::run(); app lives in app.rs (4,010 LOC) and app/."
+    },
+    {
+      "id": "cmp:DesktopApp",
+      "kind": "component",
+      "group": "components",
+      "label": "desktop app",
+      "path": "apps/desktop/src",
+      "loc": 104215,
+      "summary": "GPUI workspace: composer, board, branches, palette, dialogs, panels."
+    },
+    {
+      "id": "cmp:CoreCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "padu-core",
+      "path": "crates/padu-core/src",
+      "loc": 56664,
+      "summary": "Domain: per-provider sessions, checkpoints, git, computer use, audit."
+    },
+    {
+      "id": "cmp:DriverDir",
+      "kind": "component",
+      "group": "components",
+      "label": "padu-core/driver",
+      "path": "crates/padu-core/src/driver",
+      "summary": "claude/codex/amp/acp/cursor/deepseek/computer_use driver impls."
+    },
+    {
+      "id": "shared:ProtocolCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "padu-protocol",
+      "path": "crates/padu-protocol/src",
+      "loc": 10356,
+      "summary": "Versioned wire types only: no I/O; i18n locales included (4 langs)."
+    },
+    {
+      "id": "cmp:ClientCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "padu-client",
+      "path": "crates/padu-client/src",
+      "loc": 6210,
+      "summary": "Client transport over the protocol; TS twin in packages/padu-client."
+    },
+    {
+      "id": "shared:MermaidCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "padu-mermaid",
+      "path": "crates/padu-mermaid/src",
+      "loc": 2851
+    },
+    {
+      "id": "cmp:DaemonCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "padu-daemon",
+      "path": "crates/padu-daemon/src",
+      "loc": 1312,
+      "summary": "Background daemon keeping sessions alive beyond the app."
+    },
+    {
+      "id": "shared:WebApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "web + landing + mobile",
+      "path": "apps/web/src",
+      "loc": 23464
+    },
+    {
+      "id": "shared:TsClient",
+      "kind": "shared",
+      "group": "shared",
+      "label": "packages/padu-client (TS)",
+      "path": "packages/padu-client"
+    },
+    {
+      "id": "state:AppEntity",
+      "kind": "state",
+      "group": "state",
+      "label": "desktop app.rs",
+      "path": "apps/desktop/src/app.rs",
+      "loc": 4010,
+      "summary": "Central GPUI app entity; drafts, panels, worktrees."
+    },
+    {
+      "id": "state:SessionStore",
+      "kind": "state",
+      "group": "state",
+      "label": "core sessions",
+      "path": "crates/padu-core/src",
+      "summary": "claude_session/codex_session/... per provider state + audit."
+    },
+    {
+      "id": "state:Checkpoint",
+      "kind": "state",
+      "group": "state",
+      "label": "checkpoint.rs",
+      "path": "crates/padu-core/src/checkpoint.rs"
+    },
+    {
+      "id": "cmd:CommandPalette",
+      "kind": "command",
+      "group": "commands",
+      "label": "command palette",
+      "path": "apps/desktop/src/app/command_palette.rs",
+      "summary": "Palette dispatch in the desktop app.",
+      "tags": [
+        "palette"
+      ]
+    },
+    {
+      "id": "cmd:ComposerSend",
+      "kind": "command",
+      "group": "commands",
+      "label": "composer send",
+      "path": "apps/desktop/src/app/composer.rs",
+      "summary": "Send prompt into the active session driver.",
+      "tags": [
+        "enter"
+      ]
+    },
+    {
+      "id": "cmd:BoardActions",
+      "kind": "command",
+      "group": "commands",
+      "label": "board actions",
+      "path": "apps/desktop/src/app/board",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "ipc:DriverSpawns",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "driver sessions",
+      "path": "crates/padu-core/src/driver",
+      "summary": "Spawn/parse agent CLIs + ACP; computer_use automation."
+    },
+    {
+      "id": "ipc:DaemonIpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "daemon channel",
+      "path": "crates/padu-daemon/src",
+      "summary": "App \u2194 daemon keep-alive for long sessions."
+    },
+    {
+      "id": "ipc:DbLayer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "db (drizzle)",
+      "path": "db/schema.ts"
+    },
+    {
+      "id": "ext:AgentClis",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "README.md",
+      "summary": "Amp, Claude Code, Codex CLI, Cursor CLI, DeepSeek, ACP agents."
+    },
+    {
+      "id": "ext:GpuiPadu",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui",
+      "path": "apps/desktop/Cargo.toml"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:DesktopMain",
+      "to": "cmp:DesktopApp",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "state:AppEntity",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmp:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmd:CommandPalette",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmd:ComposerSend",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmd:BoardActions",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "shared:MermaidCrate",
+      "kind": "calls",
+      "label": "render transcripts"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "cmp:DriverDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "state:SessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "state:Checkpoint",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:DriverDir",
+      "to": "ipc:DriverSpawns",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DriverDir",
+      "to": "ext:AgentClis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DaemonCrate",
+      "to": "ipc:DaemonIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "ipc:DaemonIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "shared:ProtocolCrate",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:ClientCrate",
+      "to": "shared:ProtocolCrate",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:TsClient",
+      "to": "shared:ProtocolCrate",
+      "kind": "reads",
+      "label": "wire contract"
+    },
+    {
+      "from": "shared:WebApp",
+      "to": "shared:TsClient",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:WebApp",
+      "to": "ipc:DbLayer",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:DaemonIpc",
+      "to": "state:SessionStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "ipc:DaemonIpc",
+      "kind": "calls",
+      "label": "hand-off"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "ext:GpuiPadu",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "start-session",
+      "name": "Start a session",
+      "trigger": "composer in a project",
+      "steps": [
+        "cmd:ComposerSend",
+        "cmp:DesktopApp",
+        "cmp:CoreCrate",
+        "ipc:DriverSpawns",
+        "ext:AgentClis"
+      ],
+      "summary": "Driver spawns the agent CLI and streams the transcript."
+    },
+    {
+      "id": "palette-nav",
+      "name": "Palette navigation",
+      "trigger": "command palette",
+      "steps": [
+        "cmd:CommandPalette",
+        "cmp:DesktopApp",
+        "state:AppEntity"
+      ],
+      "summary": "Palette drives projects, sessions, settings, boards."
+    },
+    {
+      "id": "board-flow",
+      "name": "Board view",
+      "trigger": "open the board",
+      "steps": [
+        "cmd:BoardActions",
+        "cmp:DesktopApp",
+        "state:SessionStore"
+      ],
+      "summary": "Kanban over sessions and worktrees."
+    },
+    {
+      "id": "checkpoint-rollback",
+      "name": "Rollback an agent",
+      "trigger": "checkpoint restore",
+      "steps": [
+        "state:Checkpoint",
+        "cmp:CoreCrate",
+        "ipc:DriverSpawns"
+      ],
+      "summary": "Snapshots let agent file edits be undone."
+    },
+    {
+      "id": "daemon-keepalive",
+      "name": "Keep sessions alive",
+      "trigger": "quit the app with live sessions",
+      "steps": [
+        "cmp:DesktopApp",
+        "ipc:DaemonIpc",
+        "cmp:DaemonCrate",
+        "state:SessionStore"
+      ],
+      "summary": "padu-daemon owns long-running sessions between app launches."
+    }
+  ],
+  "notes": [
+    {
+      "title": "protocol crate is I/O-free",
+      "body": "padu-protocol holds only serializable data + i18n so rust and TS clients can't drift (crates/padu-protocol/src/lib.rs).",
+      "severity": "info",
+      "path": "crates/padu-protocol/src/lib.rs"
+    },
+    {
+      "title": "driver-per-provider",
+      "body": "driver/ has claude/codex/amp/acp_agy/cursor/deepseek/computer_use modules mirroring padu-core session files.",
+      "severity": "info",
+      "path": "crates/padu-core/src/driver"
+    },
+    {
+      "title": "desktop is the monolith",
+      "body": "apps/desktop = 104k LOC with app.rs (4,010) and 33 app/ modules; the biggest file is manageable but the crate is heavy.",
+      "severity": "warn",
+      "path": "apps/desktop/src"
+    },
+    {
+      "title": "tests mostly rust",
+      "body": "1,176 #[test] fns across the workspace; 47 TS test files in the web side.",
+      "severity": "info",
+      "path": "crates"
+    }
+  ]
+}

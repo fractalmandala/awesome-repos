@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 13,
+  "count": 14,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -291,6 +291,30 @@
         "scan-overview.html",
         "scan-noodle-app.json",
         "scan-noodle-app.html"
+      ]
+    },
+    {
+      "slug": "wisnuwiry__padu",
+      "name": "padu",
+      "github": "https://github.com/wisnuwiry/padu",
+      "license": "GPL-3.0-only",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Native Rust/GPUI desktop for local coding agents with a driver core.",
+      "stack": [
+        "rust",
+        "gpui",
+        "drizzle",
+        "sqlite",
+        "typescript",
+        "react",
+        "vite"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
       ]
     },
     {
