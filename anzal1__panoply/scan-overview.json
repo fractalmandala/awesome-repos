@@ -1,0 +1,493 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "panoply",
+    "slug": "anzal1__panoply",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "panoply",
+    "entryLayout": "apps/desktop/src/main.rs",
+    "root": ".",
+    "summary": "Rust/GPUI file-utility suite: command bar intent, 23 tool crates, MCP.",
+    "externalModules": [
+      "desktop",
+      "panoply-image",
+      "panoply-pdf"
+    ]
+  },
+  "stats": {
+    "nodes": 26,
+    "edges": 24,
+    "components": 10,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 2,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:DesktopMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "desktop main.rs",
+      "path": "apps/desktop/src/main.rs",
+      "summary": "Calls panoply_desktop::run_from_args."
+    },
+    {
+      "id": "cmp:DesktopApp",
+      "kind": "component",
+      "group": "components",
+      "label": "desktop app",
+      "path": "apps/desktop/src",
+      "loc": 27117,
+      "summary": "GPUI app: command bar, intent parse, result cards, disk view, share."
+    },
+    {
+      "id": "fn:IntentParser",
+      "kind": "function",
+      "group": "components",
+      "label": "intent.rs",
+      "path": "apps/desktop/src/intent.rs",
+      "summary": "Plain words \u2192 size target / conversion / search intent."
+    },
+    {
+      "id": "cmp:JobsEngine",
+      "kind": "component",
+      "group": "components",
+      "label": "jobs.rs",
+      "path": "apps/desktop/src/jobs.rs",
+      "summary": "Tool job queue with results-as-new-files and Undo-to-Trash."
+    },
+    {
+      "id": "cmp:UiMod",
+      "kind": "component",
+      "group": "components",
+      "label": "ui/",
+      "path": "apps/desktop/src/ui",
+      "summary": "app, bar, panel, disk, chrome, theme, live actions, widgets."
+    },
+    {
+      "id": "shared:SelfcheckMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "selfcheck.rs",
+      "path": "apps/desktop/src/selfcheck.rs",
+      "loc": 2246
+    },
+    {
+      "id": "shared:CoreCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "panoply-core",
+      "path": "crates/panoply-core/src",
+      "summary": "Shared tool traits/registry."
+    },
+    {
+      "id": "cmp:ImageCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "panoply-image",
+      "path": "crates/panoply-image/src",
+      "loc": 24821,
+      "summary": "Compress/convert/resize image tools."
+    },
+    {
+      "id": "cmp:MediaCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "panoply-media",
+      "path": "crates/panoply-media/src",
+      "loc": 23592
+    },
+    {
+      "id": "cmp:PdfCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "panoply-pdf",
+      "path": "crates/panoply-pdf/src",
+      "loc": 11899,
+      "summary": "PDF shrink/merge/split/convert."
+    },
+    {
+      "id": "cmp:OcrVision",
+      "kind": "component",
+      "group": "components",
+      "label": "ocr + vision",
+      "path": "crates/panoply-ocr/src",
+      "loc": 9664,
+      "summary": "OCR and vision-description tool crates."
+    },
+    {
+      "id": "cmp:FindDisk",
+      "kind": "component",
+      "group": "components",
+      "label": "find + disk + id",
+      "path": "crates/panoply-find/src"
+    },
+    {
+      "id": "shared:ShareTts",
+      "kind": "shared",
+      "group": "shared",
+      "label": "share + tts + archive + convert",
+      "path": "crates/panoply-share/src",
+      "loc": 9482
+    },
+    {
+      "id": "shared:PlatformCrates",
+      "kind": "shared",
+      "group": "shared",
+      "label": "platform crates",
+      "path": "crates/panoply-platform-macos/src",
+      "loc": 6464,
+      "summary": "macos/windows platform shells + panoply-host + ffi."
+    },
+    {
+      "id": "shared:WasmCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "panoply-wasm + modules",
+      "path": "crates/panoply-wasm/src",
+      "summary": "Sandboxed wasip2 tool modules (templates, examples, killtest)."
+    },
+    {
+      "id": "ipc:McpCrate",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "panoply-mcp",
+      "path": "crates/panoply-mcp/src",
+      "summary": "`panoply mcp`: exposes every tool to Claude/Cursor/VS Code."
+    },
+    {
+      "id": "cmp:CliCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "panoply-cli",
+      "path": "crates/panoply-cli/src",
+      "loc": 5231,
+      "summary": "Headless CLI for the same tools."
+    },
+    {
+      "id": "state:Catalog",
+      "kind": "state",
+      "group": "state",
+      "label": "catalog.rs",
+      "path": "apps/desktop/src/catalog.rs",
+      "summary": "Tool catalog the bar searches."
+    },
+    {
+      "id": "state:History",
+      "kind": "state",
+      "group": "state",
+      "label": "history.rs",
+      "path": "apps/desktop/src/history.rs",
+      "summary": "Job history with undo-to-Trash."
+    },
+    {
+      "id": "cmd:CommandBar",
+      "kind": "command",
+      "group": "commands",
+      "label": "command bar",
+      "path": "apps/desktop/src/ui/bar.rs",
+      "summary": "Drop file + type intent + Return.",
+      "tags": [
+        "bar"
+      ]
+    },
+    {
+      "id": "cmd:LiveActions",
+      "kind": "command",
+      "group": "commands",
+      "label": "live actions",
+      "path": "apps/desktop/src/ui/live.rs",
+      "tags": [
+        "actions"
+      ]
+    },
+    {
+      "id": "cmd:McpServe",
+      "kind": "command",
+      "group": "commands",
+      "label": "panoply mcp",
+      "path": "crates/panoply-mcp/src",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:CliRun",
+      "kind": "command",
+      "group": "commands",
+      "label": "panoply CLI",
+      "path": "crates/panoply-cli/src",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "ipc:FfiSeam",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "panoply-ffi",
+      "path": "crates/panoply-ffi/src"
+    },
+    {
+      "id": "ext:GpuiPatch",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui (+patch)",
+      "path": "apps/desktop/patches/gpui-base",
+      "summary": "Patched gpui-base carried in-repo (input/text/dock fixes)."
+    },
+    {
+      "id": "ext:NativeCodecs",
+      "kind": "external",
+      "group": "external",
+      "label": "native codecs",
+      "path": "crates/panoply-platform-macos/src"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:DesktopMain",
+      "to": "cmp:DesktopApp",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "fn:IntentParser",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmp:JobsEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "cmp:UiMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "state:Catalog",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "state:History",
+      "kind": "writes"
+    },
+    {
+      "from": "cmd:CommandBar",
+      "to": "fn:IntentParser",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:LiveActions",
+      "to": "cmp:UiMod",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:JobsEngine",
+      "to": "shared:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "cmp:ImageCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "cmp:MediaCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "cmp:PdfCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "cmp:OcrVision",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "cmp:FindDisk",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "shared:ShareTts",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:CoreCrate",
+      "to": "shared:PlatformCrates",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:WasmCrate",
+      "to": "shared:CoreCrate",
+      "kind": "calls",
+      "label": "module ABI"
+    },
+    {
+      "from": "ipc:McpCrate",
+      "to": "shared:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmd:McpServe",
+      "to": "ipc:McpCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:CliRun",
+      "to": "shared:CoreCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:CliCrate",
+      "to": "shared:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "shared:PlatformCrates",
+      "to": "ipc:FfiSeam",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:PlatformCrates",
+      "to": "ext:NativeCodecs",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DesktopApp",
+      "to": "ext:GpuiPatch",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "drop-and-ask",
+      "name": "Drop a file, type intent",
+      "trigger": "command bar + Return",
+      "steps": [
+        "cmd:CommandBar",
+        "fn:IntentParser",
+        "state:Catalog",
+        "cmp:JobsEngine",
+        "state:History"
+      ],
+      "summary": "Best tool picked; result written as a NEW file next to the original."
+    },
+    {
+      "id": "undo-job",
+      "name": "Undo a result",
+      "trigger": "undo in history",
+      "steps": [
+        "state:History",
+        "cmp:JobsEngine",
+        "cmp:DesktopApp"
+      ],
+      "summary": "Undo moves the result file to the Trash, never deletes."
+    },
+    {
+      "id": "mcp-tools",
+      "name": "Agents use the tools",
+      "trigger": "panoply mcp in Claude/Cursor",
+      "steps": [
+        "cmd:McpServe",
+        "ipc:McpCrate",
+        "shared:CoreCrate",
+        "cmp:ImageCrate"
+      ],
+      "summary": "Every tool exposed over MCP; nothing uploaded."
+    },
+    {
+      "id": "cli-script",
+      "name": "Script a conversion",
+      "trigger": "panoply convert in the shell",
+      "steps": [
+        "cmd:CliRun",
+        "cmp:CliCrate",
+        "shared:CoreCrate",
+        "cmp:PdfCrate"
+      ],
+      "summary": "Headless runs share the desktop's tool core."
+    },
+    {
+      "id": "disk-review",
+      "name": "Review disk space",
+      "trigger": "disk view",
+      "steps": [
+        "cmp:UiMod",
+        "cmp:FindDisk",
+        "cmp:DesktopApp"
+      ],
+      "summary": "disk.rs + panoply-disk find space hogs with review delete."
+    }
+  ],
+  "notes": [
+    {
+      "title": "results never overwrite",
+      "body": "Jobs write result files next to originals; Undo moves to Trash (README + jobs.rs) \u2014 safe-by-design file utility.",
+      "severity": "info",
+      "path": "apps/desktop/src/jobs.rs"
+    },
+    {
+      "title": "wasm tool modules",
+      "body": "modules/ are standalone wasip2 cargo projects (template-rust, examples, killtest) excluded from the host workspace.",
+      "severity": "info",
+      "path": "modules"
+    },
+    {
+      "title": "one intent parser",
+      "body": "intent.rs understands size targets, conversions, and synonyms; everything else is fuzzy tool search \u2014 deliberately small.",
+      "severity": "info",
+      "path": "apps/desktop/src/intent.rs"
+    },
+    {
+      "title": "patched gpui in-tree",
+      "body": "apps/desktop/patches/gpui-base (~30k LOC vendored patch) fixes input/text/dock behavior.",
+      "severity": "warn",
+      "path": "apps/desktop/patches/gpui-base"
+    }
+  ]
+}

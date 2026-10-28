@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 15,
+  "count": 16,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -333,6 +333,28 @@
         "sqlite",
         "xterm",
         "playwright"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
+      ]
+    },
+    {
+      "slug": "anzal1__panoply",
+      "name": "panoply",
+      "github": "https://github.com/anzal1/panoply",
+      "license": "MIT OR Apache-2.0",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Rust/GPUI file-utility suite: command bar intent, 23 tool crates, MCP.",
+      "stack": [
+        "rust",
+        "gpui",
+        "wasm",
+        "mcp",
+        "ffmpeg"
       ],
       "reports": [
         "report.md",
