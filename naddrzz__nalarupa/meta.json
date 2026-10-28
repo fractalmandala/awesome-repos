@@ -1,0 +1,12 @@
+{
+  "slug": "naddrzz__nalarupa",
+  "name": "nalarupa",
+  "github": "https://github.com/naddrzz/nalarupa",
+  "license": "MIT",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Infinite-canvas vector editor with AI agents: GPUIX React over rust core.",
+  "stack": ["rust", "react", "gpuix", "mcp", "claude"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html"]
+}

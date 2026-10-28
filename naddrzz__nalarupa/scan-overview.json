@@ -1,0 +1,468 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "nalarupa",
+    "slug": "naddrzz__nalarupa",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "nalarupa",
+    "entryLayout": "app/src/App.tsx",
+    "root": ".",
+    "summary": "Infinite-canvas vector editor with AI agents: GPUIX React over rust core.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 25,
+    "edges": 22,
+    "components": 7,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 5,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AppRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "App.tsx",
+      "path": "app/src/App.tsx",
+      "summary": "Shell: canvas + right agent panel + inspector/layers."
+    },
+    {
+      "id": "cmp:CanvasView",
+      "kind": "component",
+      "group": "components",
+      "label": "Canvas.tsx",
+      "path": "app/src/Canvas.tsx",
+      "summary": "Infinite canvas: 7 tools, camera, snapping over the rust engine."
+    },
+    {
+      "id": "cmp:AgentLayer",
+      "kind": "component",
+      "group": "components",
+      "label": "AgentLayer.tsx",
+      "path": "app/src/AgentLayer.tsx",
+      "summary": "Agent cursors, highlight flashes, Generating glow."
+    },
+    {
+      "id": "cmp:AgentPanel",
+      "kind": "component",
+      "group": "components",
+      "label": "Agent.tsx panel",
+      "path": "app/src/Agent.tsx",
+      "summary": "Design chat, plan TODO, message queue, permission card, model picker."
+    },
+    {
+      "id": "cmp:InspectorView",
+      "kind": "component",
+      "group": "components",
+      "label": "Inspector/Layers",
+      "path": "app/src/Inspector.tsx"
+    },
+    {
+      "id": "shared:PresentView",
+      "kind": "shared",
+      "group": "shared",
+      "label": "Present + Home",
+      "path": "app/src/Present.tsx"
+    },
+    {
+      "id": "fn:PenModule",
+      "kind": "function",
+      "group": "components",
+      "label": "pen.ts",
+      "path": "app/src/pen.ts",
+      "summary": "Vector contour math: anchors, handles, snapping, split/mirror."
+    },
+    {
+      "id": "fn:GeomModule",
+      "kind": "function",
+      "group": "components",
+      "label": "geometry.ts",
+      "path": "app/src/geometry.ts"
+    },
+    {
+      "id": "cmp:CoreEngine",
+      "kind": "component",
+      "group": "components",
+      "label": "core engine.rs",
+      "path": "core/src/engine.rs",
+      "summary": "Rust core engine: document, tools, undo; .pen documents."
+    },
+    {
+      "id": "ipc:AgentCore",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent.rs (1.6k)",
+      "path": "core/src/agent.rs",
+      "loc": 1571,
+      "summary": "Built-in agent loop over Claude Code/API; streams edits live."
+    },
+    {
+      "id": "ipc:McpSrv",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mcp.rs",
+      "path": "core/src/mcp.rs",
+      "summary": "Streamable-HTTP MCP on 127.0.0.1:47700 for external agents."
+    },
+    {
+      "id": "cmp:RenderCore",
+      "kind": "component",
+      "group": "components",
+      "label": "render.rs + raster.rs + shader.rs",
+      "path": "core/src/render.rs",
+      "summary": "GPU rendering pipeline; pixel readback to the React layer."
+    },
+    {
+      "id": "shared:FigmaMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "figma.rs + svg.rs",
+      "path": "core/src/figma.rs",
+      "loc": 1496,
+      "summary": "Figma import + SVG I/O."
+    },
+    {
+      "id": "shared:HtmlMod",
+      "kind": "shared",
+      "group": "shared",
+      "label": "html.rs + script.rs",
+      "path": "core/src/html.rs"
+    },
+    {
+      "id": "shared:CliBin",
+      "kind": "shared",
+      "group": "shared",
+      "label": "core cli",
+      "path": "core/src/bin/cli.rs"
+    },
+    {
+      "id": "state:CoreStore",
+      "kind": "state",
+      "group": "state",
+      "label": "core.ts bridge",
+      "path": "app/src/core.ts",
+      "summary": "call/renderPixels bridge to the rust engine."
+    },
+    {
+      "id": "state:DocModel",
+      "kind": "state",
+      "group": "state",
+      "label": "doc.rs",
+      "path": "core/src/doc.rs",
+      "summary": "Document model: nodes, undo steps, agent commit batching."
+    },
+    {
+      "id": "cmd:DesignChat",
+      "kind": "command",
+      "group": "commands",
+      "label": "design chat",
+      "path": "app/src/Agent.tsx",
+      "summary": "Describe what you want; agent builds on canvas.",
+      "tags": [
+        "composer"
+      ]
+    },
+    {
+      "id": "cmd:ParallelAgents",
+      "kind": "command",
+      "group": "commands",
+      "label": "Split / Side by side",
+      "path": "app/src/Agent.tsx",
+      "summary": "1\u20134 parallel agents splitting work or variants.",
+      "tags": [
+        "buttons"
+      ]
+    },
+    {
+      "id": "cmd:LetItCook",
+      "kind": "command",
+      "group": "commands",
+      "label": "Let it cook",
+      "path": "app/src/Agent.tsx",
+      "tags": [
+        "toggle"
+      ]
+    },
+    {
+      "id": "cmd:PenTool",
+      "kind": "command",
+      "group": "commands",
+      "label": "pen tool",
+      "path": "app/src/pen.ts",
+      "tags": [
+        "tool"
+      ]
+    },
+    {
+      "id": "ipc:GpuixBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "@gpuix bridge",
+      "path": "app/src/core.ts",
+      "summary": "call()/renderPixels() into the rust engine over GPUIX."
+    },
+    {
+      "id": "ipc:ClaudeBackends",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "claude.rs backends",
+      "path": "core/src/claude.rs",
+      "summary": "Claude Code login or Claude API key backends."
+    },
+    {
+      "id": "ipc:McpHttp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "MCP http endpoint",
+      "path": "core/src/mcp.rs"
+    },
+    {
+      "id": "ext:Gpuix",
+      "kind": "external",
+      "group": "external",
+      "label": "GPUIX",
+      "path": "app/package.json",
+      "summary": "React-on-GPUI runtime (@gpuix/native, @gpuix/react)."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:CanvasView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:AgentPanel",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:InspectorView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasView",
+      "to": "cmp:AgentLayer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CanvasView",
+      "to": "fn:PenModule",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CanvasView",
+      "to": "fn:GeomModule",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CanvasView",
+      "to": "state:CoreStore",
+      "kind": "calls",
+      "label": "call/renderPixels"
+    },
+    {
+      "from": "state:CoreStore",
+      "to": "ipc:GpuixBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:GpuixBridge",
+      "to": "cmp:CoreEngine",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CoreEngine",
+      "to": "state:DocModel",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:CoreEngine",
+      "to": "cmp:RenderCore",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "cmd:DesignChat",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:DesignChat",
+      "to": "ipc:AgentCore",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "cmd:ParallelAgents",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:AgentPanel",
+      "to": "cmd:LetItCook",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:AgentCore",
+      "to": "ipc:ClaudeBackends",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:AgentCore",
+      "to": "state:DocModel",
+      "kind": "writes",
+      "label": "undo-batched"
+    },
+    {
+      "from": "ipc:AgentCore",
+      "to": "cmp:AgentLayer",
+      "kind": "dispatches",
+      "label": "cursors"
+    },
+    {
+      "from": "cmp:CoreEngine",
+      "to": "shared:FigmaMod",
+      "kind": "calls",
+      "label": "import/export"
+    },
+    {
+      "from": "cmd:PenTool",
+      "to": "fn:PenModule",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:CoreEngine",
+      "to": "shared:HtmlMod",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:McpSrv",
+      "to": "cmp:CoreEngine",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "agent-design",
+      "name": "Agent designs on canvas",
+      "trigger": "design chat submit",
+      "steps": [
+        "cmd:DesignChat",
+        "ipc:AgentCore",
+        "ipc:ClaudeBackends",
+        "state:DocModel",
+        "cmp:RenderCore"
+      ],
+      "summary": "Steps appear live then commit as one undo step."
+    },
+    {
+      "id": "parallel-split",
+      "name": "Parallel agents",
+      "trigger": "Split / Side by side buttons",
+      "steps": [
+        "cmd:ParallelAgents",
+        "ipc:AgentCore",
+        "cmp:AgentLayer",
+        "cmp:CanvasView"
+      ],
+      "summary": "1\u20134 agents split work or make variants with named cursors."
+    },
+    {
+      "id": "let-it-cook",
+      "name": "Let it cook",
+      "trigger": "toggle after a finished design",
+      "steps": [
+        "cmd:LetItCook",
+        "ipc:AgentCore",
+        "cmp:CanvasView"
+      ],
+      "summary": "Agent keeps producing layout/style variations."
+    },
+    {
+      "id": "external-agent",
+      "name": "External agent via MCP",
+      "trigger": "Claude Code/Cursor MCP client",
+      "steps": [
+        "ipc:McpHttp",
+        "cmp:CoreEngine",
+        "cmp:RenderCore"
+      ],
+      "summary": "Same tool surface as the built-in agent over HTTP."
+    },
+    {
+      "id": "pen-draw",
+      "name": "Draw with the pen",
+      "trigger": "pen tool selected",
+      "steps": [
+        "cmd:PenTool",
+        "fn:PenModule",
+        "state:DocModel",
+        "cmp:RenderCore"
+      ],
+      "summary": "Contours with handles, snapping and smoothing."
+    }
+  ],
+  "notes": [
+    {
+      "title": "GPUIX: React over GPUI-like rust",
+      "body": "The React app talks to a rust engine via @gpuix call()/renderPixels() \u2014 GPU-native canvas with a web stack on top.",
+      "severity": "info",
+      "path": "app/src/core.ts"
+    },
+    {
+      "title": "agent edits are undo-batched",
+      "body": "Doc model commits agent streams as a single undo step (doc.rs + README).",
+      "severity": "info",
+      "path": "core/src/doc.rs"
+    },
+    {
+      "title": "one MCP, two agents",
+      "body": "Built-in agent and external agents share core/src/mcp.rs tools on 127.0.0.1:47700.",
+      "severity": "info",
+      "path": "core/src/mcp.rs"
+    },
+    {
+      "title": "tests are thin",
+      "body": "core/tests has a figma-clipboard fixture; ~190 #[test] live inside src files, 0 app-side tests.",
+      "severity": "warn",
+      "path": "core"
+    }
+  ]
+}
