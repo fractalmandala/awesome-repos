@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "gram",
+    "slug": "grameditor__gram",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "gram",
+    "entryLayout": "crates/gram/src/main.rs",
+    "root": ".",
+    "summary": "Zed hard fork: hand-writing-first editor, 135 crates, GPL-3.0.",
+    "externalModules": [
+      "editor",
+      "gram-app"
+    ]
+  },
+  "stats": {
+    "nodes": 23,
+    "edges": 20,
+    "components": 10,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 2,
+    "flows": 4
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:GramMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "gram main.rs",
+      "path": "crates/gram/src/main.rs",
+      "loc": 1342,
+      "summary": "App entry: CLI parse, workspace init, open-listener, session, reliability."
+    },
+    {
+      "id": "cmp:GramApp",
+      "kind": "component",
+      "group": "components",
+      "label": "gram.rs",
+      "path": "crates/gram/src/gram.rs",
+      "loc": 4690,
+      "summary": "Window options, menus, initialize_workspace, CLI connection handling."
+    },
+    {
+      "id": "cmp:EditorCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "editor (103k)",
+      "path": "crates/editor/src",
+      "loc": 102899,
+      "summary": "The editor surface: multi-buffer, display map, selections, inlay, vim."
+    },
+    {
+      "id": "cmp:GpuiCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "gpui (81.7k)",
+      "path": "crates/gpui/src",
+      "loc": 81741,
+      "summary": "GPU UI framework kept in-tree (forked from Zed)."
+    },
+    {
+      "id": "cmp:ProjectCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "project (63k)",
+      "path": "crates/project/src",
+      "loc": 63202,
+      "summary": "Worktrees, buffers, LSP, debugger (dap), search, terminals backend."
+    },
+    {
+      "id": "cmp:WorkspaceCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace (29k)",
+      "path": "crates/workspace/src",
+      "loc": 29416,
+      "summary": "Panes, docks, persistence, modal layer, items."
+    },
+    {
+      "id": "cmp:VimCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "vim (29k)",
+      "path": "crates/vim/src",
+      "loc": 29308,
+      "summary": "Vim + helix modes built in."
+    },
+    {
+      "id": "cmp:LanguageCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "language (20k)",
+      "path": "crates/language/src",
+      "loc": 20167
+    },
+    {
+      "id": "cmp:GitUi",
+      "kind": "component",
+      "group": "components",
+      "label": "git_ui (19k)",
+      "path": "crates/git_ui/src",
+      "loc": 19222,
+      "summary": "Git panel, blame, commit, graph, diff views."
+    },
+    {
+      "id": "shared:ForkCrates",
+      "kind": "shared",
+      "group": "shared",
+      "label": "fork-specific crates",
+      "path": "crates/which_key/src",
+      "summary": "which_key, journal, refineable, nc, app_actions (fork adds)."
+    },
+    {
+      "id": "shared:LangExt",
+      "kind": "shared",
+      "group": "shared",
+      "label": "languages + extensions",
+      "path": "crates/languages/src"
+    },
+    {
+      "id": "cmp:Terminal",
+      "kind": "component",
+      "group": "components",
+      "label": "terminal (5.7k)",
+      "path": "crates/terminal/src",
+      "loc": 5750
+    },
+    {
+      "id": "shared:CollabClient",
+      "kind": "shared",
+      "group": "shared",
+      "label": "client/collab absent",
+      "path": "crates/client/src"
+    },
+    {
+      "id": "state:Settings",
+      "kind": "state",
+      "group": "state",
+      "label": "settings store",
+      "path": "crates/settings/src/settings_store.rs",
+      "summary": "Global settings tree + keymaps watched from disk."
+    },
+    {
+      "id": "state:DbKv",
+      "kind": "state",
+      "group": "state",
+      "label": "db (sqlez)",
+      "path": "crates/db/src"
+    },
+    {
+      "id": "cmd:WhichKey",
+      "kind": "command",
+      "group": "commands",
+      "label": "which-key mode",
+      "path": "crates/which_key/src",
+      "summary": "Discoverable prefix keymaps in the editor.",
+      "tags": [
+        "keys"
+      ]
+    },
+    {
+      "id": "cmd:CommandPalette",
+      "kind": "command",
+      "group": "commands",
+      "label": "command palette",
+      "path": "crates/command_palette/src",
+      "tags": [
+        "cmd+shift+p"
+      ]
+    },
+    {
+      "id": "cmd:QuickActionBar",
+      "kind": "command",
+      "group": "commands",
+      "label": "quick action bar",
+      "path": "crates/gram/src/gram/quick_action_bar.rs",
+      "summary": "Fork addition: quick actions bar.",
+      "tags": [
+        "fork"
+      ]
+    },
+    {
+      "id": "cmd:JournalCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "journal",
+      "path": "crates/journal/src",
+      "tags": [
+        "fork"
+      ]
+    },
+    {
+      "id": "ipc:LspDap",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "lsp + dap",
+      "path": "crates/lsp/src",
+      "summary": "Language servers and debug adapters over stdio."
+    },
+    {
+      "id": "ipc:RemoteSsh",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "remote (ssh)",
+      "path": "crates/remote/src",
+      "summary": "Remote development transport inherited from Zed."
+    },
+    {
+      "id": "ext:ZedDeps",
+      "kind": "external",
+      "group": "external",
+      "label": "zed git deps",
+      "path": "Cargo.toml"
+    },
+    {
+      "id": "ext:GitCli",
+      "kind": "external",
+      "group": "external",
+      "label": "git CLI",
+      "path": "crates/git/src",
+      "summary": "Git binary invoked by project/git_ui."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:GramMain",
+      "to": "cmp:GramApp",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:GramMain",
+      "to": "cmp:WorkspaceCrate",
+      "kind": "renders",
+      "label": "initialize_workspace"
+    },
+    {
+      "from": "cmp:GramApp",
+      "to": "cmd:QuickActionBar",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:GramApp",
+      "to": "cmd:JournalCmd",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:WorkspaceCrate",
+      "to": "cmp:EditorCrate",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:WorkspaceCrate",
+      "to": "cmp:GitUi",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:WorkspaceCrate",
+      "to": "cmp:Terminal",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:WorkspaceCrate",
+      "to": "cmd:CommandPalette",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:EditorCrate",
+      "to": "cmp:LanguageCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EditorCrate",
+      "to": "cmp:VimCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EditorCrate",
+      "to": "ext:ZedDeps",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:ProjectCrate",
+      "to": "ipc:LspDap",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ProjectCrate",
+      "to": "state:Settings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:GramApp",
+      "to": "ipc:RemoteSsh",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:WorkspaceCrate",
+      "to": "state:DbKv",
+      "kind": "writes"
+    },
+    {
+      "from": "shared:ForkCrates",
+      "to": "cmp:EditorCrate",
+      "kind": "calls",
+      "label": "which_key input"
+    },
+    {
+      "from": "cmp:EditorCrate",
+      "to": "cmp:GpuiCrate",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:GramApp",
+      "to": "shared:ForkCrates",
+      "kind": "calls",
+      "label": "app_actions"
+    },
+    {
+      "from": "cmd:WhichKey",
+      "to": "cmp:EditorCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:GramMain",
+      "to": "state:Settings",
+      "kind": "writes",
+      "label": "watch"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-project",
+      "name": "Open a project",
+      "trigger": "CLI args or open-listener",
+      "steps": [
+        "cmp:GramMain",
+        "cmp:GramApp",
+        "cmp:WorkspaceCrate",
+        "cmp:EditorCrate"
+      ],
+      "summary": "Paths with positions open into a workspace with panes."
+    },
+    {
+      "id": "which-key-flow",
+      "name": "Discover keymaps",
+      "trigger": "prefix key press",
+      "steps": [
+        "cmd:WhichKey",
+        "cmp:EditorCrate"
+      ],
+      "summary": "Fork crate shows available completions for the prefix."
+    },
+    {
+      "id": "palette-action",
+      "name": "Palette an action",
+      "trigger": "cmd+shift+p",
+      "steps": [
+        "cmd:CommandPalette",
+        "cmp:WorkspaceCrate",
+        "cmp:EditorCrate"
+      ],
+      "summary": "Every app action reachable by name."
+    },
+    {
+      "id": "git-blame",
+      "name": "Git work",
+      "trigger": "open the git panel",
+      "steps": [
+        "cmp:GitUi",
+        "cmp:ProjectCrate",
+        "ext:GitCli"
+      ],
+      "summary": "Blame, commit, graph, diffs over the project's git store."
+    }
+  ],
+  "notes": [
+    {
+      "title": "hard fork with a mission",
+      "body": "docs/mission.md documents why the fork exists (anti-enshittification, hand-writing first); collab/cloud removed in spirit.",
+      "severity": "info",
+      "path": "docs/mission.md"
+    },
+    {
+      "title": "135 crates, 673k LOC",
+      "body": "Full Zed codebase retained in-tree incl. gpui; fork-specific crates are small (which_key 396, journal 284, refineable 679).",
+      "severity": "warn",
+      "path": "crates"
+    },
+    {
+      "title": "no collab service",
+      "body": "client crate remains but the hosted collab/coud is out of scope; remote ssh dev kept.",
+      "severity": "info",
+      "path": "crates/client/src"
+    },
+    {
+      "title": "upstream pins",
+      "body": "zed-industries git revs pinned for async-pipe, dap-types, lsp-types.",
+      "severity": "info",
+      "path": "Cargo.toml"
+    }
+  ]
+}

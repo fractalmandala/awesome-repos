@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 17,
+  "count": 18,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -202,6 +202,31 @@
         "scan-actions.html",
         "scan-shell.json",
         "scan-shell.html"
+      ]
+    },
+    {
+      "slug": "grameditor__gram",
+      "name": "gram",
+      "github": "https://codeberg.org/GramEditor/gram",
+      "license": "GPL-3.0-only",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Zed hard fork: hand-writing-first editor, 135 crates, GPL-3.0.",
+      "stack": [
+        "rust",
+        "gpui",
+        "tree-sitter",
+        "lsp",
+        "dap",
+        "sqlite",
+        "vim",
+        "zed-fork"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
       ]
     },
     {
