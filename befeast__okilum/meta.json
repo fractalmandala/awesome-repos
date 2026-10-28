@@ -1,0 +1,12 @@
+{
+  "slug": "befeast__okilum",
+  "name": "okilum",
+  "github": "https://github.com/BeFeast/okilum",
+  "license": "MIT",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "gpui-kit Markdown vault app: reader shell, cored sidecar, AI Brain.",
+  "stack": ["rust", "gpui-kit", "sqlite", "mcp", "forgejo"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html"]
+}

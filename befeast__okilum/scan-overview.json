@@ -1,0 +1,450 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "okilum",
+    "slug": "befeast__okilum",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "okilum",
+    "entryLayout": "crates/okilum-shell/src/main.rs",
+    "root": ".",
+    "summary": "gpui-kit Markdown vault app: reader shell, cored sidecar, AI brain.",
+    "externalModules": [
+      "core",
+      "brain"
+    ]
+  },
+  "stats": {
+    "nodes": 23,
+    "edges": 22,
+    "components": 6,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 4,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:ShellMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "okilum-shell main.rs",
+      "path": "crates/okilum-shell/src/main.rs"
+    },
+    {
+      "id": "cmp:ShellCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "okilum-shell (170k)",
+      "path": "crates/okilum-shell/src",
+      "loc": 170575,
+      "summary": "The whole UI: reader_*, projects, quick_open, pdf_engine, quicklook, platform."
+    },
+    {
+      "id": "cmp:ReaderMods",
+      "kind": "component",
+      "group": "components",
+      "label": "reader_* modules",
+      "path": "crates/okilum-shell/src/reader_editor.rs"
+    },
+    {
+      "id": "cmp:ProjectMods",
+      "kind": "component",
+      "group": "components",
+      "label": "project picker/avatar",
+      "path": "crates/okilum-shell/src/project.rs"
+    },
+    {
+      "id": "cmp:CoreCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "okilum-core (66.8k)",
+      "path": "crates/okilum-core/src",
+      "loc": 66832,
+      "summary": "Vault engine: links, link_rewrite, note_move, excalidraw, analyzer, IR."
+    },
+    {
+      "id": "shared:CoreCrateFix",
+      "kind": "shared",
+      "group": "shared",
+      "label": "core support mods",
+      "path": "crates/okilum-core/src/export.rs"
+    },
+    {
+      "id": "ipc:CoredCrate",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "okilum-cored",
+      "path": "crates/okilum-cored/src/main.rs",
+      "loc": 2228,
+      "summary": "JSON-lines sidecar (index|mcp) over the frozen protocol (docs/PROTOCOL.md)."
+    },
+    {
+      "id": "cmp:BrainCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "okilum-brain (55.5k)",
+      "path": "crates/okilum-brain/src",
+      "loc": 55488,
+      "summary": "AI Brain: chat, proposals, retrieval, t3, todoist, maestro, inbox."
+    },
+    {
+      "id": "shared:SyncStack",
+      "kind": "shared",
+      "group": "shared",
+      "label": "sync trio",
+      "path": "crates/okilum-sync-supervisor/src"
+    },
+    {
+      "id": "shared:PasteT3",
+      "kind": "shared",
+      "group": "shared",
+      "label": "okilum-paste + t3",
+      "path": "crates/okilum-paste/src",
+      "loc": 5504
+    },
+    {
+      "id": "shared:HttpCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "okilum-http",
+      "path": "crates/okilum-http/src"
+    },
+    {
+      "id": "shared:WebInbox",
+      "kind": "shared",
+      "group": "shared",
+      "label": "web/inbox",
+      "path": "web/inbox"
+    },
+    {
+      "id": "shared:VendorGpui",
+      "kind": "shared",
+      "group": "shared",
+      "label": "vendor gpui-kit",
+      "path": "Cargo.toml"
+    },
+    {
+      "id": "state:Vault",
+      "kind": "state",
+      "group": "state",
+      "label": "core Vault/Searcher",
+      "path": "crates/okilum-core/src/lib.rs",
+      "summary": "Vault index, resolution, search exposed to cored and shell."
+    },
+    {
+      "id": "state:Runner",
+      "kind": "state",
+      "group": "state",
+      "label": "brain runtime.rs",
+      "path": "crates/okilum-brain/src/runtime.rs",
+      "summary": "Provider transports behind an Adapter; Runner + Snapshot."
+    },
+    {
+      "id": "cmd:QuickOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "quick open",
+      "path": "crates/okilum-shell/src/quick_open.rs",
+      "summary": "Fast note switching.",
+      "tags": [
+        "palette"
+      ]
+    },
+    {
+      "id": "cmd:NoteMove",
+      "kind": "command",
+      "group": "commands",
+      "label": "rename/move with relink",
+      "path": "crates/okilum-core/src/note_move.rs",
+      "summary": "Rename/move updates every link (link_rewrite/).",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:InboxPlan",
+      "kind": "command",
+      "group": "commands",
+      "label": "inbox planning",
+      "path": "crates/okilum-brain/src/inbox_plan.rs",
+      "tags": [
+        "brain"
+      ]
+    },
+    {
+      "id": "cmd:TodoistPick",
+      "kind": "command",
+      "group": "commands",
+      "label": "Todoist picker",
+      "path": "crates/okilum-brain/src/todoist_picker.rs",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "ipc:CoredSidecar",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "cored stdio protocol",
+      "path": "crates/okilum-cored/src/main.rs",
+      "summary": "index + mcp subcommands; any second client uses this frozen protocol."
+    },
+    {
+      "id": "ipc:BrainAdapter",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "brain Adapter",
+      "path": "crates/okilum-brain/src/runtime.rs",
+      "summary": "Provider transports plug in; markdown stays durable."
+    },
+    {
+      "id": "ipc:SyncPair",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "sync controller",
+      "path": "crates/okilum-sync-controller/src",
+      "summary": "Device sync pairing/sync web flows."
+    },
+    {
+      "id": "ext:GpuiKit",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui-kit (vendored)",
+      "path": "Cargo.toml",
+      "summary": "Vendored gpui-kit clone fetched by scripts/vendor-setup.sh."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:ShellMain",
+      "to": "cmp:ShellCrate",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "cmp:ReaderMods",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "cmp:ProjectMods",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "cmp:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "cmp:BrainCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "shared:CoreCrateFix",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "state:Vault",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "cmd:NoteMove",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "cmd:QuickOpen",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:BrainCrate",
+      "to": "state:Runner",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:BrainCrate",
+      "to": "ipc:BrainAdapter",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:BrainCrate",
+      "to": "cmd:InboxPlan",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:BrainCrate",
+      "to": "cmd:TodoistPick",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:CoredCrate",
+      "to": "state:Vault",
+      "kind": "reads"
+    },
+    {
+      "from": "ipc:CoredCrate",
+      "to": "ipc:CoredSidecar",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "ipc:CoredSidecar",
+      "kind": "ipc",
+      "label": "same protocol"
+    },
+    {
+      "from": "shared:SyncStack",
+      "to": "ipc:SyncPair",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "shared:SyncStack",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ShellCrate",
+      "to": "ext:GpuiKit",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:BrainCrate",
+      "to": "cmp:CoreCrate",
+      "kind": "calls",
+      "label": "retrieval"
+    },
+    {
+      "from": "shared:WebInbox",
+      "to": "ipc:SyncPair",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:PasteT3",
+      "to": "cmp:ShellCrate",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-vault",
+      "name": "Open a vault",
+      "trigger": "choose folder / deep link",
+      "steps": [
+        "cmp:ShellMain",
+        "cmp:ShellCrate",
+        "cmp:CoreCrate",
+        "state:Vault"
+      ],
+      "summary": "Whole-vault index: wikilinks, backlinks, properties, embeds."
+    },
+    {
+      "id": "edit-note",
+      "name": "Edit a note",
+      "trigger": "reader editor",
+      "steps": [
+        "cmp:ReaderMods",
+        "cmp:CoreCrate",
+        "cmd:NoteMove"
+      ],
+      "summary": "Atomic saves, note history, rename-with-relink."
+    },
+    {
+      "id": "ai-chat",
+      "name": "Ask the Brain",
+      "trigger": "chat in the brain panel",
+      "steps": [
+        "cmp:BrainCrate",
+        "ipc:BrainAdapter",
+        "cmp:CoreCrate"
+      ],
+      "summary": "Retrieval over the vault; markdown stays the durable data."
+    },
+    {
+      "id": "second-client",
+      "name": "Drive from a second client",
+      "trigger": "okilum-cored index|mcp",
+      "steps": [
+        "ipc:CoredSidecar",
+        "state:Vault",
+        "cmp:ShellCrate"
+      ],
+      "summary": "Frozen JSON-lines protocol; webviews/MCP adapters attach."
+    },
+    {
+      "id": "sync-pair",
+      "name": "Pair sync",
+      "trigger": "sync pairing in the inbox web UI",
+      "steps": [
+        "shared:WebInbox",
+        "ipc:SyncPair",
+        "shared:SyncStack"
+      ],
+      "summary": "Supervisor + controller keep devices in sync."
+    }
+  ],
+  "notes": [
+    {
+      "title": "frozen sidecar protocol",
+      "body": "okilum-cored is a JSON-lines sidecar (index|mcp) so any second client (webview, MCP adapter) reaches the vault without private APIs (crates/okilum-cored/src/main.rs, docs/PROTOCOL.md).",
+      "severity": "info",
+      "path": "crates/okilum-cored/src/main.rs"
+    },
+    {
+      "title": "brain keeps markdown durable",
+      "body": "Provider transports plug into an Adapter; execution state is never copied into product data (crates/okilum-brain/src/lib.rs).",
+      "severity": "info",
+      "path": "crates/okilum-brain/src/lib.rs"
+    },
+    {
+      "title": "reader_* convention",
+      "body": "okilum-shell names every reader feature reader_*; ~40 modules cover editor, embeds, drawings, outline, occlusion, incremental loading.",
+      "severity": "info",
+      "path": "crates/okilum-shell/src"
+    },
+    {
+      "title": "test mass",
+      "body": "2,480 #[test] fns across 401 files; *_tests.rs colocated in brain and core; 15 Forgejo CI workflows.",
+      "severity": "info",
+      "path": "crates"
+    }
+  ]
+}
