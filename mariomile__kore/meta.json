@@ -1,0 +1,12 @@
+{
+  "slug": "mariomile__kore",
+  "name": "kore",
+  "github": "https://github.com/mariomile/Kore",
+  "license": "unknown",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Reflect fork: plain-file notes with tabs, graph, agents, Automations.",
+  "stack": ["typescript", "react", "tauri", "rust", "sqlite", "mcp", "icloud"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html"]
+}

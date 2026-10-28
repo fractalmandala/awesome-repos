@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "kore",
+    "slug": "mariomile__kore",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "kore",
+    "entryLayout": "apps/desktop/src/app.tsx",
+    "root": ".",
+    "summary": "Reflect fork: plain-file notes with tabs, graph, agents, Automations.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 25,
+    "edges": 24,
+    "components": 6,
+    "stateFiles": 4,
+    "commands": 4,
+    "ipcCalls": 5,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AppRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "app.tsx",
+      "path": "apps/desktop/src/app.tsx",
+      "summary": "Graph-chooser gate \u2192 GraphWorkspace; quit-time flush of dirty buffers."
+    },
+    {
+      "id": "cmp:WorkspacePane",
+      "kind": "component",
+      "group": "components",
+      "label": "GraphWorkspace",
+      "path": "apps/desktop/src/components/workspace-pane.tsx",
+      "summary": "Floating note card between two collapsible rails; note tabs strip."
+    },
+    {
+      "id": "cmp:ComponentsDir",
+      "kind": "component",
+      "group": "components",
+      "label": "components/ (122 dirs)",
+      "path": "apps/desktop/src/components",
+      "loc": 110000,
+      "summary": "agents, chat, browser, canvas, tasks, tags, settings, vault, terminal..."
+    },
+    {
+      "id": "cmp:LibDir",
+      "kind": "component",
+      "group": "components",
+      "label": "lib/ (185 files)",
+      "path": "apps/desktop/src/lib",
+      "loc": 40000,
+      "summary": "Controllers: backup, capture, chat, graph layout/scheduler, github, csv."
+    },
+    {
+      "id": "state:ProvidersDir",
+      "kind": "state",
+      "group": "state",
+      "label": "providers/",
+      "path": "apps/desktop/src/providers",
+      "summary": "React context providers: chat, capture, audio-memo, asset-describe."
+    },
+    {
+      "id": "cmp:EditorDir",
+      "kind": "component",
+      "group": "components",
+      "label": "editor/",
+      "path": "apps/desktop/src/editor"
+    },
+    {
+      "id": "ipc:TauriCore",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "src-tauri (43 mods)",
+      "path": "apps/desktop/src-tauri/src",
+      "loc": 30147,
+      "summary": "agent_cli, browser, calendar, capture, db, embed, git, icloud, mcp-ish servers."
+    },
+    {
+      "id": "shared:RustCrates",
+      "kind": "shared",
+      "group": "shared",
+      "label": "crates/",
+      "path": "crates/graph-paths/src",
+      "summary": "graph-paths (incl. obsidian compat), index-schema, note-policy (frontmatter)."
+    },
+    {
+      "id": "shared:ExtensionApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "apps/extension",
+      "path": "apps/extension",
+      "loc": 2360
+    },
+    {
+      "id": "shared:NativeHostCli",
+      "kind": "shared",
+      "group": "shared",
+      "label": "native-host + cli",
+      "path": "apps/native-host"
+    },
+    {
+      "id": "shared:DesignSystem",
+      "kind": "shared",
+      "group": "shared",
+      "label": "design-system/",
+      "path": "design-system",
+      "summary": "Tokens (Space/Midnight/Paper themes), styles, assets."
+    },
+    {
+      "id": "cmp:MobileSurf",
+      "kind": "component",
+      "group": "components",
+      "label": "mobile surfaces",
+      "path": "apps/desktop/src/mobile"
+    },
+    {
+      "id": "state:GraphProvider",
+      "kind": "state",
+      "group": "state",
+      "label": "graph-provider",
+      "path": "apps/desktop/src/providers",
+      "summary": "Which vault/graph is open; boot gate reads it."
+    },
+    {
+      "id": "state:ChatStore",
+      "kind": "state",
+      "group": "state",
+      "label": "chat providers/stores",
+      "path": "apps/desktop/src/lib/chat-events.ts",
+      "summary": "Agent chat state, model groups, attachments."
+    },
+    {
+      "id": "state:QuitFlush",
+      "kind": "state",
+      "group": "state",
+      "label": "quit-flush",
+      "path": "apps/desktop/src/lib/quit-flush.ts"
+    },
+    {
+      "id": "cmd:TabStrip",
+      "kind": "command",
+      "group": "commands",
+      "label": "note tabs",
+      "path": "apps/desktop/src/components/tab-pill.ts",
+      "summary": "\u2303Tab cycle, \u2318W close, double-click pin; persisted per graph.",
+      "tags": [
+        "\u2303Tab",
+        "\u2318W"
+      ]
+    },
+    {
+      "id": "cmd:RailToggles",
+      "kind": "command",
+      "group": "commands",
+      "label": "dual rail toggles",
+      "path": "apps/desktop/src/components",
+      "tags": [
+        "\u2318\\"
+      ]
+    },
+    {
+      "id": "cmd:AgentChat",
+      "kind": "command",
+      "group": "commands",
+      "label": "agent chat",
+      "path": "apps/desktop/src/components/chat",
+      "summary": "Chat with notes via Claude Code/Codex CLI; write approval mode.",
+      "tags": [
+        "composer"
+      ]
+    },
+    {
+      "id": "cmd:AutomationRun",
+      "kind": "command",
+      "group": "commands",
+      "label": "Automations",
+      "path": "apps/desktop/src/components/agent-routines-runner.tsx",
+      "summary": "Scheduled agent runs incl. one-click Memory curator.",
+      "tags": [
+        "scheduler"
+      ]
+    },
+    {
+      "id": "ipc:AgentCliSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent_cli.rs",
+      "path": "apps/desktop/src-tauri/src/agent_cli.rs",
+      "summary": "Claude Code/Codex CLI with Sign-in-with-ChatGPT; private notes blocked."
+    },
+    {
+      "id": "ipc:EmbedIndex",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "embed*.rs",
+      "path": "apps/desktop/src-tauri/src/embed.rs"
+    },
+    {
+      "id": "ipc:IcloudGit",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "icloud + git",
+      "path": "apps/desktop/src-tauri/src/icloud"
+    },
+    {
+      "id": "ipc:BrowserPane",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "browser.rs",
+      "path": "apps/desktop/src-tauri/src/browser.rs"
+    },
+    {
+      "id": "ext:AgentClis",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "apps/desktop/src-tauri/src/agent_cli.rs",
+      "summary": "claude / codex binaries + BYOK providers (OpenAI/Anthropic/Google/OpenRouter)."
+    },
+    {
+      "id": "ext:ReflectUp",
+      "kind": "external",
+      "group": "external",
+      "label": "reflect-open upstream",
+      "path": "README.md",
+      "summary": "team-reflect/reflect-open is the MIT fork parent."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:WorkspacePane",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "state:GraphProvider",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "state:QuitFlush",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:WorkspacePane",
+      "to": "cmp:ComponentsDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmp:LibDir",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "state:ChatStore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "state:ProvidersDir",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "ipc:TauriCore",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmp:EditorDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmd:TabStrip",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmd:RailToggles",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmd:AgentChat",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:AgentChat",
+      "to": "ipc:AgentCliSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:AgentCliSpawn",
+      "to": "ext:AgentClis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmd:AutomationRun",
+      "to": "ipc:AgentCliSpawn",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:TauriCore",
+      "to": "ipc:EmbedIndex",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:TauriCore",
+      "to": "ipc:IcloudGit",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:TauriCore",
+      "to": "ipc:BrowserPane",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:TauriCore",
+      "to": "shared:RustCrates",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:MobileSurf",
+      "to": "ipc:TauriCore",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "shared:DesignSystem",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:LibDir",
+      "to": "state:QuitFlush",
+      "kind": "writes"
+    },
+    {
+      "from": "ipc:EmbedIndex",
+      "to": "ext:ReflectUp",
+      "kind": "reads",
+      "label": "index schema compat"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmp:MobileSurf",
+      "kind": "renders"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-graph",
+      "name": "Open a vault",
+      "trigger": "graph chooser at boot",
+      "steps": [
+        "cmp:AppRoot",
+        "state:GraphProvider",
+        "cmp:WorkspacePane",
+        "cmp:ComponentsDir"
+      ],
+      "summary": "Chooser gates the workspace; daily notes/search hang off it."
+    },
+    {
+      "id": "note-tabs",
+      "name": "Work in tabs",
+      "trigger": "\u2303Tab / \u2318W on the tab strip",
+      "steps": [
+        "cmd:TabStrip",
+        "cmp:WorkspacePane",
+        "state:QuitFlush"
+      ],
+      "summary": "Linear-style tabs persisted per graph and restored at launch."
+    },
+    {
+      "id": "agent-chat",
+      "name": "Chat with your notes",
+      "trigger": "composer in the Chat rail",
+      "steps": [
+        "cmd:AgentChat",
+        "ipc:AgentCliSpawn",
+        "ext:AgentClis",
+        "state:ChatStore"
+      ],
+      "summary": "Subscription AI via local CLIs; private notes blocked at sandbox level."
+    },
+    {
+      "id": "automation-tidy",
+      "name": "Run an Automation",
+      "trigger": "scheduled run / Memory curator",
+      "steps": [
+        "cmd:AutomationRun",
+        "ipc:AgentCliSpawn",
+        "state:ChatStore"
+      ],
+      "summary": "Scheduled agent runs keep the vault tidy."
+    },
+    {
+      "id": "graph-explore",
+      "name": "Explore the graph",
+      "trigger": "open the graph view",
+      "steps": [
+        "cmp:ComponentsDir",
+        "cmp:LibDir",
+        "shared:RustCrates",
+        "ipc:TauriCore"
+      ],
+      "summary": "Force-directed map over wiki links; click opens the note."
+    }
+  ],
+  "notes": [
+    {
+      "title": "fork with a design contract",
+      "body": "design-system/ tokens + 'Craft/Linear-grade' language (ink hairlines, one accent, raised pills) is the fork's stated delta over reflect-open.",
+      "severity": "info",
+      "path": "design-system"
+    },
+    {
+      "title": "subscription AI via local CLIs",
+      "body": "agent_cli.rs runs claude/codex with the user's subscription; `private: true` notes hard-blocked at CLI sandbox level.",
+      "severity": "info",
+      "path": "apps/desktop/src-tauri/src/agent_cli.rs"
+    },
+    {
+      "title": "components + lib are the monolith",
+      "body": "122 component dirs and 185 lib files (~150k LOC) in apps/desktop/src; provider/context pattern keeps state scoping explicit.",
+      "severity": "warn",
+      "path": "apps/desktop/src"
+    },
+    {
+      "title": "rust side is lean",
+      "body": "43 tauri modules (30.1k) + 3 small crates (graph-paths w/ obsidian compat, note-policy, index-schema).",
+      "severity": "info",
+      "path": "apps/desktop/src-tauri/src"
+    }
+  ]
+}
