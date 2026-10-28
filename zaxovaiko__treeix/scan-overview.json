@@ -1,0 +1,422 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "treeix",
+    "slug": "zaxovaiko__treeix",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "treeix",
+    "entryLayout": "apps/desktop/src/main.tsx",
+    "root": ".",
+    "summary": "Tauri review workspace: worktree diffs, PRs, tickets, durable agent PTYs.",
+    "externalModules": []
+  },
+  "stats": {
+    "nodes": 20,
+    "edges": 20,
+    "components": 6,
+    "stateFiles": 2,
+    "commands": 4,
+    "ipcCalls": 3,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates/Apps"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:DesktopMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.tsx",
+      "path": "apps/desktop/src/main.tsx",
+      "summary": "React entry into the Tauri webview app."
+    },
+    {
+      "id": "cmp:Renderer",
+      "kind": "component",
+      "group": "components",
+      "label": "desktop renderer",
+      "path": "apps/desktop/src",
+      "loc": 21087,
+      "summary": "Features, panels, panes, shell over the tauri ipc."
+    },
+    {
+      "id": "cmp:PanelsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "panels/",
+      "path": "apps/desktop/src/panels",
+      "summary": "Changes, Explorer, History, Prs, Tickets panels + logic."
+    },
+    {
+      "id": "cmp:TauriCore",
+      "kind": "component",
+      "group": "components",
+      "label": "src-tauri",
+      "path": "apps/desktop/src-tauri/src",
+      "loc": 9067,
+      "summary": "Tauri commands: browser, commands, daemon, tray, voice, updater."
+    },
+    {
+      "id": "cmp:CoreCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "crates/core",
+      "path": "crates/core/src",
+      "loc": 10362,
+      "summary": "Domain: agents, git, graph, plans, prs, routines, tickets, mcp, secrets."
+    },
+    {
+      "id": "cmp:PtydCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "crates/ptyd",
+      "path": "crates/ptyd/src",
+      "loc": 10696,
+      "summary": "Durable PTY/agent-session daemon: chat, hooks, clients."
+    },
+    {
+      "id": "shared:ProtoCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "crates/proto",
+      "path": "crates/proto/src",
+      "loc": 1165
+    },
+    {
+      "id": "shared:LandingApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "apps/landing",
+      "path": "apps/landing"
+    },
+    {
+      "id": "state:IpcMock",
+      "kind": "state",
+      "group": "state",
+      "label": "ipc bindings",
+      "path": "apps/desktop/src/ipc",
+      "summary": "typed bindings + mock transport (mock*.ts) for tests/e2e."
+    },
+    {
+      "id": "state:SettingsCore",
+      "kind": "state",
+      "group": "state",
+      "label": "core settings.rs",
+      "path": "crates/core/src/settings.rs"
+    },
+    {
+      "id": "cmd:LineNote",
+      "kind": "command",
+      "group": "commands",
+      "label": "select lines \u2192 note",
+      "path": "apps/desktop/src/panels/Changes.tsx",
+      "summary": "Review note on selected diff lines queued to the agent session.",
+      "tags": [
+        "diff gutter"
+      ]
+    },
+    {
+      "id": "cmd:PrActions",
+      "kind": "command",
+      "group": "commands",
+      "label": "PR panel actions",
+      "path": "apps/desktop/src/panels/Prs.tsx",
+      "summary": "Open/merge PRs from the panel.",
+      "tags": [
+        "buttons"
+      ]
+    },
+    {
+      "id": "cmd:RoutineCreate",
+      "kind": "command",
+      "group": "commands",
+      "label": "routines",
+      "path": "crates/core/src/routines.rs",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "cmd:VoiceInput",
+      "kind": "command",
+      "group": "commands",
+      "label": "voice",
+      "path": "apps/desktop/src/features/voice",
+      "tags": [
+        "mic"
+      ]
+    },
+    {
+      "id": "ipc:TauriInvoke",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "tauri ipc",
+      "path": "apps/desktop/src/ipc/tauri.ts",
+      "summary": "invoke bindings; real transport (mock for tests)."
+    },
+    {
+      "id": "ipc:PtydSock",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "ptyd daemon channel",
+      "path": "crates/ptyd/src",
+      "summary": "App talks to ptyd so shells/agent sessions survive quits."
+    },
+    {
+      "id": "ipc:McpServer",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mcp.rs",
+      "path": "crates/core/src/mcp.rs",
+      "summary": "MCP server: agents open/read/click/type pages and tools."
+    },
+    {
+      "id": "ext:AgentClis",
+      "kind": "external",
+      "group": "external",
+      "label": "agent CLIs",
+      "path": "crates/core/src/agents",
+      "summary": "Claude Code / Codex sessions per worktree."
+    },
+    {
+      "id": "ext:GitCli",
+      "kind": "external",
+      "group": "external",
+      "label": "git",
+      "path": "crates/core/src/git.rs",
+      "summary": "Worktrees, diffs, branches."
+    },
+    {
+      "id": "ext:Webview",
+      "kind": "external",
+      "group": "external",
+      "label": "system webview",
+      "path": "apps/desktop/src-tauri/src/browser",
+      "summary": "Browser pane on the OS webview with console/network."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:DesktopMain",
+      "to": "cmp:Renderer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Renderer",
+      "to": "cmp:PanelsMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Renderer",
+      "to": "state:IpcMock",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:Renderer",
+      "to": "ipc:TauriInvoke",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Renderer",
+      "to": "cmd:VoiceInput",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:TauriCore",
+      "to": "cmp:CoreCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:TauriCore",
+      "to": "ipc:PtydSock",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:PanelsMod",
+      "to": "cmd:LineNote",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:PanelsMod",
+      "to": "cmd:PrActions",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:LineNote",
+      "to": "ipc:PtydSock",
+      "kind": "commands",
+      "label": "queued to session"
+    },
+    {
+      "from": "cmd:RoutineCreate",
+      "to": "cmp:CoreCrate",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:VoiceInput",
+      "to": "cmp:TauriCore",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "ext:AgentClis",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "ext:GitCli",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "ipc:McpServer",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:PtydSock",
+      "to": "ext:AgentClis",
+      "kind": "ipc",
+      "label": "owns ptys"
+    },
+    {
+      "from": "cmp:CoreCrate",
+      "to": "state:SettingsCore",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:TauriCore",
+      "to": "ext:Webview",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:McpServer",
+      "to": "ext:Webview",
+      "kind": "calls",
+      "label": "drive pages"
+    },
+    {
+      "from": "state:IpcMock",
+      "to": "ipc:TauriInvoke",
+      "kind": "reads",
+      "label": "same shape"
+    }
+  ],
+  "flows": [
+    {
+      "id": "review-line",
+      "name": "Review a diff",
+      "trigger": "select diff lines + write note",
+      "steps": [
+        "cmd:LineNote",
+        "ipc:PtydSock",
+        "ext:AgentClis"
+      ],
+      "summary": "Notes queue back to the agent session in that worktree."
+    },
+    {
+      "id": "durable-session",
+      "name": "Sessions survive quits",
+      "trigger": "quit and reopen Treeix",
+      "steps": [
+        "ipc:PtydSock",
+        "ext:AgentClis",
+        "cmp:Renderer"
+      ],
+      "summary": "ptyd daemon owns shells/agents; scrollback preserved."
+    },
+    {
+      "id": "browser-drive",
+      "name": "Agent drives the browser",
+      "trigger": "agent MCP tool call",
+      "steps": [
+        "ipc:McpServer",
+        "ext:Webview",
+        "cmp:Renderer"
+      ],
+      "summary": "Agents open/read/click/type through the app's browser pane."
+    },
+    {
+      "id": "pr-review",
+      "name": "PR in one screen",
+      "trigger": "open a PR in the panel",
+      "steps": [
+        "cmd:PrActions",
+        "cmp:CoreCrate",
+        "ext:GitCli",
+        "cmp:PanelsMod"
+      ],
+      "summary": "Worktree diff + PR + session side by side."
+    },
+    {
+      "id": "routine-run",
+      "name": "Run a routine",
+      "trigger": "scheduled routine fires",
+      "steps": [
+        "cmd:RoutineCreate",
+        "cmp:CoreCrate",
+        "ipc:PtydSock",
+        "ext:AgentClis"
+      ],
+      "summary": "Recurring agent jobs run in worktrees."
+    }
+  ],
+  "notes": [
+    {
+      "title": "review-first loop",
+      "body": "Line notes on diffs queue as the agent's next prompt (README + Changes.tsx) \u2014 the core loop of the app.",
+      "severity": "info",
+      "path": "apps/desktop/src/panels/Changes.tsx"
+    },
+    {
+      "title": "ptyd owns durability",
+      "body": "A background daemon owns shells/agent sessions so quits don't kill work (crates/ptyd).",
+      "severity": "info",
+      "path": "crates/ptyd/src"
+    },
+    {
+      "title": "mock ipc for tests",
+      "body": "ipc/ ships mock transports (mockAgents/mockBrowser/mockChat...) giving 32 test files a no-process harness.",
+      "severity": "info",
+      "path": "apps/desktop/src/ipc"
+    },
+    {
+      "title": "small and tight",
+      "body": "31k rust + 21k TS; largest crate files are modest.",
+      "severity": "info",
+      "path": "."
+    }
+  ]
+}

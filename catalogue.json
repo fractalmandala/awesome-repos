@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 16,
+  "count": 17,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -388,6 +388,30 @@
         "scan-bases.html",
         "scan-agent.json",
         "scan-agent.html"
+      ]
+    },
+    {
+      "slug": "zaxovaiko__treeix",
+      "name": "treeix",
+      "github": "https://github.com/zaxovaiko/treeix",
+      "license": "Apache-2.0",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Tauri review workspace: worktree diffs, PRs, tickets, durable agent PTYs.",
+      "stack": [
+        "rust",
+        "typescript",
+        "react",
+        "tauri",
+        "pty",
+        "mcp",
+        "git"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html"
       ]
     },
     {
