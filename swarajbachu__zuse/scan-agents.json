@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "zuse",
+    "slug": "swarajbachu__zuse",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "agents",
+    "name": "agents package",
+    "entryLayout": "packages/agents/src/kernel",
+    "root": "packages/agents",
+    "summary": "Agent kernel: 54 drivers, ACP harness, MCP gateway, permission policy.",
+    "externalModules": [
+      "renderer",
+      "acp",
+      "contracts",
+      "sqlite"
+    ]
+  },
+  "stats": {
+    "nodes": 15,
+    "edges": 19,
+    "components": 6,
+    "stateFiles": 1,
+    "commands": 1,
+    "ipcCalls": 4,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:KernelDir",
+      "kind": "layout",
+      "group": "layout",
+      "label": "kernel/",
+      "path": "packages/agents/src/kernel",
+      "summary": "Session assembly: driver wiring, permissions, turn protocol, streams."
+    },
+    {
+      "id": "cmp:TurnProtocol",
+      "kind": "component",
+      "group": "components",
+      "label": "turn-protocol.ts",
+      "path": "packages/agents/src/kernel/turn-protocol.ts",
+      "summary": "One-turn lifecycle events (user \u2192 tools \u2192 result)."
+    },
+    {
+      "id": "cmp:Permissions",
+      "kind": "component",
+      "group": "components",
+      "label": "permission-policy.ts",
+      "path": "packages/agents/src/kernel/permission-policy.ts",
+      "summary": "Permission decisions surfaced to the UI as prompts."
+    },
+    {
+      "id": "cmp:DriverBase",
+      "kind": "component",
+      "group": "components",
+      "label": "driver.ts",
+      "path": "packages/agents/src/kernel/driver.ts",
+      "summary": "Common driver interface every agent CLI implements."
+    },
+    {
+      "id": "fn:StreamText",
+      "kind": "function",
+      "group": "components",
+      "label": "stream-text.ts",
+      "path": "packages/agents/src/kernel/stream-text.ts",
+      "summary": "Shared streaming text handling for all drivers."
+    },
+    {
+      "id": "cmp:DriversDir",
+      "kind": "component",
+      "group": "components",
+      "label": "drivers/ (54 files)",
+      "path": "packages/agents/src/drivers",
+      "summary": "claude, codex, gemini, cursor, opencode, acp + tool/MCP bridges."
+    },
+    {
+      "id": "cmp:HarnessDir",
+      "kind": "component",
+      "group": "components",
+      "label": "harness/",
+      "path": "packages/agents/src/harness",
+      "summary": "Engine/cache/prompt/state shared agent runtime."
+    },
+    {
+      "id": "ipc:McpGateway",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "mcp-gateway/",
+      "path": "packages/agents/src/mcp-gateway",
+      "summary": "Local MCP tool gateway for agents."
+    },
+    {
+      "id": "ipc:AcpSession",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "kernel/acp-session.ts",
+      "path": "packages/agents/src/kernel/acp-session.ts",
+      "summary": "ACP session lifecycle on top of packages/acp."
+    },
+    {
+      "id": "ipc:ProviderProc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "provider-process.ts",
+      "path": "packages/agents/src/kernel/provider-process.ts",
+      "summary": "Spawn/supervise agent CLI subprocesses with stdio."
+    },
+    {
+      "id": "ipc:BrowserTools",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "browser-tools.ts",
+      "path": "packages/agents/src/drivers/browser-tools.ts",
+      "summary": "Browser automation tools exposed to agents."
+    },
+    {
+      "id": "state:KernelState",
+      "kind": "state",
+      "group": "state",
+      "label": "kernel/state.ts + cache.ts",
+      "path": "packages/agents/src/kernel",
+      "summary": "Session state, caches, account broker."
+    },
+    {
+      "id": "cmd:ToolApprove",
+      "kind": "command",
+      "group": "commands",
+      "label": "permission reply",
+      "path": "packages/agents/src/kernel/permission-policy.ts",
+      "summary": "UI allow/deny answers flow back into the driver.",
+      "tags": [
+        "UI"
+      ]
+    },
+    {
+      "id": "ext:AcpPkg",
+      "kind": "external",
+      "group": "external",
+      "label": "packages/acp",
+      "path": "packages/acp/src",
+      "summary": "JSON-RPC schemas and rpc-client."
+    },
+    {
+      "id": "ext:Sqlite",
+      "kind": "external",
+      "group": "external",
+      "label": "packages/sqlite",
+      "path": "packages/sqlite/src",
+      "summary": "Persistence under kernel state."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:KernelDir",
+      "to": "cmp:DriverBase",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:KernelDir",
+      "to": "cmp:TurnProtocol",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:KernelDir",
+      "to": "cmp:Permissions",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:KernelDir",
+      "to": "state:KernelState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:DriverBase",
+      "to": "cmp:DriversDir",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DriversDir",
+      "to": "ipc:ProviderProc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:DriversDir",
+      "to": "fn:StreamText",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:DriversDir",
+      "to": "cmp:HarnessDir",
+      "kind": "imports"
+    },
+    {
+      "from": "ipc:AcpSession",
+      "to": "ext:AcpPkg",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:HarnessDir",
+      "to": "ext:Sqlite",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:McpGateway",
+      "to": "ipc:BrowserTools",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:TurnProtocol",
+      "to": "state:KernelState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:Permissions",
+      "to": "cmd:ToolApprove",
+      "kind": "dispatches"
+    },
+    {
+      "from": "cmd:ToolApprove",
+      "to": "cmp:DriverBase",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:KernelDir",
+      "to": "ipc:AcpSession",
+      "kind": "calls"
+    },
+    {
+      "from": "state:KernelState",
+      "to": "cmp:TurnProtocol",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:KernelDir",
+      "to": "ipc:McpGateway",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:ProviderProc",
+      "to": "cmp:TurnProtocol",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:TurnProtocol",
+      "to": "fn:StreamText",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "agent-turn",
+      "name": "Run one turn",
+      "trigger": "user message enters the kernel",
+      "steps": [
+        "cmp:KernelDir",
+        "cmp:DriverBase",
+        "ipc:ProviderProc",
+        "cmp:TurnProtocol",
+        "state:KernelState"
+      ],
+      "summary": "Driver streams provider events; protocol folds them per turn."
+    },
+    {
+      "id": "permission-loop",
+      "name": "Ask permission",
+      "trigger": "tool needs approval",
+      "steps": [
+        "cmp:Permissions",
+        "cmd:ToolApprove",
+        "cmp:DriverBase"
+      ],
+      "summary": "Policy emits a prompt; the answer resumes the turn."
+    },
+    {
+      "id": "acp-agent",
+      "name": "ACP agent session",
+      "trigger": "driver picks the acp adapter",
+      "steps": [
+        "cmp:DriversDir",
+        "ipc:AcpSession",
+        "ext:AcpPkg"
+      ],
+      "summary": "JSON-RPC session over the shared acp schemas."
+    }
+  ],
+  "notes": [
+    {
+      "title": "driver-per-CLI isolation",
+      "body": "54 files under drivers/ keep provider quirks (fork points, env, model lists) isolated from the shared kernel.",
+      "severity": "info",
+      "path": "packages/agents/src/drivers"
+    },
+    {
+      "title": "Effect-Schema contracts",
+      "body": "Agents import contracts from packages/contracts; runtime and compile-time types come from one source.",
+      "severity": "info",
+      "path": "packages/contracts/src"
+    },
+    {
+      "title": "MCP gateway local-first",
+      "body": "Browser/automation tools are served to agents through the gateway rather than per-driver reimplementations.",
+      "severity": "info",
+      "path": "packages/agents/src/mcp-gateway"
+    }
+  ]
+}

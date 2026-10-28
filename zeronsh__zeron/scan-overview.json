@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "zeron",
+    "slug": "zeronsh__zeron",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "zeron",
+    "entryLayout": "apps/zeron/src/main.rs",
+    "root": ".",
+    "summary": "Rust gpui controller for coding agents: engine daemon, optional CRDT sync.",
+    "externalModules": [
+      "engine",
+      "ui"
+    ]
+  },
+  "stats": {
+    "nodes": 25,
+    "edges": 24,
+    "components": 7,
+    "stateFiles": 4,
+    "commands": 4,
+    "ipcCalls": 4,
+    "flows": 5
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Crates"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared/UI"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:AppMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "apps/zeron main.rs",
+      "path": "apps/zeron/src/main.rs",
+      "summary": "Headed entry: attach/launch background engine, IPC, url + CLI dispatch."
+    },
+    {
+      "id": "cmp:UiCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "ui (242k)",
+      "path": "crates/ui/src",
+      "loc": 241622,
+      "summary": "gpui app: composer, sessions, terminal, comments, files, glass, dictation."
+    },
+    {
+      "id": "cmp:EngineCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "engine (114k)",
+      "path": "crates/engine/src",
+      "loc": 114125,
+      "summary": "Backend daemon: agents, auth, terminals, worktrees, doc hosting, diff sync."
+    },
+    {
+      "id": "cmp:HarnessCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "harness (55k)",
+      "path": "crates/harness/src",
+      "loc": 55220,
+      "summary": "Agent adapter layer below both UI and engine."
+    },
+    {
+      "id": "cmp:ClientCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "client (17k)",
+      "path": "crates/client/src",
+      "loc": 16902,
+      "summary": "Typed RPC client used by the app against in-proc or daemon engine."
+    },
+    {
+      "id": "cmp:SyncCrate",
+      "kind": "component",
+      "group": "components",
+      "label": "sync (10.5k)",
+      "path": "crates/sync/src",
+      "loc": 10579,
+      "summary": "Loro CRDT doc mirroring over the edge relay."
+    },
+    {
+      "id": "shared:MobileCrate",
+      "kind": "shared",
+      "group": "shared",
+      "label": "mobile + ios",
+      "path": "crates/mobile/src",
+      "loc": 14906
+    },
+    {
+      "id": "shared:OtherCrates",
+      "kind": "shared",
+      "group": "shared",
+      "label": "support crates",
+      "path": "crates"
+    },
+    {
+      "id": "cmp:EdgeApp",
+      "kind": "component",
+      "group": "components",
+      "label": "edge (TS workers)",
+      "path": "edge/src",
+      "loc": 137,
+      "summary": "Workers: DeviceRoom/ChatRoom DOs, R2, WorkOS auth, APNs."
+    },
+    {
+      "id": "shared:LandingApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "landing + www-redirect",
+      "path": "apps/landing"
+    },
+    {
+      "id": "state:AuthState",
+      "kind": "state",
+      "group": "state",
+      "label": "engine auth.rs",
+      "path": "crates/engine/src/auth.rs"
+    },
+    {
+      "id": "state:ProfileScope",
+      "kind": "state",
+      "group": "state",
+      "label": "profile.rs",
+      "path": "crates/engine/src/profile.rs",
+      "summary": "WorkspaceScope captured at startup: Local | Synced | Development."
+    },
+    {
+      "id": "state:ManagedEngine",
+      "kind": "state",
+      "group": "state",
+      "label": "managed.rs",
+      "path": "crates/engine/src/managed.rs",
+      "summary": "Background engine lifecycle: spawn, reconnect backoff, embed fallback."
+    },
+    {
+      "id": "state:ChangeReq",
+      "kind": "state",
+      "group": "state",
+      "label": "change_request_store.rs",
+      "path": "crates/engine/src/change_request_store.rs",
+      "summary": "Reviewable agent change requests before they land."
+    },
+    {
+      "id": "cmd:ZeroCli",
+      "kind": "command",
+      "group": "commands",
+      "label": "zeron CLI",
+      "path": "apps/zeron/src",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cmd:NewSession",
+      "kind": "command",
+      "group": "commands",
+      "label": "new session",
+      "path": "crates/ui/src",
+      "summary": "New-session canvas with space picker; mints on the picked device.",
+      "tags": [
+        "canvas"
+      ]
+    },
+    {
+      "id": "cmd:SidebarArchive",
+      "kind": "command",
+      "group": "commands",
+      "label": "archive (sidebar)",
+      "path": "crates/ui/src",
+      "tags": [
+        "sidebar"
+      ]
+    },
+    {
+      "id": "cmd:LoginCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "zeron login",
+      "path": "apps/zeron/src",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "ipc:EngineIpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "engine IPC port",
+      "path": "crates/engine/src/instance_lock.rs",
+      "summary": "Localhost/in-proc typed RPC; in-memory duplex fallback embeds engine."
+    },
+    {
+      "id": "ipc:DeviceRoom",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "DeviceRoom DO relay",
+      "path": "edge/src/device-room.ts",
+      "summary": "Per-device Durable Object relaying RPC between engines/UIs."
+    },
+    {
+      "id": "ipc:AgentSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "agent CLI spawn",
+      "path": "crates/harness/src",
+      "summary": "Runs Claude Code/Codex/etc as subprocesses with stream parsing."
+    },
+    {
+      "id": "ipc:DocHost",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "doc_host.rs",
+      "path": "crates/engine/src/doc_host.rs",
+      "summary": "Hosts Loro docs locally; edge ChatRoom mirrors when synced."
+    },
+    {
+      "id": "ext:GpuiZui",
+      "kind": "external",
+      "group": "external",
+      "label": "gpui (zui)",
+      "path": "Cargo.toml",
+      "summary": "Forked gpui at zeronsh/zui rev 0dc69aa + gpui-component patch."
+    },
+    {
+      "id": "ext:CloudflareDO",
+      "kind": "external",
+      "group": "external",
+      "label": "Cloudflare DO/R2",
+      "path": "edge/wrangler.jsonc"
+    },
+    {
+      "id": "ext:Loro",
+      "kind": "external",
+      "group": "external",
+      "label": "Loro CRDT",
+      "path": "crates/sync",
+      "summary": "CRDT docs persisted locally and mirrored via edge when synced."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:AppMain",
+      "to": "state:ManagedEngine",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "ipc:EngineIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmd:ZeroCli",
+      "kind": "dispatches"
+    },
+    {
+      "from": "cmp:AppMain",
+      "to": "cmp:UiCrate",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "cmp:ClientCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:ClientCrate",
+      "to": "ipc:EngineIpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "cmd:NewSession",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "cmd:SidebarArchive",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "cmp:HarnessCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "ipc:AgentSpawn",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "state:AuthState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "state:ProfileScope",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "state:ChangeReq",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:EngineCrate",
+      "to": "ipc:DocHost",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:DocHost",
+      "to": "ext:Loro",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:SyncCrate",
+      "to": "ipc:DeviceRoom",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:DeviceRoom",
+      "to": "ext:CloudflareDO",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:EdgeApp",
+      "to": "ipc:DeviceRoom",
+      "kind": "renders"
+    },
+    {
+      "from": "cmd:LoginCmd",
+      "to": "state:AuthState",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "ext:GpuiZui",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:MobileCrate",
+      "to": "ipc:DeviceRoom",
+      "kind": "ipc",
+      "label": "push/live activity"
+    },
+    {
+      "from": "ipc:AgentSpawn",
+      "to": "state:ChangeReq",
+      "kind": "writes",
+      "label": "proposals"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "state:ChangeReq",
+      "kind": "reads",
+      "label": "review diffs"
+    },
+    {
+      "from": "cmp:UiCrate",
+      "to": "shared:OtherCrates",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "start-session",
+      "name": "Start an agent session",
+      "trigger": "new-session canvas in the sidebar flow",
+      "steps": [
+        "cmd:NewSession",
+        "cmp:ClientCrate",
+        "ipc:EngineIpc",
+        "cmp:EngineCrate",
+        "ipc:AgentSpawn"
+      ],
+      "summary": "Minted on the picked space's device via relay-forwardable RPC."
+    },
+    {
+      "id": "daemon-lifecycle",
+      "name": "Engine survives the app",
+      "trigger": "close the app window",
+      "steps": [
+        "cmp:AppMain",
+        "state:ManagedEngine",
+        "ipc:EngineIpc"
+      ],
+      "summary": "Detached zeron-engine keeps sessions; app reconnects with backoff."
+    },
+    {
+      "id": "cross-device",
+      "name": "Drive from another device",
+      "trigger": "sign in and sync",
+      "steps": [
+        "cmd:LoginCmd",
+        "state:ProfileScope",
+        "cmp:SyncCrate",
+        "ipc:DeviceRoom",
+        "cmp:EngineCrate"
+      ],
+      "summary": "Loro CRDT docs mirror through the edge DeviceRoom/ChatRoom DOs."
+    },
+    {
+      "id": "headless-vps",
+      "name": "Headless on a VPS",
+      "trigger": "zeron headless",
+      "steps": [
+        "cmd:ZeroCli",
+        "cmp:EngineCrate",
+        "ipc:DeviceRoom"
+      ],
+      "summary": "Engine-only serves local profile and hosts its DeviceRoom."
+    },
+    {
+      "id": "agent-review",
+      "name": "Review agent changes",
+      "trigger": "agent proposes a change",
+      "steps": [
+        "ipc:AgentSpawn",
+        "state:ChangeReq",
+        "cmp:UiCrate"
+      ],
+      "summary": "Diff surfaced for accept/reject before landing on disk."
+    }
+  ],
+  "notes": [
+    {
+      "title": "engine/UI separation is explicit",
+      "body": "One RPC protocol whether the engine is a detached daemon, in-proc fallback, or remote VPS (ARCHITECTURE.md \u00a7Headed/headless).",
+      "severity": "info",
+      "path": "crates/engine/src/managed.rs"
+    },
+    {
+      "title": "sync is opt-in, local is default",
+      "body": "WorkspaceScope is frozen at engine start; a login cannot silently swap the store (auth.rs/profile.rs split).",
+      "severity": "info",
+      "path": "crates/engine/src/profile.rs"
+    },
+    {
+      "title": "241k-LOC ui crate",
+      "body": "crates/ui/src holds 60+ flat modules (composer, comments, files, glass, voice) \u2014 the largest single crate.",
+      "severity": "warn",
+      "path": "crates/ui/src"
+    },
+    {
+      "title": "Postgres/WebRTC removed",
+      "body": "Rewrite dropped Postgres, the Hono server and WebRTC signaling for DO + Loro (ARCHITECTURE.md \u00a71).",
+      "severity": "info",
+      "path": "ARCHITECTURE.md"
+    }
+  ]
+}

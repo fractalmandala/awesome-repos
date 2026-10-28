@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "count": 10,
+  "count": 12,
   "entries": [
     {
       "slug": "alarboulletmarin__bref",
@@ -293,6 +293,64 @@
         "scan-bases.html",
         "scan-agent.json",
         "scan-agent.html"
+      ]
+    },
+    {
+      "slug": "zeronsh__zeron",
+      "name": "zeron",
+      "github": "https://github.com/zeronsh/zeron",
+      "license": "MIT",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Rust gpui controller for coding agents: engine daemon, optional CRDT sync.",
+      "stack": [
+        "rust",
+        "gpui",
+        "loro",
+        "cloudflare-workers",
+        "workos",
+        "react",
+        "swift"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-engine.json",
+        "scan-engine.html",
+        "scan-ui.json",
+        "scan-ui.html"
+      ]
+    },
+    {
+      "slug": "swarajbachu__zuse",
+      "name": "zuse",
+      "github": "https://github.com/swarajbachu/zuse",
+      "license": "AGPL-3.0-only",
+      "scanned": "2026-10-27",
+      "firstScanned": "2026-10-27",
+      "verdict": "good",
+      "summary": "Chat-first agent desktop: Electron shell, Effect-TS agent kernel, ACP.",
+      "stack": [
+        "typescript",
+        "effect",
+        "react",
+        "electron",
+        "bun",
+        "turbo",
+        "vitest",
+        "acp",
+        "sqlite"
+      ],
+      "reports": [
+        "report.md",
+        "scan-overview.json",
+        "scan-overview.html",
+        "scan-agents.json",
+        "scan-agents.html",
+        "scan-renderer.json",
+        "scan-renderer.html"
       ]
     }
   ]

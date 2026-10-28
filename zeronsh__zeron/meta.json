@@ -1,0 +1,12 @@
+{
+  "slug": "zeronsh__zeron",
+  "name": "zeron",
+  "github": "https://github.com/zeronsh/zeron",
+  "license": "MIT",
+  "scanned": "2026-10-27",
+  "firstScanned": "2026-10-27",
+  "verdict": "good",
+  "summary": "Rust gpui controller for coding agents: engine daemon, optional CRDT sync.",
+  "stack": ["rust", "gpui", "loro", "cloudflare-workers", "workos", "react", "swift"],
+  "reports": ["report.md", "scan-overview.json", "scan-overview.html", "scan-engine.json", "scan-engine.html", "scan-ui.json", "scan-ui.html"]
+}

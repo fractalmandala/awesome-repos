@@ -1,0 +1,359 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "zeron",
+    "slug": "zeronsh__zeron",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "engine",
+    "name": "engine crate",
+    "entryLayout": "crates/engine/src/lib.rs",
+    "root": "crates/engine",
+    "summary": "Rust backend daemon: agents, sessions, terminals, worktrees, doc sync.",
+    "externalModules": [
+      "ui",
+      "harness",
+      "sync"
+    ]
+  },
+  "stats": {
+    "nodes": 18,
+    "edges": 18,
+    "components": 6,
+    "stateFiles": 3,
+    "commands": 1,
+    "ipcCalls": 5,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:EngineLib",
+      "kind": "layout",
+      "group": "layout",
+      "label": "lib.rs",
+      "path": "crates/engine/src/lib.rs",
+      "summary": "Engine assembly: rpc service, registry, profiles, spawn paths."
+    },
+    {
+      "id": "state:Managed",
+      "kind": "state",
+      "group": "state",
+      "label": "managed.rs",
+      "path": "crates/engine/src/managed.rs",
+      "summary": "Detached background engine lifecycle + reconnect/embed policy."
+    },
+    {
+      "id": "cmp:Runner",
+      "kind": "component",
+      "group": "components",
+      "label": "runner.rs",
+      "path": "crates/engine/src/runner.rs",
+      "summary": "Run loop per agent turn; journal + transcripts."
+    },
+    {
+      "id": "cmp:SessionsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "sessions.rs",
+      "path": "crates/engine/src/sessions.rs",
+      "summary": "Session records, activity, titles across spaces."
+    },
+    {
+      "id": "cmp:TerminalsMod",
+      "kind": "component",
+      "group": "components",
+      "label": "terminals/",
+      "path": "crates/engine/src/terminals",
+      "summary": "PTY sessions owned by the engine, streamed to the UI."
+    },
+    {
+      "id": "cmp:SourceCtrl",
+      "kind": "component",
+      "group": "components",
+      "label": "source_control.rs",
+      "path": "crates/engine/src/source_control.rs",
+      "summary": "Git status/diff/worktrees + review threads."
+    },
+    {
+      "id": "cmp:WorkspaceHost",
+      "kind": "component",
+      "group": "components",
+      "label": "workspace_host.rs",
+      "path": "crates/engine/src/workspace_host.rs",
+      "summary": "Serves workspace files/search to UI and remote peers."
+    },
+    {
+      "id": "ipc:RpcSvc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "rpc.rs + rpc/",
+      "path": "crates/engine/src/rpc.rs",
+      "summary": "Typed RPC surface; in-memory duplex or localhost port."
+    },
+    {
+      "id": "ipc:DocHostMod",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "doc_host.rs",
+      "path": "crates/engine/src/doc_host.rs",
+      "summary": "Loro doc hosting; chat2_host mirrors to the edge when synced."
+    },
+    {
+      "id": "ipc:DiffSync",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "diff_sync/",
+      "path": "crates/engine/src/diff_sync",
+      "summary": "Workspace diff replication between devices."
+    },
+    {
+      "id": "ipc:DesktopNotify",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "desktop_notify.rs",
+      "path": "crates/engine/src/desktop_notify.rs",
+      "summary": "desktop-notifications-v1 banners with app-closed delivery."
+    },
+    {
+      "id": "ipc:FsWither",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "fs_watch.rs",
+      "path": "crates/engine/src/fs_watch.rs",
+      "summary": "Workspace filesystem watcher feeding home_index."
+    },
+    {
+      "id": "state:Registry",
+      "kind": "state",
+      "group": "state",
+      "label": "registry.rs",
+      "path": "crates/engine/src/registry.rs",
+      "summary": "Engine-wide registry of live sessions/terminals/workspaces."
+    },
+    {
+      "id": "state:RunJournal",
+      "kind": "state",
+      "group": "state",
+      "label": "run_journal.rs",
+      "path": "crates/engine/src/run_journal.rs",
+      "summary": "Append-only run history per session."
+    },
+    {
+      "id": "cmd:DaemonCmd",
+      "kind": "command",
+      "group": "commands",
+      "label": "zeron daemon",
+      "path": "crates/engine/src",
+      "summary": "start/stop/restart/status service control.",
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "ext:HarnessCrate",
+      "kind": "external",
+      "group": "external",
+      "label": "harness",
+      "path": "crates/harness/src",
+      "summary": "Agent adapters the runner spawns."
+    },
+    {
+      "id": "ext:SyncCrate",
+      "kind": "external",
+      "group": "external",
+      "label": "sync",
+      "path": "crates/sync/src",
+      "summary": "CRDT mirror transport."
+    },
+    {
+      "id": "ext:UiCrate",
+      "kind": "external",
+      "group": "external",
+      "label": "ui client",
+      "path": "crates/client/src",
+      "summary": "The app connecting over rpc.rs."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:EngineLib",
+      "to": "cmp:Runner",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:EngineLib",
+      "to": "cmp:SessionsMod",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:EngineLib",
+      "to": "ipc:RpcSvc",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:EngineLib",
+      "to": "state:Registry",
+      "kind": "writes"
+    },
+    {
+      "from": "state:Managed",
+      "to": "cmp:EngineLib",
+      "kind": "calls",
+      "label": "spawn daemon"
+    },
+    {
+      "from": "cmp:Runner",
+      "to": "ext:HarnessCrate",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Runner",
+      "to": "state:RunJournal",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:SessionsMod",
+      "to": "state:Registry",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:TerminalsMod",
+      "to": "state:Registry",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:SourceCtrl",
+      "to": "cmp:WorkspaceHost",
+      "kind": "reads"
+    },
+    {
+      "from": "ipc:FsWither",
+      "to": "cmp:WorkspaceHost",
+      "kind": "calls",
+      "label": "index refresh"
+    },
+    {
+      "from": "ipc:DocHostMod",
+      "to": "ext:SyncCrate",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:DiffSync",
+      "to": "ext:SyncCrate",
+      "kind": "ipc"
+    },
+    {
+      "from": "ext:UiCrate",
+      "to": "ipc:RpcSvc",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:DesktopNotify",
+      "to": "ext:UiCrate",
+      "kind": "dispatches",
+      "label": "focus awareness"
+    },
+    {
+      "from": "cmd:DaemonCmd",
+      "to": "state:Managed",
+      "kind": "commands"
+    },
+    {
+      "from": "ipc:RpcSvc",
+      "to": "cmp:SessionsMod",
+      "kind": "calls"
+    },
+    {
+      "from": "ipc:RpcSvc",
+      "to": "cmp:TerminalsMod",
+      "kind": "calls"
+    }
+  ],
+  "flows": [
+    {
+      "id": "run-turn",
+      "name": "Run an agent turn",
+      "trigger": "rpc from the app or remote peer",
+      "steps": [
+        "ipc:RpcSvc",
+        "cmp:Runner",
+        "ext:HarnessCrate",
+        "state:RunJournal"
+      ],
+      "summary": "Runner journalizes every event and streams deltas back."
+    },
+    {
+      "id": "daemon-boot",
+      "name": "Start the daemon",
+      "trigger": "zeron daemon start / app launch",
+      "steps": [
+        "cmd:DaemonCmd",
+        "state:Managed",
+        "cmp:EngineLib",
+        "ipc:DocHostMod"
+      ],
+      "summary": "Detached engine serves rpc and hosts local docs."
+    },
+    {
+      "id": "fs-sync",
+      "name": "Sync workspace files",
+      "trigger": "file change on disk",
+      "steps": [
+        "ipc:FsWither",
+        "cmp:WorkspaceHost",
+        "ipc:DiffSync",
+        "ext:SyncCrate"
+      ],
+      "summary": "Watcher \u2192 index \u2192 CRDT mirror to peer devices."
+    }
+  ],
+  "notes": [
+    {
+      "title": "three run modes, one code path",
+      "body": "managed daemon, embedded in-proc and headless VPS all expose rpc.rs identically.",
+      "severity": "info",
+      "path": "crates/engine/src/managed.rs"
+    },
+    {
+      "title": "journal-first runs",
+      "body": "run_journal.rs appends before UI delivery, so reconnects replay history.",
+      "severity": "info",
+      "path": "crates/engine/src/run_journal.rs"
+    },
+    {
+      "title": "notifications live in engine",
+      "body": "Banners fire from the engine with app focus reported by the UI (SetViewportFocus).",
+      "severity": "info",
+      "path": "crates/engine/src/desktop_notify.rs"
+    }
+  ]
+}

@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "zeron",
+    "slug": "zeronsh__zeron",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "ui",
+    "name": "ui crate (gpui app)",
+    "entryLayout": "crates/ui/src/lib.rs",
+    "root": "crates/ui",
+    "summary": "gpui workspace UI: rail sidebar, tabs, composer, terminal, comments.",
+    "externalModules": [
+      "engine",
+      "client",
+      "theme",
+      "voice"
+    ]
+  },
+  "stats": {
+    "nodes": 21,
+    "edges": 20,
+    "components": 10,
+    "stateFiles": 1,
+    "commands": 3,
+    "ipcCalls": 2,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:UiLib",
+      "kind": "layout",
+      "group": "layout",
+      "label": "lib.rs",
+      "path": "crates/ui/src/lib.rs",
+      "summary": "Module root wiring every panel into the app workspace shell."
+    },
+    {
+      "id": "cmp:ShellView",
+      "kind": "component",
+      "group": "components",
+      "label": "shell.rs",
+      "path": "crates/ui/src/shell.rs",
+      "summary": "Window shell: rail, tabs, panes, notice banners."
+    },
+    {
+      "id": "cmp:Rail",
+      "kind": "component",
+      "group": "components",
+      "label": "rail.rs",
+      "path": "crates/ui/src/rail.rs",
+      "summary": "Attention-sorted Sessions list + searchable spaces dropdown."
+    },
+    {
+      "id": "cmp:ComposerDock",
+      "kind": "component",
+      "group": "components",
+      "label": "composer_dock.rs",
+      "path": "crates/ui/src/composer_dock.rs",
+      "summary": "Composer input area with dictation, attachments, context usage."
+    },
+    {
+      "id": "cmp:Composer",
+      "kind": "component",
+      "group": "components",
+      "label": "composer.rs",
+      "path": "crates/ui/src/composer.rs"
+    },
+    {
+      "id": "cmp:Sessions",
+      "kind": "component",
+      "group": "components",
+      "label": "sessions UI",
+      "path": "crates/ui/src",
+      "summary": "Session canvas: transcript, tabs, running pill, queue."
+    },
+    {
+      "id": "cmp:FilesView",
+      "kind": "component",
+      "group": "components",
+      "label": "files/",
+      "path": "crates/ui/src/files",
+      "summary": "Workspace file browser and diff views."
+    },
+    {
+      "id": "cmp:CommentsView",
+      "kind": "component",
+      "group": "components",
+      "label": "comments.rs",
+      "path": "crates/ui/src/comments.rs"
+    },
+    {
+      "id": "cmp:PullRequests",
+      "kind": "component",
+      "group": "components",
+      "label": "pull_requests.rs",
+      "path": "crates/ui/src/pull_requests.rs"
+    },
+    {
+      "id": "cmp:TerminalView",
+      "kind": "component",
+      "group": "components",
+      "label": "terminal",
+      "path": "crates/ui/src/terminal",
+      "summary": "Engine-owned PTYs rendered in the workspace."
+    },
+    {
+      "id": "shared:Pickers",
+      "kind": "shared",
+      "group": "shared",
+      "label": "pickers.rs",
+      "path": "crates/ui/src/pickers.rs"
+    },
+    {
+      "id": "shared:Onboarding",
+      "kind": "shared",
+      "group": "shared",
+      "label": "onboarding.rs",
+      "path": "crates/ui/src/onboarding.rs"
+    },
+    {
+      "id": "state:UiSettings",
+      "kind": "state",
+      "group": "state",
+      "label": "ui-settings.json",
+      "path": "crates/ui/src/settings.rs",
+      "summary": "Local viewport state: openTabs, notification prefs, appearance."
+    },
+    {
+      "id": "cmd:OpenPalette",
+      "kind": "command",
+      "group": "commands",
+      "label": "command palette",
+      "path": "crates/ui/src/pickers.rs",
+      "tags": [
+        "palette"
+      ]
+    },
+    {
+      "id": "cmd:NewSession",
+      "kind": "command",
+      "group": "commands",
+      "label": "new session",
+      "path": "crates/ui/src/shell.rs",
+      "summary": "Canvas with space picker; mints on picked device.",
+      "tags": [
+        "canvas"
+      ]
+    },
+    {
+      "id": "cmd:Dictation",
+      "kind": "command",
+      "group": "commands",
+      "label": "dictate",
+      "path": "crates/ui/src/dictation.rs",
+      "tags": [
+        "mic"
+      ]
+    },
+    {
+      "id": "ipc:ClientRpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "client rpc",
+      "path": "crates/client/src",
+      "summary": "Typed calls to engine rpc; reconnect transparent to panels."
+    },
+    {
+      "id": "ipc:AssetHttp",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "asset_http.rs",
+      "path": "crates/ui/src/asset_http.rs"
+    },
+    {
+      "id": "ext:EngineCrate",
+      "kind": "external",
+      "group": "external",
+      "label": "engine",
+      "path": "crates/engine/src",
+      "summary": "Owns state; UI is a viewport."
+    },
+    {
+      "id": "ext:Theme",
+      "kind": "external",
+      "group": "external",
+      "label": "theme crate",
+      "path": "crates/theme/src"
+    },
+    {
+      "id": "ext:VoiceStack",
+      "kind": "external",
+      "group": "external",
+      "label": "voice crates",
+      "path": "crates/voice/src"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:UiLib",
+      "to": "cmp:ShellView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellView",
+      "to": "cmp:Rail",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellView",
+      "to": "cmp:Sessions",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellView",
+      "to": "cmp:TerminalView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellView",
+      "to": "cmp:FilesView",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ShellView",
+      "to": "shared:Pickers",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "cmp:ComposerDock",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComposerDock",
+      "to": "cmp:Composer",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComposerDock",
+      "to": "cmd:Dictation",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Dictation",
+      "to": "ext:VoiceStack",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "cmp:CommentsView",
+      "kind": "renders",
+      "label": "annotations"
+    },
+    {
+      "from": "cmp:CommentsView",
+      "to": "cmp:PullRequests",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:Rail",
+      "to": "state:UiSettings",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:OpenPalette",
+      "to": "shared:Pickers",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:NewSession",
+      "to": "cmp:Sessions",
+      "kind": "commands"
+    },
+    {
+      "from": "cmp:Composer",
+      "to": "ipc:ClientRpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:FilesView",
+      "to": "ipc:ClientRpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:TerminalView",
+      "to": "ipc:ClientRpc",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:Sessions",
+      "to": "ipc:AssetHttp",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:UiLib",
+      "to": "ext:Theme",
+      "kind": "imports"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-workspace",
+      "name": "Open the workspace",
+      "trigger": "app launch / window restore",
+      "steps": [
+        "cmp:UiLib",
+        "cmp:ShellView",
+        "cmp:Rail",
+        "ipc:ClientRpc"
+      ],
+      "summary": "Sidebar hydrates from engine sessions; tabs restore from ui-settings."
+    },
+    {
+      "id": "compose-send",
+      "name": "Compose and send",
+      "trigger": "submit in the composer dock",
+      "steps": [
+        "cmp:Composer",
+        "cmp:ComposerDock",
+        "ipc:ClientRpc",
+        "cmd:NewSession"
+      ],
+      "summary": "New sessions mint on the picked space; existing ones stream deltas."
+    },
+    {
+      "id": "dictate-prompt",
+      "name": "Dictate a prompt",
+      "trigger": "mic button in the dock",
+      "steps": [
+        "cmd:Dictation",
+        "ext:VoiceStack",
+        "cmp:Composer"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "title": "sidebar is the data",
+      "body": "ARCHITECTURE.md: tabs are device-local viewport state; archive is the only cross-device session action.",
+      "severity": "info",
+      "path": "crates/ui/src/rail.rs"
+    },
+    {
+      "title": "viewport-only state",
+      "body": "ui-settings.json keeps openTabs/appearance local; everything else is engine-owned via rpc.",
+      "severity": "info",
+      "path": "crates/ui/src/settings.rs"
+    },
+    {
+      "title": "242k LOC in one crate",
+      "body": "60+ sibling modules under crates/ui/src (pull_request_*, new_thread_background_*) would benefit from sub-crate grouping.",
+      "severity": "warn",
+      "path": "crates/ui/src"
+    }
+  ]
+}

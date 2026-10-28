@@ -1,0 +1,351 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "module",
+  "project": {
+    "name": "zuse",
+    "slug": "swarajbachu__zuse",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "renderer",
+    "name": "renderer app",
+    "entryLayout": "apps/renderer/src/main.tsx",
+    "root": "apps/renderer",
+    "summary": "React workspace UI: chat timeline, composer, terminals, browser panes.",
+    "externalModules": [
+      "agents",
+      "desktop",
+      "server",
+      "contracts"
+    ]
+  },
+  "stats": {
+    "nodes": 16,
+    "edges": 17,
+    "components": 6,
+    "stateFiles": 2,
+    "commands": 3,
+    "ipcCalls": 2,
+    "flows": 3
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Components"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "external",
+      "label": "Other Modules"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:RendererMain",
+      "kind": "layout",
+      "group": "layout",
+      "label": "main.tsx",
+      "path": "apps/renderer/src/main.tsx",
+      "summary": "Boot: bootstrap, application shell, notch + terminal variants."
+    },
+    {
+      "id": "cmp:AppRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "app.tsx",
+      "path": "apps/renderer/src/app.tsx",
+      "loc": 444,
+      "summary": "Registers state, mounts panes, global shortcuts."
+    },
+    {
+      "id": "cmp:ComponentsDir",
+      "kind": "component",
+      "group": "components",
+      "label": "components/ (~200)",
+      "path": "apps/renderer/src/components",
+      "loc": 158894,
+      "summary": "Chat timeline, archived chats, browser panes, agents summary, dialogs."
+    },
+    {
+      "id": "cmp:ComposerDir",
+      "kind": "component",
+      "group": "components",
+      "label": "composer/",
+      "path": "apps/renderer/src/composer",
+      "summary": "Rich composer with slash commands, mentions, attachments."
+    },
+    {
+      "id": "cmp:TerminalDir",
+      "kind": "component",
+      "group": "components",
+      "label": "terminal/",
+      "path": "apps/renderer/src/terminal",
+      "summary": "Bottom dock terminal panes."
+    },
+    {
+      "id": "cmp:ShellDir",
+      "kind": "component",
+      "group": "components",
+      "label": "shell/",
+      "path": "apps/renderer/src/shell",
+      "summary": "Sidebar/rail chrome and layout frames."
+    },
+    {
+      "id": "shared:HooksDir",
+      "kind": "shared",
+      "group": "shared",
+      "label": "hooks/ + lib/",
+      "path": "apps/renderer/src/hooks",
+      "summary": "Renderer hooks and helper lib."
+    },
+    {
+      "id": "state:AtomStore",
+      "kind": "state",
+      "group": "state",
+      "label": "state/atom-store.ts",
+      "path": "apps/renderer/src/state/atom-store.ts",
+      "summary": "Atom store foundation; registry.tsx wires scoped providers."
+    },
+    {
+      "id": "state:StoreDir",
+      "kind": "state",
+      "group": "state",
+      "label": "store/ (20+)",
+      "path": "apps/renderer/src/store",
+      "summary": "chats, acp-agents, auth, composer-drafts, git-stack, masters, annotations..."
+    },
+    {
+      "id": "cmd:SendPrompt",
+      "kind": "command",
+      "group": "commands",
+      "label": "send prompt",
+      "path": "apps/renderer/src/composer",
+      "summary": "Composer submit into the agent kernel.",
+      "tags": [
+        "enter"
+      ]
+    },
+    {
+      "id": "cmd:SlashPalette",
+      "kind": "command",
+      "group": "commands",
+      "label": "slash commands",
+      "path": "apps/renderer/src/store/chat-commands.ts",
+      "summary": "In-chat command palette.",
+      "tags": [
+        "/"
+      ]
+    },
+    {
+      "id": "cmd:Shortcuts",
+      "kind": "command",
+      "group": "commands",
+      "label": "application shortcuts",
+      "path": "apps/renderer/src/components/application-shortcuts.tsx",
+      "summary": "Global keybindings.",
+      "tags": [
+        "keys"
+      ]
+    },
+    {
+      "id": "ipc:DesktopBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "desktop invoke",
+      "path": "apps/renderer/src/lib",
+      "summary": "Tauri-free Electron bridge wrappers (windows, menus, deep links)."
+    },
+    {
+      "id": "ipc:ServerClient",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "client-runtime api",
+      "path": "packages/client-runtime/src",
+      "loc": 14175,
+      "summary": "Typed API client to apps/server; live subscriptions."
+    },
+    {
+      "id": "ext:AgentsPkg",
+      "kind": "external",
+      "group": "external",
+      "label": "packages/agents",
+      "path": "packages/agents/src",
+      "summary": "Kernel the composer talks to."
+    },
+    {
+      "id": "ext:Contracts",
+      "kind": "external",
+      "group": "external",
+      "label": "packages/contracts",
+      "path": "packages/contracts/src",
+      "summary": "Shared schemas."
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:RendererMain",
+      "to": "cmp:AppRoot",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:ComponentsDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:ShellDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmp:ComposerDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "cmp:TerminalDir",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ComposerDir",
+      "to": "state:StoreDir",
+      "kind": "writes"
+    },
+    {
+      "from": "state:AtomStore",
+      "to": "state:StoreDir",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "state:StoreDir",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "ipc:ServerClient",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:ComponentsDir",
+      "to": "ipc:DesktopBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "ipc:DesktopBridge",
+      "to": "ext:Contracts",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:SendPrompt",
+      "to": "ext:AgentsPkg",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SlashPalette",
+      "to": "cmp:ComposerDir",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:Shortcuts",
+      "to": "cmp:AppRoot",
+      "kind": "commands"
+    },
+    {
+      "from": "state:StoreDir",
+      "to": "ipc:ServerClient",
+      "kind": "reads"
+    },
+    {
+      "from": "ext:AgentsPkg",
+      "to": "state:StoreDir",
+      "kind": "writes",
+      "label": "kernel events"
+    },
+    {
+      "from": "cmp:TerminalDir",
+      "to": "ipc:DesktopBridge",
+      "kind": "ipc",
+      "label": "pty"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-workspace",
+      "name": "Open the workspace",
+      "trigger": "app launch",
+      "steps": [
+        "cmp:RendererMain",
+        "cmp:AppRoot",
+        "cmp:ShellDir",
+        "state:StoreDir",
+        "ipc:ServerClient"
+      ],
+      "summary": "Stores hydrate from the server; shell mounts panes."
+    },
+    {
+      "id": "chat-stream",
+      "name": "Chat with an agent",
+      "trigger": "composer submit",
+      "steps": [
+        "cmd:SendPrompt",
+        "ext:AgentsPkg",
+        "state:StoreDir",
+        "cmp:ComponentsDir"
+      ],
+      "summary": "Kernel events stream into the chat timeline."
+    },
+    {
+      "id": "terminal-use",
+      "name": "Use the terminal",
+      "trigger": "dock toggle",
+      "steps": [
+        "cmd:Shortcuts",
+        "cmp:TerminalDir",
+        "ipc:DesktopBridge"
+      ],
+      "summary": "PTY pane bound to the active workspace."
+    }
+  ],
+  "notes": [
+    {
+      "title": "one flat components dir",
+      "body": "~200 sibling tsx files in apps/renderer/src/components (archived-*, browser-*, agent-*) \u2014 grouping by domain would help discovery.",
+      "severity": "warn",
+      "path": "apps/renderer/src/components"
+    },
+    {
+      "title": "store-per-concern",
+      "body": "20+ small zustand/atom stores; boundaries checked by scripts/check-architecture-boundaries.",
+      "severity": "info",
+      "path": "apps/renderer/src/store"
+    },
+    {
+      "title": "kernel writes, renderer renders",
+      "body": "Agent events arrive from packages/agents into store files; components only read.",
+      "severity": "info",
+      "path": "apps/renderer/src/state/atom-store.ts"
+    }
+  ]
+}

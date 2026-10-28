@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "scan": "module-flow",
+  "scope": "repo",
+  "project": {
+    "name": "zuse",
+    "slug": "swarajbachu__zuse",
+    "date": "2026-10-27"
+  },
+  "module": {
+    "id": "overview",
+    "name": "zuse",
+    "entryLayout": "apps/renderer/src/main.tsx",
+    "root": ".",
+    "summary": "Chat-first agent desktop: Electron shell, Effect-TS agent kernel, ACP.",
+    "externalModules": [
+      "renderer",
+      "agents"
+    ]
+  },
+  "stats": {
+    "nodes": 26,
+    "edges": 26,
+    "components": 7,
+    "stateFiles": 3,
+    "commands": 4,
+    "ipcCalls": 5,
+    "flows": 6
+  },
+  "groups": [
+    {
+      "id": "layout",
+      "label": "Layout"
+    },
+    {
+      "id": "components",
+      "label": "Apps/Packages"
+    },
+    {
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "id": "commands",
+      "label": "Commands"
+    },
+    {
+      "id": "ipc",
+      "label": "IPC / Backend"
+    },
+    {
+      "id": "shared",
+      "label": "Shared"
+    },
+    {
+      "id": "external",
+      "label": "External"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cmp:RendererEntry",
+      "kind": "layout",
+      "group": "layout",
+      "label": "renderer main.tsx",
+      "path": "apps/renderer/src/main.tsx",
+      "summary": "React entry: bootstrap, shell, notch/terminal entries."
+    },
+    {
+      "id": "cmp:AppRoot",
+      "kind": "layout",
+      "group": "layout",
+      "label": "app.tsx",
+      "path": "apps/renderer/src/app.tsx",
+      "loc": 444,
+      "summary": "Workspace shell wiring state registry, composer, panes."
+    },
+    {
+      "id": "ipc:DesktopShell",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "apps/desktop (Electron)",
+      "path": "apps/desktop/src",
+      "loc": 15888,
+      "summary": "Main process: windows, tray, awake, auth callbacks, deep links."
+    },
+    {
+      "id": "cmp:ServerApp",
+      "kind": "component",
+      "group": "components",
+      "label": "apps/server",
+      "path": "apps/server/src",
+      "loc": 87678,
+      "summary": "Backend API: auth, checkpoints, collaboration, automation, attachments."
+    },
+    {
+      "id": "cmp:RendererUI",
+      "kind": "component",
+      "group": "components",
+      "label": "renderer components",
+      "path": "apps/renderer/src/components",
+      "loc": 158894,
+      "summary": "~200 components: chat timeline, terminal docks, browser panes, agents."
+    },
+    {
+      "id": "shared:MobileApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "apps/mobile",
+      "path": "apps/mobile",
+      "loc": 37475
+    },
+    {
+      "id": "shared:SlackApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "apps/slack + mcp-server",
+      "path": "apps/slack"
+    },
+    {
+      "id": "cmp:AgentsPkg",
+      "kind": "component",
+      "group": "components",
+      "label": "packages/agents",
+      "path": "packages/agents/src",
+      "loc": 34298,
+      "summary": "Agent kernel: 54 drivers (claude, codex, acp...), harness, mcp-gateway."
+    },
+    {
+      "id": "cmp:AcpPkg",
+      "kind": "component",
+      "group": "components",
+      "label": "packages/acp",
+      "path": "packages/acp/src",
+      "summary": "ACP protocol: JSON-RPC schemas, connection, rpc-client."
+    },
+    {
+      "id": "cmp:ContractsPkg",
+      "kind": "component",
+      "group": "components",
+      "label": "packages/contracts",
+      "path": "packages/contracts/src",
+      "loc": 18247,
+      "summary": "Effect Schema contracts shared by renderer/server/agents."
+    },
+    {
+      "id": "shared:ClientRuntime",
+      "kind": "shared",
+      "group": "shared",
+      "label": "client-runtime + serve + sqlite + git",
+      "path": "packages/client-runtime/src",
+      "loc": 14175,
+      "summary": "Client transport, CLI servers, sqlite storage, git services."
+    },
+    {
+      "id": "shared:OtherPkgs",
+      "kind": "shared",
+      "group": "shared",
+      "label": "other packages",
+      "path": "packages"
+    },
+    {
+      "id": "shared:WebApp",
+      "kind": "shared",
+      "group": "shared",
+      "label": "apps/web",
+      "path": "apps/web",
+      "loc": 20528
+    },
+    {
+      "id": "state:AtomStore",
+      "kind": "state",
+      "group": "state",
+      "label": "state/atom-store.ts",
+      "path": "apps/renderer/src/state/atom-store.ts"
+    },
+    {
+      "id": "state:FeatureStores",
+      "kind": "state",
+      "group": "state",
+      "label": "store/ (20+ stores)",
+      "path": "apps/renderer/src/store",
+      "summary": "chats, acp-agents, auth, composer-drafts, git-stack, masters..."
+    },
+    {
+      "id": "state:KernelState",
+      "kind": "state",
+      "group": "state",
+      "label": "agents kernel/state.ts",
+      "path": "packages/agents/src/kernel",
+      "summary": "Kernel session/agent state with Effect layers."
+    },
+    {
+      "id": "cmd:ChatSend",
+      "kind": "command",
+      "group": "commands",
+      "label": "send a chat message",
+      "path": "apps/renderer/src/composer",
+      "summary": "Composer submit routes to the agent kernel.",
+      "tags": [
+        "enter"
+      ]
+    },
+    {
+      "id": "cmd:SlashCommand",
+      "kind": "command",
+      "group": "commands",
+      "label": "chat commands",
+      "path": "apps/renderer/src/store/chat-commands.ts",
+      "tags": [
+        "/"
+      ]
+    },
+    {
+      "id": "cmd:TerminalOpen",
+      "kind": "command",
+      "group": "commands",
+      "label": "terminal dock",
+      "path": "apps/renderer/src/terminal",
+      "tags": [
+        "dock"
+      ]
+    },
+    {
+      "id": "cmd:WorktreeAction",
+      "kind": "command",
+      "group": "commands",
+      "label": "git worktree actions",
+      "path": "packages/git/src",
+      "tags": [
+        "buttons"
+      ]
+    },
+    {
+      "id": "ipc:ElectronBridge",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "desktop IPC bridge",
+      "path": "apps/desktop/src"
+    },
+    {
+      "id": "ipc:ServerApi",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "server REST API",
+      "path": "apps/server/src/api"
+    },
+    {
+      "id": "ipc:AcpJsonRpc",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "ACP JSON-RPC",
+      "path": "packages/acp/src",
+      "summary": "Schema-typed JSON-RPC to agent processes."
+    },
+    {
+      "id": "ipc:DriverSpawn",
+      "kind": "ipc",
+      "group": "ipc",
+      "label": "driver CLI spawn",
+      "path": "packages/agents/src/drivers",
+      "summary": "Spawns/wraps claude, codex, gemini, cursor, opencode CLIs."
+    },
+    {
+      "id": "ext:Effect",
+      "kind": "external",
+      "group": "external",
+      "label": "Effect-TS",
+      "path": "packages/agents/src",
+      "summary": "Schema + layers underpinning contracts and kernel."
+    },
+    {
+      "id": "ext:Sqlite",
+      "kind": "external",
+      "group": "external",
+      "label": "sqlite (local)",
+      "path": "packages/sqlite/src"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmp:RendererEntry",
+      "to": "cmp:AppRoot",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "cmp:RendererUI",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:AppRoot",
+      "to": "state:AtomStore",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RendererUI",
+      "to": "state:FeatureStores",
+      "kind": "reads"
+    },
+    {
+      "from": "cmp:RendererUI",
+      "to": "state:FeatureStores",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:RendererUI",
+      "to": "ipc:ElectronBridge",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RendererUI",
+      "to": "ipc:ServerApi",
+      "kind": "ipc",
+      "label": "client-runtime"
+    },
+    {
+      "from": "ipc:DesktopShell",
+      "to": "cmp:RendererEntry",
+      "kind": "renders",
+      "label": "webview"
+    },
+    {
+      "from": "cmp:ServerApp",
+      "to": "ipc:ServerApi",
+      "kind": "renders"
+    },
+    {
+      "from": "cmp:ServerApp",
+      "to": "state:KernelState",
+      "kind": "reads"
+    },
+    {
+      "from": "cmd:ChatSend",
+      "to": "ipc:DriverSpawn",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:SlashCommand",
+      "to": "state:FeatureStores",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:TerminalOpen",
+      "to": "ipc:DesktopShell",
+      "kind": "commands"
+    },
+    {
+      "from": "cmd:WorktreeAction",
+      "to": "ipc:DriverSpawn",
+      "kind": "commands",
+      "label": "agent context"
+    },
+    {
+      "from": "cmp:AgentsPkg",
+      "to": "ipc:AcpJsonRpc",
+      "kind": "renders"
+    },
+    {
+      "from": "ipc:AcpJsonRpc",
+      "to": "ipc:DriverSpawn",
+      "kind": "calls"
+    },
+    {
+      "from": "cmp:AgentsPkg",
+      "to": "state:KernelState",
+      "kind": "writes"
+    },
+    {
+      "from": "cmp:ContractsPkg",
+      "to": "cmp:AgentsPkg",
+      "kind": "imports"
+    },
+    {
+      "from": "cmp:ContractsPkg",
+      "to": "cmp:ServerApp",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:ClientRuntime",
+      "to": "cmp:ContractsPkg",
+      "kind": "imports"
+    },
+    {
+      "from": "state:KernelState",
+      "to": "ext:Sqlite",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:AgentsPkg",
+      "to": "ext:Effect",
+      "kind": "imports"
+    },
+    {
+      "from": "shared:MobileApp",
+      "to": "ipc:ServerApi",
+      "kind": "ipc"
+    },
+    {
+      "from": "shared:SlackApp",
+      "to": "ipc:ServerApi",
+      "kind": "ipc"
+    },
+    {
+      "from": "cmp:RendererUI",
+      "to": "cmp:ContractsPkg",
+      "kind": "imports"
+    },
+    {
+      "from": "ipc:DriverSpawn",
+      "to": "ext:Effect",
+      "kind": "reads"
+    }
+  ],
+  "flows": [
+    {
+      "id": "chat-turn",
+      "name": "Send a chat turn",
+      "trigger": "composer submit",
+      "steps": [
+        "cmd:ChatSend",
+        "cmp:AgentsPkg",
+        "ipc:DriverSpawn",
+        "state:KernelState",
+        "cmp:RendererUI"
+      ],
+      "summary": "Kernel drives the agent CLI and streams events into the timeline."
+    },
+    {
+      "id": "acp-session",
+      "name": "ACP agent session",
+      "trigger": "pick an ACP agent in the chat",
+      "steps": [
+        "ipc:AcpJsonRpc",
+        "cmp:AgentsPkg",
+        "cmp:RendererUI"
+      ],
+      "summary": "JSON-RPC session to any ACP-capable agent; permissions round-trip."
+    },
+    {
+      "id": "worktree-branch",
+      "name": "Parallel worktrees",
+      "trigger": "worktree action in the sidebar",
+      "steps": [
+        "cmd:WorktreeAction",
+        "ipc:DriverSpawn",
+        "state:KernelState"
+      ],
+      "summary": "Git worktrees give each parallel chat its own checkout."
+    },
+    {
+      "id": "mobile-mirror",
+      "name": "Drive from mobile",
+      "trigger": "sign in on the phone app",
+      "steps": [
+        "shared:MobileApp",
+        "ipc:ServerApi",
+        "cmp:ServerApp",
+        "state:KernelState"
+      ],
+      "summary": "Server relays chats; local-first desktop stays authoritative."
+    },
+    {
+      "id": "slack-bridge",
+      "name": "Run from Slack",
+      "trigger": "slash command in Slack",
+      "steps": [
+        "shared:SlackApp",
+        "ipc:ServerApi",
+        "cmp:AgentsPkg"
+      ],
+      "summary": "Slack app posts agent turns back into the thread."
+    },
+    {
+      "id": "terminal-dock",
+      "name": "Open a terminal",
+      "trigger": "terminal dock toggle",
+      "steps": [
+        "cmd:TerminalOpen",
+        "ipc:DesktopShell",
+        "cmp:RendererUI"
+      ],
+      "summary": "PTY pane bound to the workspace directory."
+    }
+  ],
+  "notes": [
+    {
+      "title": "Effect everywhere",
+      "body": "contracts/agents/server all build on Effect Schema/layers; renderer store is hand-rolled atoms on top.",
+      "severity": "info",
+      "path": "packages/contracts/src"
+    },
+    {
+      "title": "ACP as first-class",
+      "body": "packages/acp + drivers/acp implement the agent client protocol; 54 driver files cover claude/codex/gemini/cursor/opencode.",
+      "severity": "info",
+      "path": "packages/agents/src/drivers"
+    },
+    {
+      "title": "renderer is the monolith",
+      "body": "apps/renderer is 158k LOC over ~200 components; the architecture-boundary checker (scripts/check-architecture-boundaries) enforces layering instead.",
+      "severity": "warn",
+      "path": "apps/renderer"
+    },
+    {
+      "title": "AGPL desktop",
+      "body": "AGPL-3.0-only with paid icon gating (scripts/install-paid-icons.mjs) and THIRD_PARTY_NOTICES.md.",
+      "severity": "info",
+      "path": "LICENSE"
+    }
+  ]
+}
